@@ -1,0 +1,73 @@
+package com.hhit.base;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
+@SuppressWarnings("unchecked")
+public class BaseDaoImpl<T> implements IBaseDao<T> {
+
+	@Resource
+	private SessionFactory sessionFactory;
+	
+	private Class<T> clazz;
+	public BaseDaoImpl(){
+		//使用反射得到T的真实类型
+		//获取new的对象的泛型的父类类型
+		ParameterizedType pt= (ParameterizedType) this.getClass().getGenericSuperclass();
+		//获取第一个类型的真实类型
+		this.clazz=(Class<T>) pt.getActualTypeArguments()[0];
+		System.out.println("--->clazz"+clazz);
+	}
+	/**
+	 * 获取当前Session对象
+	 * protected子类中可以得到
+	 * @return
+	 */
+	protected Session getSession(){
+		return sessionFactory.getCurrentSession();
+	}
+	
+	@Override
+	public void save(T entity) {
+		getSession().save(entity);
+	}
+
+	@Override
+	public void delete(Long id) {
+		Object obj=getById(id);
+		if(null!=obj){
+			getSession().delete(obj);
+		}
+		
+	}
+
+	@Override
+	public void update(T entity) {
+		getSession().update(entity);
+	}
+
+	@Override
+	public T getById(Long id) {
+		return (T)getSession().get(clazz, id);
+	}
+
+	
+	@Override
+	public List<T> findAll() {
+		return getSession().createQuery(//
+				"FROM "+clazz.getSimpleName())//from+类名
+				.list();
+	}
+	@Override
+	public List<T> findByIds(Long[] ids) {
+		return getSession().createQuery(//
+				"FROM"+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
+				.setParameterList("ids", ids)//
+				.list();
+	}
+
+}
