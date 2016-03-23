@@ -1,16 +1,20 @@
 #MyEclipse Hibernate Properties
-#Tue Mar 22 17:45:29 CST 2016
-genVersionTag=false
-genAnnotations=false
-configFile=/SmartEducation/src/applicationContext.xml
-reStrategyClass=
-sessionFactoryId=sessionFactory
-profile=
-detectM2M=false
+#Wed Mar 23 12:06:05 CST 2016
 genBasicCompId=false
-keyGenerator=
-createConfigFile=true
-basePersistenceClass=
+sessionFactoryName=
+profile=
+daoSFId=sessionFactory
+jndiPath=
+detectM2M=false
+reStrategyClass=
 detectO2O=false
+springDaoFile=config/applicationContext.xml
 useJavaTypes=true
+keyGenerator=
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
 reSettingsFile=
+configFile=/SmartEducation/src/applicationContext.xml
+createConfigFile=true
