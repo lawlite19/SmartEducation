@@ -5,12 +5,13 @@
 
 <hibernate-mapping package="com.hhit.entity">
 
-	<class name="User" table="T_User" schema="dbo" catalog="SmartEducationDB">
-		<id name="id" type="java.lang.Long" length="32">
+	<class name="User" table="T_User">
+		<id name="id" type="long">
+			<column name="Id"></column>
             <generator class="native"/>
 		</id>
-		<property name="name" type="java.lang.String">	
-			<column name="Name" length="20">
+		<property name="userName" type="string">	
+			<column name="UserName" length="20">
 				<comment>用户名</comment>
 			</column>
 		</property>
