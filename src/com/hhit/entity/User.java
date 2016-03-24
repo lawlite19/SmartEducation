@@ -1,23 +1,14 @@
 package com.hhit.entity;
 
-
-public class User {
+public class User implements java.io.Serializable {
 	private Long id;
-	private String name;
-	
-	public User() {
-		super();
+	private String userName;
+
+	public String getUserName() {
+		return userName;
 	}
-	public User(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public Long getId() {
 		return id;

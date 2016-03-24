@@ -16,6 +16,14 @@
 			<result name="success">/test.jsp</result>
 		</action>
 	
+		<!-- 用户管理 -->
+		<!-- 通配符*,method="{1}"动态确定对应的方法，user_list user_addUI  -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
+			<result name="editUI">/WEB-INF/jsp/userAction/editUI.jsp</result>
+			<result name="toList" type="redirectAction">user_list</result>
+		</action>
 	</package>
 
 

@@ -13,7 +13,7 @@ public class SpringTest {
 		TestAction testAction=(TestAction) ac.getBean("testAction");
 		System.out.println(testAction);
 	}
-	//测试sessionFaction
+	//测试sessionFaction,创建sessionFactory的时候会自动建表
 	@Test
 	public void testSessionFaction() throws Exception{
 		SessionFactory sessionFaction=(SessionFactory) ac.getBean("sessionFactory");
