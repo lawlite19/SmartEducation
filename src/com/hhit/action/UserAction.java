@@ -6,6 +6,7 @@ import org.aspectj.weaver.IUnwovenClassFile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hhit.entity.User;
 import com.hhit.service.IUserService;
 import com.hhit.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,6 +19,13 @@ public class UserAction extends ActionSupport{
 	//获得
 	@Resource
 	private IUserService userService;
+	
+	private User user;
+	
+	public String login() throws Exception{
+		return "loginUI";
+	}
+	
 	/**  列表  */
 	public String list() throws Exception{
 		userService.findAll();
@@ -43,4 +51,13 @@ public class UserAction extends ActionSupport{
 	public String editUI() throws Exception{
 		return "editUI";
 	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

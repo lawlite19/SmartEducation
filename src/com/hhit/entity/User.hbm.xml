@@ -6,15 +6,32 @@
 <hibernate-mapping package="com.hhit.entity">
 
 	<class name="User" table="T_User">
-		<id name="id" type="long">
+		<id name="id" type="int">
 			<column name="Id"></column>
             <generator class="native"/>
 		</id>
-		<property name="userName" type="string">	
-			<column name="UserName" length="20">
-				<comment>用户名</comment>
+		<property name="userNum" type="string">	
+			<column name="UserNum" length="20">
+				<comment>用户号</comment>
 			</column>
 		</property>
+		<property name="password" type="string">
+			<column name="Password" length="50">
+				<comment>登录密码</comment>
+			</column>
+		</property>
+		<property name="isUsable" type="int">
+			<column name="IsUsable">
+				<comment>是否可用</comment>
+			</column>
+		</property>
+		<property name="userType" type="string">
+			<column name="UserType" length="20">
+				<comment>用户类型</comment>
+			</column>
+		</property>
+		<!--userDetails属性，本类与UserDetails的一对一关系     外键对应主键 -->
+		<many-to-one name="userDetails" class="UserDetails" column="UserDetails_Id" unique="true">
+		</many-to-one>
 	</class>
-	
 </hibernate-mapping>
