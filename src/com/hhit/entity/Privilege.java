@@ -17,10 +17,13 @@ import java.util.Set;
 
 public class Privilege {
 	private Integer id;
-	private Set<Role> roles;
 	private String url;
 	private String privilegeName;
+	
 	private Privilege parent;
+	private Set<Role> roles;
+	private Set<Privilege> children;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,5 +60,5 @@ public class Privilege {
 	public void setChildren(Set<Privilege> children) {
 		this.children = children;
 	}
-	private Set<Privilege> children;
+
 }

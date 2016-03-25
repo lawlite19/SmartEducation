@@ -20,13 +20,13 @@
 				<comment>用户账号</comment>
 			</column>
 		</property>
-		<property name="sex" type="String">
+		<property name="sex" type="string">
 			<column name="Sex" length="10">
 				<comment>用户性别</comment>
 			</column>
 		</property>
 		<property name="email" type="string">
-			<column name="Email">
+			<column name="Email" length="20">
 				<comment>用户邮箱</comment>
 			</column>
 		</property>
@@ -36,12 +36,12 @@
 			</column>
 		</property>	
 		<property name="telphone" type="string">
-			<column name="Telphone">
+			<column name="Telphone" length="20">
 				<comment>手机号码</comment>
 			</column>
 		</property>			
 		<property name="qqNum" type="string">
-			<column name="QQNum">
+			<column name="QQNum" length="20">
 				<comment>qq号</comment>
 			</column>
 		</property>	
@@ -55,17 +55,47 @@
 				<comment>用户等级</comment>
 			</column>
 		</property>	
+		<property name="faceIcon" type="string">
+			<column name="FaceIcon">
+				<comment>头像</comment>
+			</column>
+		</property>	
+				<property name="weChatNum" type="string">
+			<column name="WeChatNum" length="20">
+				<comment>微信号</comment>
+			</column>
+		</property>	
+				<property name="otherInfo" type="string">
+			<column name="OtherInfo">
+				<comment>其他信息</comment>
+			</column>
+		</property>	
+				<property name="loginTime" type="timestamp">
+			<column name="LoginTime">
+				<comment>登录时间</comment>
+			</column>
+		</property>	
+				<property name="logoutTime" type="timestamp">
+			<column name="LogoutTime">
+				<comment>退出时间</comment>
+			</column>
+		</property>	
+				<property name="lastViewPage" type="string">
+			<column name="LastViewPage">
+				<comment>用户等级</comment>
+			</column>
+		</property>	
 				
-		<!--user属性，本类与User的一对一  主键----》外键-->
+		<!--user属性，本类与User的一对一  主键对应外键-->
 		<one-to-one name="user" class="User" cascade="all"></one-to-one>
 		
 		<!--department属性，本类与Department多对一 -->
-		<many-to-one name="department" class="" column="Department_Id"></many-to-one>
+		<many-to-one name="department" class="Department" column="Department_Id"></many-to-one>
 		
 		<!--roles属性，本类与Role多对多  -->
-		<set name="" table="">
-			<key column=""></key>
-			<many-to-many class="" column=""></many-to-many>
+		<set name="roles" table="T_UserDetails_Role">
+			<key column="UserDetail_Id"></key>
+			<many-to-many class="Role" column="Role_Id"></many-to-many>
 		</set>
 	</class>
 	
