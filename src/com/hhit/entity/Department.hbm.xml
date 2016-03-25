@@ -5,33 +5,49 @@
 
 <hibernate-mapping package="com.hhit.entity">
 
-	<class name="User" table="T_User">
+	<class name="Department" table="T_Department">
 		<id name="id" type="int">
 			<column name="Id"></column>
             <generator class="native"/>
 		</id>
-		<property name="userNum" type="string">	
-			<column name="UserNum" length="20">
-				<comment>用户号</comment>
+		<property name="deptName" type="string">	
+			<column name="DeptName" length="20">
+				<comment>部门名</comment>
 			</column>
 		</property>
-		<property name="password" type="string">
-			<column name="Password" length="50">
-				<comment>登录密码</comment>
+		<property name="deptNum" type="string">
+			<column name="DeptNum" length="50">
+				<comment>部门号</comment>
 			</column>
 		</property>
-		<property name="isUsable" type="int">
+		<property name="deptLevel" type="int">
+			<column name="DeptLevel">
+				<comment>部门级别</comment>
+			</column>
+		</property>
+		<property name="deptDescription" type="string">
+			<column name="DeptDescription">
+				<comment>部门描述</comment>
+			</column>
+		</property>
+		<property name="isUsable" type="integer">
 			<column name="IsUsable">
 				<comment>是否可用</comment>
 			</column>
 		</property>
-		<property name="userType" type="string">
-			<column name="UserType">
-				<comment>用户类型</comment>
-			</column>
-		</property>
-		<!--userDetails属性，本类与UserDetails的一对一关系 外键----》主键 -->
-		<many-to-one name=userDetails class="UserDetails" column="UserDetails_Id" unique="true">
-		</many-to-one>
-	
+		<!--userDetails属性，本类与UserDetails的一对多-->
+		<set name="userDetails">
+			<key column="Department_Id"></key>
+			<one-to-many class="UserDetails" />
+		</set>
+		
+		<!-- parent属性，本类与Department（上级）多对一 -->
+		<many-to-one name="parent" class="Department" column="Department_Id"></many-to-one>
+		
+		<!-- children属性，本类与Department（下级）一对多 -->
+		<set name="children">
+			<key column="Department_Id"></key>
+			<one-to-many class="Department"/>
+		</set>
+	</class>
 </hibernate-mapping>

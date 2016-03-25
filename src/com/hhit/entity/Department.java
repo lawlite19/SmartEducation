@@ -18,6 +18,8 @@ public class Department {
 	private String deptNum;
 	private Integer deptLevel;
 	private String deptDescription;
+	private Integer isUsable;
+	
 	private Set<UserDetails> userDetails;
 	private Department parent;
 	private Set<Department> children;
@@ -94,6 +96,6 @@ public class Department {
 		this.isUsable = isUsable;
 	}
 
-	private Integer isUsable;
+
 
 }

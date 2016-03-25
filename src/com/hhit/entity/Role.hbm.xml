@@ -16,15 +16,22 @@
 			</column>
 		</property>
 		<property name="description" type="string">
-			<column name="Description" length="200">
+			<column name="Description">
 				<comment>角色描述</comment>
 			</column>
 		</property>
 		
-		<!--userDetails属性，本类与UserDetails的多对多-->
-		<set name="" table="">
-			<key column=""></key>
-			<many-to-many class="" column=""></many-to-many>
+		<!--userDetails属性，本类与UserDetails多对多-->
+		<set name="userDetails" table="T_UserDetails_Role">
+			<key column="Role_Id"></key>
+			<many-to-many class="UserDetails" column="UserDetail_Id"></many-to-many>
 		</set>
+		
+		<!--privileges属性，与Privilege多对多  -->
+		<set name="privileges" table="T_Role_Privilege">
+			<key column="Role_Id"></key>
+			<many-to-many class="Privilege" column="Privilege_Id"></many-to-many>
+		</set>
+	</class>
 		
 </hibernate-mapping>

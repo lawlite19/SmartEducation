@@ -23,6 +23,12 @@ public class UserDetails {
 	private String qqNum;
 	private Integer msgCount;
 	private Integer userLevel;
+	private String faceIcon;
+	private String weChatNum;
+	private String otherInfo;
+	private Timestamp loginTime;
+	private Timestamp logoutTime;
+	private String lastViewPage;
 	
 	private User user;
 	private Department department;
@@ -180,10 +186,5 @@ public class UserDetails {
 		this.user = user;
 	}
 
-	private String faceIcon;
-	private String weChatNum;
-	private String otherInfo;
-	private Timestamp loginTime;
-	private Timestamp logoutTime;
-	private String lastViewPage;
+
 }

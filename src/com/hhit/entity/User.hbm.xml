@@ -26,12 +26,12 @@
 			</column>
 		</property>
 		<property name="userType" type="string">
-			<column name="UserType">
+			<column name="UserType" length="20">
 				<comment>用户类型</comment>
 			</column>
 		</property>
-		<!--userDetails属性，本类与UserDetails的一对一关系 外键----》主键 -->
-		<many-to-one name=userDetails class="UserDetails" column="UserDetails_Id" unique="true">
+		<!--userDetails属性，本类与UserDetails的一对一关系     外键对应主键 -->
+		<many-to-one name="userDetails" class="UserDetails" column="UserDetails_Id" unique="true">
 		</many-to-one>
-	
+	</class>
 </hibernate-mapping>
