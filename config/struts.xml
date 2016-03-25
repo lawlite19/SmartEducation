@@ -11,11 +11,15 @@
 	<package name="default" namespace="/" extends="struts-default">
 	
 		<!-- 配置测试用的Action -->
-		<!-- class写bean的名称 -->
+		<!-- class写bean的名称 
 		<action name="test" class="testAction">
 			<result name="success">/test.jsp</result>
-		</action>
-	
+		</action>-->
+		<!-- 全局的Result配置 -->
+		<global-results>
+			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+			<result name="noPrivilegeError">/viewError.jsp</result>
+		</global-results>
 		<!-- 用户管理 -->
 		<!-- 通配符*,method="{1}"动态确定对应的方法，user_list user_addUI  -->
 		<action name="user_*" class="userAction" method="{1}">
@@ -23,6 +27,13 @@
 			<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
 			<result name="editUI">/WEB-INF/jsp/userAction/editUI.jsp</result>
 			<result name="toList" type="redirectAction">user_list</result>
+			
+			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
+			<result name="toIndex" type="redirect">index.jsp</result>
+		</action>
+		<!-- 首页 -->
+		<action name="home_*" class="homeAction" method="{1}">
+			<result name="{1}">/jsp/adminAction/homeAction/{1}.jsp</result>
 		</action>
 	</package>
 

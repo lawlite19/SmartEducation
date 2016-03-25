@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Role" table="T_Role">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="roleName" type="string">	
+			<column name="RoleName" length="50">
+				<comment>角色名称</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description" length="200">
+				<comment>角色描述</comment>
+			</column>
+		</property>
+		
+		<!--userDetails属性，本类与UserDetails的多对多-->
+		<set name="" table="">
+			<key column=""></key>
+			<many-to-many class="" column=""></many-to-many>
+		</set>
+		
+</hibernate-mapping>
