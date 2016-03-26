@@ -1,5 +1,7 @@
 package com.hhit.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.aspectj.weaver.IUnwovenClassFile;
@@ -20,17 +22,18 @@ public class UserAction{
 	private IUserService userService;
 	
 	private User user;
+	private List<User> users;
 	
+	/** 跳转到登录界面 */
 	public String loginUI() throws Exception{
 		return "loginUI";
 	}
 	
 	
 	public String login() throws Exception{
-		String s1=user.getUserNum().trim();
-		String s2=user.getPassword().trim();
-		String s3=user.getUserType().trim();
-		
+//		String s1=user.getUserNum().trim();
+//		String s2=user.getPassword().trim();
+//		String s3=user.getUserType().trim();	
 		if(userService.isValidateUser(user.getUserNum().trim(),user.getPassword().trim(),user.getUserType().trim()))	
 		{
 			return "toIndex";
@@ -38,11 +41,9 @@ public class UserAction{
 		return "loginUI";
 	}
 	
-	
-	
 	/**  列表  */
 	public String list() throws Exception{
-		userService.findAll();
+		setUsers(userService.findAll());
 		return "list";
 	}
 	/**  删除  */
@@ -72,6 +73,16 @@ public class UserAction{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }
