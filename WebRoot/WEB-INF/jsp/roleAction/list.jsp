@@ -37,5 +37,11 @@
 
         </tbody>
     </table>
+    <!-- 其他功能超链接 -->
+    <div id="TableTail">
+		<div id="TableTail_inside">
+			<s:a action="role_addUI">增加角色</s:a>
+        </div>
+    </div>
   </body>
 </html>

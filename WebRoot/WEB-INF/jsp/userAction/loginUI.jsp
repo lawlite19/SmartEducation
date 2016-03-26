@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <title>智慧教育后台登录界面</title>
+    <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
     <script type="text/javascript">
 	function changeValidateCode(obj) {
 		//获取当前的时间作为参数，无具体意义    
@@ -15,6 +17,8 @@
   </head>
   <body>
    <form action="user_login.action" method="post">
+   <font color="red"><s:fielderror/></font>
+   <br/>
     用户名：<input type="text" name="user.userNum" id="userNameLogin"  />
     <br/> 
     密码：<input type="password" name="user.password" id="userPassword"/>

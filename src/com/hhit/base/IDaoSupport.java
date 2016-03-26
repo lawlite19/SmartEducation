@@ -1,6 +1,6 @@
 package com.hhit.base;
 import java.util.List;
-public interface IBaseDao<T> {
+public interface IDaoSupport<T> {
 	/**
 	 * 保存一个对象
 	 * @param entity

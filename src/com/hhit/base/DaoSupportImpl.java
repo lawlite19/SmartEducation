@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 @SuppressWarnings("unchecked")
 @Transactional
-public class BaseDaoImpl<T> implements IBaseDao<T> {
+public class DaoSupportImpl<T> implements IDaoSupport<T> {
 
 	@Resource
 	private SessionFactory sessionFactory;
 	
 	private Class<T> clazz;
-	public BaseDaoImpl(){
+	public DaoSupportImpl(){
 		//使用反射得到T的真实类型
 		//获取new的对象的泛型的父类类型
 		ParameterizedType pt= (ParameterizedType) this.getClass().getGenericSuperclass();

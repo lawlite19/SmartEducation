@@ -1,5 +1,7 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,15 +9,17 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hhit.base.BaseAction;
 import com.hhit.entity.Role;
 import com.hhit.service.IRoleService;
 import com.opensymphony.xwork2.ActionContext;
 
 @Controller
 @Scope("prototype")
-public class RoleAction {
-	@Resource
-	private IRoleService roleService;
+public class RoleAction extends BaseAction<Role>{
+//	@Resource
+//	抽取到BaseAction中
+//	private IRoleService roleService;
 
 	private Integer id;
 
@@ -57,10 +61,14 @@ public class RoleAction {
 
 	/** 添加 */
 	public String add() throws Exception {
+		role.setAddDate(new Timestamp(new Date().getTime()));
 		roleService.save(role);
 		return "toList";
 	}
-
+	/** 跳转到添加界面 */
+	public String addUI() throws Exception{
+		return "saveUI";
+	}
 	/** 设置权限页面 */
 	public String setPrivilegeUI() throws Exception {
 		// 准备回显的数据

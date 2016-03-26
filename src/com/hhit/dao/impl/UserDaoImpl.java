@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hhit.base.BaseDaoImpl;
+import com.hhit.base.DaoSupportImpl;
 import com.hhit.dao.IUserDao;
 import com.hhit.entity.User;
 
+@Deprecated
 //注入容器
 @Repository
-public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
+public class UserDaoImpl extends DaoSupportImpl<User> implements IUserDao {
 
 	@Override
 	public User findByNumPwdAndType(String userNum, String password,
