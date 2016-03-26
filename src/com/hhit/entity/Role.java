@@ -1,5 +1,6 @@
 package com.hhit.entity;
 
+import java.sql.Date;
 import java.util.Set;
 
 //
@@ -19,6 +20,8 @@ public class Role {
 	private Integer id;
 	private String roleName;
 	private String description;
+	private Date addDate;
+	
 	private Set<UserDetails> userDetails;
 	private Set<Privilege> privileges;
 	
@@ -51,6 +54,12 @@ public class Role {
 	}
 	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
+	}
+	public Date getAddDate() {
+		return addDate;
+	}
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
 	}
 
 }

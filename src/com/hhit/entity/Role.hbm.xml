@@ -20,6 +20,11 @@
 				<comment>角色描述</comment>
 			</column>
 		</property>
+		<property name="addDate" type="date">
+			<column name="AddDate">
+				<comment>创建时间</comment>
+			</column>
+		</property>
 		
 		<!--userDetails属性，本类与UserDetails多对多-->
 		<set name="userDetails" table="T_UserDetails_Role">

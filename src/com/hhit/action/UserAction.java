@@ -28,8 +28,7 @@ public class UserAction{
 	public String loginUI() throws Exception{
 		return "loginUI";
 	}
-	
-	
+	/** 登录验证，成功跳转主页，否则重新登录 */
 	public String login() throws Exception{
 //		String s1=user.getUserNum().trim();
 //		String s2=user.getPassword().trim();
@@ -48,6 +47,7 @@ public class UserAction{
 	}
 	/**  删除  */
 	public String delete() throws Exception{
+
 		return "toList";
 	}
 	/**  添加  */

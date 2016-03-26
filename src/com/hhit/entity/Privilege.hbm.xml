@@ -23,7 +23,7 @@
 
 
 		<!-- roles属性，本类与 Role多对多 -->
-		<set name="roles">
+		<set name="roles" table="T_Role_Privilege">
 			<key column="Privilege_Id"></key>
 			<many-to-many class="Role" column="Role_Id"></many-to-many>
 		</set>
