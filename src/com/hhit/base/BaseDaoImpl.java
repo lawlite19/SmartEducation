@@ -37,8 +37,8 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	}
 
 	@Override
-	public void delete(Long id) {
-		Object obj=getById(id);
+	public void delete(Integer id) {
+		Object obj=findById(id);
 		if(null!=obj){
 			getSession().delete(obj);
 		}
@@ -51,7 +51,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	}
 
 	@Override
-	public T getById(Long id) {
+	public T findById(Integer id) {
 		return (T)getSession().get(clazz, id);
 	}
 
@@ -63,7 +63,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 				.list();
 	}
 	@Override
-	public List<T> findByIds(Long[] ids) {
+	public List<T> findByIds(Integer[] ids) {
 		return getSession().createQuery(//
 				"FROM"+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
 				.setParameterList("ids", ids)//

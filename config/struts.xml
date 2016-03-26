@@ -29,11 +29,11 @@
 			<result name="toList" type="redirectAction">user_list</result>
 			
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
-			<result name="toIndex" type="redirect">index.jsp</result>
+			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
 		<!-- 首页 -->
 		<action name="home_*" class="homeAction" method="{1}">
-			<result name="{1}">/jsp/adminAction/homeAction/{1}.jsp</result>
+			<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>
 		</action>
 	</package>
 
