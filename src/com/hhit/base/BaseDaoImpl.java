@@ -7,7 +7,10 @@ import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 @SuppressWarnings("unchecked")
+@Transactional
 public class BaseDaoImpl<T> implements IBaseDao<T> {
 
 	@Resource
@@ -28,6 +31,8 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 	 * @return
 	 */
 	protected Session getSession(){
+//		if(sessionFactory.getCurrentSession()==null)
+//			return sessionFactory.openSession();
 		return sessionFactory.getCurrentSession();
 	}
 	
