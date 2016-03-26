@@ -38,6 +38,11 @@
 				<param name="inputName">inputStream</param>
 			</result>
 		</action>
+		<!-- 部门管理 -->
+		<action name="department_*" class="departmentAction" method="{1}">
+			<result name="">/WEB-INF/jsp/departmentAction/list.jsp</result>
+			<result name="">/WEB-INF/jsp/departmentAction/saveUI.jsp</result>
+		</action>
 		<!-- 角色管理 -->
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>

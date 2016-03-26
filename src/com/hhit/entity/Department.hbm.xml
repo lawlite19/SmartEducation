@@ -45,7 +45,8 @@
 		<many-to-one name="parent" class="Department" column="Department_Id"></many-to-one>
 		
 		<!-- children属性，本类与Department（下级）一对多 -->
-		<set name="children">
+		<!-- 级联删除，即删除上级，下级都删除 -->
+		<set name="children" cascade="delete" order-by="id ASC">
 			<key column="Department_Id"></key>
 			<one-to-many class="Department"/>
 		</set>

@@ -15,6 +15,9 @@ public class User {
 	private String userType;
 	private UserDetails userDetails;
 	
+
+
+	
 	public Integer getId() {
 		return id;
 	}

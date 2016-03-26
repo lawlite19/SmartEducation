@@ -7,17 +7,21 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.hhit.base.BaseAction;
 import com.hhit.entity.User;
 import com.hhit.service.IUserService;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
 //注入
+@SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
-public class UserAction {
+public class UserAction extends BaseAction<User>{
 	// 获得
-	@Resource
-	private IUserService userService;
+	//抽取到BaseAction中
+//	@Resource
+//	private IUserService userService;
 
 	private User user;
 	private List<User> users;
@@ -40,7 +44,11 @@ public class UserAction {
 					.getPassword().trim(), user.getUserType().trim())) {
 				return "toIndex";
 			}
+			else
+				addFieldError("login", "用户名或密码不正确！");
 		}
+		else
+			addFieldError("login", "验证码不正确！");
 		return "loginUI";
 	}
 
