@@ -1,12 +1,12 @@
 package com.hhit.service;
 
-import java.util.List;
 
+import com.hhit.base.IBaseDao;
 import com.hhit.entity.User;
 
-public interface IUserService {
+public interface IUserService extends IBaseDao<User> {
 
-	//查询所有用户
-	List<User> findAll();
-	
+	//验证是否是登录用户
+	boolean isValidateUser(String userNum, String password, String userType);
+
 }

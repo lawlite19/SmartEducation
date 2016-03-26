@@ -11,20 +11,34 @@ import com.hhit.service.IUserService;
 import com.hhit.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 //注入
 @Controller
 @Scope("prototype")
-public class UserAction extends ActionSupport{
+public class UserAction{
 	//获得
 	@Resource
 	private IUserService userService;
 	
 	private User user;
 	
-	public String login() throws Exception{
+	public String loginUI() throws Exception{
 		return "loginUI";
 	}
+	
+	
+	public String login() throws Exception{
+		String s1=user.getUserNum().trim();
+		String s2=user.getPassword().trim();
+		String s3=user.getUserType().trim();
+		
+		if(userService.isValidateUser(user.getUserNum().trim(),user.getPassword().trim(),user.getUserType().trim()))	
+		{
+			return "toIndex";
+		}
+		return "loginUI";
+	}
+	
+	
 	
 	/**  列表  */
 	public String list() throws Exception{

@@ -10,7 +10,7 @@ public interface IBaseDao<T> {
 	 * 按id删除一个对象
 	 * @param id
 	 */
-	void delete(Long id);
+	void delete(Integer id);
 	/**
 	 * 更新一个对象
 	 * @param entity
@@ -21,7 +21,7 @@ public interface IBaseDao<T> {
 	 * @param id
 	 * @return
 	 */
-	T getById(Long id);
+	T findById(Integer id);
 	
 	/**
 	 * 查询所有
@@ -33,5 +33,5 @@ public interface IBaseDao<T> {
 	 * @param ids
 	 * @return
 	 */
-	List<T> findByIds(Long[] ids);
+	List<T> findByIds(Integer[] ids);
 }
