@@ -14,9 +14,21 @@ public class User {
 	private Integer isUsable;
 	private String userType;
 	private UserDetails userDetails;
+	/**
+	 * 默认构造函数
+	 */
+	public User(){
+		
+	}
+	//构造函数，用户安装
+	public User(String un,String pwd,Integer isU,String ut,UserDetails ud){
+		userNum=un;
+		password=pwd;
+		isUsable=isU;
+		userType=ut;
+		userDetails=ud;
+	}
 	
-
-
 	
 	public Integer getId() {
 		return id;

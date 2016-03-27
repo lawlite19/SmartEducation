@@ -6,8 +6,6 @@
 	<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 </head>
 <body>
-
-<div id="MainArea">
     <table cellspacing="0" cellpadding="0" class="TableStyle">
      
         <!-- 表头-->
@@ -61,6 +59,5 @@
 			<s:a action="department_list?parentId=%{#parent.parent.id}">返回上级</s:a>
         </div>
     </div>
-</div>
 </body>
 </html>

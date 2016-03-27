@@ -38,6 +38,25 @@ public class UserDetails {
 	private Set<Role> roles;
 
 	/**
+	 * 构造函数，用于安装
+	 */
+	public UserDetails(String uname,String unum,String se,String em,
+			String tel,String qq,Integer mC,Integer uL,
+			Department dept){
+		userName=uname;
+		userNum=unum;
+		sex=se;
+		email=em;
+		//birthday=
+		telphone=tel;
+		qqNum=qq;
+		msgCount=mC;
+		userLevel=uL;
+		//user
+		department=dept;
+	}
+	
+	/**
 	 * 判断本用户是否有指定名称的权限
 	 * 
 	 * @param name

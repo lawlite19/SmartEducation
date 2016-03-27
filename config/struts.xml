@@ -20,7 +20,7 @@
 			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
 			<result name="noPrivilegeError">/viewError.jsp</result>
 		</global-results>
-		<!-- 用户管理 -->
+		<!-- 登录用户管理 -->
 		<!-- 通配符*,method="{1}"动态确定对应的方法，user_list user_addUI  -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
@@ -30,6 +30,11 @@
 			
 			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
 			<result name="toIndex" type="redirectAction">user_list</result>
+		</action>
+		<!-- 用户详细信息管理 -->
+		<action name="userDetails_*" class="userDetailsAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
+			<result name="toList" type="redirectAction">userDetails_list</result>
 		</action>
 		<!-- 产生验证码 -->
 		<action name="rand" class="randomAction">

@@ -24,6 +24,24 @@ public class Department {
 	private Department parent;
 	private Set<Department> children;
 
+	/**
+	 * 默认构造函数
+	 */
+	public Department(){
+		
+	}
+	/**
+	 * 构造函数，用于安装
+	 */
+	public Department(String dName,String dNum,Integer dLevel,String dDes,Integer isU,Department dept){
+		deptName=dName;
+		deptNum=dNum;
+		deptLevel=dLevel;
+		deptDescription=dDes;
+		isUsable=isU;
+		parent=dept;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -16,7 +16,6 @@ public class DepartmentAction extends BaseAction<Department> {
 	// @Resource
 	// 抽取到BaseAction中
 	// private IDepartmentService departmentService;
-
 	private Integer parentId;
 
 	/** 列表 */
@@ -38,7 +37,7 @@ public class DepartmentAction extends BaseAction<Department> {
 		departmentService.delete(model.getId());
 		return "toList";
 	}
-
+	
 	/** 添加页面 */
 	public String addUI() throws Exception {
 		// 准备数据, departmentList
@@ -48,7 +47,6 @@ public class DepartmentAction extends BaseAction<Department> {
 		ActionContext.getContext().put("departmentList", departmentList);
 		return "saveUI";
 	}
-
 	/** 添加 */
 	public String add() throws Exception {
 		// 封装信息到对象中
@@ -61,7 +59,6 @@ public class DepartmentAction extends BaseAction<Department> {
 		model.setIsUsable(1);
 		// 保存
 		departmentService.save(model);
-
 		return "toList";
 	}
 

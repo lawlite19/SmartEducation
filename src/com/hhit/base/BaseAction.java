@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.hhit.entity.User;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -43,7 +44,9 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	// =============== Service实例的声明 ==================
 	
 	@Resource
-	protected IUserService userService;//用户
+	protected IUserService userService;//登录用户
+	@Resource
+	protected IUserDetailsService userDetailsService;//用户详细信息
 	@Resource
 	protected IRoleService roleService;//角色
 	@Resource

@@ -18,7 +18,7 @@ public class UserAction extends BaseAction<User> {
 	// private IUserService userService;
 
 	// private User user;
-	private List<User> users;
+	//private List<User> users;
 	private String randomCode;
 
 	/** 跳转到登录界面 */
@@ -46,7 +46,11 @@ public class UserAction extends BaseAction<User> {
 
 	/** 列表 */
 	public String list() throws Exception {
-		setUsers(userService.findAll());
+		//setUsers(userService.findAll());
+		//ActionContext.getContext().put("users", userService.findAll());
+		
+//		ActionContext.getContext().put("users", userService.findAll());
+		
 		return "list";
 	}
 
@@ -74,14 +78,6 @@ public class UserAction extends BaseAction<User> {
 	/** 修改页面 */
 	public String editUI() throws Exception {
 		return "editUI";
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	public String getRandomCode() {
