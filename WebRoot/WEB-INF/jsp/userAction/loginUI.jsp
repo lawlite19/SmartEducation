@@ -19,21 +19,21 @@
    <form action="user_login.action" method="post">
    <font color="red"><s:fielderror/></font>
    <br/>
-    用户名：<input type="text" name="user.userNum" id="userNameLogin"  />
+    用户名：<input type="text" name="userNum" id="userNameLogin"  />
     <br/> 
-    密码：<input type="password" name="user.password" id="userPassword"/>
+    密码：<input type="password" name="password" id="userPassword"/>
     <br/>
     <input type="text" name="randomCode" id="code" >
     <img src="rand.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码" style={width:30px;height:40px}/>
     <br/>
-    <input type="radio" value="管理员" name="user.userType" checked="checked" />管理员
+    <input type="radio" value="管理员" name="userType" checked="checked" />管理员
     <br/>
-    <input type="radio" value="负责人" name="user.userType" />负责人
+    <input type="radio" value="负责人" name="userType" />负责人
     
     <br/>
-        <input type="radio" value="学生" name="user.userType" />学生
+        <input type="radio" value="学生" name="userType" />学生
     <br/>
-        <input type="radio" value="老师" name="user.userType" />老师
+        <input type="radio" value="老师" name="userType" />老师
     <br/>
     <input type="submit" id= "submitForm" value="登录"/>
     </form>

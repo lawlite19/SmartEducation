@@ -1,29 +1,23 @@
 package com.hhit.action;
 
 import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
 import com.hhit.base.BaseAction;
 import com.hhit.entity.User;
-import com.hhit.service.IUserService;
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 //注入
 @SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
-public class UserAction extends BaseAction<User>{
+public class UserAction extends BaseAction<User> {
 	// 获得
-	//抽取到BaseAction中
-//	@Resource
-//	private IUserService userService;
+	// 抽取到BaseAction中
+	// @Resource
+	// private IUserService userService;
 
-	private User user;
+	// private User user;
 	private List<User> users;
 	private String randomCode;
 
@@ -40,14 +34,12 @@ public class UserAction extends BaseAction<User>{
 		String code = ((String) ActionContext.getContext().getSession()
 				.get("randomCode")).toLowerCase();
 		if (code.equals((randomCode.trim().toLowerCase()))) {
-			if (userService.isValidateUser(user.getUserNum().trim(), user
-					.getPassword().trim(), user.getUserType().trim())) {
+			if (userService.isValidateUser(model.getUserNum().trim(), model
+					.getPassword().trim(), model.getUserType().trim())) {
 				return "toIndex";
-			}
-			else
+			} else
 				addFieldError("login", "用户名或密码不正确！");
-		}
-		else
+		} else
 			addFieldError("login", "验证码不正确！");
 		return "loginUI";
 	}
@@ -84,14 +76,6 @@ public class UserAction extends BaseAction<User>{
 		return "editUI";
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public List<User> getUsers() {
 		return users;
 	}
@@ -107,5 +91,4 @@ public class UserAction extends BaseAction<User>{
 	public void setRandomCode(String randomCode) {
 		this.randomCode = randomCode;
 	}
-
 }

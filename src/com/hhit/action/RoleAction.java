@@ -21,9 +21,9 @@ public class RoleAction extends BaseAction<Role>{
 //	抽取到BaseAction中
 //	private IRoleService roleService;
 
-	private Integer id;
-
-	private Role role;
+//	private Integer id;
+//
+//	private Role role;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -34,25 +34,26 @@ public class RoleAction extends BaseAction<Role>{
 
 	/** 删除 */
 	public String delete() throws Exception {
-		roleService.delete(id);
+		roleService.delete(model.getId());
 		return "toList";
 	}
 
 	/** 修改界面 */
 	public String editUI() throws Exception {
 		// 准备回显的数据
-		role = roleService.findById(id);
+		ActionContext.getContext().getValueStack().push(roleService.findById(model.getId()));
+		//role = roleService.findById(model.getId());
 		return "saveUI";
 	}
 
 	/** 修改 */
 	public String edit() throws Exception {
 		// 1，从数据库中获取原对象
-		Role roleFind = roleService.findById(id);
+		Role roleFind = roleService.findById(model.getId());
 
 		// 2，设置要修改的属性
-		roleFind.setRoleName(role.getRoleName());
-		roleFind.setDescription(role.getDescription());
+		roleFind.setRoleName(model.getRoleName());
+		roleFind.setDescription(model.getDescription());
 		// roleFind.setAddDate(new Timestamp(new Date().getTime()));
 		// 3，更新到数据库
 		roleService.update(roleFind);
@@ -61,8 +62,8 @@ public class RoleAction extends BaseAction<Role>{
 
 	/** 添加 */
 	public String add() throws Exception {
-		role.setAddDate(new Timestamp(new Date().getTime()));
-		roleService.save(role);
+		model.setAddDate(new Timestamp(new Date().getTime()));
+		roleService.save(model);
 		return "toList";
 	}
 	/** 跳转到添加界面 */
@@ -72,7 +73,7 @@ public class RoleAction extends BaseAction<Role>{
 	/** 设置权限页面 */
 	public String setPrivilegeUI() throws Exception {
 		// 准备回显的数据
-		Role rolefind = roleService.findById(id);
+		Role rolefind = roleService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(rolefind);
 		// 根据RoleId获得对应的权限
 		// List<TbPrivilege> privileges=
@@ -91,20 +92,20 @@ public class RoleAction extends BaseAction<Role>{
 		return "setPrivilegeUI";
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
+//
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 
 }

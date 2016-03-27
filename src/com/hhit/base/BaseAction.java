@@ -19,6 +19,7 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	// =============== ModelDriven的支持 ==================
 	protected T model;
 
+	@SuppressWarnings("unchecked")
 	public BaseAction() {
 		try {
 			// 通过反射获取model的真实类型
@@ -60,24 +61,4 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	
 	
 	// ============== 分页用的参数 =============
-
-	protected int pageNum = 1; // 当前页
-	protected int pageSize = 10; // 每页显示多少条记录
-
-	public int getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
 }

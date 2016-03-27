@@ -9,22 +9,24 @@ import com.hhit.base.DaoSupportImpl;
 import com.hhit.entity.Department;
 import com.hhit.service.IDepartmentService;
 
+@SuppressWarnings("unchecked")
 @Service
 @Transactional
-public class DepartmentServiceImpl extends DaoSupportImpl<Department> implements IDepartmentService {
+public class DepartmentServiceImpl extends DaoSupportImpl<Department> implements
+		IDepartmentService {
 
 	@Override
 	public List<Department> findTopList() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Department>) getSession().createQuery(//
+				"FROM Department d WHERE d.parent IS NULL")//
+				.list();
 	}
 
 	@Override
 	public List<Department> findChildren(Integer parentId) {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery(//
+				"FROM Department d WHERE d.parent.id=?")//
+				.setParameter(0, parentId)//
+				.list();
 	}
-
-	
-
 }
