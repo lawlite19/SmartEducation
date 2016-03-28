@@ -55,13 +55,17 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	/** 添加 */
 	public String add() throws Exception {
+		/**保存用户相信信息 */
 		// 封装到对象中（当model是实体类型时，也可以使用model，但要设置未封装的属性）
 		// >> 设置所属部门
 		model.setDepartment(departmentService.findById(departmentId));
 		// >> 设置关联的岗位
 		List<Role> roleList = roleService.findByIds(roleIds);
 		model.setRoles(new HashSet<Role>(roleList));
-		// >> 设置默认密码为1234（要使用MD5摘要）
+		//保存数据库
+		userDetailsService.save(model);
+		//** 保存用户登陆信息 */
+		// >> 设置默认密码为账号（要使用MD5摘要）
 		User userModel = new User();
 		String md5Digest = DigestUtils.md5Hex(model.getUserNum());
 		userModel.setPassword(md5Digest);
@@ -71,7 +75,7 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		userModel.setUserType("学生");
 		// 保存到数据库
 		userService.save(userModel);
-		userDetailsService.save(model);
+		
 		return "toList";
 	}
 
@@ -131,7 +135,7 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		return "toList";
 	}
 
-	/** 初始化密码为1234 */
+	/** 初始化密码为登陆账号 */
 	public String initPassword() throws Exception {
 		// 1，从数据库中取出原对象
 		UserDetails userDetails=userDetailsService.findById(model.getId());

@@ -46,11 +46,11 @@
 				</td>
 				<!--<td>${deptDescription}&nbsp;</td>-->
 				<td>
-					<s:a action="department_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
-					<s:a action="department_editUI?id=%{id}">
+					<s:a action="userDetails_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
+					<s:a action="userDetails_editUI?id=%{id}">
 						修改
 					</s:a>
-					<s:a action="department_editUI?id=%{id}">
+					<s:a action="userDetails_initPassword?id=%{id}">
 						初始化密码
 					</s:a>
 					&nbsp;

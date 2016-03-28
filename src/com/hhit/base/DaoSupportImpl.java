@@ -70,7 +70,7 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 	@Override
 	public List<T> findByIds(Integer[] ids) {
 		return getSession().createQuery(//
-				"FROM"+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
+				"FROM "+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
 				.setParameterList("ids", ids)//
 				.list();
 	}

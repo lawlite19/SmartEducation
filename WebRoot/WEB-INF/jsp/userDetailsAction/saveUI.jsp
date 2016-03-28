@@ -18,7 +18,7 @@
                     </tr>
                     <tr><td>登录名</td>
                         <td><s:textfield name="userNum" cssClass="InputStyle"/> *
-							（登录名要唯一）
+							（登录名要唯一，设置为学号或工号）
 						</td>
                     </tr>
                     <tr><td>姓名</td>
@@ -31,14 +31,23 @@
 							<s:radio name="gender" list="#{'男':'男', '女':'女'}"></s:radio>
                         	 --%>
 							<s:radio name="sex" list="{'男', '女'}"></s:radio>
-
 						</td>
                     </tr>
+                    <tr><td>生日</td>
+                        <td><s:textfield name="birthday" cssClass="InputStyle"/> *</td>
+                    </tr>
+
 					<tr><td>联系电话</td>
                         <td><s:textfield name="telphone" cssClass="InputStyle"/></td>
                     </tr>
-                    <tr><td>E-mail</td>
-                        <td><s:textfield name="email" cssClass="InputStyle"/></td>
+                    <tr><td>QQ号</td>
+                        <td><s:textfield name="qqNum" cssClass="InputStyle"/></td>
+                    </tr>
+                    <tr><td>微信号</td>
+                        <td><s:textfield name="weChatNum" cssClass="InputStyle"/> *</td>
+                    </tr>
+                    <tr><td>邮箱</td>
+                        <td><s:textfield name="email" cssClass="InputStyle"/> *</td>
                     </tr>
                     <tr><td>备注</td>
                         <td><s:textarea name="otherInfo" cssClass="TextareaStyle"></s:textarea></td>
