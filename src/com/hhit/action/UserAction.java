@@ -1,6 +1,5 @@
 package com.hhit.action;
 
-import java.util.List;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import com.hhit.base.BaseAction;
@@ -44,7 +43,7 @@ public class UserAction extends BaseAction<User> {
 		return "loginUI";
 	}
 
-	/** 列表 */
+	/** 跳转主页 */
 	public String list() throws Exception {
 		//setUsers(userService.findAll());
 		//ActionContext.getContext().put("users", userService.findAll());
@@ -53,33 +52,13 @@ public class UserAction extends BaseAction<User> {
 		
 		return "list";
 	}
-
-	/** 删除 */
-	public String delete() throws Exception {
-
-		return "toList";
+	
+	/** 注销账号 */
+	public String logout() throws Exception{
+		//移除session
+		ActionContext.getContext().getSession().remove("user");
+		return "loginUI";
 	}
-
-	/** 添加 */
-	public String add() throws Exception {
-		return "toList";
-	}
-
-	/** 添加页面 */
-	public String addUI() throws Exception {
-		return "addUI";
-	}
-
-	/** 修改 */
-	public String edit() throws Exception {
-		return "toList";
-	}
-
-	/** 修改页面 */
-	public String editUI() throws Exception {
-		return "editUI";
-	}
-
 	public String getRandomCode() {
 		return randomCode;
 	}

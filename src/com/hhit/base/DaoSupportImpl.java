@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 @SuppressWarnings("unchecked")
 @Transactional

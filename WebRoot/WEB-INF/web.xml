@@ -12,7 +12,10 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
-	
+	<!-- 用于做初始化工作的监听器，一定要配置到Spring的ContextLoaderListener之后，因为要用到Spring的容器对象 -->
+	<listener>
+		<listener-class>com.hhit.util.InitListener</listener-class>
+	</listener>
 	<!-- 配置Spring的用于解决懒加载问题的过滤器 -->
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
@@ -22,7 +25,7 @@
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- 配置struts2核心过滤器 -->
 	<filter>
 		<filter-name>struts2</filter-name>

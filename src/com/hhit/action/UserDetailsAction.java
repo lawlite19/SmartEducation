@@ -147,7 +147,6 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 		// 3，更新到数据库
 		userService.update(user);
-
 		return "toList";
 	}
 

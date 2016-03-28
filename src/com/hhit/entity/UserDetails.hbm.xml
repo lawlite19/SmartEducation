@@ -88,7 +88,7 @@
 		<many-to-one class="Department" column="Department_Id"
 			name="department" />
 		<!--roles属性，本类与Role多对多 -->
-		<set name="roles" sort="unsorted" table="T_UserDetails_Role">
+		<set name="roles" sort="unsorted" table="T_UserDetails_Role" lazy="false">
 			<key column="UserDetail_Id" />
 			<many-to-many class="Role" column="Role_Id" unique="false" />
 		</set>

@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import com.opensymphony.xwork2.ActionContext;
-
+@SuppressWarnings("unchecked")
 public class UserDetails {
 	private Integer id;
 	private String userName;
@@ -108,6 +108,7 @@ public class UserDetails {
 		}
 
 		// 如果本URL不需要控制，则登录用户就可以使用
+
 		Collection<String> allPrivilegeUrls = (Collection<String>) ActionContext.getContext().getApplication().get("allPrivilegeUrls");
 		if (!allPrivilegeUrls.contains(privUrl)) {
 			return true;

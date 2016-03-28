@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.hhit.entity.User;
 import com.hhit.service.IDepartmentService;
+import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
@@ -38,30 +39,24 @@ public abstract class BaseAction<T> extends ActionSupport implements
 		return model;
 	}
 
-	
-	
-	
 	// =============== Service实例的声明 ==================
-	
+
 	@Resource
-	protected IUserService userService;//登录用户
+	protected IUserService userService;// 登录用户
 	@Resource
-	protected IUserDetailsService userDetailsService;//用户详细信息
+	protected IUserDetailsService userDetailsService;// 用户详细信息
 	@Resource
-	protected IRoleService roleService;//角色
+	protected IRoleService roleService;// 角色
 	@Resource
-	protected IDepartmentService departmentService;//部门
-	
+	protected IDepartmentService departmentService;// 部门
+	@Resource
+	protected IPrivilegeService privilegeService;// 权限
+
 	/**
 	 * 获取当前登录的用户
-	 * 
-	 * @return
 	 */
 	protected User getCurrentUser() {
 		return (User) ActionContext.getContext().getSession().get("user");
 	}
-
-	
-	
 	// ============== 分页用的参数 =============
 }

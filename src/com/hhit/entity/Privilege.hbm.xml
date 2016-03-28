@@ -31,7 +31,7 @@
 		<many-to-one name="parent" class="Privilege" column="Parent_Id"></many-to-one>
 		
 		<!--children属性，本类与Privilege（下级）一对多 -->
-		<set name="children">
+		<set name="children" lazy="false">
 			<key column="Children_Id"></key>
 			<one-to-many class="Privilege" />
 		</set>

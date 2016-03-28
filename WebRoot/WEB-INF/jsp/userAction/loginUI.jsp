@@ -17,7 +17,7 @@
   </head>
   <body>
    <form action="user_login.action" method="post">
-   <font color="red"><s:fielderror/></font>
+   <font color="red"><s:fielderror fieldName="login"/></font>
    <br/>
     用户名：<input type="text" name="userNum" id="userNameLogin"  />
     <br/> 

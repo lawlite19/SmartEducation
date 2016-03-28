@@ -33,7 +33,7 @@
 		</set>
 		
 		<!--privileges属性，与Privilege多对多  -->
-		<set name="privileges" table="T_Role_Privilege">
+		<set name="privileges" table="T_Role_Privilege" lazy="false">
 			<key column="Role_Id"></key>
 			<many-to-many class="Privilege" column="Privilege_Id"></many-to-many>
 		</set>

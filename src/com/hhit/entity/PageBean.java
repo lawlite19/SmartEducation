@@ -8,6 +8,7 @@ import java.util.List;
  * @author tyg
  * 
  */
+@SuppressWarnings("rawtypes")
 public class PageBean {
 
 	// 指定的或是页面参数
@@ -16,6 +17,7 @@ public class PageBean {
 
 	// 查询数据库
 	private int recordCount; // 总记录数
+	
 	private List recordList; // 本页的数据列表
 
 	// 计算
