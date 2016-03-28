@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.enterprise.inject.New;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Session;
@@ -33,14 +34,14 @@ public class Installer {
 
 		// ======================================================
 		//保存超级管理员
-		User user=new User();
-		user.setIsUsable(1);
-		user.setPassword(DigestUtils.md5Hex("admin"));
-		user.setUserType("admin");
-		user.setUserNum("admin");
-		user.setUserDetails(null);
-		session.save(user);
-		
+//		User user=new User();
+//		user.setIsUsable(1);
+//		user.setPassword(DigestUtils.md5Hex("admin"));
+//		user.setUserType("admin");
+//		user.setUserNum("admin");
+//		user.setUserDetails(null);
+//		session.save(user);
+//		
 //		// ==============================================================
 //		//保存部门
 //		Department depart1=new Department("淮海工学院", "01", 1, "校级", 1, null);
@@ -109,55 +110,72 @@ public class Installer {
 		
 		// ==============================================================
 		// 保存权限数据
-		Privilege menu, menu1, menu2, menu3, menu4, menu5;
-
-		// --------------------
-		menu = new Privilege("系统管理", null, null);
-		menu1 = new Privilege("角色管理", "/role_list", menu);
-		menu2 = new Privilege("部门管理", "/department_list", menu);
-		menu3 = new Privilege("用户管理", "/userDetails_list", menu);
-		session.save(menu);
-		session.save(menu1);
-		session.save(menu2);
-		session.save(menu3);
-
-		session.save(new Privilege("角色列表", "/role_list", menu1));
-		session.save(new Privilege("角色删除", "/role_delete", menu1));
-		session.save(new Privilege("角色添加", "/role_add", menu1));
-		session.save(new Privilege("角色修改", "/role_edit", menu1));
-
-		session.save(new Privilege("部门列表", "/department_list", menu2));
-		session.save(new Privilege("部门删除", "/department_delete", menu2));
-		session.save(new Privilege("部门添加", "/department_add", menu2));
-		session.save(new Privilege("部门修改", "/department_edit", menu2));
-
-		session.save(new Privilege("用户列表", "/userDetails_list", menu3));
-		session.save(new Privilege("用户删除", "/userDetails_delete", menu3));
-		session.save(new Privilege("用户添加", "/userDetails_add", menu3));
-		session.save(new Privilege("用户修改", "/userDetails_edit", menu3));
-		session.save(new Privilege("初始化密码", "/userDetails_initPassword", menu3));
-
-		// --------------------
-//		menu = new Privilege("网上交流", null, null);
-//		menu1 = new Privilege("论坛管理", "/forumManage_list", menu);
-//		menu2 = new Privilege("论坛", "/forum_list", menu);
-//		session.save(menu);
-//		session.save(menu1);
-//		session.save(menu2);
-
-		// --------------------
-//		menu = new Privilege("审批流转", null, null);
-//		menu1 = new Privilege("审批流程管理", "/processDefinition_list", menu);
-//		menu2 = new Privilege("申请模板管理", "/template_list", menu);
-//		menu3 = new Privilege("起草申请", "/flow_templateList", menu);
-//		menu4 = new Privilege("待我审批", "/flow_myTaskList", menu);
-//		menu5 = new Privilege("我的申请查询", "/flow_myApplicationList", menu);
-//		session.save(menu);
+		Privilege menu1, menu2, menu3, menu4, menu5,menu6;
+//
+//		// --------------------系统管理模块
+//		menu1 = new Privilege("系统管理", null, null);
+//		menu2 = new Privilege("系统设置", null, menu1);
+//		menu3=new Privilege("部门管理", "/department_list", menu2);	
+//		menu4= new Privilege("系统日志", "", menu2);
+//		menu5=new Privilege("系统功能", null, menu1);
+//		menu6=new Privilege("系统功能管理", "", menu5);
 //		session.save(menu1);
 //		session.save(menu2);
 //		session.save(menu3);
 //		session.save(menu4);
 //		session.save(menu5);
+//		session.save(menu6);
+//		
+//		session.save(new Privilege("部门列表", "/department_list", menu3));
+//		session.save(new Privilege("部门删除", "/department_delete", menu3));
+//		session.save(new Privilege("部门添加", "/department_add", menu3));
+//		session.save(new Privilege("部门修改", "/department_edit", menu3));
+//		// --------------------用户权限模块
+//		menu1 = new Privilege("用户权限", null, null);
+//		menu2=new Privilege("用户管理", null, menu1);
+//		menu3=new Privilege("用户管理", "/userDetail_list", menu2);
+//		menu4=new Privilege("角色管理", null, menu1);
+//		menu5=new Privilege("角色权限管理", "/role_list", menu4);
+//		session.save(menu1);
+//		session.save(menu2);
+//		session.save(menu3);
+//		session.save(menu4);
+//		session.save(menu5);
+//		
+//		session.save(new Privilege("用户列表", "/userDetails_list", menu3));
+//		session.save(new Privilege("用户删除", "/userDetails_delete", menu3));
+//		session.save(new Privilege("用户添加", "/userDetails_add", menu3));
+//		session.save(new Privilege("用户修改", "/userDetails_edit", menu3));
+//		session.save(new Privilege("初始化密码", "/userDetails_initPassword", menu3));
+//		
+//		session.save(new Privilege("角色列表", "/role_list", menu5));
+//		session.save(new Privilege("角色删除", "/role_delete", menu5));
+//		session.save(new Privilege("角色添加", "/role_add", menu5));
+//		session.save(new Privilege("角色修改", "/role_edit", menu5));
+		
+		// --------------------作业管理模块
+		menu1 = new Privilege("作业管理", null, null);
+		session.save(menu1);
+		
+		// --------------------教学管理模块
+		menu1 = new Privilege("教学管理", null, null);
+		session.save(menu1);
+		
+		// --------------------问卷管理模块
+		menu1 = new Privilege("问卷管理", null, null);
+		session.save(menu1);
+		
+		// --------------------信息交流模块
+		menu1 = new Privilege("信息交流", null, null);
+		session.save(menu1);
+		
+		// --------------------平台信息模块
+		menu1 = new Privilege("平台信息", null, null);
+		session.save(menu1);
+		
+		// --------------------接口管理模块
+		menu1 = new Privilege("接口管理", null, null);
+		session.save(menu1);
 	}
 
 	public static void main(String[] args) {

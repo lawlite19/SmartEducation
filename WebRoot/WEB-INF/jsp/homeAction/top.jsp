@@ -3,6 +3,7 @@
 <html>
 <head >
     <title></title>
+    <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
         <style type="text/css">
          *
         {
@@ -14,7 +15,7 @@
         body
         {
             margin: 0;
-            background: url(style/admin_tbg.png) repeat-x;
+            background: url(${pageContext.request.contextPath}/style/images/admin_tbg.png) repeat-x;
             padding: 0;
             color: #fff;
             font-family: 宋体, arial;
@@ -25,12 +26,12 @@
         {
             position: relative;
             height: 102px;
-            background: url(style/pnew2.png) no-repeat right top;
+            background: url(${pageContext.request.contextPath}/style/images/pnew2.png) no-repeat right top;
         }
 
         .logo
         {
-            background: url(style/logoold.gif) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/logoold.gif) no-repeat;
             left: 0px;
             top: 0px;
             position: absolute;
@@ -40,7 +41,7 @@
 
         .logofont
         {
-            background: url(style/logofont.png) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/logofont.png) no-repeat;
             width: 400px;
             height: 35px;
             position: absolute;
@@ -72,7 +73,7 @@
 
             .menu li.selected a
             {
-                background: url(style/menu.png) no-repeat right -39px;
+                background: url(${pageContext.request.contextPath}/style/images/menu.png) no-repeat right -39px;
                 color: #0A6697;
                 padding-right: 17px;
                 font-weight: bold;
@@ -80,7 +81,7 @@
 
             .menu li.selected span
             {
-                background: url(style/menu.png) no-repeat left top;
+                background: url(${pageContext.request.contextPath}/style/images/menu.png) no-repeat left top;
                 display: block;
                 padding-left: 17px;
                 text-decoration: none;
@@ -89,7 +90,7 @@
             .menu li a
             {
                 display: block;
-                background: url(style/menu.png) no-repeat right -117px;
+                background: url(${pageContext.request.contextPath}/style/images/menu.png) no-repeat right -117px;
                 padding-right: 17px;
                 text-decoration: none;
                 color: #fff;
@@ -97,7 +98,7 @@
 
             .menu span
             {
-                background: url(style/menu.png) no-repeat 0 -78px;
+                background: url(${pageContext.request.contextPath}/style/images/menu.png) no-repeat 0 -78px;
                 display: block;
                 padding-left: 17px;
             }
@@ -128,7 +129,7 @@
             position: absolute;
             right: 490px;
             top: 80px;
-            background: url(style/sy.gif) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/sy.gif) no-repeat;
             text-indent: 2em;
             line-height: 18px;
         }
@@ -139,7 +140,7 @@
             position: absolute;
             right: 405px;
             top: 80px;
-            background: url(style/t.png) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/t.png) no-repeat;
             text-indent: 2em;
         }
         .s6
@@ -148,7 +149,7 @@
             position: absolute;
             right: 225px;
             top: 80px;
-            background: url(style/help.gif) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/help.gif) no-repeat;
             text-indent: 2em;
         }
         .s5
@@ -166,7 +167,7 @@
             position: absolute;
             right: 315px;
             top: 80px;
-            background: url(style/person.gif) no-repeat;
+            background: url(${pageContext.request.contextPath}/style/images/person.gif) no-repeat;
             text-indent: 2em;
         }
     </style>
@@ -196,16 +197,24 @@
                 document.getElementById("li_1").className = "selected";
             }
         </script>
-        
-        
+        <div class="wrap">
+        <div class="logo"></div>
+        <div class="menu">
+ 		<ul>
+ 			<s:iterator value="#application.topPrivilegeList">
+               <li onclick="javascript:ChangeDisplay('li_${id}');" id='li_${id}'><a href='home_left?parentId=${id}' target="left"><span>${privilegeName}</span></a></li>
+			</s:iterator>
+  		</ul>
+        </div>
         <div class="member">
-            <img src="style/q.png" /> 您好：[]，祝您工作顺利！
+            <img src="${pageContext.request.contextPath}/style/images/q.png" /> 您好：[]
         </div>
         <div class="s2"><a href="right.aspx" style="color: #1598E0" target="right">首页</a></div>
-            <div class="s3"><a href="" style="color: #1598E0" target="_top">退出系统</a></div>
-            <div class="s4"><a href="" style="color: #1598E0" target="right">密码修改</a></div>
+            <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" style="color: #1598E0" target="_top">退出系统</a></div>
+            <div class="s4"><a href="${pageContext.request.contextPath}/user_modifyPasswordUI.action" style="color: #1598E0" target="right">密码修改</a></div>
             <div class="s6"><a href=""  style="color: #1598E0" target="right">帮助文档</a></div>
         <div class="s5" id="clock"></div>
+      </div>
         <!--添加后台主页时间-->
         <script type="text/javascript">
             var clock = new Clock();

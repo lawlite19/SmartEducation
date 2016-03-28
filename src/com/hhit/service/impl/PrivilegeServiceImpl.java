@@ -18,7 +18,7 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements I
 	
 	@Override
 	public List<Privilege> findTopList() {
-		return getSession().createQuery("FROM Privilege WHERE parent IS NULL")//
+		return getSession().createQuery("FROM Privilege p WHERE p.parent IS NULL")//
 		.list();
 	}
 

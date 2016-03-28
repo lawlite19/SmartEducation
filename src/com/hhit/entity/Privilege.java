@@ -33,7 +33,7 @@ public class Privilege {
 	/**
 	 * 构造函数，用于安装
 	 */
-	public Privilege(String url,String priName,Privilege pri){
+	public Privilege(String priName,String url,Privilege pri){
 		this.url=url;
 		this.privilegeName=priName;
 		this.parent=pri;

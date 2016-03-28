@@ -1,7 +1,10 @@
 package com.hhit.action;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.digester.Digester;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.User;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,6 +22,9 @@ public class UserAction extends BaseAction<User> {
 	// private User user;
 	//private List<User> users;
 	private String randomCode;
+	
+	private String oldPassword;
+	private String newPassword;
 
 	/** 跳转到登录界面 */
 	public String loginUI() throws Exception {
@@ -59,6 +65,26 @@ public class UserAction extends BaseAction<User> {
 		ActionContext.getContext().getSession().remove("user");
 		return "loginUI";
 	}
+	
+	/** 跳转修改密码界面 */
+	public String modifyPasswordUI() throws Exception{
+		return "modifyPasswordUI";
+	}
+	
+	/** 跳转修改密码界面 */
+	public String modifyPassword() throws Exception{
+		if((DigestUtils.md5Hex(oldPassword.trim())).equals(getCurrentUser().getPassword()))
+		{
+			String newPass=DigestUtils.md5Hex(newPassword);
+			getCurrentUser().setPassword(newPass);
+			userService.update(getCurrentUser());
+			addFieldError("information", "密码修改成功");
+		}
+		else
+			addFieldError("information", "旧密码错误");
+		return "modifyPasswordUI";
+	}
+	
 	public String getRandomCode() {
 		return randomCode;
 	}
@@ -66,4 +92,21 @@ public class UserAction extends BaseAction<User> {
 	public void setRandomCode(String randomCode) {
 		this.randomCode = randomCode;
 	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
 }

@@ -27,8 +27,8 @@
 			<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
 			<result name="editUI">/WEB-INF/jsp/userAction/editUI.jsp</result>
 			<result name="toList" type="redirectAction">user_list</result>
-			
-			<result name="logout">/WEB-INF/jsp/userAction/logout.jsp</result>
+
+			<result name="modifyPasswordUI">/WEB-INF/jsp/userAction/modifyPasswordUI.jsp</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
 		<!-- 用户详细信息管理 -->
