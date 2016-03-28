@@ -34,6 +34,7 @@
 		<!-- 用户详细信息管理 -->
 		<action name="userDetails_*" class="userDetailsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">userDetails_list</result>
 		</action>
 		<!-- 产生验证码 -->

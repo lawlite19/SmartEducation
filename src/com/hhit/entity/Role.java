@@ -25,7 +25,19 @@ public class Role {
 	
 	private Set<UserDetails> userDetails;
 	private Set<Privilege> privileges;
+	/**
+	 * 默认构造函数,用户初始化，有重载则不可缺少
+	 */
+	public Role(){
+		
+	}
 	
+	public Role(String rN,String desc,Timestamp aD){
+		roleName=rN;
+		description=desc;
+		addDate=aD;
+	}
+
 	public Integer getId() {
 		return id;
 	}

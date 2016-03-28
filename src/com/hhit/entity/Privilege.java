@@ -24,6 +24,15 @@ public class Privilege {
 	private Set<Role> roles;
 	private Set<Privilege> children;
 	
+	/**
+	 * 默认构造函数,用户初始化，有重载则不可缺少
+	 */
+	public Privilege(){
+		
+	}
+	/**
+	 * 构造函数，用于安装
+	 */
 	public Privilege(String url,String priName,Privilege pri){
 		this.url=url;
 		this.privilegeName=priName;

@@ -1,5 +1,8 @@
 package com.hhit.util;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.hibernate.Session;
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.entity.Department;
+import com.hhit.entity.Privilege;
+import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
 @Component
@@ -24,6 +29,7 @@ public class Installer {
 	@Transactional
 	public void install() {
 		Session session = sessionFactory.getCurrentSession();
+
 		// ==============================================================
 		//保存部门
 		Department depart1=new Department("淮海工学院", "01", 1, "校级", 1, null);
@@ -61,18 +67,37 @@ public class Installer {
 		session.save(userDetails6);
 		session.save(userDetails7);
 		session.save(userDetails8);
-		//		User user = new User();
-//		user.setUserNum("201212");
-//		user.setUserType("管理员");
-//		user.setPassword(DigestUtils.md5Hex("123456"));
-//		user.setIsUsable(1);
-		//user.s
-//		session.save(user); // 保存
 		// ==============================================================
-		// 保存用户详细信息
-
+		// 保存用户信息
+		User user1=new User("2012122710", "123456", 1, "管理员",userDetails1);
+		User user2=new User("2012122711", "123456", 1, "负责人", userDetails2);
+		User user3=new User("2012122712", "123456", 1, "负责人", userDetails3);
+		User user4=new User("2012122713", "123456", 1, "教师", userDetails4);
+		User user5=new User("2012122714", "123456", 1, "教师", userDetails5);
+		User user6=new User("2012122715", "123456", 1, "学生", userDetails6);
+		User user7=new User("2012122716", "123456", 1, "学生", userDetails7);
+		User user8=new User("2012122717", "123456", 1, "管理员", userDetails8);
+		session.save(user1);
+		session.save(user2);
+		session.save(user3);
+		session.save(user4);
+		session.save(user5);
+		session.save(user6);
+		session.save(user7);
+		session.save(user8);
 		// ==============================================================
-		// 保存权限数据
+		// 保存角色
+		Role role1=new Role("管理员", "管理员功能", new Timestamp(new Date().getTime()));
+		Role role2=new Role("课程负责人", "课程负责人功能", new Timestamp(new Date().getTime()));
+		Role role3=new Role("普通教师", "普通教师功能", new Timestamp(new Date().getTime()));
+		Role role4=new Role("学生", "学生功能", new Timestamp(new Date().getTime()));
+		session.save(role1);
+		session.save(role2);
+		session.save(role3);
+		session.save(role4);
+		
+//		// ==============================================================
+//		// 保存权限数据
 //		Privilege menu, menu1, menu2, menu3, menu4, menu5;
 //
 //		// --------------------

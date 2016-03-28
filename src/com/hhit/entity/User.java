@@ -15,18 +15,30 @@ public class User {
 	private String userType;
 	private UserDetails userDetails;
 	/**
-	 * 默认构造函数
+	 * 默认构造函数,重载了则不可缺少
 	 */
 	public User(){
 		
 	}
-	//构造函数，用户安装
-	public User(String un,String pwd,Integer isU,String ut,UserDetails ud){
+	
+	/**
+	 * 构造函数，用户安装
+	 */
+	public User(String un,String pwd,
+			Integer isU,String ut,UserDetails ud){
 		userNum=un;
 		password=pwd;
 		isUsable=isU;
 		userType=ut;
 		userDetails=ud;
+	}
+	//构造函数，用户安装
+	public User(String un,String pwd,
+			Integer isU,String ut){
+		userNum=un;
+		password=pwd;
+		isUsable=isU;
+		userType=ut;
 	}
 	
 	

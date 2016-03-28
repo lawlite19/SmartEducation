@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hhit.base.DaoSupportImpl;
 import com.hhit.dao.IUserDao;
 import com.hhit.entity.User;
+import com.hhit.entity.UserDetails;
 import com.hhit.service.IUserService;
 
 //注入
@@ -37,6 +38,12 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 			return true;
 		return false;
 
+	}
+	@Override
+	public User findByDetailsId(UserDetails userDetails) {
+		return (User) getSession().createQuery("FROM User WHERE userDetails=?")//
+		.setParameter(0, userDetails)//
+		.list().get(0);
 	}
 	
 }

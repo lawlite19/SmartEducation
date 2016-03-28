@@ -38,6 +38,12 @@ public class UserDetails {
 	private Set<Role> roles;
 
 	/**
+	 * 默认构造函数,用户初始化，有重载则不可缺少
+	 */
+	public UserDetails(){
+		
+	}
+	/**
 	 * 构造函数，用于安装
 	 */
 	public UserDetails(String uname,String unum,String se,String em,

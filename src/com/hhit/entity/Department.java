@@ -25,7 +25,7 @@ public class Department {
 	private Set<Department> children;
 
 	/**
-	 * 默认构造函数
+	 * 默认构造函数,用户初始化，有重载则不可缺少
 	 */
 	public Department(){
 		

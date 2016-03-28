@@ -35,7 +35,7 @@
 				<!-- <td>${department.deptName}&nbsp;</td>-->
 			    <td>${userName}&nbsp;</td>
 				<td>${userNum}&nbsp;</td>
-				<td>${user.userNum}&nbsp;</td>
+  			<td>${user.userNum}&nbsp;</td>
 				<td>  
 					<c:if test="${user.isUsable=='1'}">
 						正在用
@@ -60,6 +60,11 @@
 			
         </tbody>
     </table>
- 
+     <!-- 其他功能超链接 -->
+    <div id="TableTail">
+        <div id="TableTail_inside">
+            <s:a action="userDetails_addUI">添加用户</s:a>
+        </div>
+    </div>
   </body>
 </html>
