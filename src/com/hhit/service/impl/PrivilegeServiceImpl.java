@@ -18,7 +18,13 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements I
 	
 	@Override
 	public List<Privilege> findTopList() {
-		return getSession().createQuery("FROM Privilege p WHERE p.parent IS NULL")//
+		return getSession().createQuery("FROM Privilege p WHERE p.url IS NULL AND p.parent IS NULL")//
+		.list();
+	}
+	
+	@Override
+	public List<Privilege> findSecondList() {
+		return getSession().createQuery("FROM Privilege p WHERE p.url IS NULL AND p.parent IS NOT NULL")//
 		.list();
 	}
 
@@ -27,6 +33,8 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements I
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }

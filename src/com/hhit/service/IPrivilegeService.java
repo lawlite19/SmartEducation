@@ -8,10 +8,13 @@ import com.hhit.entity.Privilege;
 
 public interface IPrivilegeService extends IDaoSupport<Privilege> {
 
-	//查询所有顶级权限
+	// 查询所有顶级权限
 	List<Privilege> findTopList();
 
-	//查询所有权限url
+	// 查找所有二级权限
+	List<Privilege> findSecondList();
+
+	// 查询所有权限url
 	Collection<String> getAllPrivilegeUrls();
 
 }

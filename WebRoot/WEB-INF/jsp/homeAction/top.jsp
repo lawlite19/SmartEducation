@@ -202,7 +202,7 @@
         <div class="menu">
  		<ul>
  			<s:iterator value="#application.topPrivilegeList">
-               <li onclick="javascript:ChangeDisplay('li_${id}');" id='li_${id}'><a href='home_left?parentId=${id}' target="left"><span>${privilegeName}</span></a></li>
+               <li onclick="javascript:ChangeDisplay('li_${id}');" id='li_${id}'><a href='home_left.action?parentId=${id}' target="left"><span>${privilegeName}</span></a></li>
 			</s:iterator>
   		</ul>
         </div>

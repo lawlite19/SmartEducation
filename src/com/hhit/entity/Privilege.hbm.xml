@@ -28,11 +28,11 @@
 			<many-to-many class="Role" column="Role_Id"></many-to-many>
 		</set>
 		<!-- parent属性，本类与Privilege（上级）的多对一 -->
-		<many-to-one name="parent" class="Privilege" column="Parent_Id"></many-to-one>
+		<many-to-one name="parent" class="Privilege" column="Parent_Id" lazy="false"></many-to-one>
 		
 		<!--children属性，本类与Privilege（下级）一对多 -->
-		<set name="children" lazy="false">
-			<key column="Children_Id"></key>
+		<set name="children" lazy="false" order-by="id ASC">
+			<key column="Parent_Id"></key>
 			<one-to-many class="Privilege" />
 		</set>
 	</class>
