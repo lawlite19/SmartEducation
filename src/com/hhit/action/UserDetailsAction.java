@@ -37,7 +37,22 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		userDetailsService.delete(model.getId());
 		return "toList";
 	}
-
+	/** 禁用账户 */
+	public String stopUser() throws Exception{
+		UserDetails userDetails=userDetailsService.findById(model.getId());
+		User user=userDetails.getUser();
+		user.setIsUsable(0);
+		userService.update(user);
+		return "toList";
+	}
+	/** 启用账户 */
+	public String enableUser() throws Exception{
+		UserDetails userDetails=userDetailsService.findById(model.getId());
+		User user=userDetails.getUser();
+		user.setIsUsable(1);
+		userService.update(user);
+		return "toList";
+	}
 	/** 添加页面 */
 	public String addUI() throws Exception {
 		// 准备数据, departmentList

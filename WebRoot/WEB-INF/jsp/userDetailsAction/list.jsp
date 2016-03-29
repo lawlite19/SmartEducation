@@ -19,11 +19,11 @@
         <thead>
             <tr align=center valign=middle id=TableTitle>
             	<td width="150px">部门名称</td>
-            	<td width="150px">用户名</td>
+            	<td width="150px">姓名</td>
 				<td width="150px">账号</td>
 				<td width="150px">角色</td>
 				<td width="150px">账户状态</td>
-				<td>相关操作</td>
+				<td width="150px">相关操作</td>
             </tr>
         </thead>
 
@@ -32,21 +32,31 @@
         
            <s:iterator value="#userDetailsList">
 			<tr class="TableDetail1 template">
-				<!-- <td>${department.deptName}&nbsp;</td>-->
+				<td>${department.deptName}&nbsp;</td>
 			    <td>${userName}&nbsp;</td>
-				<td>${userNum}&nbsp;</td>
   			<td>${user.userNum}&nbsp;</td>
+  			<td>
+               	<s:iterator value="roles">
+                		${roleName}
+                	</s:iterator>
+             </td>
 				<td>  
-					<c:if test="${user.isUsable=='1'}">
+					<s:if test="%{user.isUsable==1}">
 						正在用
-					</c:if>
-					<c:if test="${user.isUsable!='1'}">
-						已禁用 
-					</c:if>
+					</s:if>
+					<s:if test="%{user.isUsable!=1}">
+						<font color="red">已禁用 </font>
+					</s:if>
 				</td>
 				<!--<td>${deptDescription}&nbsp;</td>-->
 				<td>
-					<s:a action="userDetails_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
+					<s:a action="userDetails_delete?id=%{id}" onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
+					<s:if test="%{user.isUsable==1}">
+						<s:a action="userDetails_stopUser?id=%{id}">禁用</s:a>
+					</s:if>
+					<s:else>
+						<s:a action="userDetails_enableUser?id=%{id}">启用</s:a>
+					</s:else>
 					<s:a action="userDetails_editUI?id=%{id}">
 						修改
 					</s:a>

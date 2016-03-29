@@ -1,6 +1,8 @@
 package com.hhit.base;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -56,7 +58,11 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 
 	@Override
 	public T findById(Integer id) {
-		return (T)getSession().get(clazz, id);
+		if(id==null){
+			return null;
+		}
+		else
+			return (T)getSession().get(clazz, id);
 	}
 
 	
@@ -68,6 +74,10 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 	}
 	@Override
 	public List<T> findByIds(Integer[] ids) {
+		if(ids==null||ids.length==0){
+			//返回一个空集合
+			return Collections.EMPTY_LIST;
+		}
 		return getSession().createQuery(//
 				"FROM "+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
 				.setParameterList("ids", ids)//

@@ -48,5 +48,6 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 		.setParameter(0, userDetails)//
 		.list().get(0);
 	}
+
 	
 }

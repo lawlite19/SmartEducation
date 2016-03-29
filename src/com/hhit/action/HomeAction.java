@@ -34,14 +34,7 @@ public class HomeAction extends ActionSupport implements ServletContextAware {
 		List<Privilege> privileges = (List<Privilege>) servletContext
 				.getAttribute("secondPrivilegeList");
 		if (parentId == null) {
-			privilegeList = new ArrayList<Privilege>();
-			for (Privilege pri : privileges) {
-				if (pri.getParent().getId() == parentId);
-				{
-					privilegeList.add(pri);
-				}
-			}
-			
+			//TODO
 		} else {
 			privilegeList = new ArrayList<Privilege>();
 			for (Privilege pri : privileges) {
