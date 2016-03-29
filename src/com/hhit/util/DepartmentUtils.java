@@ -12,6 +12,8 @@ public class DepartmentUtils {
 	 * @param topList
 	 * @return
 	 */
+	
+	
 	public static List<Department> getAllDepartments(List<Department> topList) {
 		List<Department> list = new ArrayList<Department>();
 		walkDepartmentTreeList(topList, "┣", list);

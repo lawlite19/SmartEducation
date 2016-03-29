@@ -5,39 +5,48 @@
 	<constant name="struts.devMode" value="true"></constant>
 	<!-- 扩展名配置为action -->
 	<constant name="struts.action.extension" value="action"></constant>
-    <!-- 把主题配置为simple -->
-    <constant name="struts.ui.theme" value="simple" />
-	
+	<!-- 把主题配置为simple -->
+	<constant name="struts.ui.theme" value="simple" />
+
 	<package name="default" namespace="/" extends="struts-default">
-	
+		<interceptors>
+			<!-- 声明拦截器 -->
+			<interceptor name="checkPrivilege"
+				class="com.hhit.util.CheckPrivilegeInterceptor"></interceptor>
+			<!-- 重新定义默认的拦截器栈 -->
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="checkPrivilege"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		<!-- 配置测试用的Action -->
-		<!-- class写bean的名称 
-		<action name="test" class="testAction">
-			<result name="success">/test.jsp</result>
-		</action>-->
+		<!-- class写bean的名称 <action name="test" class="testAction"> <result name="success">/test.jsp</result> 
+			</action> -->
 		<!-- 全局的Result配置 -->
 		<global-results>
 			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
-			<result name="noPrivilegeError">/viewError.jsp</result>
+			<result name="noPrivilegeError">/noPrivilegeError.jsp</result>
 		</global-results>
 		<!-- 登录用户管理 -->
-		<!-- 通配符*,method="{1}"动态确定对应的方法，user_list user_addUI  -->
+		<!-- 通配符*,method="{1}"动态确定对应的方法，user_list user_addUI -->
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
 			<result name="addUI">/WEB-INF/jsp/userAction/addUI.jsp</result>
 			<result name="editUI">/WEB-INF/jsp/userAction/editUI.jsp</result>
 			<result name="toList" type="redirectAction">user_list</result>
 
-			<result name="modifyPasswordUI">/WEB-INF/jsp/userAction/modifyPasswordUI.jsp</result>
+			<result name="modifyPasswordUI">/WEB-INF/jsp/userAction/modifyPasswordUI.jsp
+			</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
 		<!-- 用户详细信息管理 -->
 		<action name="userDetails_*" class="userDetailsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
-			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp
+			</result>
 			<result name="toList" type="redirectAction">userDetails_list</result>
 		</action>
-		<!-- 产生验证码 -->
+		<!-- 产生验证码，配置在拦截器前 -->
 		<action name="rand" class="randomAction">
 			<result type="stream">
 				<param name="contentType">image/jpeg</param>
@@ -48,13 +57,15 @@
 		<action name="department_*" class="departmentAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/departmentAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/departmentAction/saveUI.jsp</result>
-			<result name="toList" type="redirectAction">department_list?parentId=${parentId}</result>
+			<result name="toList" type="redirectAction">department_list?parentId=${parentId}
+			</result>
 		</action>
 		<!-- 角色管理 -->
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
-			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp</result>
+			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp
+			</result>
 			<result name="toList" type="redirectAction">role_list</result>
 		</action>
 		<!-- 首页 -->

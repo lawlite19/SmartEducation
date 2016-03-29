@@ -30,8 +30,9 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements I
 
 	@Override
 	public Collection<String> getAllPrivilegeUrls() {
-		// TODO Auto-generated method stub
-		return null;
+		return getSession().createQuery(//
+		"SELECT DISTINCT p.url FROM Privilege p WHERE p.url IS NOT NULL")//
+		.list();
 	}
 
 

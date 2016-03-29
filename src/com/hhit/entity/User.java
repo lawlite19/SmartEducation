@@ -91,6 +91,7 @@ public class User {
 
 		// 如果本URL不需要控制，则登录用户就可以使用
 
+		@SuppressWarnings("unchecked")
 		Collection<String> allPrivilegeUrls = (Collection<String>) ActionContext.getContext().getApplication().get("allPrivilegeUrls");
 		if (!allPrivilegeUrls.contains(privUrl)) {
 			return true;

@@ -31,12 +31,12 @@
 				<td>${parent.deptName}&nbsp;</td>
 				<td>${deptLevel}&nbsp;</td>
 				<td>
-					<c:if test="${isUsable==1}">
+					<s:if test="isUsable==1">
 						是
-					</c:if>
-					<c:if test="${isUsable!=1}">
+					</s:if>
+					<s:else >
 						否
-					</c:if>
+					</s:else>
 				</td>
 				<td>${deptDescription}&nbsp;</td>
 				<td>

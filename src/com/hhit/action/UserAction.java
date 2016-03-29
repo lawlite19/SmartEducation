@@ -1,7 +1,6 @@
 package com.hhit.action;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.digester.Digester;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 

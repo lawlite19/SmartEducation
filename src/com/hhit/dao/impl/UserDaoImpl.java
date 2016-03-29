@@ -3,7 +3,6 @@ package com.hhit.dao.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.base.DaoSupportImpl;
 import com.hhit.dao.IUserDao;
