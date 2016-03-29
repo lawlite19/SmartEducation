@@ -9,14 +9,18 @@
 <body>
 <s:form id="form1" >
  	<s:iterator value="#privilegeList" >
+ 	<s:if test="#session.user.hasPrivilegeByName(privilegeName)">
        <div>
                <dl>
                   <dt>${privilegeName}</dt>
                    <s:iterator value="children">
+                   <s:if test="#session.user.hasPrivilegeByName(privilegeName)">
                           <dd><a href='${pageContext.request.contextPath}${url}.action' target="right">${privilegeName}</a></dd>
+                   </s:if>
                    </s:iterator>
                </dl>
         </div>
+     </s:if>
      </s:iterator>
     </s:form>
 </body>

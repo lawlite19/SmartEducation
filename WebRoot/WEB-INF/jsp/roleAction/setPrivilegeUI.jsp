@@ -7,12 +7,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
-	<script type="text/javascript">
+<script type="text/javascript">
 		$(function(){
 			// 指定事件处理函数
 			$("[name=privilegeIds]").click(function(){
+				
 				// 当选中或取消一个权限时，也同时选中或取消所有的下级权限
 				$(this).siblings("ul").find("input").attr("checked", this.checked);
+				
 				// 当选中一个权限时，也要选中所有的直接上级权限
 				if(this.checked == true){
 					$(this).parents("li").children("input").attr("checked", true);
@@ -25,26 +27,12 @@
 <body>
 
 <!-- 标题显示 -->
-<div id="Title_bar">
-    <div id="Title_bar_Head">
-        <div id="Title_Head"></div>
-        <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 配置权限
-        </div>
-        <div id="Title_End"></div>
-    </div>
-</div>
-
+配置权限
 <!--显示表单内容-->
-<div id=MainArea>
 
-    <s:form action="role_setPrivilege">
+    <s:form action="role_setPrivilege" method="post">
     	<s:hidden name="id"></s:hidden>
-    
-        <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
-        	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/style/blue/images/item_point.gif" /> 正在为【${roleName}】配置权限 </div> 
-        </div>
-        
+		正在为【${roleName}】配置权限        
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
@@ -65,22 +53,6 @@
 						<tr class="TableDetail1">
 							<!-- 显示权限树 -->
 							<td>
-
-
-<%-- 
-<s:checkboxlist name="privilegeIds" list="#privilegeList" listKey="id" listValue="name"></s:checkboxlist>
---%>
-
-<%-- 
-<s:iterator value="#privilegeList">
-	<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}"
-		<s:property value="%{id in privilegeIds ? 'checked' : ''}"/>
-	/>
-	<label for="cb_${id}">${name}</label>
-	<br/>
-</s:iterator>
---%>
-
 <!-- 显示树状结构内容 -->
 <ul id="tree">
 <%-- 显示一级菜单 --%>
@@ -90,13 +62,13 @@
 		<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
 		<ul>
 		<%-- 显示二级菜单 --%>
-		<s:iterator value="tbPrivileges">
+		<s:iterator value="children">
 			<li>
 				<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
 				<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
 				<ul>
 				<%-- 显示三级菜单 --%>
-				<s:iterator value="tbPrivileges">
+				<s:iterator value="children">
 					<li>
 						<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
 						<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
@@ -129,8 +101,8 @@
             <input type="submit" value="分配"/>
             <a href="javascript:history.go(-1);">返回上级</a>
         </div>
-    </s:form>
-</div>
+</s:form>
+
 
 <div class="Description">
 	说明：<br />

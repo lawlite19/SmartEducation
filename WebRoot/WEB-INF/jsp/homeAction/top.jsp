@@ -201,8 +201,11 @@
         <div class="logo"></div>
         <div class="menu">
  		<ul>
+ 			
  			<s:iterator value="#application.topPrivilegeList">
+ 			<s:if test="#session.user.hasPrivilegeByName(privilegeName)">
                <li onclick="javascript:ChangeDisplay('li_${id}');" id='li_${id}'><a href='home_left.action?parentId=${id}' target="left"><span>${privilegeName}</span></a></li>
+			</s:if>
 			</s:iterator>
   		</ul>
         </div>
