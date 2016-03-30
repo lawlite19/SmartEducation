@@ -17,7 +17,6 @@ public class PageBean {
 
 	// 查询数据库
 	private int recordCount; // 总记录数
-	
 	private List recordList; // 本页的数据列表
 
 	// 计算
@@ -27,18 +26,12 @@ public class PageBean {
 
 	/**
 	 * 只接受前4个必要的属性，会自动的计算出其他3个属生的值
-	 * 
-	 * @param currentPage
-	 * @param pageSize
-	 * @param recordCount
-	 * @param recordList
 	 */
-	public PageBean(int currentPage, int pageSize, int recordCount, List recordList) {
+	public PageBean(int currentPage, int pageSize, int recordCount,List recordList) {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 		this.recordCount = recordCount;
 		this.recordList = recordList;
-
 		// 计算总页码
 		pageCount = (recordCount + pageSize - 1) / pageSize;
 

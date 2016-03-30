@@ -17,7 +17,11 @@ import java.util.Set;
 
 
 
-public class Role {
+public class Role implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String roleName;
 	private String description;

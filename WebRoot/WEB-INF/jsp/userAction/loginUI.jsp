@@ -13,7 +13,11 @@
 		//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。    
 		obj.src = "rand.action?d=" + timenow;
 	}
-</script>
+	// 在被嵌套时就刷新上级窗口
+	if(window.parent != window){
+		window.parent.location.reload(true);
+	}
+	</script>
   </head>
   <body>
    <form action="user_login.action" method="post">

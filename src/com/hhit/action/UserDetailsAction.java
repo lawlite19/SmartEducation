@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
+import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
@@ -22,12 +23,17 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	private Integer departmentId;
 	private Integer[] roleIds;
+	
+	private int pageNum=1;
+	private int pageSize=10;
 
 	/** 列表 */
 	public String list() throws Exception {
-		List<UserDetails> userDetails = userDetailsService.findAll();
-		// userDetails.get(0).
-		ActionContext.getContext().put("userDetailsList", userDetails);
+		//List<UserDetails> userDetails = userDetailsService.findAll();
+		
+		//准备分页信息
+		PageBean pageBean=userDetailsService.getPageBean(pageNum,pageSize);
+		ActionContext.getContext().getValueStack().push(pageBean);
 		return "list";
 	}
 
@@ -179,6 +185,22 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	public void setRoleIds(Integer[] roleIds) {
 		this.roleIds = roleIds;
+	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 }

@@ -15,7 +15,11 @@ import java.util.Set;
 
 
 
-public class Privilege {
+public class Privilege implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String url;
 	private String privilegeName;

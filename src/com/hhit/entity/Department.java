@@ -12,7 +12,11 @@ import java.util.Set;
 //
 //
 
-public class Department {
+public class Department implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String deptName;
 	private String deptNum;

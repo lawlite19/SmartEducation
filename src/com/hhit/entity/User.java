@@ -11,7 +11,11 @@ import com.opensymphony.xwork2.ActionContext;
 //  @ Author : 
 //
 
-public class User {
+public class User implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String userNum;
 	private String password;
