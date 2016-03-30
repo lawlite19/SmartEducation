@@ -20,6 +20,7 @@ public class UserDetailsServiceImpl extends DaoSupportImpl<UserDetails> implemen
 	public PageBean getPageBean(int pageNum, int pageSize) {
 		Long count=(Long) getSession().createQuery("SELECT COUNT(*) FROM UserDetails").uniqueResult();
 		
+		@SuppressWarnings("unchecked")
 		List<UserDetails> list=getSession().createQuery("FROM UserDetails")//
 				.setFirstResult((pageNum-1)*pageSize)//
 				.setMaxResults(pageSize)//

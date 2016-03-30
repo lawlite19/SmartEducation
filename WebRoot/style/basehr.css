@@ -1,0 +1,36 @@
+﻿body {
+}
+.myfont{font-size:13px;}
+th{font-size:13px;padding-right:0px;height:22px;padding-top:6px;color:#000000; font-weight:normal;}
+.grdth{font-size:12px;padding-right:0px;height:22px;padding-top:6px;color:#000000;font-weight:bold}
+.inpu{ height:19px; line-height:19px; width:130px;}
+.ddl{height:22px;line-height:22px; padding-right:1px; padding-bottom:1px; padding-left:1px; padding-top:1px; width:131px;}
+/*按钮样式*/
+/*.Button60, .btn60hover, .btn60active
+{
+    text-align: center;
+    background: url('/sys_basehr/images/btn60.gif') no-repeat;
+}
+
+.ButtonHide{display:none;}
+.Button60,.btn60hover,.btn60active{ text-align:center; width:60px; background:url(/sys_basehr/images/btn60.gif) no-repeat;}
+.Button80,.btn80hover,.btn80active{text-align:center; width:80px; background:url(/sys_basehr/images/btn80.gif) no-repeat; }
+.Button100,.btn100hover,.btn100active{ width:100px;background:url(/sys_basehr/images/btn100.gif) no-repeat;}
+.Button60,.Button80,.Button100,.Button120,.Button140,.btn60hover,.btn60active,.btn80hover,.btn80active,.btn100hover,.btn100active
+{
+    background-position:0px 0px;border:none; text-align:center;outline: none; cursor:hand; height:22px;line-height:22px;}
+.btn60hover,.btn80hover,.btn100hover{background-position:0px -23px;}
+.btn60active,.btn80active,.btn100active{background-position:0px -46px;}*/
+/*警告（红色)*/
+.red{color:Red; font-weight:bold}
+.blue{color:Blue; font-weight:bold}
+.V_NULL
+{
+	border:1px solid red;
+}
+.myBlock{color:#00080D;font-weight:bold;padding-left:35px; font-size:12px;display:block;}
+.HeaderStyle{background:#E8F5FE;font-weight:bold;color:black;height:28px;text-align:center; }
+.grid1 {border:1px solid #E8F5FE;width:100%;}
+.gridHead1 {background:#E8F5FE;font-weight:bold;color:black;height:28px;text-align:center }
+.grid1 td { border:1px #C6D8DA solid; border-top:0px ; border-left:0px;}
+.grid1 th { border:1px #C6D8DA solid;text-align:center;}
