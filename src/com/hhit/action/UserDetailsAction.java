@@ -1,5 +1,6 @@
 package com.hhit.action;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,16 +24,19 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	private Integer departmentId;
 	private Integer[] roleIds;
-	
-	private int pageNum=1;
-	private int pageSize=10;
 
 	/** 列表 */
 	public String list() throws Exception {
 		//List<UserDetails> userDetails = userDetailsService.findAll();
 		
-		//准备分页信息
-		PageBean pageBean=userDetailsService.getPageBean(pageNum,pageSize);
+//		//准备分页信息version-1
+//		PageBean pageBean=userDetailsService.getPageBean(pageNum,pageSize);
+		
+		//准备分页信息version-2
+		String hql="FROM UserDetails";
+		List<Object> parameters=new ArrayList<Object>();
+		parameters=null;
+		PageBean pageBean=userDetailsService.getPageBean(pageNum,pageSize,hql,parameters);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "list";
 	}
@@ -185,22 +189,6 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	public void setRoleIds(Integer[] roleIds) {
 		this.roleIds = roleIds;
-	}
-
-	public int getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
 	}
 
 }

@@ -1,19 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>显示所有用户</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
-<script type="text/javascript">
-	function gotoPage( pageNum ){
-	   window.location.href = "userDetails_list.action?id=${id}&pageNum=" + pageNum;
-		
-		//$(document.forms[0]).append("<input type='hidden' name='pageNum' value='" + pageNum +"'>");
-		//document.forms[0].submit();
-	}
-</script>
 </head>
 <body>
 	<table cellspacing="0" cellpadding="0" class="TableStyle">
@@ -61,32 +52,8 @@
 
 		</tbody>
 	</table>
-	页次：${currentPage}/${pageCount}&nbsp; 每页：${pageSize}条&nbsp;
-	总记录条数：${recordCount}&nbsp;
-	<a href="javascript: gotoPage(1)" title="首页" style="cursor: hand;">首页</a>
-	<s:iterator begin="%{beginPageIndex}" end="%{endPageIndex}" var="num">
-		<s:if test="#num == currentPage">
-			<%-- 当前页 --%>
-			<span class="PageSelectorNum PageSelectorSelected">${num}</span>
-		</s:if>
-		<s:else>
-			<%-- 非当前页 --%>
-			<span class="PageSelectorNum" style="cursor: hand;"
-				onClick="gotoPage(${num});">${num}</span>
-		</s:else>
-	</s:iterator>
-	<a href="javascript: gotoPage(${pageCount})" title="尾页"
-		style="cursor: hand;">尾页</a> 转到：
-	<select onchange="gotoPage(this.value)" id="_pn">
-		<s:iterator begin="1" end="%{pageCount}" var="num">
-			<option value="${num}">${num}</option>
-		</s:iterator>
-	</select>
-	<script type="text/javascript">
-		$("#_pn").val("${currentPage}");
-	</script>
-	
-	
+	<%@include file="/WEB-INF/jsp/public/pageView.jspf" %>
+	<s:form action="userDetails_list"></s:form>
 	
 	<!-- 其他功能超链接 -->
 	<div id="TableTail">

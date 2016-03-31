@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.hhit.entity.PageBean;
 @SuppressWarnings("unchecked")
 @Transactional
 public class DaoSupportImpl<T> implements IDaoSupport<T> {
@@ -63,8 +66,6 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 		else
 			return (T)getSession().get(clazz, id);
 	}
-
-	
 	@Override
 	public List<T> findAll() {
 		return getSession().createQuery(//
@@ -81,6 +82,34 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 				"FROM "+clazz.getSimpleName()+"  WHERE id IN (:ids)")//
 				.setParameterList("ids", ids)//
 				.list();
+	}
+	@Override
+	public PageBean getPageBean(int pageNum, int pageSize, String hql,
+			List<Object> parameters) {
+		//查询数据列表
+		Query listQuery=getSession().createQuery(hql);//创建查询对象
+		if(parameters!=null)//设置参数
+		{
+			for(int i=0;i<parameters.size();i++)
+			{
+				listQuery.setParameter(i, parameters.get(i));
+			}
+		}
+		listQuery.setFirstResult((pageNum-1)*pageSize);
+		listQuery.setMaxResults(pageSize);
+		List list=listQuery.list();//执行查询
+		//查询记录总数
+		Query countQuery=getSession().createQuery("SELECT COUNT(*) "+hql);
+		if(parameters!=null)//设置参数
+		{
+			for(int i=0;i<parameters.size();i++)
+			{
+				listQuery.setParameter(i, parameters.get(i));
+			}
+		}
+		Long count=(Long) countQuery.uniqueResult();//执行查询
+		
+		return new PageBean(pageNum, pageSize, count.intValue(), list);
 	}
 
 }

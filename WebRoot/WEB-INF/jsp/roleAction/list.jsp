@@ -5,7 +5,7 @@
 <head>
 <title>角色列表</title>
 <!--Layer插件弹出对话框前台代码开始-->
-<script src="${pageContext.request.contextPath}/script/jquery-2.0.0.js"></script>
+<script src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <script>
         function LayerAlert(type, msg) {   //0:叹号   1:对号  2：错号 3：禁止号  4：问号  5：减号  6：棒  7：锁  8：委屈  9：笑脸  10：对号
@@ -13,6 +13,10 @@
                 dialog: { type: type, msg: msg }
             });
         }
+        (function () {
+            	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            	parent.layer.close(index); //再执行关闭 
+        })();
     </script>
 <!--Layer插件弹出对话框前台代码结束-->
 
@@ -43,7 +47,10 @@
 					<td><s:a action="role_delete?id=%{id}"
 							onclick="return confirm('确定要删除吗？')">删除</s:a> <s:a
 							action="role_editUI?id=%{id}">修改</s:a>
-						<a id="${id}" class="rolePrivilege" title="${roleName}">设置权限</a></td>
+						<s:if test="#session.user.hasPrivilegeByName(privilegeName)">
+							<a id="${id}" class="rolePrivilege" title="${roleName}">设置权限</a>
+						</s:if>
+					</td>
 				</tr>
 			</s:iterator>
 
@@ -68,10 +75,13 @@
                   shadeClose: true,
                   shade: 0.8,
                   area: ['500px', '90%'],
-                  content: 'role_setPrivilegeUI.action?id=' + value //iframe的url
+                  content: 'role_setPrivilegeUI.action?id=' + value, //iframe的url
+                  yes:function(index){
+                	  layer.close(index);
+                  }
                 }); 
-        	
-          })})();
+          });
+        })();
         	
 
     </script>

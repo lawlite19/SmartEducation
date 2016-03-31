@@ -23,9 +23,10 @@ public class PrivilegeServiceImpl extends DaoSupportImpl<Privilege> implements I
 	}
 	
 	@Override
-	public List<Privilege> findSecondList() {
-		return getSession().createQuery("FROM Privilege p WHERE p.url IS NULL AND p.parent IS NOT NULL")//
-		.list();
+	public List<Privilege> findSecondList(List<Privilege> priList) {
+		return getSession().createQuery("FROM Privilege p WHERE  p.parent IN (:priList)")
+				.setParameterList("priList", priList)//
+				.list();
 	}
 
 	@Override

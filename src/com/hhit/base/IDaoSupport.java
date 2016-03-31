@@ -1,5 +1,8 @@
 package com.hhit.base;
 import java.util.List;
+
+import com.hhit.entity.PageBean;
+
 public interface IDaoSupport<T> {
 	/**
 	 * 保存一个对象
@@ -34,4 +37,11 @@ public interface IDaoSupport<T> {
 	 * @return
 	 */
 	List<T> findByIds(Integer[] ids);
+	/**
+	 * 
+	 * @param hql   查询列表的语句
+	 * @param parameters   参数列表，与hql语句的？对应
+	 * @return
+	 */
+	PageBean getPageBean(int pageNum, int pageSize, String hql, List<Object> parameters);
 }

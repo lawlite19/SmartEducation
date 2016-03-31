@@ -6,7 +6,7 @@ import com.hhit.entity.UserDetails;
 
 public interface IUserDetailsService extends IDaoSupport<UserDetails> {
 
-	//查询分页信息--用户list
-	PageBean getPageBean(int pageNum, int pageSize);
+//	//查询分页信息 version-1--用户list
+//	PageBean getPageBean(int pageNum, int pageSize);
 
 }

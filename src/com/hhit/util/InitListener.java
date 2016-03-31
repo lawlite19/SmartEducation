@@ -26,7 +26,7 @@ public class InitListener implements ServletContextListener {
 		System.out.println("------------> 已准备数据topPrivilegeList <------------");
 
 		// 准备数据：secondPrivilegeList
-		List<Privilege> secondPrivilegeList = privilegeService.findSecondList();
+		List<Privilege> secondPrivilegeList = privilegeService.findSecondList(topPrivilegeList);
 		sce.getServletContext().setAttribute("secondPrivilegeList", secondPrivilegeList);
 		System.out.println("------------> 已准备数据secondPrivilegeList <------------");
 

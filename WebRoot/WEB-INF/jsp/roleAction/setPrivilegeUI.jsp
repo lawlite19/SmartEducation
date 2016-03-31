@@ -7,6 +7,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
+	<!--Layer插件弹出对话框前台代码开始-->
+	<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
+<script>
+        function LayerAlert(type, msg) {   //0:叹号   1:对号  2：错号 3：禁止号  4：问号  5：减号  6：棒  7：锁  8：委屈  9：笑脸  10：对号
+            $.layer({
+                dialog: { type: type, msg: msg }
+            });
+        }
+    </script>
+<!--Layer插件弹出对话框前台代码结束-->
 <script type="text/javascript">
 		$(function(){
 			// 指定事件处理函数
@@ -99,7 +109,7 @@
         <!-- 表单操作 -->
         <div id="InputDetailBar">
             <input type="submit" value="分配"/>
-            <a href="javascript:history.go(-1);">返回上级</a>
+            <input type="button" value="取消" id="btnCancel"/>
         </div>
 </s:form>
 
@@ -116,7 +126,14 @@
 	3，全选/取消全选。<br />
 	4，默认选中当前岗位已有的权限。<br />
 </div>
-
+        <script>
+            (function () {
+                $('#btnCancel').click(function () {
+                	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                	parent.layer.close(index); //再执行关闭 
+                });
+            })();
+        </script>
 </body>
 </html>
     

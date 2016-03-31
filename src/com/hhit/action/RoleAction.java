@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.jsp.JspWriter;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -101,7 +103,6 @@ public class RoleAction extends BaseAction<Role> {
 
 		// 3，更新到数据库
 		roleService.update(role);
-
 		return "toList";
 	}
 

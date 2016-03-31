@@ -16,17 +16,17 @@ import com.hhit.service.IUserDetailsService;
 @Transactional
 public class UserDetailsServiceImpl extends DaoSupportImpl<UserDetails> implements IUserDetailsService {
 
-	@Override
-	public PageBean getPageBean(int pageNum, int pageSize) {
-		Long count=(Long) getSession().createQuery("SELECT COUNT(*) FROM UserDetails").uniqueResult();
-		
-		@SuppressWarnings("unchecked")
-		List<UserDetails> list=getSession().createQuery("FROM UserDetails")//
-				.setFirstResult((pageNum-1)*pageSize)//
-				.setMaxResults(pageSize)//
-				.list();
-		return new PageBean(pageNum, pageSize, count.intValue(), list);
-	}
+//	@Override
+//	public PageBean getPageBean(int pageNum, int pageSize) {
+//		Long count=(Long) getSession().createQuery("SELECT COUNT(*) FROM UserDetails").uniqueResult();
+//		
+//		@SuppressWarnings("unchecked")
+//		List<UserDetails> list=getSession().createQuery("FROM UserDetails")//
+//				.setFirstResult((pageNum-1)*pageSize)//
+//				.setMaxResults(pageSize)//
+//				.list();
+//		return new PageBean(pageNum, pageSize, count.intValue(), list);
+//	}
 
 
 }
