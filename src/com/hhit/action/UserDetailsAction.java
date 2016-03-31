@@ -54,17 +54,12 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		// pageBean=userDetailsService.getPageBean(pageNum,pageSize,hql,parameters);
 		// ActionContext.getContext().getValueStack().push(pageBean);
 		// 准备分页信息version-3
-		if(roleId!=null)
-		{
-			Role role=roleService.findById(roleId);
-			new QueryHelper(UserDetails.class, "u")//
-			.addCondition((departmentId != null), "u.department.id=?",departmentId)//
-			.addCondition("u.roles=?",role)//
-			.addCondition((viewType == 0) && (inputTerm.length() > 1),"u.userName=?", inputTerm)//
-			.addCondition((viewType == 1) && (inputTerm.length() > 1),"u.userNum=?", inputTerm)//
-			.preparePageBean(userDetailsService, pageNum, pageSize);
-		}
-
+		//roleService.findById(roleId);
+		new QueryHelper(UserDetails.class, "u")//
+				.addCondition((departmentId != null), "u.department.id=?",departmentId)//
+				.addCondition((viewType == 0) && (inputTerm.trim().length() > 0),"u.userName LIKE ?", "%"+inputTerm+"%")//
+				.addCondition((viewType == 1) && (inputTerm.trim().length() > 0),"u.userNum LIKE ?", "%"+inputTerm+"%")//
+				.preparePageBean(userDetailsService, pageNum, pageSize);
 		return "list";
 	}
 

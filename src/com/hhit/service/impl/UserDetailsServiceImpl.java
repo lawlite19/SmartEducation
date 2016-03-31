@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.base.DaoSupportImpl;
 import com.hhit.entity.PageBean;
+import com.hhit.entity.Role;
 import com.hhit.entity.UserDetails;
 import com.hhit.service.IUserDetailsService;
 
@@ -27,6 +28,5 @@ public class UserDetailsServiceImpl extends DaoSupportImpl<UserDetails> implemen
 //				.list();
 //		return new PageBean(pageNum, pageSize, count.intValue(), list);
 //	}
-
 
 }
