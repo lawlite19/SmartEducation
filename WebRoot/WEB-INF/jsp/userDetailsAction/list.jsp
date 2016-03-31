@@ -7,6 +7,9 @@
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
 </head>
 <body>
+
+
+
 	<table cellspacing="0" cellpadding="0" class="TableStyle">
 		<!-- 表头-->
 		<thead>
@@ -26,7 +29,7 @@
 				<tr class="TableDetail1 template">
 					<td>${department.deptName}&nbsp;</td>
 					<td>${userName}&nbsp;</td>
-					<td>${user.userNum}&nbsp;</td>
+					<td>${userNum}&nbsp;</td>
 					<td><s:iterator value="roles">
                 		${roleName}
                 	</s:iterator></td>
@@ -52,9 +55,21 @@
 
 		</tbody>
 	</table>
-	<%@include file="/WEB-INF/jsp/public/pageView.jspf" %>
-	<s:form action="userDetails_list"></s:form>
+<s:form action="userDetails_list">
+	按部门：
+	<s:select name="departmentId" cssClass="SelectStyle" list="#departmentList"
+		listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
+	按角色：
+	<s:select name="roleId" cssClass="SelectStyle" list="#roleList"
+		listKey="id" listValue="roleName" headerKey="" headerValue="==请选择角色==" />
+	<s:select name="viewType" list="#{0:'姓名', 1:'账号'}"/>
+	<s:textfield name="inputTerm"></s:textfield>
+	<input type="submit" value="查询" >
+</s:form>
+	<!-- 分页页码 -->
+	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 	
+
 	<!-- 其他功能超链接 -->
 	<div id="TableTail">
 		<div id="TableTail_inside">

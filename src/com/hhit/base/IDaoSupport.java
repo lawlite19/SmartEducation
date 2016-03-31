@@ -1,7 +1,10 @@
 package com.hhit.base;
 import java.util.List;
 
+
+
 import com.hhit.entity.PageBean;
+import com.hhit.util.QueryHelper;
 
 public interface IDaoSupport<T> {
 	/**
@@ -43,5 +46,15 @@ public interface IDaoSupport<T> {
 	 * @param parameters   参数列表，与hql语句的？对应
 	 * @return
 	 */
+	@Deprecated
 	PageBean getPageBean(int pageNum, int pageSize, String hql, List<Object> parameters);
+	/**
+	 * 公共的查询分页信息的方法（最终）
+	 * @param pageNum
+	 * @param pageSize
+	 * @param queryHelper   HQL语句与参数列表
+	 * @return
+	 */
+	PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper);
+
 }
