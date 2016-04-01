@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
+import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;

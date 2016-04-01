@@ -20,6 +20,7 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 导入外部配置数据库连接的文件 -->
+	<!-- classpath:jdbc_mysql.properties -->
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 	
 	<!-- 配置c3p0数据库连接池 -->
@@ -68,6 +69,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
+					<!-- SQLServerDialect   MySQLDialect  -->
 					org.hibernate.dialect.SQLServerDialect
 				</prop>
 				<!-- 显示sql语句 -->

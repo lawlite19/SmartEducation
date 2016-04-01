@@ -9,9 +9,6 @@ import com.opensymphony.xwork2.ActionContext;
 
 /**
  * 用于辅助拼接HQL语句
- * 
- * @author tyg
- * 
  */
 public class QueryHelper {
 
@@ -23,10 +20,7 @@ public class QueryHelper {
 
 	/**
 	 * 生成From子句
-	 * 
-	 * @param clazz
-	 * @param alias
-	 *            别名
+	 * @param alias 别名
 	 */
 	public QueryHelper(Class clazz, String alias) {
 		fromClause = "FROM " + clazz.getSimpleName() + " " + alias;
@@ -34,9 +28,8 @@ public class QueryHelper {
 
 	/**
 	 * 拼接Where子句
-	 * 
-	 * @param condition
-	 * @param params
+	 * @param condition  条件
+	 * @param params   可变参数，因为添加中？数量不确定，eg: x.id between ? and ?
 	 */
 	public QueryHelper addCondition(String condition, Object... params) {
 		// 拼接
@@ -45,40 +38,19 @@ public class QueryHelper {
 		} else {
 			whereClause += " AND " + condition;
 		}
-
 		// 参数
 		if (params != null) {
 			for (Object p : params) {
 				parameters.add(p);
 			}
 		}
-
-		return this;
-	}
-	public QueryHelper addInCondition(String condition, Object... params) {
-		// 拼接
-		if (whereClause.length() == 0) {
-			whereClause = " WHERE " + condition;
-		} else {
-			whereClause += " AND " + condition;
-		}
-
-		// 参数
-		if (params != null) {
-			for (Object p : params) {
-				parameters.add(p);
-			}
-		}
-
 		return this;
 	}
 
 	/**
 	 * 如果第一个参数为true，则拼接Where子句
 	 * 
-	 * @param append
-	 * @param condition
-	 * @param params
+	 * @param append  Action层传递过来是否拼接的条件
 	 */
 	public QueryHelper addCondition(boolean append, String condition,
 			Object... params) {
@@ -89,43 +61,10 @@ public class QueryHelper {
 	}
 
 	/**
-	 * 拼接Like条件
-	 */
-	public QueryHelper addLikeCondition(String condition, Object... params) {
-		// 拼接
-		if (whereClause.length() == 0) {
-			whereClause = " WHERE " + condition;
-		} else {
-			whereClause += " AND " + condition;
-		}
-
-		// 参数
-		if (params != null) {
-			int i=0;
-			for (Object p : params) {
-				parameters.set(i++, "%"+p+"%");
-			}
-		}
-
-		return this;
-	}
-	/**
-	 * 如果第一个参数为true，则拼接Where Like子句
-	 */
-	public QueryHelper addLikeCondition(boolean append, String condition,
-			Object... params) {
-		if (append) {
-			addCondition(condition, params);
-		}
-		return this;
-	}
-	/**
 	 * 拼接OrderBy子句
 	 * 
-	 * @param propertyName
-	 *            参与排序的属性名
-	 * @param asc
-	 *            true表示升序，false表示降序
+	 * @param propertyName  参与排序的属性名
+	 * @param asc  true表示升序，false表示降序
 	 */
 	public QueryHelper addOrderProperty(String propertyName, boolean asc) {
 		if (orderByClause.length() == 0) {
@@ -139,10 +78,6 @@ public class QueryHelper {
 
 	/**
 	 * 如果第一个参数为true，则拼接OrderBy子句
-	 * 
-	 * @param append
-	 * @param propertyName
-	 * @param asc
 	 */
 	public QueryHelper addOrderProperty(boolean append, String propertyName,
 			boolean asc) {
@@ -154,8 +89,6 @@ public class QueryHelper {
 
 	/**
 	 * 获取生成的用于查询数据列表的HQL语句
-	 * 
-	 * @return
 	 */
 	public String getListQueryHql() {
 		return fromClause + whereClause + orderByClause;
@@ -163,8 +96,6 @@ public class QueryHelper {
 
 	/**
 	 * 获取生成的用于查询总记录数的HQL语句
-	 * 
-	 * @return
 	 */
 	public String getCountQueryHql() {
 		return "SELECT COUNT(*) " + fromClause + whereClause;
@@ -172,8 +103,6 @@ public class QueryHelper {
 
 	/**
 	 * 获取HQL中的参数值列表
-	 * 
-	 * @return
 	 */
 	public List<Object> getParameters() {
 		return parameters;
@@ -181,13 +110,9 @@ public class QueryHelper {
 
 	/**
 	 * 查询分页信息，并放到值栈栈顶
-	 * 
-	 * @param service 需要的service
-	 * @param pageNum
-	 * @param pageSize
+	 * @param service   需要的service
 	 */
-	public void preparePageBean(IDaoSupport<?> service, int pageNum,
-			int pageSize) {
+	public void preparePageBean(IDaoSupport<?> service, int pageNum,int pageSize) {
 		PageBean pageBean = service.getPageBean(pageNum, pageSize, this);
 		ActionContext.getContext().getValueStack().push(pageBean);
 	}
