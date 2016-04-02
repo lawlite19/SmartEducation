@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+	<!-- 自动扫描与装配 -->
+	<context:component-scan base-package="com.hhit"></context:component-scan>
+	<!-- 配置声明式事务管理（采用注解的方式） -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 导入外部配置数据库连接的文件 -->
+	<!-- classpath:jdbc_mysql.properties -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	
+	<!-- 配置c3p0数据库连接池 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- 连接信息 -->
+		<property name="driverClass"
+			value="${driverClass}">
+		</property>
+		<property name="jdbcUrl"
+			value="${jdbcUrl}">
+		</property>
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		<!-- 其他配置 -->
+		
+		<!-- 初始化时获得三个连接，取值应该在minPoolSize和maxPoolSize之间。Default：3 
+		<property name="initialPoolSize" value="10"></property>-->
+		<!-- 连接池保留的最小连接数。Default：3 
+		<property name="minPoolSize" value="5"></property>-->
+		<!-- 连接池保留的最大连接数，Default：15 
+		<property name="maxPoolSize" value="60"></property>	-->
+		<!-- 当连接池中的连接耗尽时c3p0一次同时获取的连接数 Default：3 
+		<property name="acquireIncrement" value="5"></property>-->
+		<!-- 控制数据源内加载的PreparedStatements数量。如果 maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default：0
+		<property name="maxStatements" value="50"></property>-->
+		<!-- 连接池内单个连接所拥有的最大缓存statements数。Default:0 
+		<property name="maxStatementsPerConnection" value="5"></property>-->
+		<!--每40秒检查所有连接池中的空闲连接。Default: 0 
+		<property name="idleConnectionTestPeriod" value="40"></property>-->
+		<!-- 最大空闲时间，30秒内未使用则连接被丢弃。若为0则永不丢弃。Default:0 
+		<property name="maxIdleTime" value="20"></property>-->
+		<!--连接池在获得新连接失败时重试的次数，如果小于等于0则无限重试直至连接获得成功
+		<property name="acquireRetryAttempts" value="25"></property>
+		<property name="acquireRetryDelay" value="1000"></property>
+		<property name="checkoutTimeout" value="3000"></property>
+		<property name="autoCommitOnClose" value="false"></property>-->
+	</bean>
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					<!-- SQLServerDialect   MySQLDialect  -->
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<!-- 显示sql语句 -->
+				<prop key="show_sql">true</prop>
+				<!-- 自动建表 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/hhit/entity/User.hbm.xml</value>
+				<value>com/hhit/entity/UserDetails.hbm.xml</value>
+				<value>com/hhit/entity/Role.hbm.xml</value>
+				<value>com/hhit/entity/Privilege.hbm.xml</value>
+				<value>com/hhit/entity/Department.hbm.xml</value>
+				<value>com/hhit/entity/QQLoginInfo.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>

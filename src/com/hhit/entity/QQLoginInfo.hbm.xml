@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="QQLoginInfo" table="T_QQLoginInfo">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="accessToken" type="string">	
+			<column name="AccessToken" length="50">
+				<comment>accessToken标识</comment>
+			</column>
+		</property>
+		<property name="openId" type="string">
+			<column name="OpenId" length="50">
+				<comment>openId标识</comment>
+			</column>
+		</property>
+		<property name="nikeName" type="string">
+			<column name="NikeName" length="20">
+				<comment>昵称</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="Gender" length="10">
+				<comment>性别</comment>
+			</column>
+		</property>
+		<property name="birthPlace" type="string">
+			<column name="BirthPlace" length="50">
+				<comment>出生地</comment>
+			</column>
+		</property>
+		<property name="birthYear" type="int">
+			<column name="BirthYear">
+				<comment>出生年份</comment>
+			</column>
+		</property>
+		<property name="figureUrl" type="string">
+			<column name="FigureUrl" length="150">
+				<comment>头像地址</comment>
+			</column>
+		</property>
+		<!--user属性，本类与User的一对一关系     外键对应主键 -->
+		<many-to-one name="user" class="User" unique="true">
+			<column name="User_Id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

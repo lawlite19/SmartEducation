@@ -1,0 +1,27 @@
+body		{ background:#FFF; margin:0px; font:normal 12px arial,ËÎÌו; scrollbar-face-color: #999999; scrollbar-highlight-color: #999999; scrollbar-shadow-color: #999999; scrollbar-darkshadow-color: #999999; scrollbar-3dlight-color: #999999; scrollbar-arrow-color: #FFFFFF;scrollbar-track-color: #eeeeee;}
+table	{ border:0px; }
+td		{ font-size:12px ; }
+img		{ vertical-align:bottom; border:0px; }
+a		{ font-size: 12px ; color:#125488; text-decoration:none; }
+a:hover	 { color:red }
+a img {border:0}
+
+.menu {clear:both;width:168px;margin-bottom:4px;}
+.menu .sec_menu {display:;}
+.menuHide {clear:both;width:168px;margin-bottom:4px;}
+.menuHide .sec_menu {display:none;}
+.menuHide a.menu_title {background-image:url(../style/images/admin_title_bg.gif);background-position:0 -30px;}
+.menuHide a.menu_title:hover {background-position:0 0;}
+
+.sec_menu {}
+.sec_menu a {text-indent:10px; line-height:23px; display:block;}
+.sec_menu a:hover {background:#ddd;color:#000;}
+
+
+.col_sel {padding:3px 5px; text-align:center; display:none;*display:block;}
+.col_sel img {height:10px; width:10px; margin:0 4px; font-size:6px; cursor:pointer;display:block;float:left;}
+
+dl,dd,dt{ padding:0; margin:0}
+dt{ background:url(../style/images/d.png) no-repeat; height:29px; line-height:29px; color:#fff;  text-indent:3em; font-size:12px; margin-top:1px; margin-bottom:8px}
+dd{ background:url(../style/images/d.png) no-repeat 0 -29px; height:28px; line-height:28px; text-indent:3em}
+dd a.onblur_1 { display:block;background:url(../style/images/d.png) no-repeat 0 -57px; height:28px; color:#F97A0F}
