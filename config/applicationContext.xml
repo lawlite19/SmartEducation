@@ -85,6 +85,7 @@
 				<value>com/hhit/entity/Role.hbm.xml</value>
 				<value>com/hhit/entity/Privilege.hbm.xml</value>
 				<value>com/hhit/entity/Department.hbm.xml</value>
+				<value>com/hhit/entity/QQLoginInfo.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

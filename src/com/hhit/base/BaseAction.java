@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.hhit.entity.User;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IPrivilegeService;
+import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
@@ -51,6 +52,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IDepartmentService departmentService;// 部门
 	@Resource
 	protected IPrivilegeService privilegeService;// 权限
+	@Resource 
+	protected IQQLoginInfoService qqLoginService;//qq第三方登录
 
 	/**
 	 * 获取当前登录的用户

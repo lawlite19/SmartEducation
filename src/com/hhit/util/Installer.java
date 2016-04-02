@@ -71,6 +71,15 @@ public class Installer {
 		UserDetails userDetails6=new UserDetails("李晨", "2012122715", "女", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart6);
 		UserDetails userDetails7=new UserDetails("马傲", "2012122716", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart7);
 		UserDetails userDetails8=new UserDetails("梁发宏", "2012122717", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart8);
+		
+		UserDetails userDetails9=new UserDetails("test1", "2012122718", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart1);
+		UserDetails userDetails10=new UserDetails("test2", "2012122719", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart2);
+		UserDetails userDetails11=new UserDetails("test3", "2012122720", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart3);
+		UserDetails userDetails12=new UserDetails("test4", "2012122721", "女", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart4);
+		UserDetails userDetails13=new UserDetails("test5", "2012122722", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart5);
+		UserDetails userDetails14=new UserDetails("test6", "2012122723", "女", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart6);
+		UserDetails userDetails15=new UserDetails("test7", "2012122724", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart7);
+		UserDetails userDetails16=new UserDetails("test8", "2012122725", "男", "849451478@qq.com", "18360539986", "849451478", 12, 5, depart8);
 		session.save(userDetails1);
 		session.save(userDetails2);
 		session.save(userDetails3);
@@ -79,6 +88,15 @@ public class Installer {
 		session.save(userDetails6);
 		session.save(userDetails7);
 		session.save(userDetails8);
+		
+		session.save(userDetails9);
+		session.save(userDetails10);
+		session.save(userDetails11);
+		session.save(userDetails12);
+		session.save(userDetails13);
+		session.save(userDetails14);
+		session.save(userDetails15);
+		session.save(userDetails16);
 		// ==============================================================
 		// 保存用户信息
 		User user1=new User("2012122710", "123456", 1, "管理员",userDetails1);
@@ -89,6 +107,15 @@ public class Installer {
 		User user6=new User("2012122715", "123456", 1, "学生", userDetails6);
 		User user7=new User("2012122716", "123456", 1, "学生", userDetails7);
 		User user8=new User("2012122717", "123456", 1, "管理员", userDetails8);
+		
+		User user9=new User("2012122718", "123456", 1, "管理员",userDetails9);
+		User user10=new User("2012122719", "123456", 1, "负责人", userDetails10);
+		User user11=new User("2012122720", "123456", 1, "负责人", userDetails11);
+		User user12=new User("2012122721", "123456", 1, "教师", userDetails12);
+		User user13=new User("2012122722", "123456", 1, "教师", userDetails13);
+		User user14=new User("2012122723", "123456", 1, "学生", userDetails14);
+		User user15=new User("2012122724", "123456", 1, "学生", userDetails15);
+		User user16=new User("2012122725", "123456", 1, "管理员", userDetails16);
 		session.save(user1);
 		session.save(user2);
 		session.save(user3);
@@ -97,85 +124,93 @@ public class Installer {
 		session.save(user6);
 		session.save(user7);
 		session.save(user8);
-//		// ==============================================================
-//		// 保存角色
-//		Role role1=new Role("管理员", "管理员功能", new Timestamp(new Date().getTime()));
-//		Role role2=new Role("课程负责人", "课程负责人功能", new Timestamp(new Date().getTime()));
-//		Role role3=new Role("普通教师", "普通教师功能", new Timestamp(new Date().getTime()));
-//		Role role4=new Role("学生", "学生功能", new Timestamp(new Date().getTime()));
-//		session.save(role1);
-//		session.save(role2);
-//		session.save(role3);
-//		session.save(role4);
+		session.save(user9);
+		session.save(user10);
+		session.save(user11);
+		session.save(user12);
+		session.save(user13);
+		session.save(user14);
+		session.save(user15);
+		session.save(user16);
+		// ==============================================================
+		// 保存角色
+		Role role1=new Role("管理员", "管理员功能", new Timestamp(new Date().getTime()));
+		Role role2=new Role("课程负责人", "课程负责人功能", new Timestamp(new Date().getTime()));
+		Role role3=new Role("普通教师", "普通教师功能", new Timestamp(new Date().getTime()));
+		Role role4=new Role("学生", "学生功能", new Timestamp(new Date().getTime()));
+		session.save(role1);
+		session.save(role2);
+		session.save(role3);
+		session.save(role4);
 		
 		// ==============================================================
 		// 保存权限数据
-//		Privilege menu1, menu2, menu3, menu4, menu5,menu6;
-//
-//		// --------------------系统管理模块
-//		menu1 = new Privilege("系统管理", null, null);
-//		menu2 = new Privilege("系统设置", null, menu1);
-//		menu3=new Privilege("部门管理", "/department_list", menu2);	
-//		menu4= new Privilege("系统日志", "", menu2);
-//		menu5=new Privilege("系统功能", null, menu1);
-//		menu6=new Privilege("系统功能管理", "", menu5);
-//		session.save(menu1);
-//		session.save(menu2);
-//		session.save(menu3);
-//		session.save(menu4);
-//		session.save(menu5);
-//		session.save(menu6);
-//		
-//		session.save(new Privilege("部门列表", "/department_list", menu3));
-//		session.save(new Privilege("部门删除", "/department_delete", menu3));
-//		session.save(new Privilege("部门添加", "/department_add", menu3));
-//		session.save(new Privilege("部门修改", "/department_edit", menu3));
-//		// --------------------用户权限模块
-//		menu1 = new Privilege("用户权限", null, null);
-//		menu2=new Privilege("用户管理", null, menu1);
-//		menu3=new Privilege("用户管理", "/userDetail_list", menu2);
-//		menu4=new Privilege("角色管理", null, menu1);
-//		menu5=new Privilege("角色权限管理", "/role_list", menu4);
-//		session.save(menu1);
-//		session.save(menu2);
-//		session.save(menu3);
-//		session.save(menu4);
-//		session.save(menu5);
-//		
-//		session.save(new Privilege("用户列表", "/userDetails_list", menu3));
-//		session.save(new Privilege("用户删除", "/userDetails_delete", menu3));
-//		session.save(new Privilege("用户添加", "/userDetails_add", menu3));
-//		session.save(new Privilege("用户修改", "/userDetails_edit", menu3));
-//		session.save(new Privilege("初始化密码", "/userDetails_initPassword", menu3));
-//		
-//		session.save(new Privilege("角色列表", "/role_list", menu5));
-//		session.save(new Privilege("角色删除", "/role_delete", menu5));
-//		session.save(new Privilege("角色添加", "/role_add", menu5));
-//		session.save(new Privilege("角色修改", "/role_edit", menu5));
-//		
-//		// --------------------作业管理模块
-//		menu1 = new Privilege("作业管理", null, null);
-//		session.save(menu1);
-//		
-//		// --------------------教学管理模块
-//		menu1 = new Privilege("教学管理", null, null);
-//		session.save(menu1);
-//		
-//		// --------------------问卷管理模块
-//		menu1 = new Privilege("问卷管理", null, null);
-//		session.save(menu1);
-//		
-//		// --------------------信息交流模块
-//		menu1 = new Privilege("信息交流", null, null);
-//		session.save(menu1);
-//		
-//		// --------------------平台信息模块
-//		menu1 = new Privilege("平台信息", null, null);
-//		session.save(menu1);
-//		
-//		// --------------------接口管理模块
-//		menu1 = new Privilege("接口管理", null, null);
-//		session.save(menu1);
+		Privilege menu1, menu2, menu3, menu4, menu5,menu6;
+
+		// --------------------系统管理模块
+		menu1 = new Privilege("系统管理", null, null);
+		menu2 = new Privilege("系统设置", null, menu1);
+		menu3=new Privilege("部门管理", "/department_list", menu2);	
+		menu4= new Privilege("系统日志", "", menu2);
+		menu5=new Privilege("系统功能", null, menu1);
+		menu6=new Privilege("系统功能管理", "", menu5);
+		session.save(menu1);
+		session.save(menu2);
+		session.save(menu3);
+		session.save(menu4);
+		session.save(menu5);
+		session.save(menu6);
+		
+		session.save(new Privilege("部门列表", "/department_list", menu3));
+		session.save(new Privilege("部门删除", "/department_delete", menu3));
+		session.save(new Privilege("部门添加", "/department_add", menu3));
+		session.save(new Privilege("部门修改", "/department_edit", menu3));
+		// --------------------用户权限模块
+		menu1 = new Privilege("用户权限", null, null);
+		menu2=new Privilege("用户管理", null, menu1);
+		menu3=new Privilege("用户管理", "/userDetail_list", menu2);
+		menu4=new Privilege("角色管理", null, menu1);
+		menu5=new Privilege("角色权限管理", "/role_list", menu4);
+		session.save(menu1);
+		session.save(menu2);
+		session.save(menu3);
+		session.save(menu4);
+		session.save(menu5);
+		
+		session.save(new Privilege("用户列表", "/userDetails_list", menu3));
+		session.save(new Privilege("用户删除", "/userDetails_delete", menu3));
+		session.save(new Privilege("用户添加", "/userDetails_add", menu3));
+		session.save(new Privilege("用户修改", "/userDetails_edit", menu3));
+		session.save(new Privilege("初始化密码", "/userDetails_initPassword", menu3));
+		
+		session.save(new Privilege("角色列表", "/role_list", menu5));
+		session.save(new Privilege("角色删除", "/role_delete", menu5));
+		session.save(new Privilege("角色添加", "/role_add", menu5));
+		session.save(new Privilege("角色修改", "/role_edit", menu5));
+		
+		// --------------------作业管理模块
+		menu1 = new Privilege("作业管理", null, null);
+		session.save(menu1);
+		
+		// --------------------教学管理模块
+		menu1 = new Privilege("教学管理", null, null);
+		session.save(menu1);
+		
+		// --------------------问卷管理模块
+		menu1 = new Privilege("问卷管理", null, null);
+		session.save(menu1);
+		
+		// --------------------信息交流模块
+		menu1 = new Privilege("信息交流", null, null);
+		session.save(menu1);
+		
+		// --------------------平台信息模块
+		menu1 = new Privilege("平台信息", null, null);
+		session.save(menu1);
+		
+		// --------------------接口管理模块
+		menu1 = new Privilege("接口管理", null, null);
+		session.save(menu1);
 	}
 
 	public static void main(String[] args) {

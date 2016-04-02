@@ -24,7 +24,7 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 	//@Resource
 	//private IUserDao userDao;
 	@Override
-	public boolean isValidateUser(String userNum, String password, String userType) {
+	public User findUserByNumAndPwd(String userNum, String password, String userType) {
 		String md5Digest=DigestUtils.md5Hex(password);
 		User user=(User) getSession().createQuery(//
 				"FROM User WHERE userNum=? AND password=? AND userType=? AND isUsable=?")//
@@ -33,14 +33,7 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 				.setParameter(2, userType)//
 				.setParameter(3, 1)//
 				.uniqueResult();
-		if(user!=null)
-		{
-			//保存到session
-			ActionContext.getContext().getSession().put("user", user);
-			return true;
-		}		
-		return false;
-
+		return user;
 	}
 	@Override
 	public User findByDetailsId(UserDetails userDetails) {

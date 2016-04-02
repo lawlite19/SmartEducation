@@ -38,8 +38,9 @@ public class UserAction extends BaseAction<User> {
 		String code = ((String) ActionContext.getContext().getSession()
 				.get("randomCode")).toLowerCase();
 		if (code.equals((randomCode.trim().toLowerCase()))) {
-			if (userService.isValidateUser(model.getUserNum().trim(), model
-					.getPassword().trim(), model.getUserType().trim())) {
+			User userFind=userService.findUserByNumAndPwd(model.getUserNum().trim(), model.getPassword().trim(), model.getUserType().trim());
+			if (null!=userFind) {
+				ActionContext.getContext().getSession().put("user", userFind);
 				return "toIndex";
 			} else
 				addFieldError("login", "用户名或密码不正确！");

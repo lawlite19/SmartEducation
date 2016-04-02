@@ -20,7 +20,7 @@
 	<listener>
 		<listener-class>com.hhit.util.CountOnlineListener</listener-class>
 	</listener>
-	<!-- 配置Session过期时间为5分钟 -->
+	<!-- 配置Session过期时间为10分钟 -->
 	<session-config>
           <session-timeout>10</session-timeout>
     </session-config>   

@@ -72,6 +72,11 @@
 		<action name="home_*" class="homeAction" method="{1}">
 			<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>
 		</action>
+		<!-- qq第三方登录 -->
+		<action name="qqLoginInfo_*" class="qqLoginInfoAction" method="{1}">
+			<result name="bindUserUI">/WEB-INF/jsp/qqLoginInfoAction/bindUserUI.jsp</result>
+			<result name="toIndex" type="redirectAction" >home_index</result>
+		</action>
 	</package>
 
 
