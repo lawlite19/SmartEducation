@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Role" table="T_Role">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="roleName" type="string">	
+			<column name="RoleName" length="50">
+				<comment>角色名称</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description">
+				<comment>角色描述</comment>
+			</column>
+		</property>
+		<property name="addDate" type="timestamp">
+			<column name="AddDate">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		
+		<!--userDetails属性，本类与UserDetails多对多-->
+		<set name="userDetails" table="T_UserDetails_Role">
+			<key column="Role_Id"></key>
+			<many-to-many class="UserDetails" column="UserDetail_Id"></many-to-many>
+		</set>
+		
+		<!--privileges属性，与Privilege多对多  -->
+		<set name="privileges" table="T_Role_Privilege" lazy="false">
+			<key column="Role_Id"></key>
+			<many-to-many class="Privilege" column="Privilege_Id"></many-to-many>
+		</set>
+	</class>
+		
+</hibernate-mapping>

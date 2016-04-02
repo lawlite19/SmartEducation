@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Department" table="T_Department">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="deptName" type="string">	
+			<column name="DeptName" length="20">
+				<comment>部门名</comment>
+			</column>
+		</property>
+		<property name="deptNum" type="string">
+			<column name="DeptNum" length="50">
+				<comment>部门号</comment>
+			</column>
+		</property>
+		<property name="deptLevel" type="int">
+			<column name="DeptLevel">
+				<comment>部门级别</comment>
+			</column>
+		</property>
+		<property name="deptDescription" type="string">
+			<column name="DeptDescription">
+				<comment>部门描述</comment>
+			</column>
+		</property>
+		<property name="isUsable" type="integer">
+			<column name="IsUsable">
+				<comment>是否可用</comment>
+			</column>
+		</property>
+		<!--userDetails属性，本类与UserDetails的一对多-->
+		<set name="userDetails">
+			<key column="Department_Id"></key>
+			<one-to-many class="UserDetails" />
+		</set>
+		
+		<!-- parent属性，本类与Department（上级）多对一 -->
+		<many-to-one name="parent" class="Department" column="Department_Id"></many-to-one>
+		
+		<!-- children属性，本类与Department（下级）一对多 -->
+		<!-- 级联删除，即删除上级，下级都删除 -->
+		<set name="children" cascade="delete" order-by="id ASC">
+			<key column="Department_Id"></key>
+			<one-to-many class="Department"/>
+		</set>
+	</class>
+</hibernate-mapping>

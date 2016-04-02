@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>SmartEducation</display-name>
+	<!-- 配置Spring的 用于初始化容器对象的监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!-- 用于做初始化工作的监听器，一定要配置到Spring的ContextLoaderListener之后，因为要用到Spring的容器对象 -->
+	<listener>
+		<listener-class>com.hhit.util.InitListener</listener-class>
+	</listener>
+	<!-- 用户在线数和登录数统计 -->
+	<listener>
+		<listener-class>com.hhit.util.CountOnlineListener</listener-class>
+	</listener>
+	<!-- 配置Session过期时间为10分钟 -->
+	<session-config>
+          <session-timeout>10</session-timeout>
+    </session-config>   
+	<!-- 配置Spring的用于解决懒加载问题的过滤器 -->
+	<filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置struts2核心过滤器 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/viewError.jsp</location>
+	</error-page>
+</web-app>

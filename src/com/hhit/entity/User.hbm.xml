@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="User" table="T_User">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="userNum" type="string">	
+			<column name="UserNum" length="20">
+				<comment>用户号</comment>
+			</column>
+		</property>
+		<property name="password" type="string">
+			<column name="Password" length="50">
+				<comment>登录密码</comment>
+			</column>
+		</property>
+		<property name="isUsable" type="int">
+			<column name="IsUsable">
+				<comment>是否可用</comment>
+			</column>
+		</property>
+		<property name="userType" type="string">
+			<column name="UserType" length="20">
+				<comment>用户类型</comment>
+			</column>
+		</property>
+		<!--userDetails属性，本类与UserDetails的一对一关系     外键对应主键 -->
+		<many-to-one name="userDetails" class="UserDetails" unique-key="UserDetails_Id">
+			<column name="UserDetails_Id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>
