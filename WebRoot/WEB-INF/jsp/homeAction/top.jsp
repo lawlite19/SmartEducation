@@ -2,7 +2,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head >
-    <title></title>
+    <title>智慧教育后台系统</title>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" 
+ data-appid="101304940" data-redirecturi="http://www.soeasystudy.com/back.jsp" charset="utf-8"></script>
+    
     <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
         <style type="text/css">
          *
@@ -213,11 +216,18 @@
             <img src="${pageContext.request.contextPath}/style/images/q.png" /> 您好：[]
         </div>
         <div class="s2"><a href="right.aspx" style="color: #1598E0" target="right">首页</a></div>
-            <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" style="color: #1598E0" target="_top">退出系统</a></div>
+            <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" onclick="signOut();" style="color: #1598E0" target="_top">退出系统</a></div>
             <div class="s4"><a href="${pageContext.request.contextPath}/user_modifyPasswordUI.action" style="color: #1598E0" target="right">密码修改</a></div>
             <div class="s6"><a href=""  style="color: #1598E0" target="right">帮助文档</a></div>
         <div class="s5" id="clock"></div>
       </div>
+      <script type="text/javascript">
+      	function signOut(){
+      		QC.Login.signOut();
+      	}
+      </script>
+      
+      
         <!--添加后台主页时间-->
         <script type="text/javascript">
             var clock = new Clock();
