@@ -223,7 +223,15 @@
       </div>
       <script type="text/javascript">
       	function signOut(){
-      		QC.Login.signOut();
+      		//如果qq登录，就退出
+      		if(QC.Login.check()){
+      			QC.Login.signOut();
+      		}
+      		//如果微博登录，就退出
+      		if(WB2.checkLogin()){
+      			WB2.logout();
+      		}
+      		
       	}
       </script>
       

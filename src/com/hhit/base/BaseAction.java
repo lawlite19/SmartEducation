@@ -11,6 +11,7 @@ import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
+import com.hhit.service.IWeiboInfoService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -54,6 +55,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IPrivilegeService privilegeService;// 权限
 	@Resource 
 	protected IQQLoginInfoService qqLoginService;//qq第三方登录
+	@Resource
+	protected IWeiboInfoService weiboInfoService;//微博第三方登录
 
 	/**
 	 * 获取当前登录的用户

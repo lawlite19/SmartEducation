@@ -14,13 +14,25 @@
 </head>
 <body>
 <s:form action="qqLoginInfo_bindUserUI.action" method="post" id="formQQ">
-<s:hidden name="openId" id="hidOpenId" value=""></s:hidden>
-<s:hidden name="accessToken" id="hidAccessToken" value=""></s:hidden>
-<s:hidden name="nikeName" id="hidNikeName" value=""></s:hidden>
-<s:hidden name="gender" id="hidGender" value=""></s:hidden>
-<s:hidden name="birthPlace" id="hidBirthPlace" value=""></s:hidden>
-<s:hidden name="birthYear" id="hidBirthYear" value=""></s:hidden>
-<s:hidden name="figureUrl" id="hidFigureUrl" value=""></s:hidden>
+<s:hidden name="openId" id="hidQQ_OpenId" value=""></s:hidden>
+<s:hidden name="accessToken" id="hidQQ_AccessToken" value=""></s:hidden>
+<s:hidden name="nikeName" id="hidQQ_NikeName" value=""></s:hidden>
+<s:hidden name="gender" id="hidQQ_Gender" value=""></s:hidden>
+<s:hidden name="birthPlace" id="hidQQ_BirthPlace" value=""></s:hidden>
+<s:hidden name="birthYear" id="hidQQ_BirthYear" value=""></s:hidden>
+<s:hidden name="figureUrl" id="hidQQ_FigureUrl" value=""></s:hidden>
+</s:form>
+<s:form action="weiboInfo_bindUserUI.action" method="post" id="formWeibo">
+<s:hidden name="identifier" id="hidWeibo_Identifier" value=""></s:hidden>
+<s:hidden name="name" id="hidWeibo_Name" value=""></s:hidden>
+<s:hidden name="avatar" id="hidWeibo_Avatar" value=""></s:hidden>
+<s:hidden name="location" id="hidWeibo_Location" value=""></s:hidden>
+<s:hidden name="gender" id="hidWeibo_Gender" value=""></s:hidden>
+<s:hidden name="followersCount" id="hidWeibo_Followers" value=""></s:hidden>
+<s:hidden name="friendsCount" id="hidWeibo_Friends" value=""></s:hidden>
+<s:hidden name="weiBoClass" id="hidWeibo_Class" value=""></s:hidden>
+<s:hidden name="createTime" id="hidWeibo_CreateTime" value=""></s:hidden>
+<s:hidden name="description" id="hidWeibo_Desc" value=""></s:hidden>
 </s:form>
 
 	<span id="qqLoginBtn"></span>
@@ -45,18 +57,18 @@
 			alert("当前用户所在城市为：" + s.data.province + s.data.city);
 			alert("当前用户出生日期为：" + s.data.year);
 			alert("当前用户头像地址为：" + s.data.figureurl_2);
-			$("#hidNikeName").attr("value",s.data.nickname);
-			$("#hidGender").attr("value",s.data.gender);
-			$("#hidBirthPlace").attr("value",s.data.province + s.data.city);
-			$("#hidBirthYear").attr("value",s.data.year);
-			$("#hidFigureUrl").attr("value",s.data.figureurl_2);
+			$("#hidQQ_NikeName").attr("value",s.data.nickname);
+			$("#hidQQ_Gender").attr("value",s.data.gender);
+			$("#hidQQ_BirthPlace").attr("value",s.data.province + s.data.city);
+			$("#hidQQ_BirthYear").attr("value",s.data.year);
+			$("#hidQQ_FigureUrl").attr("value",s.data.figureurl_2);
 			
 			if (QC.Login.check()) {//如果已登录
 				QC.Login.getMe(function(openId, accessToken) {
 					alert([ "当前登录用户的", "openId为：" + openId,
 							"accessToken为：" + accessToken ].join("\n"));
-					$("#hidOpenId").attr("value",openId);
-					$("#hidAccessToken").attr("value",accessToken);
+					$("#hidQQ_OpenId").attr("value",openId);
+					$("#hidQQ_AccessToken").attr("value",accessToken);
 					//window.location.href = "qQLoginInfo_bindUser.action";
 					$("#formQQ").submit();
 				});
@@ -94,6 +106,18 @@
 	            	alert("等级:"+o.class);
 	            	alert("创建时间:"+o.created_at);
 	            	alert("描述:"+o.description);
+	    			$("#hidWeibo_Identifier").attr("value",o.id);
+	    			$("#hidWeibo_Name").attr("value",o.name);
+	    			$("#hidWeibo_Avatar").attr("value",o.avatar_large);
+	    			$("#hidWeibo_Location").attr("value",o.location);
+	    			$("#hidWeibo_Gender").attr("value",o.gender);
+	    			$("#hidWeibo_Followers").attr("value",o.followers_count);
+	    			$("#hidWeibo_Friends").attr("value",o.friends_count);
+	    			$("#hidWeibo_Class").attr("value",o.class);
+	    			$("#hidWeibo_CreateTime").attr("value",o.created_at);
+	    			$("#hidWeibo_Desc").attr("value",o.description);
+	    			
+	    			$("#formWeibo").submit();
 	            },
 	            logout: function () { //退出后的回调函数
 	                alert('logout');
