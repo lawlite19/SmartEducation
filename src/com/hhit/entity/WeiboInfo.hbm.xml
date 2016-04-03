@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="WeiboInfo" table="T_WeiboInfo">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="identifier" type="string">	
+			<column name="Identifier" length="50">
+				<comment>id标识</comment>
+			</column>
+		</property>
+		<property name="name" type="string">
+			<column name="Name" length="50">
+				<comment>昵称</comment>
+			</column>
+		</property>
+		<property name="avatar" type="string">
+			<column name="Avatar">
+				<comment>头像地址</comment>
+			</column>
+		</property>
+		<property name="location" type="string">
+			<column name="Location" length="50">
+				<comment>地址</comment>
+			</column>
+		</property>
+		<property name="gender" type="string">
+			<column name="Gender" length="10">
+				<comment>性别</comment>
+			</column>
+		</property>
+		<property name="followersCount" type="int">
+			<column name="FollowersCount">
+				<comment>粉丝数</comment>
+			</column>
+		</property>
+		<property name="friendsCount" type="int">
+			<column name="FriendsCount">
+				<comment>关注数</comment>
+			</column>
+		</property>
+		<property name="weiBoClass" type="int">
+			<column name="WeiBoClass">
+				<comment>微博等级</comment>
+			</column>
+		</property>
+		<property name="createTime" type="string">
+			<column name="CreateTime" length="150">
+				<comment>创建时间</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description" length="150">
+				<comment>个人描述</comment>
+			</column>
+		</property>
+		<!--user属性，本类与User的一对一关系     外键对应主键 -->
+		<many-to-one name="user" class="User" unique="true" lazy="false">
+			<column name="User_Id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -31,7 +31,7 @@
 			</column>
 		</property>
 		<!--userDetails属性，本类与UserDetails的一对一关系     外键对应主键 -->
-		<many-to-one name="userDetails" class="UserDetails" unique-key="UserDetails_Id">
+		<many-to-one name="userDetails" class="UserDetails" unique-key="UserDetails_Id" lazy="false">
 			<column name="UserDetails_Id"></column>
 		</many-to-one>
 	</class>

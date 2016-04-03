@@ -13,10 +13,16 @@
 
 </head>
 <body>
-<form action="qqLoginInfo_bindUserUI.action" method="post" id="formQQ">
-<input type="hidden" name="openId" id="hidOpenId" value="" /> 
-<input type="hidden" name="accessToken" id="hidAccessToken" value="" />
-</form>
+<s:form action="qqLoginInfo_bindUserUI.action" method="post" id="formQQ">
+<s:hidden name="openId" id="hidOpenId" value=""></s:hidden>
+<s:hidden name="accessToken" id="hidAccessToken" value=""></s:hidden>
+<s:hidden name="nikeName" id="hidNikeName" value=""></s:hidden>
+<s:hidden name="gender" id="hidGender" value=""></s:hidden>
+<s:hidden name="birthPlace" id="hidBirthPlace" value=""></s:hidden>
+<s:hidden name="birthYear" id="hidBirthYear" value=""></s:hidden>
+<s:hidden name="figureUrl" id="hidFigureUrl" value=""></s:hidden>
+</s:form>
+
 	<span id="qqLoginBtn"></span>
 	<!-- 登录  -->
 	<script type="text/javascript">
@@ -39,6 +45,12 @@
 			alert("当前用户所在城市为：" + s.data.province + s.data.city);
 			alert("当前用户出生日期为：" + s.data.year);
 			alert("当前用户头像地址为：" + s.data.figureurl_2);
+			$("#hidNikeName").attr("value",s.data.nickname);
+			$("#hidGender").attr("value",s.data.gender);
+			$("#hidBirthPlace").attr("value",s.data.province + s.data.city);
+			$("#hidBirthYear").attr("value",s.data.year);
+			$("#hidFigureUrl").attr("value",s.data.figureurl_2);
+			
 			if (QC.Login.check()) {//如果已登录
 				QC.Login.getMe(function(openId, accessToken) {
 					alert([ "当前登录用户的", "openId为：" + openId,
@@ -59,7 +71,6 @@
 		.complete(function(c) {
 			//完成请求回调
 			alert("获取用户信息完成！");
-
 			});
 	</script>
 	
