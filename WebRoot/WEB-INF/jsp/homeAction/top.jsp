@@ -3,9 +3,11 @@
 <html>
 <head >
     <title>智慧教育后台系统</title>
+    <!-- qq登录js -->
     <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" 
  data-appid="101304940" data-redirecturi="http://www.soeasystudy.com/back.jsp" charset="utf-8"></script>
-    
+    <!-- 微博js -->
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2840992581&debug=true" type="text/javascript" charset="utf-8"></script>
     <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
         <style type="text/css">
          *
