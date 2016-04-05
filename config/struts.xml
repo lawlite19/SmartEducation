@@ -8,7 +8,7 @@
 	<!-- 把主题配置为simple -->
 	<constant name="struts.ui.theme" value="simple" />
 
-	<package name="default" namespace="/" extends="struts-default">
+	<package name="default" namespace="/" extends="json-default">
 		<interceptors>
 			<!-- 声明拦截器 -->
 			<interceptor name="checkPrivilege"
@@ -42,9 +42,9 @@
 		<!-- 用户详细信息管理 -->
 		<action name="userDetails_*" class="userDetailsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
-			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp
-			</result>
+			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">userDetails_list</result>
+			<result name="message" type="json"></result>
 		</action>
 		<!-- 产生验证码，配置在拦截器前 -->
 		<action name="rand" class="randomAction">

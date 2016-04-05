@@ -5,10 +5,104 @@
 <head>
 <title>显示所有用户</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
+<script>
+	$(function() {
+             $("#selectAll").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=true;
+           	   });;
+             });
+             $("#selectNone").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=false;
+           	   });
+           });
+             $("#selectOthers").click(function(){
+          	     $(":checkbox").each(function(){
+          		    this.checked=!this.checked;
+          	   });
+           });
+             $("#deleteSelected").click(function(){
+            	 $(":checked").each(function(){
+        	    	 var value=$(this).val().split(",");
+        	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
+        	    		if(value[1]=="admin"){
+        					alert("该用户为超级管理员,不能删除！");
+        					return;
+        				}
+        	    		$.ajax({ 
+            	    		type: "POST", 
+            	    		url: "userDetails_bulkDelete.action", 
+            	    		data: {'id':value[0]}, 
+            	    		dataType : "text",
+            	    		async : false,
+                            success: function(data) { 
+								  if (data.message=="ok") {
+		           				  	alert("删除成功");
+		           				  } else {
+		           	                 alert("删除失败");  
+		           				}
+            	    		} 
+            	       }); 
+					}
+        	     });
+        	   window.location.reload();
+      });
+
+	});
+
+	function deleteUser(userId,userName) {
+		if (confirm("确定要删除"+userName+"吗?")) {
+			if(userName=="admin"){
+				alert("该用户为超级管理员,不能删除！");
+				return;
+			}
+			   var url = "/RBAC/deleteUser";
+		       var data={"userId":userId};
+		      $.post(url,data,function(result){
+		    	    if (result==="true") {
+						  alert("该用户为某部门经理,不能删除");
+		    	    }else if(result=="role"){
+		    	    	  alert("该用户在岗位中存在,不能删除");
+		    	   } else if(result=="menu"){
+			    	    	 alert("该用户存在菜单表中,不能删除");
+		    	   } else if (result==="ok") {
+						alert("删除成功");
+				  } else {
+	                    alert("删除失败");  
+				}
+		   window.location.reload();
+		       },"text");
+      }
+
+	}
+	function updateUser(userId,pageIndex) {
+
+		if (confirm("确定要修改吗？")) {
+			  var url = "/RBAC/updateUser?userId="+userId+"&pageIndex="+pageIndex;
+             window.location.href = url;
+
+		}
+
+	}
+</script>
 </head>
 <body>
-
-
+<s:form action="userDetails_list">
+	按部门：
+	<s:select name="departmentId" cssClass="SelectStyle" list="#departmentList"
+		listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
+	按角色：
+	<s:select name="roleId" cssClass="SelectStyle" list="#roleList"
+		listKey="id" listValue="roleName" headerKey="" headerValue="==请选择角色==" />
+	<s:select name="viewType" list="#{0:'姓名', 1:'账号'}"/>
+	<s:textfield name="inputTerm"></s:textfield>
+	<input type="submit" value="查询" >
+</s:form>
+<input type="button" id="selectAll" value="全选" />
+<input type="button" id="selectNone" value="全不选" />
+<input type="button" id="selectOthers" value="反选" />
+<input type="button" id="deleteSelected" value="删除" />
 
 	<table cellspacing="0" cellpadding="0" class="TableStyle">
 		<!-- 表头-->
@@ -27,6 +121,9 @@
 		<tbody id="TableData" class="dataContainer" datakey="recordList">
 			<s:iterator value="recordList">
 				<tr class="TableDetail1 template">
+					<td>
+						<input type="checkbox" class="checkbox" value="${id},${userName}">
+					</td>
 					<td>${department.deptName}&nbsp;</td>
 					<td>${userName}&nbsp;</td>
 					<td>${userNum}&nbsp;</td>
@@ -55,17 +152,7 @@
 
 		</tbody>
 	</table>
-<s:form action="userDetails_list">
-	按部门：
-	<s:select name="departmentId" cssClass="SelectStyle" list="#departmentList"
-		listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
-	按角色：
-	<s:select name="roleId" cssClass="SelectStyle" list="#roleList"
-		listKey="id" listValue="roleName" headerKey="" headerValue="==请选择角色==" />
-	<s:select name="viewType" list="#{0:'姓名', 1:'账号'}"/>
-	<s:textfield name="inputTerm"></s:textfield>
-	<input type="submit" value="查询" >
-</s:form>
+
 	<!-- 分页页码 -->
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 	

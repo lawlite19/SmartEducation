@@ -30,6 +30,8 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	private int viewType;// 0姓名；1账号
 	private String inputTerm = "";// 输入的词条
+	
+	private String message;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -200,6 +202,13 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		userService.update(user);
 		return "toList";
 	}
+	/** 批量删除 */
+	public String bulkDelete() throws Exception {
+		// 直接根据id删除
+		userDetailsService.delete(model.getId());
+		this.message="ok";
+		return SUCCESS;
+	}
 
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -240,5 +249,14 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 
 }
