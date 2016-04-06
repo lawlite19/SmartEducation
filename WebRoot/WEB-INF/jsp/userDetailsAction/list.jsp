@@ -43,8 +43,8 @@
                	    		dataType : "json",
                	    		async : false,
                             success: function(data) { 
-                            	 var json = eval("(" + data + ")");
-								 var str = json.name;
+                            	 //var json = eval("(" + data + ")");
+								 var str = data.name;
    								  if (str=="ok") {
    		           				  	alert("删除成功");
    		           				 	window.location.reload();

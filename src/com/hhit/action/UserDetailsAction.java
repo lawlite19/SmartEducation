@@ -10,6 +10,8 @@ import javax.enterprise.inject.New;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.json.JSONUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -20,6 +22,7 @@ import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
 import com.hhit.util.DepartmentUtils;
+import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -35,7 +38,7 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 	private int viewType;// 0姓名；1账号
 	private String inputTerm = "";// 输入的词条
 	
-
+	//ajax json返回
 	private String result;
 
 	/** 列表 */
@@ -214,12 +217,13 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		userDetailsService.delete(model.getId());
 		result="ok";
 		map.put("name", result);
-		// 将要返回的map对象进行json处理
-		JSONObject json = JSONObject.fromObject(map);
-		// 调用json对象的toString方法转换为字符串然后赋值给result
-		this.result = json.toString();
-
-		return "success";
+//		// 将要返回的map对象进行json处理
+//		JSONObject json = JSONObject.fromObject(map);
+//		// 调用json对象的toString方法转换为字符串然后赋值给result
+//		this.result = json.toString();
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
 	}
 
 	public Integer getDepartmentId() {

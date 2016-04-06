@@ -9,7 +9,7 @@
 	<constant name="struts.ui.theme" value="simple" />
 
 
-	<package name="default" namespace="/" extends="struts-default,json-default">
+	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
 			<!-- 声明拦截器 -->
 			<interceptor name="checkPrivilege"
@@ -45,9 +45,6 @@
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">userDetails_list</result>
-			<result type="json">
-				<param name="root">result</param>
-			</result> 
 		</action>
 		<!-- 产生验证码 -->
 		<action name="rand" class="randomAction">
