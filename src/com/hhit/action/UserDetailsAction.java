@@ -1,9 +1,13 @@
 package com.hhit.action;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.inject.New;
+
+import net.sf.json.JSONObject;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
@@ -31,7 +35,8 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 	private int viewType;// 0姓名；1账号
 	private String inputTerm = "";// 输入的词条
 	
-	private String message;
+
+	private String result;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -204,10 +209,17 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 	}
 	/** 批量删除 */
 	public String bulkDelete() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		// 直接根据id删除
 		userDetailsService.delete(model.getId());
-		this.message="ok";
-		return SUCCESS;
+		result="ok";
+		map.put("name", result);
+		// 将要返回的map对象进行json处理
+		JSONObject json = JSONObject.fromObject(map);
+		// 调用json对象的toString方法转换为字符串然后赋值给result
+		this.result = json.toString();
+
+		return "success";
 	}
 
 	public Integer getDepartmentId() {
@@ -250,13 +262,13 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		this.roleId = roleId;
 	}
 
-	public String getMessage() {
-		return message;
+
+	public String getResult() {
+		return result;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setResult(String result) {
+		this.result = result;
 	}
 	
-
 }
