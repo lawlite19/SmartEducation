@@ -92,5 +92,17 @@
 			<key column="UserDetail_Id" />
 			<many-to-many class="Role" column="Role_Id" unique="false" />
 		</set>
+		
+		<!-- courses属性，与Course类一对多 -->
+		<set name="courses">
+			<key column="UserDetails_Id"></key>
+			<one-to-many class="Course" />
+		</set>
+		
+		<!-- submitTasks属性，与SubmitTask类一对多 -->
+		<set name="submitTasks">
+			<key column="UserDetails_Id"></key>
+			<one-to-many class="SubmitTask" />
+		</set>
 	</class>
 </hibernate-mapping>

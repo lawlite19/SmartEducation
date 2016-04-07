@@ -28,6 +28,7 @@ public class Department implements java.io.Serializable{
 	private Department parent;
 	private Set<Department> children;
 
+	private Set<Course> courses;
 	/**
 	 * 默认构造函数,用户初始化，有重载则不可缺少
 	 */
@@ -116,6 +117,12 @@ public class Department implements java.io.Serializable{
 
 	public void setIsUsable(Integer isUsable) {
 		this.isUsable = isUsable;
+	}
+	public Set<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
 
 

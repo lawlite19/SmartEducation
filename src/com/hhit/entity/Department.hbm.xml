@@ -50,5 +50,12 @@
 			<key column="Department_Id"></key>
 			<one-to-many class="Department"/>
 		</set>
+		
+		<!-- courses属性，与Course类一对多 -->
+		<set name="courses">
+			<key column="Department_Id"></key>
+			<one-to-many class="Course" />
+		</set>
+		
 	</class>
 </hibernate-mapping>
