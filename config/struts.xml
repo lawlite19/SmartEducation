@@ -82,5 +82,9 @@
 			<result name="bindUserUI">/WEB-INF/jsp/weiboInfoAction/bindUserUI.jsp</result>
 			<result name="toIndex" type="redirectAction" >home_index</result>
 		</action>
+		<!-- 系统功能管理 -->
+		<action name="privilege_*" class="privilegeAction" method="{1}">
+			<result name="toPrivilegeUI">/WEB-INF/jsp/privilegeAction/privilegeManageUI.jsp</result>
+		</action>
 	</package>
 </struts>    

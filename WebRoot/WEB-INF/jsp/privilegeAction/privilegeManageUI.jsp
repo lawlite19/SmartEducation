@@ -1,14 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-	<title>配置权限</title>
+  <head>
+    <title>系统功能管理</title>
     <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
 	
-<script type="text/javascript">
+    <script type="text/javascript">
 		$(function(){
 			// 指定事件处理函数
 			$("[name=privilegeIds]").click(function(){
@@ -24,14 +25,10 @@
 			});
 		});
 	</script>
-</head>
-<body>
-
-<!-- 标题显示 -->
-配置权限
-<!--显示表单内容-->
-
-    <s:form action="role_setPrivilege" method="post">
+  </head>
+  
+  <body>
+    	    <s:form action="role_setPrivilege" method="post">
     	<s:hidden name="id"></s:hidden>
 		正在为【${roleName}】配置权限        
         <!-- 表单内容显示 -->
@@ -104,27 +101,5 @@
         </div>
 </s:form>
 
-
-<div class="Description">
-	说明：<br />
-	1，选中一个权限时：<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; a，应该选中他的所有直系上级。<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; b，应该选中他的所有直系下级。<br />
-	2，取消选择一个权限时：<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; a，应该取消选择他的所有直系下级。<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; b，如果同级的权限都是未选择状态，就应该取消选中他的直接上级，并向上做这个操作。<br />
-
-	3，全选/取消全选。<br />
-	4，默认选中当前岗位已有的权限。<br />
-</div>
-        <script>
-            (function () {
-                $('#btnCancel').click(function () {
-                	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                	parent.layer.close(index); //再执行关闭 
-                });
-            })();
-        </script>
-</body>
+  </body>
 </html>
-    
