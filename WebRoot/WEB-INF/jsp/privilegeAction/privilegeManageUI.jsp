@@ -95,7 +95,7 @@
 <br/>
 功能描述：<s:textarea name="description"></s:textarea>
 <br/>
-<s:if test="%{id}!=null">
+<s:if test="%{id!=null}">
 	<s:submit value="修改功能" />
 </s:if>
 <s:else>
