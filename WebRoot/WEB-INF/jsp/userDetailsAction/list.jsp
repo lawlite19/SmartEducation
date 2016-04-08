@@ -5,15 +5,88 @@
 <head>
 <title>显示所有用户</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
+<script language="javascript" src="${pageContext.request.contextPath}/script/ckform.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/script/commons.js"></script>
+<script>
+	$(function() {
+             $("#selectAll").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=true;
+           	   });
+             });
+             $("#selectNone").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=false;
+           	   });
+           });
+             $("#selectOthers").click(function(){
+          	     $(":checkbox").each(function(){
+          		    this.checked=!this.checked;
+          	   });
+           });
+             $("#deleteSelected").click(function(){
+            	 $("input:checked").each(function(){
+            	 	 var value=$(this).val().split(",");
+           	    	 //alert(value[0]);
+           	    	 //alert(value[1]);
+           	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
+           	    		//if(value[1]=="admin"){
+           				//	alert("该用户为超级管理员,不能删除！");
+           				//	return;
+           				//}
+           	    		$.ajax({ 
+               	    		type: "post",
+               	    		url: "userDetails_bulkDelete.action", 
+               	    		data: {
+               	    			"id" : value[0]
+           	    			}, 
+               	    		dataType : "json",
+               	    		async : false,
+                            success: function(data) { 
+                            	 //var json = eval("(" + data + ")");
+								 var str = data.name;
+   								  if (str=="ok") {
+   		           				  	alert("删除成功");
+   		           				 	window.location.reload();
+   		           				  } else {
+   		           	                 alert("删除失败");  
+   		           				}
+               	    		} 
+               	       }); 
+   					}
+        	    	 
+        	     });
+        	   //window.location.reload();
+      });
+
+	});
+
+</script>
 </head>
 <body>
-
-
-
-	<table cellspacing="0" cellpadding="0" class="TableStyle">
+<div>
+<s:form action="userDetails_list" method="post">
+	按部门：
+	<s:select name="departmentId" cssClass="SelectStyle" list="#departmentList"
+		listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
+	按角色：
+	<s:select name="roleId" cssClass="SelectStyle" list="#roleList"
+		listKey="id" listValue="roleName" headerKey="" headerValue="==请选择角色==" />
+	<s:select name="viewType" list="#{0:'姓名', 1:'账号'}"/>
+	<s:textfield name="inputTerm"></s:textfield>
+	<input type="submit" value="查询" >
+</s:form>
+</div>
+<div>
+<input type="button" id="selectAll" value="全选" />
+<input type="button" id="selectNone" value="全不选" />
+<input type="button" id="selectOthers" value="反选" />
+<input type="button" id="deleteSelected" value="删除" />
+</div>
+	<table>
 		<!-- 表头-->
 		<thead>
-			<tr align=center valign=middle id=TableTitle>
+			<tr>
 				<td width="150px">部门名称</td>
 				<td width="150px">姓名</td>
 				<td width="150px">账号</td>
@@ -24,9 +97,12 @@
 		</thead>
 
 		<!--显示数据列表-->
-		<tbody id="TableData" class="dataContainer" datakey="recordList">
+		<tbody>
 			<s:iterator value="recordList">
 				<tr class="TableDetail1 template">
+					<td>
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${userName}" />
+					</td>
 					<td>${department.deptName}&nbsp;</td>
 					<td>${userName}&nbsp;</td>
 					<td>${userNum}&nbsp;</td>
@@ -55,17 +131,7 @@
 
 		</tbody>
 	</table>
-<s:form action="userDetails_list">
-	按部门：
-	<s:select name="departmentId" cssClass="SelectStyle" list="#departmentList"
-		listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
-	按角色：
-	<s:select name="roleId" cssClass="SelectStyle" list="#roleList"
-		listKey="id" listValue="roleName" headerKey="" headerValue="==请选择角色==" />
-	<s:select name="viewType" list="#{0:'姓名', 1:'账号'}"/>
-	<s:textfield name="inputTerm"></s:textfield>
-	<input type="submit" value="查询" >
-</s:form>
+
 	<!-- 分页页码 -->
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 	

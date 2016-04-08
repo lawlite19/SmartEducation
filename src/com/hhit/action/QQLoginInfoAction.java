@@ -21,14 +21,21 @@ public class QQLoginInfoAction extends BaseAction<QQLoginInfo> {
 		QQLoginInfo qqLoginInfo = qqLoginService.findByOpenId(model.getOpenId());
 		if (qqLoginInfo != null) 
 		{   //如果存在就跳转首页
-			ActionContext.getContext().getSession().put("user", qqLoginInfo.getUser());
-			return "toIndex";
+			if(qqLoginInfo.getUser()!=null)
+			{
+				ActionContext.getContext().getSession().put("user", qqLoginInfo.getUser());
+				return "toIndex";
+			}
+			else
+			{
+				ActionContext.getContext().put("openId", model.getOpenId());
+				return "bindUserUI";
+			}
 		}
 		else
 		{
 			//否则保存到qq第三方登录信息表，跳转绑定用户界面,将openId携带过去
 			qqLoginService.save(model);
-			ActionContext.getContext().put("openId", model.getOpenId());
 			return "bindUserUI";
 		}
 	}
@@ -41,14 +48,14 @@ public class QQLoginInfoAction extends BaseAction<QQLoginInfo> {
 			QQLoginInfo qqLoginInfo = qqLoginService.findByOpenId(model.getOpenId());
 			qqLoginInfo.setUser(userFind);
 			qqLoginService.update(qqLoginInfo);
+			ActionContext.getContext().getSession().put("user", userFind);
+			return "toIndex";
 		}
 		else
 		{
 			addFieldError("bindInfo", "信息输入有误！");
 			return "bindUserUI";
 		}
-			
-		return "toIndex";
 	}
 	public String getUserNum() {
 		return userNum;
