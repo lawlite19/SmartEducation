@@ -37,8 +37,8 @@ public class Installer {
 		User user=new User();
 		user.setIsUsable(1);
 		user.setPassword(DigestUtils.md5Hex("admin"));
-		user.setUserType("admin");
-		user.setUserNum(DigestUtils.md5Hex("admin"));
+		user.setUserType("管理员");
+		user.setUserNum("admin");
 		user.setUserDetails(null);
 		session.save(user);
 	
@@ -154,7 +154,7 @@ public class Installer {
 		menu3=new Privilege("部门管理", "/department_list", menu2);	
 		menu4= new Privilege("系统日志", "", menu2);
 		menu5=new Privilege("系统功能", null, menu1);
-		menu6=new Privilege("系统功能管理", "", menu5);
+		menu6=new Privilege("系统功能管理", "/privilege_toPrivilegeUI", menu5);
 		session.save(menu1);
 		session.save(menu2);
 		session.save(menu3);
@@ -169,7 +169,7 @@ public class Installer {
 		// --------------------用户权限模块
 		menu1 = new Privilege("用户权限", null, null);
 		menu2=new Privilege("用户管理", null, menu1);
-		menu3=new Privilege("用户管理", "/userDetail_list", menu2);
+		menu3=new Privilege("用户管理", "/userDetails_list", menu2);
 		menu4=new Privilege("角色管理", null, menu1);
 		menu5=new Privilege("角色权限管理", "/role_list", menu4);
 		session.save(menu1);

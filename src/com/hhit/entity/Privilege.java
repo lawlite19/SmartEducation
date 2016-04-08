@@ -23,6 +23,7 @@ public class Privilege implements java.io.Serializable{
 	private Integer id;
 	private String url;
 	private String privilegeName;
+	private String description;
 	
 	private Privilege parent;
 	private Set<Role> roles;
@@ -79,5 +80,12 @@ public class Privilege implements java.io.Serializable{
 	public void setChildren(Set<Privilege> children) {
 		this.children = children;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
+	
 }

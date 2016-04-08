@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -28,24 +27,11 @@
   </head>
   
   <body>
-    	    <s:form action="role_setPrivilege" method="post">
-    	<s:hidden name="id"></s:hidden>
-		正在为【${roleName}】配置权限        
+		系统功能树   
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
                 <table cellpadding="0" cellspacing="0" class="mainForm">
-					<!--表头-->
-					<thead>
-						<tr align="LEFT" valign="MIDDLE" id="TableTitle">
-							<td width="300px" style="padding-left: 7px;">
-								<!-- 如果把全选元素的id指定为selectAll，并且有函数selectAll()，就会有错。因为有一种用法：可以直接用id引用元素 -->
-								<input type="checkbox" id="cbSelectAll" onclick="$('[name=privilegeIds]').attr('checked', this.checked)"/>
-								<label for="cbSelectAll">全选</label>
-							</td>
-						</tr>
-					</thead>
-                   
 			   		<!--显示数据列表-->
 					<tbody id="TableData">
 						<tr class="TableDetail1">
@@ -56,20 +42,23 @@
 <%-- 显示一级菜单 --%>
 <s:iterator value="#application.topPrivilegeList">
 	<li>
-		<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-		<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
+		<s:a href="privilege_editUI.action?id=%{id}">
+			<span class="folder">${privilegeName}</span>
+		</s:a>
 		<ul>
 		<%-- 显示二级菜单 --%>
 		<s:iterator value="children">
 			<li>
-				<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-				<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
+			<s:a href="privilege_editUI.action?id=%{id}">
+				<span class="folder">${privilegeName}</span>
+			</s:a>
 				<ul>
 				<%-- 显示三级菜单 --%>
 				<s:iterator value="children">
 					<li>
-						<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
-						<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
+					<s:a href="privilege_editUI.action?id=%{id}">
+						<span class="folder">${privilegeName}</span>
+					</s:a>
 					</li>
 				</s:iterator>
 				</ul>
@@ -93,13 +82,25 @@
         	$("#tree").treeview();
         });
         </script>
-        
-        <!-- 表单操作 -->
-        <div id="InputDetailBar">
-            <input type="submit" value="分配"/>
-            <input type="button" value="取消" id="btnCancel"/>
-        </div>
+<!-- 添加功能 -->
+<s:form action="privilege_%{id == null ? 'add' : 'edit'}" method="post">
+<s:hidden name="id" />
+父级功能：
+<s:select name="privilegeId" cssClass="SelectStyle" list="#selectPrivilegeList"
+		listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
+<br/>
+功能名称： <s:textfield name="privilegeName" ></s:textfield>
+<br/>
+功能url： <s:textfield name="url"></s:textfield>
+<br/>
+功能描述：<s:textarea name="description"></s:textarea>
+<br/>
+<s:if test="%{id}!=null">
+	<s:submit value="修改功能" />
+</s:if>
+<s:else>
+	<s:submit value="添加功能" />
+</s:else>
 </s:form>
-
   </body>
 </html>

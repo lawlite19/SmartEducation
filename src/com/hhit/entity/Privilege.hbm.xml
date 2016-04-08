@@ -20,6 +20,11 @@
 				<comment>权限名称</comment>
 			</column>
 		</property>
+		<property name="description" type="string">
+			<column name="Description">
+				<comment>权限描述</comment>
+			</column>
+		</property>
 
 
 		<!-- roles属性，本类与 Role多对多 -->
