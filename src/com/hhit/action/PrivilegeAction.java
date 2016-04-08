@@ -11,7 +11,7 @@ import com.hhit.entity.Role;
 import com.hhit.util.PrivilegeUtils;
 import com.opensymphony.xwork2.ActionContext;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "unchecked", "serial" })
 @Controller
 @Scope("prototype")
 public class PrivilegeAction extends BaseAction<Privilege> {
@@ -28,7 +28,6 @@ public class PrivilegeAction extends BaseAction<Privilege> {
 		ActionContext.getContext().put("privilegeList", privilegeList);
 
 		//设置select的功能树
-		@SuppressWarnings("unchecked")
 		List<Privilege> topPrivilegeList = (List<Privilege>) ActionContext.getContext().getApplication().get("topPrivilegeList");
 		List<Privilege> selectPrivilegeList = PrivilegeUtils.getAllPrivileges(topPrivilegeList);
 		ActionContext.getContext().put("selectPrivilegeList",selectPrivilegeList);
@@ -43,17 +42,39 @@ public class PrivilegeAction extends BaseAction<Privilege> {
 		ActionContext.getContext().put("privilegeList", privilegeList);
 
 		//设置select的功能树
-		@SuppressWarnings("unchecked")
 		List<Privilege> topPrivilegeList = (List<Privilege>) ActionContext.getContext().getApplication().get("topPrivilegeList");
 		List<Privilege> selectPrivilegeList = PrivilegeUtils.getAllPrivileges(topPrivilegeList);
 		ActionContext.getContext().put("selectPrivilegeList",selectPrivilegeList);
 		
 		//准备回显数据
-		privilegeId = model.getId();
+		
+		privilegeId = privilegeService.findById(model.getId()).getParent().getId();
+		
+		Privilege privilegeFind=privilegeService.findById(model.getId());
+		ActionContext.getContext().getValueStack().push(privilegeFind);
 		
 		return "toPrivilegeUI";
 	}
-
+	//添加功能
+	public String add() throws Exception{
+		//设置父级功能
+		model.setParent(privilegeService.findById(privilegeId));
+		privilegeService.save(model);
+		//实际需要重启服务器才行，因为功能是启动服务器时就加载好的
+		//之后返回提示信息
+		return toPrivilegeUI();
+	}
+	//修改功能
+	public String edit() throws Exception{
+		
+		model.setParent(privilegeService.findById(privilegeId));
+		privilegeService.update(model);
+		
+		//实际也需要重启服务器才行，因为功能是启动服务器时就加载好的
+		//之后返回提示信息
+		return toPrivilegeUI();
+	}
+	
 	public Integer[] getPrivilegeIds() {
 		return privilegeIds;
 	}
