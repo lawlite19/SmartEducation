@@ -38,6 +38,9 @@ public class UserDetails implements java.io.Serializable{
 	private User user;
 	private Department department;
 	private Set<Role> roles;
+	
+	private Set<Course> courses;
+	private Set<SubmitTask> submitTasks;
 
 	/**
 	 * 默认构造函数,用户初始化，有重载则不可缺少
@@ -214,6 +217,18 @@ public class UserDetails implements java.io.Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Set<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
+	public Set<SubmitTask> getSubmitTasks() {
+		return submitTasks;
+	}
+	public void setSubmitTasks(Set<SubmitTask> submitTasks) {
+		this.submitTasks = submitTasks;
 	}
 
 

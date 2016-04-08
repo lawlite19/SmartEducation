@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SubmitTask" table="T_SubmitTask">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="score" type="float">	
+			<column name="Score">
+				<comment>作业得分</comment>
+			</column>
+		</property>
+		<property name="ipAddress" type="string">
+			<column name="IpAddress" length="20">
+				<comment>提交作业的ip地址</comment>
+			</column>
+		</property>
+		<property name="submitTime" type="timestamp">
+			<column name="SubmitTime">
+				<comment>提交时间</comment>
+			</column>
+		</property>
+		<property name="taskAddress" type="string">
+			<column name="TaskAddress">
+				<comment>作业文件地址</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description">
+				<comment>提交的作业描述</comment>
+			</column>
+		</property>
+		<!--task属性，本类与Task的多对一 -->
+		<many-to-one name="task" class="Task" column="Task_Id">
+		</many-to-one>
+		
+		<!--student属性，本类与UserDetails的多对一  -->
+		<many-to-one name="student" class="UserDetails" column="UserDetails_Id">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -86,6 +86,10 @@
 				<value>com/hhit/entity/Privilege.hbm.xml</value>
 				<value>com/hhit/entity/Department.hbm.xml</value>
 				<value>com/hhit/entity/QQLoginInfo.hbm.xml</value>
+				<value>com/hhit/entity/WeiboInfo.hbm.xml</value>
+				<value>com/hhit/entity/Course.hbm.xml</value>
+				<value>com/hhit/entity/Task.hbm.xml</value>
+				<value>com/hhit/entity/SubmitTask.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

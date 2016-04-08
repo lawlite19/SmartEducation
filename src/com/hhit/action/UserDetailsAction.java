@@ -1,21 +1,22 @@
 package com.hhit.action;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
-import javax.enterprise.inject.New;
+import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
-import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
 import com.hhit.util.DepartmentUtils;
+import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -30,6 +31,9 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	private int viewType;// 0姓名；1账号
 	private String inputTerm = "";// 输入的词条
+
+	// ajax json返回
+	private String result;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -55,11 +59,16 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		// pageBean=userDetailsService.getPageBean(pageNum,pageSize,hql,parameters);
 		// ActionContext.getContext().getValueStack().push(pageBean);
 		// 准备分页信息version-3
-		//roleService.findById(roleId);
+		// roleService.findById(roleId);
 		new QueryHelper(UserDetails.class, "u")//
-				.addCondition((departmentId != null), "u.department.id=?",departmentId)//
-				.addCondition((viewType == 0) && (inputTerm.trim().length() > 0),"u.userName LIKE ?", "%"+inputTerm+"%")//
-				.addCondition((viewType == 1) && (inputTerm.trim().length() > 0),"u.userNum LIKE ?", "%"+inputTerm+"%")//
+				.addCondition((departmentId != null), "u.department.id=?",
+						departmentId)//
+				.addCondition(
+						(viewType == 0) && (inputTerm.trim().length() > 0),
+						"u.userName LIKE ?", "%" + inputTerm + "%")//
+				.addCondition(
+						(viewType == 1) && (inputTerm.trim().length() > 0),
+						"u.userNum LIKE ?", "%" + inputTerm + "%")//
 				.preparePageBean(userDetailsService, pageNum, pageSize);
 		return "list";
 	}
@@ -201,6 +210,22 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		return "toList";
 	}
 
+	/** 批量删除 */
+	public String bulkDelete() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 直接根据id删除
+		userDetailsService.delete(model.getId());
+		result = "ok";
+		map.put("name", result);
+		// // 将要返回的map对象进行json处理
+		// JSONObject json = JSONObject.fromObject(map);
+		// // 调用json对象的toString方法转换为字符串然后赋值给result
+		// this.result = json.toString();
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+
+		return null;
+	}
+
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -241,4 +266,11 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		this.roleId = roleId;
 	}
 
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 }

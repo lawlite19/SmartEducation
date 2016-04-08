@@ -46,7 +46,7 @@
 			</column>
 		</property>
 		<!--user属性，本类与User的一对一关系     外键对应主键 -->
-		<many-to-one name="user" class="User" unique="true">
+		<many-to-one name="user" class="User" unique="true" lazy="false">
 			<column name="User_Id"></column>
 		</many-to-one>
 	</class>

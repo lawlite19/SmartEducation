@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Task" table="T_Task">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="taskName" type="string">	
+			<column name="TaskName" length="50">
+				<comment>作业名</comment>
+			</column>
+		</property>
+		<property name="releaseTime" type="timestamp">
+			<column name="ReleaseTime">
+				<comment>发布时间</comment>
+			</column>
+		</property>
+		<property name="endDate" type="timestamp">
+			<column name="EndDate">
+				<comment>截止时间</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description">
+				<comment>作业描述</comment>
+			</column>
+		</property>
+		<!-- course属性，本类与Course类的多对一 -->
+		<many-to-one name="course" class="Course" column="Course_Id">
+		</many-to-one>
+		<!-- submitTasks属性，本类与SubmitTask类的一对多 -->
+		<set name="submitTasks">
+			<key column="Task_Id"></key>
+			<one-to-many class="SubmitTask" />
+		</set>
+	</class>
+</hibernate-mapping>
