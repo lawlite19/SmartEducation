@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="DataDict" table="T_DataDict">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="dictNum" type="string">	
+			<column name="dictNum" length="20">
+				<comment>数据编号</comment>
+			</column>
+		</property>
+		<property name="dictName" type="string">
+			<column name="dictName" length="50">
+				<comment>数据名称</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="description">
+				<comment>数据描述</comment>
+			</column>
+		</property>
+		<!--dataType属性，本类与DataType的多对一 -->
+		<many-to-one name="dataType" class="DataType" column="DataType_Id"></many-to-one>
+	</class>
+</hibernate-mapping>

@@ -5,6 +5,8 @@ import java.lang.reflect.ParameterizedType;
 import javax.annotation.Resource;
 
 import com.hhit.entity.User;
+import com.hhit.service.IDataDictService;
+import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
@@ -57,6 +59,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IQQLoginInfoService qqLoginService;//qq第三方登录
 	@Resource
 	protected IWeiboInfoService weiboInfoService;//微博第三方登录
+	@Resource
+	protected IDataDictService dataDictService;//数据字典
+	@Resource
+	protected IDataTypeService dataTypeService;//数据项类型
 
 	/**
 	 * 获取当前登录的用户

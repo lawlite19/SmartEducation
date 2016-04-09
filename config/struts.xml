@@ -86,6 +86,11 @@
 		<action name="privilege_*" class="privilegeAction" method="{1}">
 			<result name="toPrivilegeUI">/WEB-INF/jsp/privilegeAction/privilegeManageUI.jsp</result>
 		</action>
+		<!-- 数据字典管理 -->
+		<action name="dataDict_*" class="dataDictAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/dataDictAction/list.jsp</result>
+			<result name="toList" type="redirectAction">dataDict_list</result>
+		</action>
 	</package>
 
 </struts>    

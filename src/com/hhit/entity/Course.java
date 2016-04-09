@@ -27,6 +27,9 @@ public class Course implements java.io.Serializable {
 	private Department department;
 	private UserDetails teacher;
 	private Set<Task> tasks;
+	
+	private Set<TeachProcess> teachProcesses;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -74,6 +77,12 @@ public class Course implements java.io.Serializable {
 	}
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+	public Set<TeachProcess> getTeachProcesses() {
+		return teachProcesses;
+	}
+	public void setTeachProcesses(Set<TeachProcess> teachProcesses) {
+		this.teachProcesses = teachProcesses;
 	}
 	
 	
