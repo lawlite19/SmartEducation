@@ -8,6 +8,7 @@ import com.hhit.entity.User;
 import com.hhit.service.IDataDictService;
 import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
+import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
@@ -63,6 +64,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IDataDictService dataDictService;//数据字典
 	@Resource
 	protected IDataTypeService dataTypeService;//数据项类型
+	@Resource
+	protected ILogFileService logFileService; //日志
 
 	/**
 	 * 获取当前登录的用户
