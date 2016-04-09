@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="LogFile" table="T_LogFile">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="userNum" type="string">	
+			<column name="UserNum" length="20">
+				<comment>用户账号</comment>
+			</column>
+		</property>
+		<property name="ipAddress" type="string">
+			<column name="IpAddress" length="50">
+				<comment>操作ip地址</comment>
+			</column>
+		</property>
+		<property name="operateTime" type="timestamp">
+			<column name="OperateTime">
+				<comment>操作时间</comment>
+			</column>
+		</property>
+		<property name="description" type="string">
+			<column name="Description">
+				<comment>操作描述</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

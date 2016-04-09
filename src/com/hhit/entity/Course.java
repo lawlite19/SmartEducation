@@ -11,9 +11,6 @@ import java.util.Set;
 //
 //
 
-
-
-
 public class Course implements java.io.Serializable {
 	/**
 	 * 

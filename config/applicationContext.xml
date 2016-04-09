@@ -94,6 +94,8 @@
 				<value>com/hhit/entity/DataType.hbm.xml</value>
 				<value>com/hhit/entity/DataDict.hbm.xml</value>
 				<value>com/hhit/entity/TeachProcess.hbm.xml</value>
+				
+				<value>com/hhit/entity/LogFile.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
