@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TeachProcess" table="T_TeachProcess">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="startData" type="timestamp">	
+			<column name="startData">
+				<comment>开始日期</comment>
+			</column>
+		</property>
+		<property name="weekCount" type="integer">
+			<column name="weekCount">
+				<comment>周次</comment>
+			</column>
+		</property>
+		<property name="lessonCount" type="integer">
+			<column name="lessonCount">
+				<comment>授课节次</comment>
+			</column>
+		</property>
+		<property name="chapter" type="string">
+			<column name="chapter">
+				<comment>授课章节</comment>
+			</column>
+		</property>
+		<property name="lessonContent" type="text">
+			<column name="lessonContent">
+				<comment>课程内容</comment>
+			</column>
+		</property>
+		<!--teachType属性，本类与DataDict的多对一，单项 -->
+		<many-to-one name="teachType" class="DataDict" column="TeachType_Id"></many-to-one>
+		<!--course属性，本类与Course的多对一 -->
+		<many-to-one name="course" class="Course" column="Course_Id"></many-to-one>
+	</class>
+</hibernate-mapping>

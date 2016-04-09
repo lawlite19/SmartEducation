@@ -41,5 +41,11 @@
 			<key column="Course_Id"></key>
 			<one-to-many class="Task" />
 		</set>
+		
+		<!-- teachProcesses属性，本类与TeachProcess的一对多 -->
+		<set name="teachProcesses">
+			<key column="Course_Id"></key>
+			<one-to-many class="TeachProcess" />
+		</set>
 	</class>
 </hibernate-mapping>
