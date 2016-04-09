@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hhit.entity.DataType;
 import com.hhit.entity.Department;
 import com.hhit.entity.Privilege;
 import com.hhit.entity.Role;
@@ -32,7 +33,7 @@ public class Installer {
 	public void install() {
 		Session session = sessionFactory.getCurrentSession();
 
-		// ======================================================
+// ======================================================
 		//保存超级管理员
 		User user=new User();
 		user.setIsUsable(1);
@@ -42,7 +43,7 @@ public class Installer {
 		user.setUserDetails(null);
 		session.save(user);
 	
-		// ==============================================================
+// ==============================================================
 		//保存部门
 		Department depart1=new Department("淮海工学院", "01", 1, "校级", 1, null);
 		Department depart2=new Department("计算机学院", "02", 2, "院级", 1, depart1);
@@ -61,7 +62,7 @@ public class Installer {
 		session.save(depart7);
 		session.save(depart8);
 		
-		// ==============================================================
+// ==============================================================
 		// 保存用户详细信息
 		UserDetails userDetails1=new UserDetails("王晓曦", "2012122710", "女", "857489330@qq.com", "18356784958", "574839038", 12, 5, depart1);
 		UserDetails userDetails2=new UserDetails("test1", "2012122711", "男", "857489330@qq.com", "18356784958", "574839038", 12, 5, depart2);
@@ -97,7 +98,7 @@ public class Installer {
 		session.save(userDetails14);
 		session.save(userDetails15);
 		session.save(userDetails16);
-		// ==============================================================
+// ==============================================================
 		// 保存用户信息
 		String pwd=DigestUtils.shaHex("123456");
 		User user1=new User("2012122710", pwd, 1, "管理员",userDetails1);
@@ -133,7 +134,7 @@ public class Installer {
 		session.save(user14);
 		session.save(user15);
 		session.save(user16);
-		// ==============================================================
+// ==============================================================
 		// 保存角色
 		Role role1=new Role("管理员", "管理员功能", new Timestamp(new Date().getTime()));
 		Role role2=new Role("课程负责人", "课程负责人功能", new Timestamp(new Date().getTime()));
@@ -144,7 +145,7 @@ public class Installer {
 		session.save(role3);
 		session.save(role4);
 		
-		// ==============================================================
+// ==============================================================
 		// 保存权限数据
 		Privilege menu1, menu2, menu3, menu4, menu5,menu6;
 
@@ -212,6 +213,10 @@ public class Installer {
 		// --------------------接口管理模块
 		menu1 = new Privilege("接口管理", null, null);
 		session.save(menu1);
+// ==============================================================
+		// 保存数据字典类型
+		DataType dataType1=new DataType("001","教学方式");
+		session.save(dataType1);
 	}
 
 	public static void main(String[] args) {

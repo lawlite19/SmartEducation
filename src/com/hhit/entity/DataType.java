@@ -22,6 +22,22 @@ public class DataType implements java.io.Serializable {
 	private String dataTypeNum;
 	private String dataTypeName;
 	private Set<DataDict> dataDicts;
+	
+	/**
+	 * 默认构造函数
+	 */
+	public DataType(){
+		
+	}
+	
+	/**
+	 * 构造函数
+	 */
+	public DataType(String num,String name){
+		dataTypeNum=num;
+		dataTypeName=name;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
