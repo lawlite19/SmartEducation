@@ -83,7 +83,7 @@
 			</column>
 		</property>
 		<!--user属性，本类与User的一对一 主键对应外键 -->
-		<one-to-one name="user" class="User" cascade="all"/>
+		<one-to-one name="user" class="User"  property-ref="userDetails" lazy="false" cascade="all" />
 		<!--department属性，本类与Department多对一 -->
 		<many-to-one class="Department" column="Department_Id"
 			name="department" />
