@@ -91,5 +91,10 @@
 			<result name="list">/WEB-INF/jsp/dataDictAction/list.jsp</result>
 			<result name="toList" type="redirectAction">dataDict_list</result>
 		</action>
+		<!-- 系统日志管理 -->
+		<action name="logFile_*" class="logFileAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/logFileAction/list.jsp</result>
+			<result name="toList" type="redirectAction">logFile_list</result>
+		</action>
 	</package>
 </struts>    

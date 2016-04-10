@@ -66,9 +66,17 @@ public class PrivilegeAction extends BaseAction<Privilege> {
 	}
 	//修改功能
 	public String edit() throws Exception{
+		//取出源对象
+		Privilege privilege=privilegeService.findById(model.getId());
 		
-		model.setParent(privilegeService.findById(privilegeId));
-		privilegeService.update(model);
+		Privilege privilegeParent=privilegeService.findById(privilegeId);
+		//设置相关属性
+		privilege.setParent(privilegeParent);
+		privilege.setDescription(model.getDescription());
+		privilege.setPrivilegeName(model.getPrivilegeName());
+		privilege.setUrl(model.getUrl());
+		//更新数据库
+		privilegeService.update(privilege);
 		
 		//实际也需要重启服务器才行，因为功能是启动服务器时就加载好的
 		//之后返回提示信息
