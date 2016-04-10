@@ -33,7 +33,7 @@
            				//}
            	    		$.ajax({ 
                	    		type: "post",
-               	    		url: "userDetails_bulkDelete.action", 
+               	    		url: "logFile_bulkDelete.action", 
                	    		data: {
                	    			"id" : value[0]
            	    			}, 
