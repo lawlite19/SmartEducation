@@ -110,11 +110,12 @@
 					<td><s:iterator value="roles">
                 		${roleName}
                 	</s:iterator></td>
-					<td><s:if test="%{user.isUsable==1}">
+					<td><s:if test="%{user.isUsable}">
 						正在用
-					</s:if> <s:if test="%{user.isUsable!=1}">
+					</s:if>
+						<s:else>
 							<font color="red">已禁用 </font>
-						</s:if></td>
+						</s:else></td>
 					<!--<td>${deptDescription}&nbsp;</td>-->
 					<td><s:a action="userDetails_delete?id=%{id}"
 							onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
