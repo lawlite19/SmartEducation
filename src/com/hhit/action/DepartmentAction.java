@@ -1,10 +1,18 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import ChartDirector.GetSessionImage;
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
+import com.hhit.entity.LogFile;
 import com.hhit.util.DepartmentUtils;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -59,6 +67,10 @@ public class DepartmentAction extends BaseAction<Department> {
 		model.setIsUsable(1);
 		// 保存
 		departmentService.save(model);
+		//操作日志保存
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(),
+				ServletActionContext.getRequest().getRemoteAddr(), 
+				new Timestamp(new Date().getTime()), "添加部门【"+model.getDeptName()+"】成功"));
 		return "toList";
 	}
 
