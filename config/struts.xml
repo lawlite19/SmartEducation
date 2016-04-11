@@ -98,5 +98,11 @@
 			<result name="list">/WEB-INF/jsp/logFileAction/list.jsp</result>
 			<result name="toList" type="redirectAction">logFile_list</result>
 		</action>
+		<!-- 布置的作业管理 -->
+		<action name="task_*" class="taskAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/taskAction/list.jsp</result>
+			<result name="assignTaskUI">/WEB-INF/jsp/taskAction/assignTaskUI.jsp</result>
+			<result name="toList" type="redirectAction">task_list</result>
+		</action>
 	</package>
 </struts>    
