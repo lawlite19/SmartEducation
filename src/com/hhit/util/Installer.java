@@ -100,7 +100,7 @@ public class Installer {
 		session.save(userDetails16);
 // ==============================================================
 		// 保存用户信息
-		String pwd=DigestUtils.shaHex("123456");
+		String pwd=DigestUtils.md5Hex("123456");
 		User user1=new User("2012122710", pwd, 1, "管理员",userDetails1);
 		User user2=new User("2012122711", pwd, 1, "负责人", userDetails2);
 		User user3=new User("2012122712", pwd, 1, "负责人", userDetails3);

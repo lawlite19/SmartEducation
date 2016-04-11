@@ -12,6 +12,7 @@ import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ITaskService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IWeiboInfoService;
@@ -66,6 +67,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IDataTypeService dataTypeService;//数据项类型
 	@Resource
 	protected ILogFileService logFileService; //日志
+	@Resource
+	protected ITaskService taskService;//老师布置作业
 
 	/**
 	 * 获取当前登录的用户

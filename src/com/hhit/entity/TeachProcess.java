@@ -12,9 +12,6 @@ import java.sql.Timestamp;
 //
 //
 
-
-
-
 public class TeachProcess implements java.io.Serializable{
 	/**
 	 * 

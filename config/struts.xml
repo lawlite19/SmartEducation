@@ -45,6 +45,8 @@
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/userDetailsAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">userDetails_list</result>
+			<result name="personalMaintainUI">/WEB-INF/jsp/userDetailsAction/personalMaintainUI.jsp</result>
+			<result name="personalMaintain"  type="redirectAction">userDetails_personalMaintainUI</result>
 		</action>
 		<!-- 产生验证码 -->
 		<action name="rand" class="randomAction">
@@ -90,6 +92,17 @@
 		<action name="dataDict_*" class="dataDictAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/dataDictAction/list.jsp</result>
 			<result name="toList" type="redirectAction">dataDict_list</result>
+		</action>
+		<!-- 系统日志管理 -->
+		<action name="logFile_*" class="logFileAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/logFileAction/list.jsp</result>
+			<result name="toList" type="redirectAction">logFile_list</result>
+		</action>
+		<!-- 布置的作业管理 -->
+		<action name="task_*" class="taskAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/taskAction/list.jsp</result>
+			<result name="assignTaskUI">/WEB-INF/jsp/taskAction/assignTaskUI.jsp</result>
+			<result name="toList" type="redirectAction">task_list</result>
 		</action>
 	</package>
 
