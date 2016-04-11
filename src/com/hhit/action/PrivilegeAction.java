@@ -34,7 +34,7 @@ public class PrivilegeAction extends BaseAction<Privilege> {
 		return "toPrivilegeUI";
 	}
 	
-	/** 修改功能 */
+	/** 修改界面 */
 	public String editUI() throws Exception{
 		
 		// 准备数据 privilegeList
@@ -47,8 +47,9 @@ public class PrivilegeAction extends BaseAction<Privilege> {
 		ActionContext.getContext().put("selectPrivilegeList",selectPrivilegeList);
 		
 		//准备回显数据
-		
-		privilegeId = privilegeService.findById(model.getId()).getParent().getId();
+		Privilege priFind=privilegeService.findById(model.getId());
+		if(priFind.getParent()!=null)
+			privilegeId = privilegeService.findById(model.getId()).getParent().getId();
 		
 		Privilege privilegeFind=privilegeService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(privilegeFind);

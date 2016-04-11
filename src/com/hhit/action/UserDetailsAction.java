@@ -15,6 +15,8 @@ import org.apache.struts2.json.JSONUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import ChartDirector.GetSessionImage;
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
 import com.hhit.entity.PageBean;
@@ -224,6 +226,29 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		
 		return null;
+	}
+	public String personalMaintainUI() throws Exception{
+		
+		UserDetails userDetailsFind=userDetailsService.findByUserNum(getCurrentUser().getUserNum());
+		ActionContext.getContext().getValueStack().push(userDetailsFind);
+		return "personalMaintainUI";
+	}
+	/** 个人信息维护 */
+	public String personalMaintain() throws Exception{
+		//查询原对象
+		UserDetails userDetailsFind=userDetailsService.findByUserNum(getCurrentUser().getUserNum());
+		//设置相关属性
+		userDetailsFind.setBirthday(model.getBirthday());
+		userDetailsFind.setEmail(model.getEmail());
+		userDetailsFind.setOtherInfo(model.getOtherInfo());
+		userDetailsFind.setQqNum(model.getQqNum());
+		userDetailsFind.setSex(model.getSex());
+		userDetailsFind.setTelphone(model.getTelphone());
+		userDetailsFind.setWeChatNum(model.getWeChatNum());
+		//更新数据
+		userDetailsService.update(userDetailsFind);
+		
+		return "personalMaintain";
 	}
 
 	public Integer getDepartmentId() {
