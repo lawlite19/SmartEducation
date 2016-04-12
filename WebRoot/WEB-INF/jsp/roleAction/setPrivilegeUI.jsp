@@ -73,6 +73,15 @@
 					<li>
 						<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
 						<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
+					<ul>
+					<%--显示四级菜单 --%>
+						<s:iterator value="children">
+						<li>
+							<input type="checkbox" name="privilegeIds" value="${id}" id="cb_${id}" <s:property value="%{id in privilegeIds ? 'checked' : ''}"/> />
+						<label for="cb_${id}"><span class="folder">${privilegeName}</span></label>
+						</li>
+				</s:iterator>
+				</ul>
 					</li>
 				</s:iterator>
 				</ul>

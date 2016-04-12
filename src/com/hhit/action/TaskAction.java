@@ -34,6 +34,16 @@ public class TaskAction extends BaseAction<Task>{
 		return "list";
 	}
 	
+	/** 跳转布置作业界面 */
+	public String assignTaskUI() throws Exception{
+		//准备数据
+		//查找登录用户对应的课程
+		UserDetails userDetails=getCurrentUser().getUserDetails();
+		List<Course> courseList=courseService.findByUser(userDetails);
+		ActionContext.getContext().put("courseList", courseList);
+		
+		return "assignTaskUI";
+	}
 	/** 布置作业 */
 	public String assignTask() throws Exception{
 		//设置对应隐含属性

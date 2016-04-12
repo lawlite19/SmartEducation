@@ -204,6 +204,15 @@ public class Installer {
 		menu1 = new Privilege("教学管理", null, null);
 		session.save(menu1);
 		
+		menu2=new Privilege("教学管理", null, menu1);
+		
+		session.save(new Privilege("课程管理", "/course_list", menu2));
+		session.save(new Privilege("课程列表", "/course_list", menu2));
+		session.save(new Privilege("课程删除", "/course_delete", menu2));
+		session.save(new Privilege("课程添加", "/course_add", menu2));
+		session.save(new Privilege("课程修改", "/course_edit", menu2));
+		
+		
 		// --------------------问卷管理模块
 		menu1 = new Privilege("问卷管理", null, null);
 		session.save(menu1);
