@@ -26,7 +26,7 @@ public class LogFileAction extends BaseAction<LogFile>{
 		
 		new QueryHelper(LogFile.class, "l")//
 		.addCondition((model.getUserNum()!=null), "l.userNum LIKE ?", "%"+model.getUserNum()+"%")
-		.addOrderProperty(true, "l.id", false)//false表示降序
+		.addOrderProperty("l.id", false)//false表示降序
 		.preparePageBean(logFileService, pageNum, pageSize);
 		return "list";
 	}
