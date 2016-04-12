@@ -104,5 +104,11 @@
 			<result name="assignTaskUI">/WEB-INF/jsp/taskAction/assignTaskUI.jsp</result>
 			<result name="toList" type="redirectAction">task_list</result>
 		</action>
+		<!-- 课程管理 -->
+		<action name="course_*" class="courseAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/courseAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/courseAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">course_list</result>
+		</action>
 	</package>
 </struts>    
