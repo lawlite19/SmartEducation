@@ -59,6 +59,16 @@
 					<s:a href="privilege_editUI.action?id=%{id}">
 						<span class="folder">${privilegeName}</span>
 					</s:a>
+					<ul>
+					<%--显示四级菜单 --%>
+						<s:iterator value="children">
+						<li>
+							<s:a href="privilege_editUI.action?id=%{id}">
+								<span class="folder">${privilegeName}</span>
+							</s:a>
+						</li>
+				</s:iterator>
+				</ul>
 					</li>
 				</s:iterator>
 				</ul>

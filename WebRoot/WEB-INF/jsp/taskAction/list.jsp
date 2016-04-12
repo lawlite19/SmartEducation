@@ -62,7 +62,14 @@
   </head>
   
   <body>
+  <s:form action="" method="post">
+  课程：<s:select name="courseId" cssClass="SelectStyle"
+			list="#courseList" listKey="id" listValue="courseName" headerKey=""
+			headerValue="==请选择课程==" />
+		
+	</s:form>
     <div>
+<s:a href="task_assignTaskUI">布置作业</s:a>
 <input type="button" id="selectAll" value="全选" />
 <input type="button" id="selectNone" value="全不选" />
 <input type="button" id="selectOthers" value="反选" />
