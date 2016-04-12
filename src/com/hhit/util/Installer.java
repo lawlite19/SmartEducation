@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hhit.entity.DataDict;
 import com.hhit.entity.DataType;
 import com.hhit.entity.Department;
 import com.hhit.entity.Privilege;
@@ -192,7 +193,12 @@ public class Installer {
 		
 		// --------------------作业管理模块
 		menu1 = new Privilege("作业管理", null, null);
+		menu2=new Privilege("作业管理", null, menu1);
 		session.save(menu1);
+		session.save(menu2);
+		
+		session.save(new Privilege("布置列表", "/task_list", menu2));
+		session.save(new Privilege("布置作业", "/task_assignTask", menu2));
 		
 		// --------------------教学管理模块
 		menu1 = new Privilege("教学管理", null, null);
@@ -214,9 +220,15 @@ public class Installer {
 		menu1 = new Privilege("接口管理", null, null);
 		session.save(menu1);
 // ==============================================================
-		// 保存数据字典类型
+		// 保存数据字典
 		DataType dataType1=new DataType("001","教学方式");
 		session.save(dataType1);
+		session.save(new DataDict("001","讲课",dataType1));
+		session.save(new DataDict("002","实验",dataType1));
+		session.save(new DataDict("003","大作业",dataType1));
+		session.save(new DataDict("004","小测验",dataType1));
+		session.save(new DataDict("005","课程讨论",dataType1));
+		session.save(new DataDict("006","复习",dataType1));
 	}
 
 	public static void main(String[] args) {

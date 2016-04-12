@@ -21,6 +21,22 @@ public class DataDict implements java.io.Serializable{
 	private String dictName;
 	private String description;
 	private DataType dataType;
+	
+	/**
+	 * 默认构造函数
+	 */
+	public DataDict(){
+		
+	}
+	/**
+	 * 构造函数
+	 */
+	public DataDict(String num,String name,DataType d){
+		dictNum=num;
+		dictName=name;
+		dataType=d;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
