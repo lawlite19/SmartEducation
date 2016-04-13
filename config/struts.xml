@@ -91,6 +91,7 @@
 		<!-- 数据字典管理 -->
 		<action name="dataDict_*" class="dataDictAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/dataDictAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/dataDictAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">dataDict_list</result>
 		</action>
 		<!-- 系统日志管理 -->

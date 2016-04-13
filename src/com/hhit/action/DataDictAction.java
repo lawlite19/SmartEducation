@@ -18,70 +18,90 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings({ "unchecked", "serial" })
 @Controller
 @Scope("prototype")
-public class DataDictAction extends BaseAction<DataDict>{
+public class DataDictAction extends BaseAction<DataDict> {
 
 	private Integer dataTypeId;
-	
-	//ajax json返回
+
+	// ajax json返回
 	private String result;
-	
+
 	/** 列表 */
-	public String list() throws Exception{
-		
-		List<DataType> dataTypeList=(List<DataType>) ActionContext.getContext().getApplication().get("dataTypeList");
+	public String list() throws Exception {
+		// 准备数据
+		List<DataType> dataTypeList = (List<DataType>) ActionContext
+				.getContext().getApplication().get("dataTypeList");
 		ActionContext.getContext().put("dataTypeList", dataTypeList);
-		new QueryHelper(DataDict.class, "d").preparePageBean(dataDictService, pageNum, pageSize);
+		// 分页信息
+		new QueryHelper(DataDict.class, "d")//
+				.addCondition(dataTypeId != null, "d.dataType=?",dataTypeService.findById(dataTypeId))//
+				.preparePageBean(dataDictService, pageNum, pageSize);
 		return "list";
 	}
-	
-	/** 添加  */
-	public String add() throws Exception{
-		//设置所属数据项类型
+
+	/** 跳转添加界面 */
+	public String addUI() throws Exception {
+		// 准备数据
+		List<DataType> dataTypeList = (List<DataType>) ActionContext
+				.getContext().getApplication().get("dataTypeList");
+		ActionContext.getContext().put("dataTypeList", dataTypeList);
+		return "saveUI";
+	}
+
+	/** 添加 */
+	public String add() throws Exception {
+		// 设置所属数据项类型
 		model.setDataType(dataTypeService.findById(dataTypeId));
-		//保存到数据库
+		// 保存到数据库
 		dataDictService.save(model);
 		return "toList";
 	}
-	
+
 	/** 跳转修改界面 */
-	public String editUI() throws Exception{
-		//准备回显数据
-		DataDict dataDict=dataDictService.findById(model.getId());
-		dataTypeId=dataDict.getDataType().getId();
-		ActionContext.getContext().getValueStack().push(dataDict);
-		//
-		return list();
+	public String editUI() throws Exception {
+		// 准备数据
+		List<DataType> dataTypeList = (List<DataType>) ActionContext
+				.getContext().getApplication().get("dataTypeList");
+		ActionContext.getContext().put("dataTypeList", dataTypeList);
+		//回显
+		DataDict dataDictFind=dataDictService.findById(model.getId());
+		dataTypeId=dataDictFind.getDataType().getId();
+		ActionContext.getContext().getValueStack().push(dataDictFind);
+		
+		return "saveUI";
 	}
+
 	/** 修改 */
-	public String edit() throws Exception{
-		//设置属性
+	public String edit() throws Exception {
+		// 设置属性
 		model.setDataType(dataTypeService.findById(dataTypeId));
 		model.setDictNum(model.getDictNum());
 		model.setDictName(model.getDictName());
 		model.setDescription(model.getDescription());
-		//更新数据库
+		// 更新数据库
 		dataDictService.update(model);
-		
+
 		return "toList";
 	}
+
 	/** 删除 */
-	public String delete() throws Exception{
-		//删除数据
+	public String delete() throws Exception {
+		// 删除数据
 		dataDictService.delete(model.getId());
 		return "toList";
 	}
+
 	/** 批量删除 */
-	public String bulkDelete() throws Exception{
-		//定义一个map存储要返回的数据
-		Map<String,Object> map=new HashMap<String,Object>();
+	public String bulkDelete() throws Exception {
+		// 定义一个map存储要返回的数据
+		Map<String, Object> map = new HashMap<String, Object>();
 		dataDictService.delete(model.getId());
-		result="ok";
+		result = "ok";
 		map.put("name", result);
-		//转为json格式
+		// 转为json格式
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-	
+
 	public Integer getDataTypeId() {
 		return dataTypeId;
 	}
@@ -97,5 +117,5 @@ public class DataDictAction extends BaseAction<DataDict>{
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+
 }

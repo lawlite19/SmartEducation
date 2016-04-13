@@ -21,6 +21,14 @@
 				this.checked = !this.checked;
 			});
 		});
+		//$("#dataTypeId").change(function(){
+			//alert("进入");
+			//alert($(this).find("option:selected").val());
+			//alert(123);
+		//	$("#selectChangedataTypeId").attr("value",$(this).find("option:selected").val());
+			
+		//	$("#selectChange").submit();
+		//});
 		$("#deleteSelected").click(function() {
 			$("input:checked").each(function() {
 				var value = $(this).val().split(",");
@@ -60,31 +68,13 @@
 </script>
 </head>
 <body>
-	<!-- 编辑区域 -->
-	系统字典管理
-	<br />
-	<s:form action="dataDict_%{id == null ? 'add' : 'edit'}" method="post">
-	<s:hidden name="id"></s:hidden>
-	数据项类型（*）：
-	<s:select name="dataTypeId" cssClass="SelectStyle" list="#dataTypeList"
-			listKey="id" listValue="dataTypeName" headerKey=""
-			headerValue="==请选择数据项类型==" />
-	数据项编号（*）：
-	<s:textfield name="dictNum"></s:textfield>
-		<br />
-	数据项名称（*）：
-	<s:textfield name="dictName"></s:textfield>
-	数据项描述：
-	<s:textfield name="description"></s:textfield>
-		<br />
-		<s:if test="%{id==null}">
-			<s:submit value="添加"></s:submit>
-		</s:if>
-		<s:else>
-			<s:submit value="修改"></s:submit>	
-		</s:else>
+	<s:form action="dataDict_list" method="post">
+	按数据项类型（*）：
+	<s:select id="dataTypeId" name="dataTypeId" cssClass="SelectStyle" list="#dataTypeList"
+			listKey="id" listValue="dataTypeName" headerKey="" headerValue="==请选择数据类型=="/>
+	<s:submit value="查找"></s:submit>
 	</s:form>
-
+	<s:a action="dataDict_addUI">添加数据项</s:a>
 	<!-- 显示区域 -->
 	<div>
 		<input type="button" id="selectAll" value="全选" /> <input
