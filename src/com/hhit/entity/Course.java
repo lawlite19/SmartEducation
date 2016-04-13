@@ -27,6 +27,8 @@ public class Course implements java.io.Serializable {
 	
 	private Set<TeachProcess> teachProcesses;
 	
+	private UserDetails student;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -80,6 +82,12 @@ public class Course implements java.io.Serializable {
 	}
 	public void setTeachProcesses(Set<TeachProcess> teachProcesses) {
 		this.teachProcesses = teachProcesses;
+	}
+	public UserDetails getStudent() {
+		return student;
+	}
+	public void setStudent(UserDetails student) {
+		this.student = student;
 	}
 	
 	

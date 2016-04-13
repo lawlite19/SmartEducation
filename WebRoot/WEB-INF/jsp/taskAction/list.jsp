@@ -62,14 +62,14 @@
   </head>
   
   <body>
-  <s:form action="" method="post">
+  <s:form action="task_list" method="post">
   课程：<s:select name="courseId" cssClass="SelectStyle"
 			list="#courseList" listKey="id" listValue="courseName" headerKey=""
 			headerValue="==请选择课程==" />
-		
+		<s:submit value="查找"></s:submit>
 	</s:form>
     <div>
-<s:a href="task_assignTaskUI">布置作业</s:a>
+<s:a action="task_addUI">布置作业</s:a>
 <input type="button" id="selectAll" value="全选" />
 <input type="button" id="selectNone" value="全不选" />
 <input type="button" id="selectOthers" value="反选" />
@@ -100,6 +100,7 @@
 						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${taskName}" />
 					</td>
 					<td>${(currentPage-1)*10+s.count}</td>
+					<td>${course.courseName}</td>
 					<td>${taskName}&nbsp;</td>
 					<td>${releaseTime}&nbsp;</td>
 					<td>${endDate}&nbsp;</td>

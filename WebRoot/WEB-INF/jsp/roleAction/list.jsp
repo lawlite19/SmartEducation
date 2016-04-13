@@ -23,11 +23,11 @@
 </head>
 
 <body>
-	<table cellspacing="0" cellpadding="0" class="TableStyle">
+	<table>
 
 		<!-- 表头-->
 		<thead>
-			<tr align="CENTER" valign="MIDDLE" id="TableTitle">
+			<tr>
 				<td width="200px">角色名称</td>
 				<td width="300px">角色说明</td>
 				<td width="300px">创建时间</td>
@@ -36,7 +36,7 @@
 		</thead>
 
 		<!--显示数据列表-->
-		<tbody id="TableData" class="dataContainer" datakey="roleList">
+		<tbody>
 
 			<s:iterator value="#roleList">
 				<tr class="TableDetail1 template">

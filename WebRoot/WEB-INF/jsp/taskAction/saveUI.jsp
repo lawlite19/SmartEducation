@@ -7,7 +7,8 @@
 </head>
 
 <body>
-	<s:form action="task_assignTask" method="post">
+	<s:form action="task_%{id==null ? 'add' : 'edit'}" method="post">
+	<s:hidden name="id"></s:hidden>
 	课程：<s:select name="courseId" cssClass="SelectStyle"
 			list="#courseList" listKey="id" listValue="courseName" headerKey=""
 			headerValue="==请选择课程==" />
