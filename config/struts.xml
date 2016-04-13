@@ -110,5 +110,11 @@
 			<result name="saveUI">/WEB-INF/jsp/courseAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">course_list</result>
 		</action>
+		<!-- 学生提交作业管理 -->
+		<action name="submitTask_*" class="submitTaskAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/submitTaskAction/list.jsp</result>
+			<result name="submitTaskUI">/WEB-INF/jsp/submitTaskAction/submitTaskUI.jsp</result>
+			<result name="toList" type="redirectAction">course_list</result>
+		</action>
 	</package>
 </struts>    

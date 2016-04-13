@@ -42,6 +42,7 @@ public class UserDetails implements java.io.Serializable{
 	private Set<Course> courses;
 	private Set<SubmitTask> submitTasks;
 
+	private Set<Course> studentCourses;
 	/**
 	 * 默认构造函数,用户初始化，有重载则不可缺少
 	 */
@@ -229,6 +230,12 @@ public class UserDetails implements java.io.Serializable{
 	}
 	public void setSubmitTasks(Set<SubmitTask> submitTasks) {
 		this.submitTasks = submitTasks;
+	}
+	public Set<Course> getStudentCourses() {
+		return studentCourses;
+	}
+	public void setStudentCourses(Set<Course> studentCourses) {
+		this.studentCourses = studentCourses;
 	}
 
 

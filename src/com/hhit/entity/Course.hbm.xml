@@ -47,5 +47,9 @@
 			<key column="Course_Id"></key>
 			<one-to-many class="TeachProcess" />
 		</set>
+		
+		<!-- student属性，与UserDetails类多对一  -->
+		<many-to-one name="student" class="UserDetails" column="Student_Id">
+		</many-to-one>
 	</class>
 </hibernate-mapping>

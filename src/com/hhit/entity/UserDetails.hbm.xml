@@ -104,5 +104,11 @@
 			<key column="UserDetails_Id"></key>
 			<one-to-many class="SubmitTask" />
 		</set>
+		
+		<!-- studentCourses属性，与Course类一对多  -->
+		<set name="studentCourses">
+			<key column="Student_Id"></key>
+			<one-to-many class="Course" />
+		</set>
 	</class>
 </hibernate-mapping>
