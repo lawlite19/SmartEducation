@@ -193,13 +193,15 @@ public class Installer {
 		
 		// --------------------作业管理模块
 		menu1 = new Privilege("作业管理", null, null);
-		menu2=new Privilege("作业管理", null, menu1);
+		menu2=new Privilege("作业菜单", null, menu1);
 		session.save(menu1);
 		session.save(menu2);
 		
-		session.save(new Privilege("布置列表", "/task_list", menu2));
+		session.save(new Privilege("作业管理（教师）", "/task_list", menu2));
 		session.save(new Privilege("布置作业", "/task_assignTask", menu2));
 		
+		menu3=new Privilege("作业管理（学生）", "/submitTask_list", menu2);
+		session.save(new Privilege("作业提交", "/submitTask_submitTask", menu3));
 		// --------------------教学管理模块
 		menu1 = new Privilege("教学管理", null, null);
 		session.save(menu1);

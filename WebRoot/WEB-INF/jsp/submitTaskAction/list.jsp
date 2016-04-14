@@ -39,7 +39,7 @@
 					<td>${description}</td>
 					
 					<td>
-					<s:a action="submitTask_submitTask?id=%{id}">
+					<s:a action="submitTask_submitTaskUI?id=%{id}">
 						提交作业
 					</s:a></td>
 				</tr>
