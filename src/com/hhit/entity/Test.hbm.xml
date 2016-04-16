@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Test" table="T_Test">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="name" type="string">	
+			<column name="name">
+				<comment>用户号</comment>
+			</column>
+		</property>
+		<property name="author" type="string">
+			<column name="author">
+				<comment>登录密码</comment>
+			</column>
+		</property>
+		<property name="readme" type="string">
+			<column name="readme">
+				<comment>是否可用</comment>
+			</column>
+		</property>
+	
+	</class>
+</hibernate-mapping>
