@@ -15,6 +15,7 @@ import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITestService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IWeiboInfoService;
@@ -75,6 +76,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ICourseService courseService;//课程
 	@Resource
 	protected ISubmitTaskService submitTaskService;//学生提交作业
+	@Resource
+	protected ITestService testService;
 
 	/**
 	 * 获取当前登录的用户

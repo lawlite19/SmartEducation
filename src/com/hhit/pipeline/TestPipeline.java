@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;
 
@@ -16,8 +17,11 @@ public class TestPipeline implements PageModelPipeline<Test>{
 	@Resource
 	private ITestService testService;
 
-	@Override
 	public void process(Test t, Task task) {
+		System.out.println("-------------------------进入了----------------------------------");
+		System.out.println("-------------------------进入了----------------------------------");
+		System.out.println("-------------------------进入了----------------------------------");
+		System.out.println("-------------------------进入了----------------------------------");
 		testService.save(t);
 	}
 	

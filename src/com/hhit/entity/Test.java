@@ -1,25 +1,24 @@
 package com.hhit.entity;
 
+import java.io.Serializable;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.model.AfterExtractor;
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.ExtractByUrl;
 import us.codecraft.webmagic.model.annotation.HelpUrl;
-import us.codecraft.webmagic.model.annotation.TargetUrl;
 
-//@TargetUrl("https://github.com/\\w+/\\w+")
-//@HelpUrl("https://github.com/\\w+")
-public class Test  implements AfterExtractor {
+public class Test  implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
-    @ExtractBy(value = "//h1[@class='entry-title public']/strong/a/text()", notNull = true)
     private String name;
 
-    @ExtractByUrl("https://github\\.com/(\\w+)/.*")
     private String author;
 
-    @ExtractBy("//div[@id='readme']/tidyText()")
     private String readme;
 
 
@@ -55,11 +54,7 @@ public class Test  implements AfterExtractor {
 		this.id = id;
 	}
 
-	@Override
-	public void afterProcess(Page page) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
     
 }
