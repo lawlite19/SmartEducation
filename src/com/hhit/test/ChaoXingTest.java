@@ -22,7 +22,16 @@ public class ChaoXingTest implements PageProcessor{
 	//获取service
 	ISpiderProfessionService spiderProfessionService=(ISpiderProfessionService) ac.getBean("spiderProfessionServiceImpl");
 
-	private Site site=Site.me().setRetryTimes(3).setSleepTime(1000);
+	private Site site=Site.me().setRetryTimes(3).setSleepTime(1000)
+			.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+			.addHeader("User-Agent", "Chrome/49.0.2623.112")
+			.setCharset("utf-8")
+			.addCookie("hhit.fanya.chaoxing.com", "JSESSIONID", "37CC4B3B0767E4549F5826841B2BA08F.jvm7184")
+			.addCookie("nation.chaoxing.com", "JSESSIONID", "2149841CDDF5D8F9BF4ED50598796F56")
+			.addCookie(".chaoxing.com", "NATION_PREFIX", "hhit")
+			.addCookie(".chaoxing.com", "fanyamoocs", "11401F839C536D9E")
+			.addCookie("super.fy.chaoxing.com", "JSESSIONID","AFFA81779A238D435B7B507273BF12F4.jvm7151");
+			
 	
 	@Override
 	public void process(Page page) {
@@ -61,7 +70,6 @@ public class ChaoXingTest implements PageProcessor{
 				spiderProfessionService.save(spiderProfession);
 			}
 		}
-	
 //		page.addTargetRequests(page.getHtml().links().regex("(\\/courselist\\?professionid=\\d+&xuekeid=\\d+)").all());
 //		List<String> urls = page.getHtml().css("div.pagination").links().regex("").all();
 //		page.addTargetRequests(urls);
@@ -74,8 +82,10 @@ public class ChaoXingTest implements PageProcessor{
 	}
 	public void crawer(){
         Spider.create(new ChaoXingTest())
-        //从"http://nation.chaoxing.com/nation?prefix=hhit&id=400A4E71B99E66FEDC29078F41E3E3B57C094C6405C01671B4D556D8C6BCB5AB"开始抓
-        .addUrl("http://nation.chaoxing.com/nation?prefix=hhit&id=400A4E71B99E66FEDC29078F41E3E3B57C094C6405C01671B4D556D8C6BCB5AB")
+        //从"http://nation.chaoxing.com/index?xuekeid=0&start=0&size=434"开始抓
+        
+        	//因为有分页，这里通过设置url可以实现显示全部
+        .addUrl("http://nation.chaoxing.com/index?xuekeid=0&start=0&size=434")
         //开启5个线程抓取
         .thread(5)
         //启动爬虫

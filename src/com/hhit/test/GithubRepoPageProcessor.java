@@ -2,7 +2,6 @@ package com.hhit.test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.hhit.entity.Test;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
