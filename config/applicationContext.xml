@@ -99,7 +99,6 @@
 				
 				<value>com/hhit/entity/SpiderProfession.hbm.xml</value>
 				
-				<value>com/hhit/entity/Test.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
