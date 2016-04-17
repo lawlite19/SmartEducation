@@ -5,9 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.base.DaoSupportImpl;
 import com.hhit.entity.SpiderProfession;
-import com.hhit.service.ISpiderPorfessionService;
+import com.hhit.service.ISpiderProfessionService;
 @Service
 @Transactional
-public class SpiderProfessionServiceImpl extends DaoSupportImpl<SpiderProfession> implements ISpiderPorfessionService{
+public class SpiderProfessionServiceImpl extends DaoSupportImpl<SpiderProfession> implements ISpiderProfessionService{
 
 }

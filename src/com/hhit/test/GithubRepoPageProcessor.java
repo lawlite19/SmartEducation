@@ -1,19 +1,8 @@
 package com.hhit.test;
-
-import javax.annotation.Resource;
-
-
-
-
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.hhit.entity.Test;
-import com.hhit.service.IPrivilegeService;
-import com.hhit.service.ITestService;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -25,9 +14,10 @@ import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 
 public class GithubRepoPageProcessor implements PageProcessor {
 
-	private ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-	
-	
+//	private ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+//	
+//	ITestService testService = (ITestService) ac.getBean("testServiceImpl");
+
 
     // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
@@ -48,14 +38,13 @@ public class GithubRepoPageProcessor implements PageProcessor {
         String readme=page.getHtml().xpath("//div[@id='readme']/tidyText()").toString();
         page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
 
-        ITestService testService = (ITestService) ac.getBean("testServiceImpl");
-       // if(name!=null){
-            Test test=new Test();
-            test.setAuthor("123");
-            test.setName("123");
-            test.setReadme("123");
-            testService.save(test);
-        //}
+//        if(name==null){
+//            Test test=new Test();
+//            test.setAuthor(author);
+//            test.setName(name);
+//            test.setReadme(readme);
+//            testService.save(test);
+//        }
         // 部分三：从页面发现后续的url地址来抓取
         page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
     
