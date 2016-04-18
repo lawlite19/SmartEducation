@@ -47,24 +47,24 @@ public class CourseSpider implements PageProcessor {
 //		</li>
 		// 筛选名称
 		List<String> courseNameList = page.getHtml().xpath("//div[@class='introArea']/a/html()").all();
-		page.putField("professionName", courseNameList);
+		page.putField("courseNameList", courseNameList);
 		// 筛选url
 		List<String> courseUrlList = page.getHtml().xpath("//div[@class='introArea']/a/@href").all();
-		page.putField("professionName", courseUrlList);
+		page.putField("courseUrlList", courseUrlList);
 		// 筛选信息
 		List<String> infoList = page.getHtml().xpath("//div[@class='introArea2']/@title").all();
-		page.putField("professionName", infoList);
+		page.putField("infoList", infoList);
 
 		if (courseNameList.size() > 0) {
 			for (int i = 0; i < courseNameList.size(); i++) {
-				SpiderCourse model = new SpiderCourse(courseNameList.get(i).toString().trim(),infoList.get(i).toString(), professionType);
+				SpiderCourse model = new SpiderCourse(courseNameList.get(i).toString().trim(),courseUrlList.get(i).toString().trim(),infoList.get(i).toString(), professionType);
 				spiderCourseService.save(model);
 			}
 		}
 		List<SpiderProfessionType> list=spiderProfessionTypeService.findAll();
 		List<String> urlList=new ArrayList<String>();
 		for(int j=2;j<list.size();j++){
-			urlList.add(list.get(j).getUrl().trim()+"/0/200");
+			urlList.add(list.get(j).getUrl()+"/0/1000");
 		}
 		//将后续urls作为请求
 		page.addTargetRequests(urlList);
@@ -81,7 +81,7 @@ public class CourseSpider implements PageProcessor {
 		Spider.create(new CourseSpider())//
 				// 全部得到，不分页
 				.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
-				.thread(5)//
+				.thread(10)//
 				.run();
 	}
 }

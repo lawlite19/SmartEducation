@@ -15,14 +15,16 @@ public class SpiderCourse {
 	private Integer id;
 	private String professionType;
 	private String name;
+	private String url;
 	private String info;
 	/** 默认构造函数 */
 	public SpiderCourse(){
 		
 	}
 	/** 构造函数 */
-	public SpiderCourse(String na,String in,String pr){
+	public SpiderCourse(String na,String ur,String in,String pr){
 		name=na;
+		url=ur;
 		info=in;
 		professionType=pr;
 	}
@@ -49,6 +51,12 @@ public class SpiderCourse {
 	}
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	

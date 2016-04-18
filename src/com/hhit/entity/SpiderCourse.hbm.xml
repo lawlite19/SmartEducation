@@ -15,6 +15,11 @@
 				<comment>课程名称</comment>
 			</column>
 		</property>
+		<property name="url" type="string">
+			<column name="Url">
+				<comment>课程url</comment>
+			</column>
+		</property>
 		<property name="info" type="string">
 			<column name="Info">
 				<comment>课程信息</comment>
