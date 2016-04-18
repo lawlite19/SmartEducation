@@ -13,7 +13,7 @@ import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.SpiderProfession;
-import com.hhit.test.ChaoXingTest;
+import com.hhit.spider.ChaoXingTest;
 
 @SuppressWarnings("serial")
 @Controller

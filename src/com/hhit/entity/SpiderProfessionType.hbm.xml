@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SpiderProfessionType" table="T_SpiderProfessionType">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="name" type="string">	
+			<column name="Name">
+				<comment>课程名</comment>
+			</column>
+		</property>
+		<property name="url" type="string">
+			<column name="Url">
+				<comment>课程链接</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

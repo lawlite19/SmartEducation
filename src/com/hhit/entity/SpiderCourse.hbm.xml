@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SpiderCourse" table="T_SpiderCourse">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="name" type="string">	
+			<column name="Name">
+				<comment>课程名称</comment>
+			</column>
+		</property>
+		<property name="info" type="string">
+			<column name="Info">
+				<comment>课程信息</comment>
+			</column>
+		</property>
+		<property name="professionType" type="string">
+			<column name="ProfessionType">
+				<comment>专业类型</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

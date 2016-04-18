@@ -1,4 +1,4 @@
-package com.hhit.test;
+package com.hhit.spider;
 
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.ConsolePageModelPipeline;

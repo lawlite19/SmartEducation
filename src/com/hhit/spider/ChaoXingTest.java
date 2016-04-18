@@ -1,6 +1,8 @@
-package com.hhit.test;
+package com.hhit.spider;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,6 +24,7 @@ public class ChaoXingTest implements PageProcessor{
 	//获取service
 	ISpiderProfessionService spiderProfessionService=(ISpiderProfessionService) ac.getBean("spiderProfessionServiceImpl");
 
+	//分析有关登录的cookie加入
 	private Site site=Site.me().setRetryTimes(3).setSleepTime(1000)
 			.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
 			.addHeader("User-Agent", "Chrome/49.0.2623.112")
@@ -31,7 +34,6 @@ public class ChaoXingTest implements PageProcessor{
 			.addCookie(".chaoxing.com", "NATION_PREFIX", "hhit")
 			.addCookie(".chaoxing.com", "fanyamoocs", "11401F839C536D9E")
 			.addCookie("super.fy.chaoxing.com", "JSESSIONID","AFFA81779A238D435B7B507273BF12F4.jvm7151");
-			
 	
 	@Override
 	public void process(Page page) {
@@ -66,7 +68,12 @@ public class ChaoXingTest implements PageProcessor{
 		//如果url不为空就保存到数据库
 		if(professionNameList.size()>0){
 			for(int i=0;i<professionNameList.size();i++){
-				SpiderProfession spiderProfession=new SpiderProfession(professionNameList.get(i).toString(),1,urlList.get(i).toString(),professionTypeList.get(i).toString());
+				String temp=courseCountList.get(i).toString();
+				String regEx="[^0-9]";
+				Pattern p = Pattern.compile(regEx);   
+				Matcher m = p.matcher(temp); 
+				Integer count=Integer.parseInt(m.replaceAll("").trim());
+				SpiderProfession spiderProfession=new SpiderProfession(professionNameList.get(i).toString(),count,urlList.get(i).toString(),professionTypeList.get(i).toString());
 				spiderProfessionService.save(spiderProfession);
 			}
 		}
@@ -83,8 +90,7 @@ public class ChaoXingTest implements PageProcessor{
 	public void crawer(){
         Spider.create(new ChaoXingTest())
         //从"http://nation.chaoxing.com/index?xuekeid=0&start=0&size=434"开始抓
-        
-        	//因为有分页，这里通过设置url可以实现显示全部
+        //因为有分页，这里通过设置url可以实现显示全部，但是需要使用cookie模拟登录
         .addUrl("http://nation.chaoxing.com/index?xuekeid=0&start=0&size=434")
         //开启5个线程抓取
         .thread(5)
