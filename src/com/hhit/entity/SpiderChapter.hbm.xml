@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SpiderChapter" table="T_SpiderChapter">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="chapterNum" type="string">	
+			<column name="ChapterNum">
+				<comment>章节编号</comment>
+			</column>
+		</property>
+		<property name="chapterName" type="string">
+			<column name="ChapterName">
+				<comment>章节名称</comment>
+			</column>
+		</property>
+		<property name="url" type="string">
+			<column name="Url">
+				<comment>地址</comment>
+			</column>
+		</property>
+		<property name="courseName" type="string">
+			<column name="CourseName">
+				<comment>课程名字</comment>
+			</column>
+		</property>
+		
+		<!-- spiderCourse属性，与SpiderCourse多对一 -->
+		<many-to-one name="spiderCourse" class="SpiderCourse" column="SpiderCourse_Id">
+		</many-to-one>
+	</class>
+</hibernate-mapping>
