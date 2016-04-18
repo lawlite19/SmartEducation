@@ -117,6 +117,11 @@
 			<result name="submitTaskUI">/WEB-INF/jsp/submitTaskAction/submitTaskUI.jsp</result>
 			<result name="toList" type="redirectAction">course_list</result>
 		</action>
+		<!-- 爬取课程资源管理 -->
+		<action name="spiderCourse_*" class="spiderCourseAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/spiderCourseAction/list.jsp</result>
+ 
+		</action>
 	</package>
 
 </struts>    
