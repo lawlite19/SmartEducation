@@ -102,6 +102,8 @@
 				<value>com/hhit/entity/SpiderProfessionType.hbm.xml</value>
 				<value>com/hhit/entity/SpiderCourse.hbm.xml</value>
 				<value>com/hhit/entity/SpiderChapter.hbm.xml</value>
+				<value>com/hhit/entity/SpiderDocument.hbm.xml</value>
+				
 			</list>
 		</property>
 	</bean>

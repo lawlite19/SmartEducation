@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SpiderDocument" table="T_SpiderDocument">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="name" type="string">	
+			<column name="Name">
+				<comment>文档名</comment>
+			</column>
+		</property>
+		<property name="url" type="string">
+			<column name="Url">
+				<comment>文档url</comment>
+			</column>
+		</property>
+		<property name="author" type="string">
+			<column name="Author">
+				<comment>文档作者</comment>
+			</column>
+		</property>
+		<property name="publish" type="string">
+			<column name="Publish">
+				<comment>出版社</comment>
+			</column>
+		</property>
+		<property name="imgUrl" type="string">
+			<column name="ImgUrl">
+				<comment>封面图片url</comment>
+			</column>
+		</property>
+		<!-- spiderCourse属性，本类与SpiderCourse的多对一   -->
+		<many-to-one name="spiderCourse" class="SpiderCourse" column="SpiderCourse_Id">
+		</many-to-one>
+	</class>
+</hibernate-mapping>
