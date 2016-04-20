@@ -30,5 +30,16 @@
 				<comment>专业类型</comment>
 			</column>
 		</property>
+		
+		<!-- spiderChapters属性，与SpiderChapter类一对多 -->
+		<set name="spiderChapters">
+			<key column="SpiderCourse_Id"></key>
+			<one-to-many class="SpiderChapter" />
+		</set>
+		<!-- spiderDocuemnts属性，与 SpiderDocument类一对多-->
+		<set name="spiderDocuemnts">
+			<key column="SpiderCourse_Id"></key>
+			<one-to-many class="SpiderDocument" />
+		</set>
 	</class>
 </hibernate-mapping>
