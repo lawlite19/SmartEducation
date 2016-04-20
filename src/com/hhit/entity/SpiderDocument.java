@@ -11,12 +11,17 @@ package com.hhit.entity;
 
 
 
+/**
+ * @author bob
+ *
+ */
 public class SpiderDocument {
 	private Integer id;
 	private String name;
 	private String url;
 	private String author;
-	private String publish;
+	private String publisher;
+	private String publishDate;
 	private String imgUrl;
 	private SpiderCourse spiderCourse;
 	/** 默认构造函数 */
@@ -24,11 +29,12 @@ public class SpiderDocument {
 		
 	}
 	/** 构造函数 */
-	public SpiderDocument(String na,String ur,String au,String pu,String im,SpiderCourse sp){
+	public SpiderDocument(String na,String ur,String au,String pue,String puD,String im,SpiderCourse sp){
 		name=na; 
 		url=ur;    
 		author=au; 
-		publish=pu;
+		publisher=pue;
+		publishDate=puD;
 		imgUrl=im; 
 		spiderCourse=sp;
 	}
@@ -57,11 +63,18 @@ public class SpiderDocument {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getPublish() {
-		return publish;
+
+	public String getPublisher() {
+		return publisher;
 	}
-	public void setPublish(String publish) {
-		this.publish = publish;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public String getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
 	}
 	public String getImgUrl() {
 		return imgUrl;

@@ -2,14 +2,17 @@ package com.hhit.spider;
 
 import java.util.List;
 
+
+
+
+
+import net.sf.json.JSONObject;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.hhit.entity.SpiderChapter;
-import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderDocument;
-import com.hhit.entity.SpiderProfessionType;
 import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
@@ -44,64 +47,49 @@ public class DocumentTest implements PageProcessor {
 
 	/**
 	 * 爬取课程对应的章节、文档
+	 * 这个有点特殊，它是一个iframe
+	 * 并且通过分析之后得出iframe里有个data属性，是json格式的数据，然后网站再通过js拼接html代码
+	 * 汉字采用的是unicode编码
 	 */
 	public void crawCourseInfo(Page page) {
 
 		/**
 		 * 爬取参考教材
 		 */
-		// <span class="ans-book-info">
-		// <span class="ans-ref-bookname">
-		// <a href="javascript:void(0);" class="as-ref-link"
-		// id="ext-gen1038">先秦哲学</a>
-		// </span>
-		// <span class="ans-ref-author">曾仕礼编著</span>
-		// <span class="ans-ref-publish">昆明市：云南大学出版社&nbsp;2009.09</span>
-		// </span>
-		// 筛选名称
-		List<String> documentNameList = page.getHtml().xpath("//div[@class='ans-attach-ct']/iframe/@bookname").all();
-//				.getHtml()
-//				.xpath("//span[@class='ans-ref-bookname']/a[@class='as-ref-link']/text()")
-//				.all();
-//		<iframe src="/ananas/modules/innerbook/simple.html"
-//				readurl="http://resapi.chaoxing.com/realRead?dxid=000006873411&amp;ssid=12553309&amp;d=BD6EECD6198FDD693FD0E87F715B5F05" 
-//				coverurl="http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236" 
-//				bookname="先秦哲学" author="曾仕礼编著" publisher="昆明市：云南大学出版社" 
-//				publishdate="2009.09" start="" end="" 
-//				innerurl="http://resapi.chaoxing.com/innerurl?dxid=000006873411&amp;ssid=12553309&amp;d=BD6EECD6198FDD693FD0E87F715B5F05&amp;unitid=7719" 
-//				class="ans-attach-online ans-book-simple" frameborder="0" scrolling="no">
-//		</iframe>
-		// 筛选url,得到的不是真实的url,需要添加上"&readstyle=4&tp=flip&rotate=true&cpage=1"，后面处理
-		List<String> documentUrlList=page.getHtml().xpath("//iframe/@innerurl").all();
-				
-		// 筛选作者
-		List<String> documentAuthorList =page.getHtml().xpath("//iframe/@bookname").all();
-				//page.getHtml().xpath("//span[@class='ans-ref-author']/text()").all();
-		// 筛选出版社
-		List<String> documentPublishList = page.getHtml()
-				.xpath("//span[@class='ans-ref-publish']/text()").all();
-		// <span class="ans-book-cover">
-		// <a href="javascript:void(0);" class="as-ref-link" id="ext-gen1037">
-		// <img
-		// src="http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236">
-		// </a>
-		// </span>
-		// 筛选封面图片url
-		List<String> documentImgUrlList = page.getHtml()
-				.xpath("//span[@class='ans-book-cover']/a/img/@src").all();
 
-		if (documentNameList.size() > 0) {
-			for (int i = 0; i < documentNameList.size(); i++) {
-				String realUrl=documentUrlList.get(i).toString()+"&readstyle=4&tp=flip&rotate=true&cpage=1";
-				SpiderDocument model = new SpiderDocument(documentNameList.get(i)
-						.toString(), realUrl, documentAuthorList.get(i).toString(),
-						documentPublishList.get(i).toString(), documentImgUrlList.get(i)
-								.toString(), null);
+		//得到的是json格式的字符串
+		//格式：
+//		{"readurl":"http://resapi.chaoxing.com/realRead?dxid=000006873411&ssid=12553309&d=BD6EECD6198FDD693FD0E87F715B5F05",
+//		"coverurl":"http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236",
+//		"bookname":"\u5148\u79e6\u54f2\u5b66",
+//		"author":"\u66fe\u4ed5\u793c\u7f16\u8457",
+//		"publisher":"\u6606\u660e\u5e02\uff1a\u4e91\u5357\u5927\u5b66\u51fa\u7248\u793e",
+//		"publishdate":"2009.09",
+//		"id":"ext-gen1223"}
+		
+		List<String> allInfoList = page.getHtml().xpath("//iframe/@data").all();
+		
+		
+		if(allInfoList.size()>0){
+			for(int i=0;i<allInfoList.size();i++){
+				//String转为json
+				JSONObject json = JSONObject.fromObject(allInfoList.get(i).toString()); 
+				String realUrl=json.getString("readurl");
+
+				realUrl=realUrl.replace("realRead", "innerurl");
+				realUrl=realUrl+"&unitid=7719&readstyle=4&tp=flip&rotate=true&cpage=1";
+				SpiderDocument model=new SpiderDocument(json.getString("bookname"), realUrl, json.getString("author"), json.getString("publisher"),json.getString("publishdate"), json.getString("coverurl"), null);
 				spiderDocumentService.save(model);
 			}
 		}
-	}
 
+	}
+	@Test
+	public void test(){
+		
+		String ascii="\u5148\u79e6\u54f2\u5b66";
+		System.out.println(ascii);
+	}
 	@Override
 	public Site getSite() {
 		return site;

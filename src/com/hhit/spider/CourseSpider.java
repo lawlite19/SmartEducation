@@ -2,6 +2,8 @@ package com.hhit.spider;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,33 +24,25 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 public class CourseSpider implements PageProcessor {
-	private ApplicationContext ac = new ClassPathXmlApplicationContext(
-			"applicationContext.xml");
+	private ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	// 获取service
-	ISpiderCourseService spiderCourseService = (ISpiderCourseService) ac
-			.getBean("spiderCourseServiceImpl");
-	ISpiderProfessionTypeService spiderProfessionTypeService = (ISpiderProfessionTypeService) ac
-			.getBean("spiderProfessionTypeServiceImpl");
-	ISpiderChapterService spiderChapterService = (ISpiderChapterService) ac
-			.getBean("spiderChapterServiceImpl");
-	ISpiderDocumentService spiderDocumentService = (ISpiderDocumentService) ac
-			.getBean("spiderDocumentServiceImpl");
+	ISpiderCourseService spiderCourseService = (ISpiderCourseService) ac.getBean("spiderCourseServiceImpl");
+	ISpiderProfessionTypeService spiderProfessionTypeService = (ISpiderProfessionTypeService) ac.getBean("spiderProfessionTypeServiceImpl");
+	ISpiderChapterService spiderChapterService = (ISpiderChapterService) ac.getBean("spiderChapterServiceImpl");
+	ISpiderDocumentService spiderDocumentService = (ISpiderDocumentService) ac.getBean("spiderDocumentServiceImpl");
 
-	private Site site = Site.me().setRetryTimes(5).setSleepTime(3000)
-			.setTimeOut(23000);
+	private Site site = Site.me().setRetryTimes(5).setSleepTime(3000).setTimeOut(23000);
 
 	@Override
 	public void process(Page page) {
 		// 格式：http://mooc.chaoxing.com/category/01/0/1000
-		if (page.getUrl()
-				.regex("http://mooc\\.chaoxing\\.com/category/\\d+/\\d/\\d+")
+		if (page.getUrl().regex("http://mooc\\.chaoxing\\.com/category/\\d+/\\d/\\d+")
 				.toString() != null) {
 			System.out.println("第一层");
 			crawerCourse(page);
 		}
 		// 格式：http://mooc.chaoxing.com/course/55672.html
-		else if (page.getUrl()
-				.regex("http://mooc\\.chaoxing\\.com/course/\\d+\\.html")
+		else if (page.getUrl().regex("http://mooc\\.chaoxing\\.com/course/\\d+\\.html")
 				.toString() != null) {
 			System.out.println("第二层");
 			crawCourseInfo(page);
@@ -110,12 +104,13 @@ public class CourseSpider implements PageProcessor {
 						.setPriority(1).putExtra("courseModel", model));
 			}
 		}
-//		List<SpiderProfessionType> list = spiderProfessionTypeService.findAll();
-//		for (int j = 2; j < list.size(); j++) {
-//			// 设置优先级为0
-//			page.addTargetRequest(new Request(list.get(j).getUrl())
-//					.setPriority(0));
-//		}
+		 List<SpiderProfessionType> list =
+		 spiderProfessionTypeService.findAll();
+		 for (int j = 2; j < list.size(); j++) {
+		 // 设置优先级为0
+		 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1000")
+		 .setPriority(0));
+		 }
 
 		// List<String> urlList=new ArrayList<String>();
 		// for(int j=2;j<list.size();j++){
@@ -177,56 +172,40 @@ public class CourseSpider implements PageProcessor {
 				spiderChapterService.save(model);
 			}
 		}
-		/**
-		 * 爬取参考教材
-		 */
-		// <span class="ans-book-info">
-		// <span class="ans-ref-bookname">
-		// <a href="javascript:void(0);" class="as-ref-link"
-		// id="ext-gen1038">先秦哲学</a>
-		// </span>
-		// <span class="ans-ref-author">曾仕礼编著</span>
-		// <span class="ans-ref-publish">昆明市：云南大学出版社&nbsp;2009.09</span>
-		// </span>
-		// 筛选名称
-		List<String> documentNameList = page
-				.getHtml()
-				.xpath("//span[@class='ans-ref-bookname']/a[@class='as-ref-link']/text()")
-				.all();
-//		<iframe src="/ananas/modules/innerbook/simple.html"
-//				readurl="http://resapi.chaoxing.com/realRead?dxid=000006873411&amp;ssid=12553309&amp;d=BD6EECD6198FDD693FD0E87F715B5F05" 
-//				coverurl="http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236" 
-//				bookname="先秦哲学" author="曾仕礼编著" publisher="昆明市：云南大学出版社" 
-//				publishdate="2009.09" start="" end="" 
-//				innerurl="http://resapi.chaoxing.com/innerurl?dxid=000006873411&amp;ssid=12553309&amp;d=BD6EECD6198FDD693FD0E87F715B5F05&amp;unitid=7719" 
-//				class="ans-attach-online ans-book-simple" frameborder="0" scrolling="no">
-//		</iframe>
-		// 筛选url,得到的不是真实的url,需要添加上"&readstyle=4&tp=flip&rotate=true&cpage=1"，后面处理
-		List<String> documentUrlList=page.getHtml().xpath("//iframe/@innerurl").all();
-				
-		// 筛选作者
-		List<String> documentAuthorList = page.getHtml()
-				.xpath("//span[@class='ans-ref-author']/text()").all();
-		// 筛选出版社
-		List<String> documentPublishList = page.getHtml()
-				.xpath("//span[@class='ans-ref-publish']/text()").all();
-		// <span class="ans-book-cover">
-		// <a href="javascript:void(0);" class="as-ref-link" id="ext-gen1037">
-		// <img
-		// src="http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236">
-		// </a>
-		// </span>
-		// 筛选封面图片url
-		List<String> documentImgUrlList = page.getHtml()
-				.xpath("//span[@class='ans-book-cover']/a/img/@src").all();
 
-		if (documentNameList.size() > 0) {
-			for (int i = 0; i < documentNameList.size(); i++) {
-				String realUrl=documentUrlList.get(i).toString()+"&readstyle=4&tp=flip&rotate=true&cpage=1";
-				SpiderDocument model = new SpiderDocument(documentNameList.get(i)
-						.toString(), realUrl, documentAuthorList.get(i).toString(),
-						documentPublishList.get(i).toString(), documentImgUrlList.get(i)
-								.toString(), courseModel);
+		/**
+		 * 爬取课程对应的章节文档 ，这个有点特殊，它是一个iframe
+		 * 并且通过分析之后得出iframe里有个data属性，是json格式的数据，然后网站再通过js拼接html代码
+		 * 汉字采用的是unicode编码
+		 */
+
+		// 得到的是json格式的字符串
+		// 格式：
+		// {"readurl":"http://resapi.chaoxing.com/realRead?dxid=000006873411&ssid=12553309&d=BD6EECD6198FDD693FD0E87F715B5F05",
+		// "coverurl":"http://cover.duxiu.com/cover/Cover.dll?iid=6768656B6B696569666F3839393335393236",
+		// "bookname":"\u5148\u79e6\u54f2\u5b66",
+		// "author":"\u66fe\u4ed5\u793c\u7f16\u8457",
+		// "publisher":"\u6606\u660e\u5e02\uff1a\u4e91\u5357\u5927\u5b66\u51fa\u7248\u793e",
+		// "publishdate":"2009.09",
+		// "id":"ext-gen1223"}
+
+		List<String> allInfoList = page.getHtml().xpath("//iframe/@data").all();
+
+		if (allInfoList.size() > 0) {
+			for (int i = 0; i < allInfoList.size(); i++) {
+				// String转为json
+				JSONObject json = JSONObject.fromObject(allInfoList.get(i)
+						.toString());
+				String realUrl = json.getString("readurl");
+				//http://resapi.chaoxing.com/realRead?dxid=000006873411&ssid=12553309&d=BD6EECD6198FDD693FD0E87F715B5F05
+				//连接中realRead替换为innerurl,并加上后缀&unitid=7719&readstyle=4&tp=flip&rotate=true&cpage=1
+				realUrl = realUrl.replace("realRead", "innerurl")+ "&unitid=7719&readstyle=4&tp=flip&rotate=true&cpage=1";
+						
+				SpiderDocument model = new SpiderDocument(
+						json.getString("bookname"), realUrl,
+						json.getString("author"), json.getString("publisher"),
+						json.getString("publishdate"),
+						json.getString("coverurl"), courseModel);
 				spiderDocumentService.save(model);
 			}
 		}
@@ -242,7 +221,7 @@ public class CourseSpider implements PageProcessor {
 
 		Spider.create(new CourseSpider())//
 				// 全部得到，不分页
-				.addUrl("http://mooc.chaoxing.com/category/01/0/2")//
+				.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
 				.thread(5)//
 				.run();
 	}
