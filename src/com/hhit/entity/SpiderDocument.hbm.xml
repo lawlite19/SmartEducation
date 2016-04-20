@@ -25,9 +25,14 @@
 				<comment>文档作者</comment>
 			</column>
 		</property>
-		<property name="publish" type="string">
-			<column name="Publish">
+		<property name="publisher" type="string">
+			<column name="Publisher">
 				<comment>出版社</comment>
+			</column>
+		</property>
+		<property name="publishDate" type="string">
+			<column name="PublishDate" length="20">
+				<comment>出版日期</comment>
 			</column>
 		</property>
 		<property name="imgUrl" type="string">
