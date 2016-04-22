@@ -120,7 +120,10 @@
 		<!-- 爬取课程资源管理 -->
 		<action name="spiderCourse_*" class="spiderCourseAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/spiderCourseAction/list.jsp</result>
- 
+ 			<result name="toList" type="redirectAction">spiderCourse_list</result>
+			<result name="listCourseInfo">/WEB-INF/jsp/spiderCourseAction/listCourseInfo.jsp</result>
+		
+		
 		</action>
 	</package>
 
