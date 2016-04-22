@@ -13,7 +13,9 @@ import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseService;
+import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
@@ -81,6 +83,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ISpiderProfessionService spiderProfessionService;//爬虫1专业
 	@Resource
 	protected ISpiderCourseService spiderCourseService;//爬虫2课程
+	@Resource
+	protected ISpiderChapterService spiderChapterService;//爬虫课程章节
+	@Resource
+	protected ISpiderDocumentService spiderDocumentService;//爬虫课程文档
 
 	/**
 	 * 获取当前登录的用户

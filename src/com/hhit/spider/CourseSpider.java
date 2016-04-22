@@ -222,7 +222,7 @@ public class CourseSpider implements PageProcessor {
 		Spider.create(new CourseSpider())//
 				// 全部得到，不分页
 				.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
-				.thread(5)//
+				.thread(10)//
 				.run();
 	}
 }

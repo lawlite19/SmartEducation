@@ -5,8 +5,6 @@
 <head>
 <title>显示所有课程资源</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
-<!--Layer插件弹出对话框前台代码开始-->
-<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <script>
 	$(function() {
              $("#selectAll").click(function(){
@@ -75,43 +73,43 @@
 <input type="button" id="selectOthers" value="反选" />
 <input type="button" id="deleteSelected" value="删除" />
 </div>
+<h1>章节</h1>
 	<table>
 		<!-- 表头-->
 		<thead>
 			<tr>
 				<td>选择</td>
 				<td>序号</td>
-				<td>课程名字</td>
-				<td>课程地址</td>
-				<td>课程类型</td>
-				<td>课程信息</td>
+				<td>章节编号</td>
+				<td>章节名字</td>
+				<td>章节url</td>
 				<td>相关操作</td>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
 		<tbody>
-			<s:iterator value="recordList" status="s">
+			<s:iterator value="spiderChapterList" status="s">
 				<tr class="TableDetail1 template">
 					<td>
-						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${name}" />
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${chapterName}" />
 					</td>
-					<td>${(currentPage-1)*10+s.count}</td>
+					<td>${s.count}</td>
 					<td>
-					<s:a action="spiderCourse_listCourseInfo?id=%{id}">
-						${name}
-					</s:a>
+						${chapterNum}
 					&nbsp;
 					</td>
 					<td>
-					<a onclick="javascript:load('${url}');return false;" href="#">${url}</a>
+						${chapterName}
 					&nbsp;
 					</td>
-					<td>${professionType}&nbsp;</td>
-					<td>${info}&nbsp;</td>
-					
-					<!--<td>${deptDescription}&nbsp;</td>-->
-					<td><s:a action="spiderCourse_delete?id=%{id}"
+					<td>
+					<a href="${url}">${url}</a>
+					&nbsp;
+					</td>
+					<td>${courseName}&nbsp;</td>
+
+					<td><s:a action="spiderCourse_deleteChapter?id=%{id}"
 							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
 						&nbsp;</td>
 				</tr>
@@ -119,30 +117,62 @@
 
 		</tbody>
 	</table>
-
-	<!-- 分页页码 -->
-	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 	
+	<h1>参考教材</h1>
+<table>
+		<!-- 表头-->
+		<thead>
+			<tr>
+				<td>选择</td>
+				<td>序号</td>
+				<td>封面</td>
+				<td>教材名</td>
+				<td>教材地址</td>
+				<td>教材作者</td>
+				<td>出版社</td>
+				<td>出版日期</td>
+				<td>操作</td>
+			</tr>
+		</thead>
 
+		<!--显示数据列表-->
+		<tbody>
+			<s:iterator value="spiderDocumentList" status="s">
+				<tr class="TableDetail1 template">
+					<td>
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${name}" />
+					</td>
+					<td>${s.count}</td>
+					<td>
+						<img alt="" src="${imgUrl}"/>
+					</td>
+					<td>
+						${name}
+					&nbsp;
+					</td>
+					<td>
+						<a href="${url}">${url}</a>
+					&nbsp;
+					</td>
+					<td>
+						${author}
+					&nbsp;
+					</td>
+					<td>${publisher}&nbsp;</td>
+					<td>${publishDate}&nbsp;</td>
+					<td><s:a action="spiderChapter_deleteDocument?id=%{id}"
+							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
+						&nbsp;</td>
+				</tr>
+			</s:iterator>
+
+		</tbody>
+	</table>
 	<!-- 其他功能超链接 -->
 	<div id="TableTail">
 		<div id="TableTail_inside">
 			<s:a action="userDetails_addUI">添加用户</s:a>
 		</div>
 	</div>
-	<script type="text/javascript">
-	//iframe窗
-		function load(url){
-			layer.open({
-			      type: 2,
-			      title: '详细信息',
-			      shadeClose: true,
-			      shade: false,
-			      maxmin: true, //开启最大化最小化按钮
-			      area: ['893px', '600px'],
-			      content: url
-			    });
-		}
-</script>
 </body>
 </html>
