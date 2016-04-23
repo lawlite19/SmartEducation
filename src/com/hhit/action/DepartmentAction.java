@@ -64,7 +64,7 @@ public class DepartmentAction extends BaseAction<Department> {
 		Department parent = departmentService.findById(parentId);
 		model.setParent(parent);
 		//1代表可用
-		model.setIsUsable(1);
+//		model.setIsUsable(1);
 		// 保存
 		departmentService.save(model);
 		//操作日志保存
@@ -98,7 +98,7 @@ public class DepartmentAction extends BaseAction<Department> {
 
 		// 2，设置要修改的属性
 		department.setDeptName(model.getDeptName());
-		department.setDeptNum(model.getDeptNum());
+//		department.setDeptNum(model.getDeptNum());
 		department.setDeptLevel(model.getDeptLevel());
 		department.setDeptDescription(model.getDeptDescription());
 		department.setParent(departmentService.findById(parentId)); // 设置所属的上级部门

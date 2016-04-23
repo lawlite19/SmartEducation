@@ -62,7 +62,7 @@ public class RoleAction extends BaseAction<Role> {
 
 	/** 添加 */
 	public String add() throws Exception {
-		model.setAddDate(new Timestamp(new Date().getTime()));
+		model.setAddTime(new Timestamp(new Date().getTime()));
 		roleService.save(model);
 		return "toList";
 	}

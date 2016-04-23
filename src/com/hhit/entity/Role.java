@@ -25,10 +25,11 @@ public class Role implements java.io.Serializable{
 	private Integer id;
 	private String roleName;
 	private String description;
-	private Timestamp addDate;
+	private Timestamp addTime;
 	
-	private Set<UserDetails> userDetails;
 	private Set<Privilege> privileges;
+	private Student student;
+	private Set<Teacher> teachers;
 	/**
 	 * 默认构造函数,用户初始化，有重载则不可缺少
 	 */
@@ -39,7 +40,7 @@ public class Role implements java.io.Serializable{
 	public Role(String rN,String desc,Timestamp aD){
 		roleName=rN;
 		description=desc;
-		addDate=aD;
+		addTime=aD;
 	}
 
 	public Integer getId() {
@@ -60,24 +61,41 @@ public class Role implements java.io.Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Set<UserDetails> getUserDetails() {
-		return userDetails;
-	}
-	public void setUserDetails(Set<UserDetails> userDetails) {
-		this.userDetails = userDetails;
-	}
 	public Set<Privilege> getPrivileges() {
 		return privileges;
 	}
 	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
 	}
-	public Timestamp getAddDate() {
-		return addDate;
+
+
+	public Timestamp getAddTime() {
+		return addTime;
 	}
-	public void setAddDate(Timestamp addDate) {
-		this.addDate = addDate;
+
+	public void setAddTime(Timestamp addTime) {
+		this.addTime = addTime;
 	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Set<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(Set<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+
+
+
+
 
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Class_" table="T_Class">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="classNum" type="string">	
+			<column name="ClassNum" length="20">
+				<comment>班级号</comment>
+			</column>
+		</property>
+		<property name="className" type="string">
+			<column name="ClassName" length="50">
+				<comment>班级名</comment>
+			</column>
+		</property>
+		<property name="Grade" type="string">
+			<column name="Grade">
+				<comment>年级</comment>
+			</column>
+		</property>
+
+		<!--department属性，本类与Department的多对一  -->
+		<many-to-one name="department" class="Department" column="Department_Id">
+		</many-to-one>
+		<!-- students属性，与Student类的一对多 -->
+		<set name="students">
+			<key column="Class_Id"></key>
+			<one-to-many class="Student" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -39,7 +39,7 @@ public class CourseAction extends BaseAction<Course>{
 		//设置相关属性
 		model.setAddTime(new Timestamp(new Date().getTime()));
 		model.setDepartment(userDetailsFind.getDepartment());
-		model.setTeacher(userDetailsFind);
+//		model.setTeacher(userDetailsFind);
 		//保存
 		courseService.save(model);
 		return "toList";
@@ -56,7 +56,7 @@ public class CourseAction extends BaseAction<Course>{
 		//查询出原对象
 		Course courseFind=courseService.findById(model.getId());
 		//设置相关属性
-		courseFind.setCourseLevel(model.getCourseLevel());
+//		courseFind.setCourseLevel(model.getCourseLevel());
 		courseFind.setCourseName(model.getCourseName());
 		courseFind.setDescription(model.getDescription());
 		//更新数据库

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 //
 //  @ Project : Untitled
 //  @ File Name : Student.java
-//  @ Date : 2016/4/22
+//  @ Date : 2016/4/23
 //  @ Author : 
 //
 //
@@ -13,7 +13,12 @@ import java.sql.Timestamp;
 
 
 
+
 public class Student implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String stuNum;
 	private String stuName;
@@ -22,8 +27,12 @@ public class Student implements java.io.Serializable{
 	private Timestamp birthday;
 	private String grade;
 	private String photo;
+	
+	
 	private Department department;
 	private Class_ class_;
+	private Role role;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -78,11 +87,18 @@ public class Student implements java.io.Serializable{
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-	public Class getClass_() {
+	public Class_ getClass_() {
 		return class_;
 	}
-	public void setClass_(Class class_) {
+	public void setClass_(Class_ class_) {
 		this.class_ = class_;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	
 }
