@@ -15,11 +15,6 @@
 				<comment>部门名</comment>
 			</column>
 		</property>
-		<property name="deptNum" type="string">
-			<column name="DeptNum" length="50">
-				<comment>部门号</comment>
-			</column>
-		</property>
 		<property name="deptLevel" type="int">
 			<column name="DeptLevel">
 				<comment>部门级别</comment>
@@ -30,17 +25,6 @@
 				<comment>部门描述</comment>
 			</column>
 		</property>
-		<property name="isUsable" type="integer">
-			<column name="IsUsable">
-				<comment>是否可用</comment>
-			</column>
-		</property>
-		<!--userDetails属性，本类与UserDetails的一对多-->
-		<set name="userDetails">
-			<key column="Department_Id"></key>
-			<one-to-many class="UserDetails" />
-		</set>
-		
 		<!-- parent属性，本类与Department（上级）多对一 -->
 		<many-to-one name="parent" class="Department" column="Department_Id"></many-to-one>
 		
@@ -51,6 +35,24 @@
 			<one-to-many class="Department"/>
 		</set>
 		
+		
+		<!--students属性，本类与Student的一对多-->
+		<set name="students">
+			<key column="Department_Id"></key>
+			<one-to-many class="Student" />
+		</set>
+		
+		<!--teachers属性，本类与Teacher的一对多-->
+		<set name="teachers">
+			<key column="Department_Id"></key>
+			<one-to-many class="Teacher" />
+		</set>	
+		<!--classes属性，本类与Class_的一对多-->
+		<set name="classes">
+			<key column="Department_Id"></key>
+			<one-to-many class="Class_" />
+		</set>		
+
 		<!-- courses属性，与Course类一对多 -->
 		<set name="courses">
 			<key column="Department_Id"></key>

@@ -15,11 +15,6 @@
 				<comment>课程名</comment>
 			</column>
 		</property>
-		<property name="courseLevel" type="integer">
-			<column name="CourseLevel">
-				<comment>课程级别</comment>
-			</column>
-		</property>
 		<property name="addTime" type="timestamp">
 			<column name="AddTime">
 				<comment>添加时间</comment>
@@ -33,23 +28,6 @@
 		<!-- department属性，本类与Department的多对一   -->
 		<many-to-one name="department" class="Department" column="Department_Id">
 		</many-to-one>
-		<!-- teacher属性，本类与UserDetails的多对一  -->
-		<many-to-one name="teacher" class="UserDetails" column="UserDetails_Id">
-		</many-to-one>
-		<!-- tasks属性，本类与Task的一对多 -->
-		<set name="tasks">
-			<key column="Course_Id"></key>
-			<one-to-many class="Task" />
-		</set>
 		
-		<!-- teachProcesses属性，本类与TeachProcess的一对多 -->
-		<set name="teachProcesses">
-			<key column="Course_Id"></key>
-			<one-to-many class="TeachProcess" />
-		</set>
-		
-		<!-- student属性，与UserDetails类多对一  -->
-		<many-to-one name="student" class="UserDetails" column="Student_Id">
-		</many-to-one>
 	</class>
 </hibernate-mapping>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Teacher" table="T_Teacher">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="teaNum" type="string">	
+			<column name="TeaNum" length="20">
+				<comment>职工号</comment>
+			</column>
+		</property>
+		<property name="teaName" type="string">
+			<column name="TeaName" length="20">
+				<comment>教师姓名</comment>
+			</column>
+		</property>
+		<property name="teaPwd" type="string">
+			<column name="TeaPwd" length="50">
+				<comment>教师密码</comment>
+			</column>
+		</property>
+		<property name="title" type="string">
+			<column name="Title" length="20">
+				<comment>职称</comment>
+			</column>
+		</property>
+		<property name="sex" type="string">
+			<column name="Sex" length="10">
+				<comment>性别</comment>
+			</column>
+		</property>
+		<property name="birthday" type="timestamp">
+			<column name="Birthday">
+				<comment>生日</comment>
+			</column>
+		</property>
+		<property name="finalEdu" type="string">
+			<column name="FinalEdu" length="50">
+				<comment>最终学历</comment>
+			</column>
+		</property>
+		<property name="inTime" type="timestamp">
+			<column name="InTime">
+				<comment>来校时间</comment>
+			</column>
+		</property>		
+		
+		<!--department属性，本类与Department的多对一关系-->
+		<many-to-one name="department" class="Department" column="Department_Id">
+		</many-to-one>
+		<!-- roles属性，本类与Role类的多对多 -->
+		<set name="roles" table="T_Teacher_Role">
+			<key column="Teacher_Id"></key>
+			<many-to-many class="Role" column="Role_Id"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

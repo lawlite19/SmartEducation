@@ -20,22 +20,25 @@
 				<comment>角色描述</comment>
 			</column>
 		</property>
-		<property name="addDate" type="timestamp">
-			<column name="AddDate">
+		<property name="addTime" type="timestamp">
+			<column name="AddTime">
 				<comment>创建时间</comment>
 			</column>
 		</property>
-		
-		<!--userDetails属性，本类与UserDetails多对多-->
-		<set name="userDetails" table="T_UserDetails_Role">
-			<key column="Role_Id"></key>
-			<many-to-many class="UserDetails" column="UserDetail_Id"></many-to-many>
-		</set>
-		
+
 		<!--privileges属性，与Privilege多对多  -->
 		<set name="privileges" table="T_Role_Privilege" lazy="false">
 			<key column="Role_Id"></key>
 			<many-to-many class="Privilege" column="Privilege_Id"></many-to-many>
+		</set>
+		
+		<!-- student属性，与 Student类多对一-->
+		<many-to-one name="student" class="Student" column="Student_Id">
+		</many-to-one>
+		<!-- teachers属性，与 Teacher类多对多-->
+		<set name="teachers" table="T_Teacher_Role">
+			<key column="Role_Id"></key>
+			<many-to-many class="Teacher" column="Teacher_Id"></many-to-many>
 		</set>
 	</class>
 		
