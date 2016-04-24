@@ -17,8 +17,10 @@ import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
+import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITeacherService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IWeiboInfoService;
@@ -52,9 +54,16 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	}
 
 	// =============== Service实例的声明 ==================
-
 	@Resource
 	protected IUserService userService;// 登录用户
+	@Resource
+	protected IStudentService studentService;//学生
+	@Resource
+	protected ITeacherService teacherService;//老师
+
+
+	
+	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息
 	@Resource

@@ -19,7 +19,7 @@ public class CourseAction extends BaseAction<Course>{
 
 	/** 列表 */
 	public String list() throws Exception{
-		UserDetails userFind=getCurrentUser().getUserDetails();
+//		UserDetails userFind=getCurrentUser().getUserDetails();
 		List<Course> courseList=courseService.findByUser(userFind);
 		ActionContext.getContext().put("courseList", courseList);
 		return "list";

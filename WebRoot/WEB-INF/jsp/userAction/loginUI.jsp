@@ -5,7 +5,6 @@
 <head>
 <title>智慧教育后台登录界面</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/c.css" />
     <style type="text/css">
         .auto-style1 {
             width: 90px;
@@ -112,9 +111,11 @@
 	</script>
 	
 	<!-- 微博登录开始 -->
-	<div id="wb_connect_btn"></div>
+	
+	
 	
 	<script type="text/javascript">
+
 	WB2.anyWhere(function (W) {
 	    W.widget.connectButton({
 	        id: "wb_connect_btn",
@@ -180,8 +181,8 @@
                              <%--登录表单开始--%>
                                 <table style="width: 90%; margin-left: 5px; margin-top: 10px;">
                                     <tr>
-                                        <td colspan="2" style="text-align: center;">
-                                            <font color="red"><s:fielderror fieldName="login"/></font>
+                                        <td colspan="2" style="text-align: center;color:red;">
+                                            <s:fielderror fieldName="login"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -204,7 +205,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                    <td colspan="2" style="text-align: right; font-size: 14px; padding-left:80px" >
+                                    <td colspan="2" style="text-align: left; font-size: 14px; padding-left:80px" >
                                         	<input id="manager" type="radio" value="管理员" name="userType" checked="checked" />
                                         	<label for="manager">管理员</label>
                                         	
@@ -240,10 +241,9 @@
                                                 <legend>第三方登录</legend>
                                                 
                                                 <a style="cursor:pointer;" onclick="return window.open('https://graph.qq.com/oauth2.0/authorize?client_id=101304940&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.soeasystudy.com%2Fback.jsp', 'oauth2Login_10235' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');" id="qqAuthorizationUrl" class="qq"></a>
-                                                
-                                                
-                                                <a style="cursor:pointer;" onclick="return window.open('https://api.weibo.com/2/oauth2/authorize?client_id=2840992581&response_type=token&display=js&transport=html5&referer=http://www.soeasystudy.com/user_loginUI.action" id="qqAuthorizationUrl" class="sina"></a>
-											
+                                               
+                                                <a style="cursor:pointer;" onclick="return window.open('https://api.weibo.com/2/oauth2/authorize?client_id=2840992581&response_type=token&display=js&transport=html5&referer=http://www.soeasystudy.com/test.jsp" class="sina"></a>
+											<div id="wb_connect_btn"></div>
                                             </fieldset>
                                         </td>
                                     </tr>

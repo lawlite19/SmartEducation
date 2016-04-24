@@ -19,9 +19,11 @@ public class User implements java.io.Serializable{
 	private Integer id;
 	private String userNum;
 	private String password;
-	private Integer isUsable;
 	private String userType;
-	private UserDetails userDetails;
+	
+	
+	private Student student;
+	private Teacher teacher;
 	/**
 	 * 默认构造函数,重载了则不可缺少
 	 */
@@ -33,19 +35,17 @@ public class User implements java.io.Serializable{
 	 * 构造函数，用户安装
 	 */
 	public User(String un,String pwd,
-			Integer isU,String ut,UserDetails ud){
+			Integer isU,String ut,Student stu){
 		userNum=un;
 		password=pwd;
-		isUsable=isU;
 		userType=ut;
-		userDetails=ud;
+		student=stu;
 	}
 	//构造函数，用户安装
 	public User(String un,String pwd,
 			Integer isU,String ut){
 		userNum=un;
 		password=pwd;
-		isUsable=isU;
 		userType=ut;
 	}
 	
@@ -61,11 +61,21 @@ public class User implements java.io.Serializable{
 			return true;
 		}
 
-		// 普通用户要判断是否含有这个权限
-		for (Role role : userDetails.getRoles()) {
-			for (Privilege priv : role.getPrivileges()) {
+		// 学生要判断是否含有这个权限
+		if(student!=null){
+			for (Privilege priv : student.getRole().getPrivileges()) {
 				if (priv.getPrivilegeName().equals(name)) {
 					return true;
+				}
+			}
+		}
+		// 教师要判断是否含有这个权限
+		if(teacher!=null){
+			for (Role role : teacher.getRoles()) {
+				for (Privilege priv : role.getPrivileges()) {
+					if (priv.getPrivilegeName().equals(name)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -100,8 +110,14 @@ public class User implements java.io.Serializable{
 		if (!allPrivilegeUrls.contains(privUrl)) {
 			return true;
 		} else {
-			// 普通用户要判断是否含有这个权限
-			for (Role role : userDetails.getRoles()) {
+			// 学生要判断是否含有这个权限
+				for (Privilege priv : student.getRole().getPrivileges()) {
+					if (privUrl.equals(priv.getUrl())) {
+						return true;
+					}
+				}
+			// 老师要判断是否含有这个权限
+			for (Role role : teacher.getRoles()) {
 				for (Privilege priv : role.getPrivileges()) {
 					if (privUrl.equals(priv.getUrl())) {
 						return true;
@@ -139,23 +155,28 @@ public class User implements java.io.Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getIsUsable() {
-		return isUsable;
-	}
-	public void setIsUsable(Integer isUsable) {
-		this.isUsable = isUsable;
-	}
 	public String getUserType() {
 		return userType;
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	public UserDetails getUserDetails() {
-		return userDetails;
+
+	public Student getStudent() {
+		return student;
 	}
-	public void setUserDetails(UserDetails userDetails) {
-		this.userDetails = userDetails;
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
 
 }

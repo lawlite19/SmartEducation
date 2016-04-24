@@ -20,19 +20,20 @@
 				<comment>登录密码</comment>
 			</column>
 		</property>
-		<property name="isUsable" type="int">
-			<column name="IsUsable">
-				<comment>是否可用</comment>
-			</column>
-		</property>
+
 		<property name="userType" type="string">
 			<column name="UserType" length="20">
 				<comment>用户类型</comment>
 			</column>
 		</property>
-		<!--userDetails属性，本类与UserDetails的一对一关系     外键对应主键 -->
-		<many-to-one name="userDetails" class="UserDetails" unique-key="UserDetails_Id" lazy="false">
-			<column name="UserDetails_Id"></column>
+		<!--student属性，本类与Student的一对一关系     外键对应主键 -->
+		<many-to-one name="student" class="Student" unique-key="Student_Id" lazy="false">
+			<column name="Student_Id"></column>
+		</many-to-one>
+		
+		<!-- teacher属性，本类与 Teacher的一对一-->
+		<many-to-one name="teacher" class="Teacher" unique-key="Teacher_Id" lazy="false">
+			<column name="Teacher_Id"></column>
 		</many-to-one>
 	</class>
 </hibernate-mapping>

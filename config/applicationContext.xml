@@ -81,6 +81,7 @@
 		<property name="mappingResources">
 			<list>
 			
+			<value>com/hhit/entity/User.hbm.xml</value>
 			<value>com/hhit/entity/Student.hbm.xml</value>
 			<value>com/hhit/entity/Teacher.hbm.xml</value>
 			<value>com/hhit/entity/Role.hbm.xml</value>

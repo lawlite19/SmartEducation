@@ -215,11 +215,21 @@
   		</ul>
         </div>
         <div class="member">
-            <img src="${pageContext.request.contextPath}/style/images/q.png" /> 您好：[${user.userDetails.userName},
+            <img src="${pageContext.request.contextPath}/style/images/q.png" />
+            您好：
+            <s:if test="%{user.teacher!=null}">
+            	${user.teacher.teaName}
+            	[${user.userNum},
             	<s:iterator value="user.userDetails.roles">
             		${roleName}
             	</s:iterator>
-            ,${user.userNum}]
+            	,${user.userNum}]
+            </s:if>
+            <s:if test="%{user.student!=null}">
+            学生
+            	${user.student.stuName}
+            </s:if>
+           	  
         </div>
         <div class="s2"><a href="right.aspx" style="color: #1598E0" target="right">首页</a></div>
             <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" onclick="signOut();" style="color: #1598E0" target="_top">退出系统</a></div>
