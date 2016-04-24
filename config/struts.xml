@@ -40,6 +40,16 @@
 			</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
 		</action>
+		<!-- 学生管理 -->
+		<action name="student_*" class="studentAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/studentAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/studentAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">student_list</result>
+			<result name="personalMaintainUI">/WEB-INF/jsp/studentAction/personalMaintainUI.jsp</result>
+			<result name="personalMaintain"  type="redirectAction">student_personalMaintainUI</result>
+		</action>
+		
+		
 		<!-- 用户详细信息管理 -->
 		<action name="userDetails_*" class="userDetailsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/userDetailsAction/list.jsp</result>
