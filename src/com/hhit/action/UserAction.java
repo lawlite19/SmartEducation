@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -12,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
-public class UserAction extends BaseAction<User> {
+public class UserAction extends BaseAction<Teacher> {
 	// 获得
 	// 抽取到BaseAction中
 	// @Resource
@@ -37,15 +38,15 @@ public class UserAction extends BaseAction<User> {
 		// String s3=user.getUserType().trim();
 		String code = ((String) ActionContext.getContext().getSession()
 				.get("randomCode")).toLowerCase();
-		if (code.equals((randomCode.trim().toLowerCase()))) {
-			User userFind=userService.findUserByNumAndPwd(model.getUserNum().trim(), model.getPassword().trim(), model.getUserType().trim());
-			if (null!=userFind) {
-				ActionContext.getContext().getSession().put("user", userFind);
-				return "toIndex";
-			} else
-				addFieldError("login", "用户名或密码不正确！");
-		} else
-			addFieldError("login", "验证码不正确！");
+//		if (code.equals((randomCode.trim().toLowerCase()))) {
+//			User userFind=userService.findUserByNumAndPwd(model.getUserNum().trim(), model.getPassword().trim(), model.getUserType().trim());
+//			if (null!=userFind) {
+//				ActionContext.getContext().getSession().put("user", userFind);
+//				return "toIndex";
+//			} else
+//				addFieldError("login", "用户名或密码不正确！");
+//		} else
+//			addFieldError("login", "验证码不正确！");
 		return "loginUI";
 	}
 

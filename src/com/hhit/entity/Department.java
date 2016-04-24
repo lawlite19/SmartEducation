@@ -30,6 +30,25 @@ public class Department implements java.io.Serializable{
 	private Set<Teacher> teachers;
 	private Set<Class_> classes;
 	private Set<Course> courses;
+	
+	/**
+	 * 默认构造函数
+	 */
+	public Department(){
+		
+	}
+	/**
+	 * 默认构造函数
+	 */
+	public Department(String name,Integer leve,String desc,Department par){
+		deptName=name;
+		deptLevel=leve;
+		deptDescription=desc;
+		parent=par;
+		
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

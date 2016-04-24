@@ -1,15 +1,27 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns:wb="http://open.weibo.com/wb">
 <head>
 <title>智慧教育后台登录界面</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/c.css" />
+    <style type="text/css">
+        .auto-style1 {
+            width: 90px;
+            height: 27px;
+        }
+
+        .auto-style2 {
+            height: 27px;
+        }
+    </style>
 <meta property="qc:admins" content="005476307763751313454163757" />
 <!-- qq的js -->
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" 
  data-appid="101304940" data-redirecturi="http://www.soeasystudy.com/back.jsp" charset="utf-8"></script>
 <!-- 微博js -->
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2840992581&debug=true" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2840992581"  charset="utf-8"></script>
 <!-- 验证码切换 -->
 <script type="text/javascript">
 	function changeValidateCode(obj) {
@@ -25,28 +37,8 @@
 	}
 	</script>
 </head>
-<body>
-<form action="user_login.action" method="post">
-   <font color="red"><s:fielderror fieldName="login"/></font>
-   <br/>
-    用户名：<input type="text" name="userNum" id="userNameLogin"  />
-    <br/> 
-    密码：<input type="password" name="password" id="userPassword"/>
-    <br/>
-    <input type="text" name="randomCode" id="code" >
-    <img src="rand.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码" style={width:30px;height:40px}/>
-    <br/>
-    <input type="radio" value="管理员" name="userType" checked="checked" />管理员
-    <br/>
-    <input type="radio" value="负责人" name="userType" />负责人
-    
-    <br/>
-        <input type="radio" value="学生" name="userType" />学生
-    <br/>
-        <input type="radio" value="老师" name="userType" />老师
-    <br/>
-    <input type="submit" id= "submitForm" value="登录"/>
-    </form>
+<body style="background-color: #0055AD">
+<!-- 第三方登录 -->
 <s:form action="qqLoginInfo_bindUserUI.action" method="post" id="formQQ">
 <s:hidden name="openId" id="hidQQ_OpenId" value=""></s:hidden>
 <s:hidden name="accessToken" id="hidQQ_AccessToken" value=""></s:hidden>
@@ -68,15 +60,14 @@
 <s:hidden name="createTime" id="hidWeibo_CreateTime" value=""></s:hidden>
 <s:hidden name="description" id="hidWeibo_Desc" value=""></s:hidden>
 </s:form>
-
+	<!-- 登录  
 	<span id="qqLoginBtn"></span>
-	<!-- 登录  -->
 	<script type="text/javascript">
 		QC.Login({
-			btnId : "qqLoginBtn",//插入按钮的html标签id
-			size : "A_M",//按钮尺寸
-		});
-	</script>
+				btnId : "qqLoginBtn",//插入按钮的html标签id
+				//size : "B_S",//按钮尺寸
+			});
+	</script> -->
 	<!-- 获取信息 -->
 	<script type="text/javascript">
 		//从页面收集OpenAPI必要的参数。get_user_info不需要输入参数，因此paras中没有参数
@@ -121,8 +112,8 @@
 	</script>
 	
 	<!-- 微博登录开始 -->
-	<br/><br/>
 	<div id="wb_connect_btn"></div>
+	
 	<script type="text/javascript">
 	WB2.anyWhere(function (W) {
 	    W.widget.connectButton({
@@ -161,5 +152,121 @@
 	});
 	
 	</script>
+<!-- 登录 -->
+   <form id="formLogin" action="user_login.action" method="post">
+        <table style="width: 100%; position: absolute; left: 0px; top: 0px;" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_left.jpg'); background-repeat: repeat-x; width: 25%"></td>
+                <td style="width: 1000px; border: 0px">
+                    <table bgcolor="#0055AD" border="0" cellpadding="0" cellspacing="0" width="1000">
+                        <tr>
+                            <td rowspan="6" style="background-image: url('${pageContext.request.contextPath}/style/login/login_left.jpg'); width: 5px; height: 660px;"></td>
+                            <td colspan="5" style="background-image: url('${pageContext.request.contextPath}/style/login/login_top.jpg'); width: 990px; height: 60px;"></td>
+                            <td rowspan="6" style="background-image: url('${pageContext.request.contextPath}/style/login/login_right.jpg'); width: 5px; height: 660px;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="background-image: url('${pageContext.request.contextPath}/style/login/login_titleold.jpg'); width: 990px; height: 125px;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="background-image: url('${pageContext.request.contextPath}/style/login/login_logo_left.jpg'); width: 605px; height: 73px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_logo.jpg'); width: 264px; height: 73px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_logo_right.jpg'); width: 121px; height: 73px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_center_left.jpg'); width: 46px; height: 299px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_center_font.jpg'); width: 56px; height: 299px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_center_pic.jpg'); width: 503px; height: 299px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_center_form.jpg'); width: 264px; height: 299px; vertical-align: top;">
+                             <%--登录表单开始--%>
+                                <table style="width: 90%; margin-left: 5px; margin-top: 10px;">
+                                    <tr>
+                                        <td colspan="2" style="text-align: center;">
+                                            <font color="red"><s:fielderror fieldName="login"/></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 90px; text-align: right; font-size: 14px;">用户名:</td>
+                                        <td>
+                                            <input type="text" name="userNum" id="userNameLogin" class="inpu" width="168px"  />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; font-size: 14px;" class="auto-style1">密&nbsp;&nbsp; 码:</td>
+                                        <td class="auto-style2">
+                                            <input type="password" name="password" id="userPassword" class="inpu"  width="168px"/>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td style="text-align: right; font-size: 14px;" class="auto-style1">验证码:</td>
+                                        <td>
+                                            <input name="randomCode" id="code" class="inpu" width="50px" style="width:70px;" />
+    										<img src="rand.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码" style="cursor:pointer;" height="24px" width="74px"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2" style="text-align: right; font-size: 14px; padding-left:80px" >
+                                        	<input id="manager" type="radio" value="管理员" name="userType" checked="checked" />
+                                        	<label for="manager">管理员</label>
+                                        	
+                                        	<input id="student" type="radio" value="学生" name="userType" />
+    										<label for="student">学生</label>
+                                        	<br/>
+                                        	<input id="responsible" type="radio" value="负责人" name="userType" />
+        									<label for="responsible">负责人</label>
+    								
+        									<input id="teacher" type="radio" value="老师" name="userType" />
+                                        	<label for="teacher">老师</label>
+                                     </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        	<input type="submit" id= "submitForm" class="ftn" value="登录" />
+                                        </td>
+                                    </tr>
+                                    <%--<tr>
+                                       <td>&nbsp;</td>
+                                   </tr>
+                                    <tr>
+                                        <td style="font-size: 14px; text-align: right; vertical-align: bottom;">&nbsp;</td>
+                                        <td align="right">
+                                            <a href='firmRegistration.aspx'><span style="text-decoration: underline;  font-family: 'Arial Black', Gadget, sans-serif; color: blue">企业注册</span></a>
+                                            <a href='eduRegistration.aspx'><span style="text-decoration: underline;  font-family: 'Arial Black', Gadget, sans-serif; color: blue">教育机构注册</span></a></td>
+                                    </tr>--%>
+                                    <tr>
+                                        <td class="third-part" colspan="2" style="text-align: center">
+                                            <fieldset style="width: 92%; text-align: left; line-height: 23px; padding-left: 5px;">
+                                                <legend>第三方登录</legend>
+                                                
+                                                <a style="cursor:pointer;" onclick="return window.open('https://graph.qq.com/oauth2.0/authorize?client_id=101304940&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.soeasystudy.com%2Fback.jsp', 'oauth2Login_10235' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');" id="qqAuthorizationUrl" class="qq"></a>
+                                                
+                                                
+                                                <a style="cursor:pointer;" onclick="return window.open('https://api.weibo.com/2/oauth2/authorize?client_id=2840992581&response_type=token&display=js&transport=html5&referer=http://www.soeasystudy.com/user_loginUI.action" id="qqAuthorizationUrl" class="sina"></a>
+											
+                                            </fieldset>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                    <%--登录表单结束--%>
+                </td>
+                <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_center_right.jpg'); width: 121px; height: 299px;"></td>
+                </tr>
+                        <tr>
+                            <td colspan="3" style="background-image: url('${pageContext.request.contextPath}/style/login/login_copyright_left.jpg'); width: 605px; height: 59px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_copyright.jpg'); width: 264px; height: 59px;"></td>
+                            <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_copyright_right.jpg'); width: 121px; height: 59px;"></td>
+                        </tr>
+                <tr>
+                    <td colspan="5" style="background-image: url('${pageContext.request.contextPath}/style/login/login_bottom.jpg'); width: 990px; height: 44px; background-repeat: repeat-y"></td>
+                </tr>
+                </table>
+                </td>
+                <td style="background-image: url('${pageContext.request.contextPath}/style/login/login_right.jpg'); background-repeat: repeat-x; width: 25%"></td>
+            </tr>
+        </table>
+    </form>
+
 </body>
 </html>
