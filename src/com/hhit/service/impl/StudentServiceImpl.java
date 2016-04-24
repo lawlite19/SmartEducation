@@ -13,15 +13,5 @@ import com.hhit.service.IStudentService;
 @Transactional
 public class StudentServiceImpl extends DaoSupportImpl<Student> implements IStudentService{
 
-	@Override
-	public Student findByNumAndPwd(String userNum, String password) {
-		//加密对比
-		String realPwd=DigestUtils.md5Hex(password);
-		return (Student) getSession().createQuery(//
-				"FROM Student WHERE stuNum=? AND stuPwd=?")//
-				.setParameter(0, userNum)//
-				.setParameter(1, realPwd)//
-				.uniqueResult();
-	}
 
 }
