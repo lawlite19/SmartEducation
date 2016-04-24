@@ -24,16 +24,14 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 	//@Resource
 	//private IUserDao userDao;
 	@Override
-	public User findUserByNumAndPwd(String userNum, String password, String userType) {
+	public User findUserByNumAndPwd(String userNum, String password,String userType) {
 		String md5Digest=DigestUtils.md5Hex(password);
-		User user=(User) getSession().createQuery(//
-				"FROM User WHERE userNum=? AND password=? AND userType=? AND isUsable=?")//
+		return (User) getSession().createQuery(//
+				"FROM User WHERE userNum=? AND password=? AND userType=?")//
 				.setParameter(0, userNum)//
 				.setParameter(1, md5Digest)//
 				.setParameter(2, userType)//
-				.setParameter(3, 1)//
 				.uniqueResult();
-		return user;
 	}
 	@Override
 	public User findByDetailsId(UserDetails userDetails) {

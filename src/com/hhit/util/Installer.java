@@ -38,10 +38,10 @@ public class Installer {
 
 // ======================================================
 		//保存超级管理员
-		Teacher teacher=new Teacher();
-		teacher.setTeaNum("admin");
-		teacher.setTeaPwd(DigestUtils.md5Hex("admin"));
-		session.save(teacher);
+		User user=new User();
+		user.setUserNum("admin");
+		user.setPassword(DigestUtils.md5Hex("admin"));
+		session.save(user);
 	
 // ==============================================================
 		//保存部门
