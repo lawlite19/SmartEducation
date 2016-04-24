@@ -27,12 +27,12 @@
 			</column>
 		</property>
 		<!--student属性，本类与Student的一对一关系     外键对应主键 -->
-		<many-to-one name="student" class="Student" unique-key="Student_Id" lazy="false">
+		<many-to-one name="student" class="Student" lazy="false">
 			<column name="Student_Id"></column>
 		</many-to-one>
 		
 		<!-- teacher属性，本类与 Teacher的一对一-->
-		<many-to-one name="teacher" class="Teacher" unique-key="Teacher_Id" lazy="false">
+		<many-to-one name="teacher" class="Teacher" lazy="false">
 			<column name="Teacher_Id"></column>
 		</many-to-one>
 	</class>

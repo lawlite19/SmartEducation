@@ -33,6 +33,24 @@ public class Student implements java.io.Serializable{
 	private Class_ class_;
 	private Role role;
 	
+	
+	/**
+	 * 默认构造函数
+	 */
+	public Student(){
+		
+	}
+	/**
+	 * 构造函数
+	 */
+	public Student(String num,String name,String s,String g){
+		stuNum=num;
+		stuName=name;
+		sex=s;
+		grade=g;
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}
