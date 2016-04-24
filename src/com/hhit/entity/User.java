@@ -34,21 +34,13 @@ public class User implements java.io.Serializable{
 	/**
 	 * 构造函数，用户安装
 	 */
-	public User(String un,String pwd,
-			Integer isU,String ut,Student stu){
+	public User(String un,String pwd,String ut,Student stu,Teacher tea){
 		userNum=un;
 		password=pwd;
 		userType=ut;
 		student=stu;
+		teacher=tea;
 	}
-	//构造函数，用户安装
-	public User(String un,String pwd,
-			Integer isU,String ut){
-		userNum=un;
-		password=pwd;
-		userType=ut;
-	}
-	
 	/**
 	 * 判断本用户是否有指定名称的权限
 	 * 

@@ -87,8 +87,6 @@
 				<td>部门名称</td>
 				<td>姓名</td>
 				<td>账号</td>
-				<td>角色</td>
-				<td>账户状态</td>
 				<td>相关操作</td>
 			</tr>
 		</thead>
@@ -98,24 +96,14 @@
 			<s:iterator value="recordList" status="s">
 				<tr class="TableDetail1 template">
 					<td>
-						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${userName}" />
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${stuName}" />
 					</td>
 					<td>${(currentPage-1)*10+s.count}</td>
 					<td>${department.deptName}&nbsp;</td>
-					<td>${userName}&nbsp;</td>
-					<td>${userNum}&nbsp;</td>
-					<td><s:iterator value="roles">
-                		${roleName}
-                	</s:iterator></td>
-					<td><s:if test="%{user.isUsable}">
-						正在用
-					</s:if>
-						<s:else>
-							<font color="red">已禁用 </font>
-						</s:else></td>
-					<!--<td>${deptDescription}&nbsp;</td>-->
+					<td>${stuName}&nbsp;</td>
+					<td>${stuNum}&nbsp;</td>
 					<td><s:a action="student_delete?id=%{id}"
-							onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')">删除</s:a>
+							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
 						 <s:a action="student_editUI?id=%{id}">
 						修改
 					</s:a> <s:a action="student_initPassword?id=%{id}">
