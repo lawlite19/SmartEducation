@@ -1,0 +1,15 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<div>
+<table width="90%" align="center" cellspacing="0" cellpadding="0">
+       <tbody>
+       		<tr>
+                <td class="tl">
+                	<input type="button" id="selectAll" class="ttn" value="全选" />
+                	<input type="button" id="selectNone" class="ttn"  value="全不选" />
+                	<input type="button" id="selectOthers" class="ttn" value="反选" />
+                	<input type="button" id="deleteSelected" class="bbtn btn-danger" value="删除" />
+                </td>
+       </tbody>
+</table>
+
+</div>

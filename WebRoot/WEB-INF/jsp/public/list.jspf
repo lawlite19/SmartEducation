@@ -1,0 +1,37 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/c.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
+<!--鼠标悬浮变色相关代码开始-->
+    <script type="text/javascript">
+        var _oldColor;
+        function SetNewColor(source) {
+            _oldColor = source.style.backgroundColor;
+            source.style.backgroundColor = '#E8F5FE';
+        }
+        function SetOldColor(source) {
+            source.style.backgroundColor = _oldColor;
+        }
+    </script>
+<!--鼠标悬浮变色相关代码结束-->
+<!-- 选择按钮 -->
+<script type="text/javascript">
+	$(function() {
+             $("#selectAll").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=true;
+           	   });
+             });
+             $("#selectNone").click(function(){
+            	 $(":checkbox").each(function(){
+           		    this.checked=false;
+           	   });
+           });
+             $("#selectOthers").click(function(){
+          	     $(":checkbox").each(function(){
+          		    this.checked=!this.checked;
+          	   });
+           });
+	})();
+</script>
