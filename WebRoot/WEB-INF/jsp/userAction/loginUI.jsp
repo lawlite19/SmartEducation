@@ -5,7 +5,27 @@
 <head>
 <title>智慧教育后台登录界面</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
-
+<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请填写'+msg, {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if (!MM_Empty('txt_userNum', '用户名')) return false;
+        if (!MM_Empty('txt_userPwd', '密码')) return false;
+        if (!MM_Empty('txt_code', '验证码')) return false;
+    }
+	</script>
     <style type="text/css">
         .auto-style1 {
             width: 90px;
@@ -189,19 +209,19 @@
                                     <tr>
                                         <td style="width: 90px; text-align: right; font-size: 14px;">用户名:</td>
                                         <td>
-                                            <input type="text" name="userNum" id="userNameLogin" class="inpu" width="168px"  />
+                                            <input type="text" name="userNum" id="txt_userNum" class="inpu" width="168px"  />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: right; font-size: 14px;" class="auto-style1">密&nbsp;&nbsp; 码:</td>
                                         <td class="auto-style2">
-                                            <input type="password" name="password" id="userPassword" class="inpu"  width="168px"/>
+                                            <input type="password" name="password" id="txt_userPwd" class="inpu"  width="168px"/>
                                         </td>
                                     </tr>
                                      <tr>
                                         <td style="text-align: right; font-size: 14px;" class="auto-style1">验证码:</td>
                                         <td>
-                                            <input name="randomCode" id="code" class="inpu" width="50px" style="width:70px;" />
+                                            <input name="randomCode" id="txt_code" class="inpu" width="50px" style="width:70px;" />
     										<img src="rand.action" onclick="changeValidateCode(this)" title="点击图片刷新验证码" style="cursor:pointer;" height="24px" width="74px"/>
                                         </td>
                                     </tr>
@@ -224,7 +244,7 @@
                                         <td>
                                         </td>
                                         <td>
-                                        	<input type="submit" id= "submitForm" class="ftn" value="登录" />
+                                        	<input type="submit" onclick="return Check()"  id= "submitForm" class="ftn" value="登录" />
                                         </td>
                                     </tr>
                                     <%--<tr>

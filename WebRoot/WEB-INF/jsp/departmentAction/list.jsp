@@ -2,20 +2,47 @@
 <html>
 <head>
     <title>部门列表</title>
-	<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
-<!--鼠标悬浮变色相关代码开始-->
-    <script type="text/javascript">
-        var _oldColor;
-        function SetNewColor(source) {
-            _oldColor = source.style.backgroundColor;
-            source.style.backgroundColor = '#E8F5FE';
-        }
-        function SetOldColor(source) {
-            source.style.backgroundColor = _oldColor;
-        }
-    </script>
-<!--鼠标悬浮变色相关代码结束-->
+	<%@ include file="/WEB-INF/jsp/public/list.jspf" %>
+	<script>
+	$(function() {
+             $("#deleteSelected").click(function(){
+            	 $("input:checked").each(function(){
+            	 	 var value=$(this).val().split(",");
+           	    	 //alert(value[0]);
+           	    	 //alert(value[1]);
+           	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
+           	    		//if(value[1]=="admin"){
+           				//	alert("该用户为超级管理员,不能删除！");
+           				//	return;
+           				//}
+           	    		$.ajax({ 
+               	    		type: "post",
+               	    		url: "student_bulkDelete.action", 
+               	    		data: {
+               	    			"id" : value[0]
+           	    			}, 
+               	    		dataType : "json",
+               	    		async : false,
+                            success: function(data) { 
+                            	 //var json = eval("(" + data + ")");
+								 var str = data.name;
+   								  if (str=="ok") {
+   		           				  	alert("删除成功");
+   		           				 	window.location.reload();
+   		           				  } else {
+   		           	                 alert("删除失败");  
+   		           				}
+               	    		} 
+               	       }); 
+   					}
+        	    	 
+        	     });
+        	   //window.location.reload();
+      });
+
+	});
+
+</script>
 </head>
 <body>
 <!-- 顶层 -->
@@ -26,7 +53,7 @@
 <table align="center" cellspacing="5" cellpadding="5">
 	<tr>
 		<td class="bbtn btn-primary" align="center">
-			<s:a action="sdepartment_addUI?parentId=%{parentId}" style="color:white;text-decoration: none;">增加部门</s:a>
+			<s:a action="department_addUI?parentId=%{parentId}" style="color:white;text-decoration: none;">增加部门</s:a>
 		</td>
 		<td class="bbtn btn-primary" align="center">
 			<s:a action="department_list?parentId=%{#parent.parent.id}" style="color:white;text-decoration: none;">返回上级</s:a>
@@ -96,6 +123,5 @@
 </tbody>
 </table>
 	</div>
-
 </body>
 </html>

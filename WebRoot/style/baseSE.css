@@ -6,6 +6,13 @@ th{font-size:13px;padding-right:0px;height:22px;padding-top:6px;color:#000000; f
 .inpu{ height:19px; line-height:19px; width:130px;}
 .ddl{height:22px;line-height:22px; padding-right:1px; padding-bottom:1px; padding-left:1px; padding-top:1px; width:131px;}
 
+.span_note{
+	color:red;
+	font-size:16px;
+}
+.addFont{
+	font-size:16px;
+}
 .PageSelectorNum{
 	cursor: hand;
 	color:#333399;

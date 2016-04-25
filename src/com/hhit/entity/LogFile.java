@@ -11,9 +11,6 @@ import java.sql.Timestamp;
 //
 //
 
-
-
-
 public class LogFile implements java.io.Serializable{
 	/**
 	 * 
@@ -21,6 +18,7 @@ public class LogFile implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String userNum;
+	private String userType;
 	private String ipAddress;
 	private Timestamp operateTime;
 	private String description;
@@ -31,8 +29,9 @@ public class LogFile implements java.io.Serializable{
 	public LogFile(){
 		
 	}
-	public LogFile(String un,String ip,Timestamp t,String desc){
+	public LogFile(String un,String ut,String ip,Timestamp t,String desc){
 		userNum=un;
+		userType=ut;
 		ipAddress=ip;
 		operateTime=t;
 		description=desc;
@@ -67,4 +66,11 @@ public class LogFile implements java.io.Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
 }
