@@ -5,6 +5,7 @@
 <head>
 <title>智慧教育后台登录界面</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
+
     <style type="text/css">
         .auto-style1 {
             width: 90px;

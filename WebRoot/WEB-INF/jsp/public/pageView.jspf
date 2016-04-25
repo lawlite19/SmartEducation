@@ -1,17 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<div class="pageView">
 页次：${currentPage}/${pageCount}&nbsp; 每页：${pageSize}条&nbsp;
 总记录条数：${recordCount}&nbsp;
 <a href="javascript: gotoPage(1)" title="首页" style="cursor: hand;">首页</a>
 <s:iterator begin="%{beginPageIndex}" end="%{endPageIndex}" var="num">
 	<s:if test="#num == currentPage">
 		<%-- 当前页 --%>
-		<span class="PageSelectorNum PageSelectorSelected">${num}</span>
+		<span class="PageSelectorSelected">${num}</span>
 	</s:if>
 	<s:else>
 		<%-- 非当前页 --%>
-		<span class="PageSelectorNum" style="cursor: hand;"
-			onClick="gotoPage(${num});">${num}</span>
+		<span class="PageSelectorNum" onClick="gotoPage(${num});">${num}</span>
 	</s:else>
 </s:iterator>
 <a href="javascript: gotoPage(${pageCount})" title="尾页"
@@ -34,3 +34,4 @@
 		document.forms[0].submit();
 	}
 </script>
+</div>

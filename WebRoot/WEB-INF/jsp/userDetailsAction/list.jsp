@@ -5,6 +5,8 @@
 <head>
 <title>显示所有用户</title>
 <%@include file="/WEB-INF/jsp/public/commons.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
+
 <script>
 	$(function() {
              $("#selectAll").click(function(){
@@ -62,6 +64,9 @@
 </script>
 </head>
 <body>
+<!-- 顶层 -->
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 学生管理</div>
+
 <div>
 <s:form action="userDetails_list" method="post">
 	按部门：
@@ -81,7 +86,21 @@
 <input type="button" id="selectOthers" value="反选" />
 <input type="button" id="deleteSelected" value="删除" />
 </div>
-	<table>
+<div class="mframe">
+	<table width="90%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">用户账号管理</span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+	<table class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<!-- 表头-->
 		<thead>
 			<tr>
@@ -133,6 +152,10 @@
 
 		</tbody>
 	</table>
+</td>
+</tr>
+</tbody>
+</table>
 
 	<!-- 分页页码 -->
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
@@ -144,5 +167,6 @@
 			<s:a action="userDetails_addUI">添加用户</s:a>
 		</div>
 	</div>
+</div>
 </body>
 </html>
