@@ -190,10 +190,10 @@ public class Installer {
 //		session.save(new Privilege("学生修改", "/student_edit", menu4));
 //		session.save(new Privilege("初始化密码", "/student_initPassword", menu4));
 //		
-//		session.save(new Privilege("角色列表", "/role_list", menu5));
-//		session.save(new Privilege("角色删除", "/role_delete", menu5));
-//		session.save(new Privilege("角色添加", "/role_add", menu5));
-//		session.save(new Privilege("角色修改", "/role_edit", menu5));
+//		session.save(new Privilege("角色列表", "/role_list", menu6));
+//		session.save(new Privilege("角色删除", "/role_delete", menu6));
+//		session.save(new Privilege("角色添加", "/role_add", menu6));
+//		session.save(new Privilege("角色修改", "/role_edit", menu6));
 //		
 //		// --------------------作业管理模块
 //		menu1 = new Privilege("作业管理", null, null);

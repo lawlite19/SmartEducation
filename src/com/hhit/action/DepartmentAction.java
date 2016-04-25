@@ -58,17 +58,12 @@ public class DepartmentAction extends BaseAction<Department> {
 	/** 添加 */
 	public String add() throws Exception {
 		// 封装信息到对象中
-		// Department department = new Department();
-		// department.setName(name);
-		// department.setDescription(description)
 		Department parent = departmentService.findById(parentId);
 		model.setParent(parent);
-		//1代表可用
-//		model.setIsUsable(1);
 		// 保存
 		departmentService.save(model);
 		//操作日志保存
-		logFileService.save(new LogFile(getCurrentUser().getUserNum(),
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(),getCurrentUser().getUserType(),
 				ServletActionContext.getRequest().getRemoteAddr(), 
 				new Timestamp(new Date().getTime()), "添加部门【"+model.getDeptName()+"】成功"));
 		return "toList";
@@ -98,7 +93,6 @@ public class DepartmentAction extends BaseAction<Department> {
 
 		// 2，设置要修改的属性
 		department.setDeptName(model.getDeptName());
-//		department.setDeptNum(model.getDeptNum());
 		department.setDeptLevel(model.getDeptLevel());
 		department.setDeptDescription(model.getDeptDescription());
 		department.setParent(departmentService.findById(parentId)); // 设置所属的上级部门
