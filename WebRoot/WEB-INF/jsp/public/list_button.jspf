@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <div>
-<table width="90%" align="center" cellspacing="0" cellpadding="0">
+<table width="50%" align="left" cellspacing="0" cellpadding="0" style="margin-left:5%">
        <tbody>
        		<tr>
                 <td class="tl">

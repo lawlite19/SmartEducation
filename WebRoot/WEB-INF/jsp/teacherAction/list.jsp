@@ -18,7 +18,7 @@
            				//}
            	    		$.ajax({ 
                	    		type: "post",
-               	    		url: "student_bulkDelete.action", 
+               	    		url: "teacher_bulkDelete.action", 
                	    		data: {
                	    			"id" : value[0]
            	    			}, 
@@ -47,9 +47,10 @@
 </head>
 <body>
 <!-- 顶层 -->
-<div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 学生管理</div>
-<!-- 查找和添加 -->
-<s:form action="student_list" method="post">
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 老师管理</div>
+
+<div>
+<s:form action="teacher_list" method="post">
 <table width="90%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td class="tl"></td>
@@ -77,6 +78,13 @@
                <td colspan="4" align="center">
                    <input type="submit" value="查询" class="ttn" />
 			   </td>
+			   <td width="150">
+			   </td>
+			   <td colspan="4" align="right">
+			   		<s:form action="teacher_addUI">
+			   			<s:submit cssClass="ttn" value="添加老师"></s:submit>
+			   		</s:form>
+			   </td>
         </tr>
     </tbody>
 </table>
@@ -88,14 +96,8 @@
 </s:form>
 <!-- 引入选择按钮 -->
 <%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
-<!-- 添加按钮 -->
-<table align="center" cellspacing="3" cellpadding="5">
-	<tr>
-		<td class="bbtn btn-primary" align="center">
-			<s:a action="student_addUI" style="color:white;text-decoration: none;">添加学生</s:a>
-		</td>
-	</tr>
-</table>
+
+
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
@@ -129,21 +131,21 @@
 			<s:iterator value="recordList" status="s">
 				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
 					<td align="center">
-						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${stuName}" />
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${teaName}" />
 					</td>
 					<td align="center">${(currentPage-1)*10+s.count}</td>
 					<td align="center">${department.deptName}&nbsp;</td>
-					<td align="center" >${stuName}&nbsp;</td>
-					<td align="center">${stuNum}&nbsp;</td>
+					<td align="center" >${teaName}&nbsp;</td>
+					<td align="center">${teaNum}&nbsp;</td>
 					<td align="center">
-					<s:a action="student_editUI?id=%{id}">
+					<s:a action="teacher_editUI?id=%{id}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
 					</s:a>
 					|
-					<s:a action="student_delete?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
+					<s:a action="teacher_delete?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
-					<s:a action="student_initPassword?id=%{id}">
+					<s:a action="teacher_initPassword?id=%{id}">
 						初始化密码
 					</s:a> &nbsp;</td>
 				</tr>
