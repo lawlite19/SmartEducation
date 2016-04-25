@@ -3,37 +3,9 @@
 <html>
 <head>
 <title>显示所有用户</title>
-<%@include file="/WEB-INF/jsp/public/commons.jspf"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
-<!--鼠标悬浮变色相关代码开始-->
-    <script type="text/javascript">
-        var _oldColor;
-        function SetNewColor(source) {
-            _oldColor = source.style.backgroundColor;
-            source.style.backgroundColor = '#E8F5FE';
-        }
-        function SetOldColor(source) {
-            source.style.backgroundColor = _oldColor;
-        }
-    </script>
-    <!--鼠标悬浮变色相关代码结束-->
+<%@include file="/WEB-INF/jsp/public/list.jspf"%>
 <script>
 	$(function() {
-             $("#selectAll").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=true;
-           	   });
-             });
-             $("#selectNone").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=false;
-           	   });
-           });
-             $("#selectOthers").click(function(){
-          	     $(":checkbox").each(function(){
-          		    this.checked=!this.checked;
-          	   });
-           });
              $("#deleteSelected").click(function(){
             	 $("input:checked").each(function(){
             	 	 var value=$(this).val().split(",");
@@ -117,20 +89,10 @@
 </s:form>
 
 </div>
-<div>
-<table width="90%" align="center" cellspacing="0" cellpadding="0">
-       <tbody>
-       		<tr>
-                <td class="tl">
-                	<input type="button" id="selectAll" class="ttn" value="全选" />
-                	<input type="button" id="selectNone" class="ttn"  value="全不选" />
-                	<input type="button" id="selectOthers" class="ttn" value="反选" />
-                	<input type="button" id="deleteSelected" class="bbtn btn-danger" value="删除" />
-                </td>
-       </tbody>
-</table>
+<!-- 引入选择按钮 -->
+<%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
 
-</div>
+
 <div class="mframe">
 	<table width="90%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
