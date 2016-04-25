@@ -10,12 +10,12 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
 
 	public String intercept(ActionInvocation invocation) throws Exception {
 		// 获取信息
-		Object object=ActionContext.getContext().getSession().get("user");
-		
-		
 		User user = (User) ActionContext.getContext().getSession().get("user"); // 当前登录用户
+		//    /
 		String namespace = invocation.getProxy().getNamespace();
+		//   xxx_xxxx
 		String actionName = invocation.getProxy().getActionName();
+		//     /xxx_xxxx
 		String privUrl = namespace + actionName; // 对应的权限URL
 
 		// 如果未登录

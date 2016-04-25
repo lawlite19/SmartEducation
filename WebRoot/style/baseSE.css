@@ -48,13 +48,28 @@ th{font-size:13px;padding-right:0px;height:22px;padding-top:6px;color:#000000; f
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #1D98DC;
+  border-color: #1D98DC;
 }
 .btn-danger {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
 }
 /*°´Å¥ÑùÊ½*/
 /*.Button60, .btn60hover, .btn60active
