@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/c.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 <!--鼠标悬浮变色相关代码开始-->

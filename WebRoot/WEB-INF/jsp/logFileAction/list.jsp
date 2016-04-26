@@ -28,10 +28,11 @@
                             	 //var json = eval("(" + data + ")");
 								 var str = data.name;
    								  if (str=="ok") {
-   		           				  	alert("删除成功");
+   									alert("删除成功！");
+   									layer.load();
    		           				 	window.location.reload();
    		           				  } else {
-   		           	                 alert("删除失败");  
+   		           					alert("删除失败！");
    		           				}
                	    		} 
                	       }); 

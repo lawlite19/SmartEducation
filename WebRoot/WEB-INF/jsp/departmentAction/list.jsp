@@ -17,7 +17,7 @@
            				//}
            	    		$.ajax({ 
                	    		type: "post",
-               	    		url: "student_bulkDelete.action", 
+               	    		url: "department_bulkDelete.action", 
                	    		data: {
                	    			"id" : value[0]
            	    			}, 
@@ -28,6 +28,7 @@
 								 var str = data.name;
    								  if (str=="ok") {
    		           				  	alert("删除成功");
+   		           				  	layer.load();
    		           				 	window.location.reload();
    		           				  } else {
    		           	                 alert("删除失败");  

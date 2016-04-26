@@ -2,7 +2,9 @@ package com.hhit.action;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +16,7 @@ import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
 import com.hhit.entity.LogFile;
 import com.hhit.util.DepartmentUtils;
+import com.hhit.util.JsonUtil;
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
@@ -25,6 +28,9 @@ public class DepartmentAction extends BaseAction<Department> {
 	// 抽取到BaseAction中
 	// private IDepartmentService departmentService;
 	private Integer parentId;
+	
+	// ajax json返回
+	private String result;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -42,7 +48,10 @@ public class DepartmentAction extends BaseAction<Department> {
 
 	/** 删除 */
 	public String delete() throws Exception {
+		
 		departmentService.delete(model.getId());
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(), getCurrentUser().getUserType(), ServletActionContext.getRequest().getRemoteAddr(),
+				new Timestamp(new Date().getTime()), "删除部门【id="+model.getId().toString()+"】成功"));
 		return "toList";
 	}
 	
@@ -101,6 +110,19 @@ public class DepartmentAction extends BaseAction<Department> {
 		departmentService.update(department);
 
 		return "toList";
+	}
+	/** 批量删除 */
+	public String bulkDelete() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 直接根据id删除
+		departmentService.delete(model.getId());
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(), getCurrentUser().getUserType(), ServletActionContext.getRequest().getRemoteAddr(),
+				new Timestamp(new Date().getTime()), "删除部门【id="+model.getId().toString()+"】成功"));
+		result = "ok";
+		map.put("name", result);
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+
+		return null;
 	}
 
 	public Integer getParentId() {
