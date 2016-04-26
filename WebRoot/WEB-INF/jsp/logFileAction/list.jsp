@@ -3,24 +3,9 @@
 <html>
   <head>
     <title>日志管理</title>
-    <%@include file="/WEB-INF/jsp/public/commons.jspf" %>
+    <%@include file="/WEB-INF/jsp/public/list.jspf" %>
     <script>
 	$(function() {
-             $("#selectAll").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=true;
-           	   });
-             });
-             $("#selectNone").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=false;
-           	   });
-           });
-             $("#selectOthers").click(function(){
-          	     $(":checkbox").each(function(){
-          		    this.checked=!this.checked;
-          	   });
-           });
              $("#deleteSelected").click(function(){
             	 $("input:checked").each(function(){
             	 	 var value=$(this).val().split(",");
@@ -62,56 +47,101 @@
   </head>
   
   <body>
-  <div>
+  <!-- 顶层 -->
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 学生管理</div>
 <s:form action="logFile_list" method="post">
-	<s:textfield name="userNum"></s:textfield>
-	<input type="submit" value="查询" >
+<table width="90%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                    <td class="mm" colspan="3">
+<table align="left" cellspacing="1" cellpadding="1">
+     <tbody><tr>
+               <td>
+                                                  按账号：
+				</td>
+               <td>
+               		<s:textfield name="userNum" cssClass="inpu"></s:textfield>
+               </td>
+               <td colspan="4" align="center">
+               		<s:submit cssClass="ttn" value="查询"></s:submit>
+			   </td>
+        </tr>
+    </tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
 </s:form>
-</div>
-<div>
-<input type="button" id="selectAll" value="全选" />
-<input type="button" id="selectNone" value="全不选" />
-<input type="button" id="selectOthers" value="反选" />
-<input type="button" id="deleteSelected" value="删除" />
-</div>
-	<table>
+<!-- 引入选择按钮 -->
+<%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
+
+<div class="mframe">
+	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">用户账号管理</span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+                    <div>
+	<table class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<!-- 表头-->
 		<thead>
 			<tr>
-				<td>选择</td>
-				<td>序号</td>
-				<td>账号</td>
-				<td>ip地址</td>
-				<td>操作时间</td>
-				<td>操作描述</td>
-				<td>相关操作</td>
+				<td align="center">选择</td>
+				<td align="center">序号</td>
+				<td align="center">账号</td>
+				<td align="center">ip地址</td>
+				<td align="center">操作时间</td>
+				<td align="center">操作描述</td>
+				<td align="center">相关操作</td>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
 		<tbody>
 			<s:iterator value="recordList" status="s">
-				<tr>
-					<td>
+				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+					<td align="center">
 						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${userNum}" />
 					</td>
-					<td>${(currentPage-1)*10+s.count}</td>
-					<td>${userNum}&nbsp;</td>
-					<td>${ipAddress}&nbsp;</td>
-					<td>${operateTime}&nbsp;</td>
-					<td>${description}&nbsp;</td>
-					<td><s:a action="logFile_delete?id=%{id}"
-							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
+					<td align="center">${(currentPage-1)*10+s.count}</td>
+					<td align="center">${userNum}&nbsp;</td>
+					<td align="center">${ipAddress}&nbsp;</td>
+					<td align="center">${operateTime}&nbsp;</td>
+					<td align="center">${description}&nbsp;</td>
+					<td align="center">
+					<s:a action="logFile_delete?id=%{id}"
+							onclick="return window.confirm('您确定要删除吗？')">
+							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+					</s:a>
+							&nbsp;
 					</td>
+					
 				</tr>
 			</s:iterator>
 
 		</tbody>
 	</table>
-
+	</div>
+</td>
+</tr>
+</tbody>
+</table>
 	<!-- 分页页码 -->
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
-	
 
+	</div>
   </body>
 </html>

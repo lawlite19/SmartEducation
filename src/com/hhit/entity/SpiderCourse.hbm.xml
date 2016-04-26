@@ -25,6 +25,11 @@
 				<comment>课程信息</comment>
 			</column>
 		</property>
+		<property name="imgUrl" type="string">
+			<column name="ImgUrl">
+				<comment>图片地址</comment>
+			</column>
+		</property>
 		<property name="professionType" type="string">
 			<column name="ProfessionType">
 				<comment>专业类型</comment>

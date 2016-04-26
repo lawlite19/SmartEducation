@@ -19,6 +19,7 @@ public class SpiderCourse {
 	private String name;
 	private String url;
 	private String info;
+	private String imgUrl;
 	
 	private Set<SpiderChapter> spiderChapters;
 	private Set<SpiderDocument> spiderDocuemnts;
@@ -75,6 +76,13 @@ public class SpiderCourse {
 	public void setSpiderDocuemnts(Set<SpiderDocument> spiderDocuemnts) {
 		this.spiderDocuemnts = spiderDocuemnts;
 	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	
 	
 	
 }
