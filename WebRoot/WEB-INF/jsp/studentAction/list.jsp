@@ -48,7 +48,7 @@
 <body>
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 学生管理</div>
-<!-- 查找和添加 -->
+<!-- 查找-->
 <s:form action="student_list" method="post">
 <table width="90%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>

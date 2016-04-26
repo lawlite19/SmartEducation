@@ -94,6 +94,11 @@
 			<value>com/hhit/entity/DataDict.hbm.xml</value>
 			
 			<value>com/hhit/entity/LogFile.hbm.xml</value>
+			
+			<value>com/hhit/entity/SpiderProfessionType.hbm.xml</value>
+			<value>com/hhit/entity/SpiderCourse.hbm.xml</value>
+			<value>com/hhit/entity/SpiderChapter.hbm.xml</value>
+			<value>com/hhit/entity/SpiderDocument.hbm.xml</value>
 			<!--  
 				<value>com/hhit/entity/User.hbm.xml</value>
 				<value>com/hhit/entity/UserDetails.hbm.xml</value>
