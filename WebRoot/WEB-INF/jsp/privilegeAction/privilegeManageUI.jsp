@@ -4,6 +4,7 @@
   <head>
     <title>系统功能管理</title>
     <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
@@ -24,6 +25,27 @@
 			});
 		});
 	</script>
+	<!-- 验证输入 -->
+	<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请填写'+msg, {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if (!MM_Empty('select_parent', '父级功能')) return false;
+        if (!MM_Empty('txt_privilegeName', '功能名称')) return false;
+    }
+	</script>
   </head>
   
   
@@ -38,7 +60,7 @@
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">系统 </span>
+                        <span class="tt">系统功能 </span>
                     </td>
                     <td class="tr"></td>
                 </tr>
@@ -54,6 +76,10 @@
 						<tr class="TableDetail1">
 							<!-- 显示权限树 -->
 							<td rowspan="20">
+							<fieldset>
+	<legend>系统功能树</legend>
+	
+
 <!-- 显示树状结构内容 -->
 <ul id="tree">
 <%-- 显示一级菜单 --%>
@@ -95,30 +121,62 @@
 	</li>
 </s:iterator>
 </ul>
-
+</fieldset>
 
 							</td>
-							<td>
-<!-- 添加功能 -->
+
+							<td valign="top">
+<fieldset>
+	<legend>功能管理</legend>
+		<!-- 添加功能 -->
 <s:form action="privilege_%{id == null ? 'add' : 'edit'}" method="post">
 <s:hidden name="id" />
-父级功能：
-<s:select name="privilegeId" cssClass="ddl" list="#selectPrivilegeList"
-		listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
-<br/>
-功能名称： <s:textfield name="privilegeName" cssClass="inpu" ></s:textfield>
-<br/>
-功能url： <s:textfield name="url" cssClass="inpu"></s:textfield>
-<br/>
-功能描述：<s:textarea name="description" cssClass="inpu"></s:textarea>
-<br/>
-<s:if test="%{id!=null}">
-	<s:submit cssClass="ttn" value="修改功能"  />
-</s:if>
-<s:else>
-	<s:submit cssClass="ttn" value="添加功能" />
-</s:else>
+	<table>
+		<tbody>
+			<tr>
+				<td><span class="addFont">父级功能：</span></td>
+				<td>
+					<s:select name="privilegeId" id="select_parent" cssClass="ddl" list="#selectPrivilegeList"
+						listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
+					<span class="span_note">*</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能名称：</span></td>
+				<td>
+					<s:textfield name="privilegeName" id="txt_privilegeName" cssClass="inpu" ></s:textfield>
+					<span class="span_note">*</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能url：</span></td>
+				<td><s:textfield name="url" cssClass="inpu"></s:textfield></td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能描述：</span> </td>
+				<td><s:textarea name="description" cssClass="inpu" cssStyle="height:60px;width:240px"></s:textarea>
+				</td>
+			</tr>
+			<tr>
+				<td> </td>
+				<td>
+					<s:if test="%{id!=null}">
+					<s:submit onclick="return Check();" cssClass="ttn" value="修改功能"  />
+					</s:if>
+					<s:else>
+					<s:submit onclick="return Check();" cssClass="ttn" value="添加功能" />
+					</s:else>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
 </s:form>
+	
+</fieldset>
+
+
 							</td>
 						</tr>
 					</tbody>

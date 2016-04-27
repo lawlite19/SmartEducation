@@ -29,6 +29,7 @@
 								 var str = data.name;
    								  if (str=="ok") {
    		           				  	alert("删除成功");
+   		           				  	layer.load();
    		           				 	window.location.reload();
    		           				  } else {
    		           	                 alert("删除失败");  
@@ -44,6 +45,26 @@
 	});
 
 </script>
+<!-- 查询输入框检查 -->
+<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请输入查询条件！', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if ((!MM_Empty('select_dept', '上级部门'))&&(!MM_Empty('txt_inputTerm', '部门名称'))) return false;
+    }
+	</script>
 </head>
 <body>
 <!-- 顶层 -->
@@ -63,19 +84,19 @@
                                      按部门：
 				</td>
                <td>
-               		<s:select name="departmentId" cssClass="ddl" list="#departmentList"
+               		<s:select name="departmentId" id="select_dept" cssClass="ddl" list="#departmentList"
 					listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
                </td>
                <td>
                    <s:select name="viewType" list="#{0:'姓名', 1:'账号'}" cssClass="ddl" />
    			   </td>
                <td>
-                   <s:textfield name="inputTerm" cssClass="inpu"></s:textfield>
+                   <s:textfield name="inputTerm" id="txt_inputTerm" cssClass="inpu"></s:textfield>
                </td>
                <td>
                </td> 
                <td colspan="4" align="center">
-                   <input type="submit" value="查询" class="ttn" />
+               		<s:submit onclick="return Check();" cssClass="ttn" value="查询" ></s:submit>
 			   </td>
         </tr>
     </tbody>

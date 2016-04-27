@@ -22,7 +22,6 @@ public class Student implements java.io.Serializable{
 	private Integer id;
 	private String stuNum;
 	private String stuName;
-	private String stuPwd;
 	private String sex;
 	private Timestamp birthday;
 	private String grade;
@@ -68,12 +67,6 @@ public class Student implements java.io.Serializable{
 	}
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
-	}
-	public String getStuPwd() {
-		return stuPwd;
-	}
-	public void setStuPwd(String stuPwd) {
-		this.stuPwd = stuPwd;
 	}
 	public String getSex() {
 		return sex;

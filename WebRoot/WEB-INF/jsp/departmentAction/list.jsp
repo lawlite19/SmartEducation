@@ -50,6 +50,7 @@
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 用户管理 &gt; 学生管理</div>
 <!-- 引入选择按钮 -->
 <%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
+
 <!-- 添加和返回 -->
 <table align="center" cellspacing="5" cellpadding="5">
 	<tr>

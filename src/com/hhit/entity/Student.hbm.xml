@@ -20,11 +20,6 @@
 				<comment>学生姓名</comment>
 			</column>
 		</property>
-		<property name="stuPwd" type="string">
-			<column name="StuPwd" length="50">
-				<comment>密码</comment>
-			</column>
-		</property>
 		<property name="sex" type="string">
 			<column name="Sex" length="10">
 				<comment>性别</comment>

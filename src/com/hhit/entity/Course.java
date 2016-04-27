@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 //  @ Author : 
 //
 //
+import java.util.Set;
 
 
 
@@ -22,7 +23,10 @@ public class Course implements java.io.Serializable{
 	private String courseName;
 	private Timestamp addTime;
 	private String description;
-	private Department department;
+	private Set<Department> departments;
+	
+	private Set<Teacher> teachers;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -47,11 +51,17 @@ public class Course implements java.io.Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Department getDepartment() {
-		return department;
+	public Set<Department> getDepartments() {
+		return departments;
 	}
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDepartments(Set<Department> departments) {
+		this.departments = departments;
 	}
-	
+	public Set<Teacher> getTeachers() {
+		return teachers;
+	}
+	public void setTeachers(Set<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+
 }
