@@ -20,11 +20,6 @@
 				<comment>教师姓名</comment>
 			</column>
 		</property>
-		<property name="teaPwd" type="string">
-			<column name="TeaPwd" length="50">
-				<comment>教师密码</comment>
-			</column>
-		</property>
 		<property name="title" type="string">
 			<column name="Title" length="20">
 				<comment>职称</comment>
@@ -58,6 +53,11 @@
 		<set name="roles" table="T_Teacher_Role" lazy="false">
 			<key column="Teacher_Id"></key>
 			<many-to-many class="Role" column="Role_Id"></many-to-many>
+		</set>
+		<!-- courses属性，本类与Course的多对多   -->
+		<set name="courses" table="T_Teacher_Course">
+			<key column="Teacher_Id"></key>
+			<many-to-many class="Course" column="Course_Id"></many-to-many>
 		</set>
 	</class>
 </hibernate-mapping>

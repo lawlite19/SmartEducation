@@ -87,8 +87,9 @@
                     		
                     	</td>
                         <td>
-                        	<input type="submit" onclick="return Check();" class="ttn" value="提交"/>
-                        	<a href="javascript:history.go(-1);">返回</a>
+                        	<s:submit value="提交" onclick="return Check();" cssClass="ttn"></s:submit>
+                        	&nbsp;&nbsp;&nbsp;
+                        	<input type="button" class="ttn" onclick="javascript:history.go(-1);" value="返回" />
                         </td>
                     </tr>
 		</tbody>

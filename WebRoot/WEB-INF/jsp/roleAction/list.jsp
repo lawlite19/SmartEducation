@@ -4,9 +4,7 @@
 <html>
 <head>
 <title>角色列表</title>
-<!--Layer插件弹出对话框前台代码开始-->
-<script src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
+<%@ include file="/WEB-INF/jsp/public/list.jspf" %>
 <script>
         function LayerAlert(type, msg) {   //0:叹号   1:对号  2：错号 3：禁止号  4：问号  5：减号  6：棒  7：锁  8：委屈  9：笑脸  10：对号
             $.layer({
@@ -23,45 +21,105 @@
 </head>
 
 <body>
-	<table>
-
+<!-- 顶层 -->
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 角色管理 &gt; 角色权限管理</div>
+	<!-- 添加 -->
+<table align="center" cellspacing="5" cellpadding="5">
+	<tr>
+	<td width="91%">
+ 	 </td>
+		<td class="bbtn btn-primary" align="center">
+			<s:a action="role_addUI" style="color:white;text-decoration: none;">增加角色</s:a>
+		</td>
+	</tr>
+</table>
+<div class="mframe">
+	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">角色权限管理</span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+                    <div>
+	<table class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<!-- 表头-->
-		<thead>
+		<thead> 
 			<tr>
-				<td width="200px">角色名称</td>
-				<td width="300px">角色说明</td>
-				<td width="300px">创建时间</td>
-				<td>相关操作</td>
+				<td align="center">序号</td>
+				<td align="center">角色名称</td>
+				<td align="center">角色说明</td>
+				<td align="center">创建时间</td>
+				<td align="center">相关操作</td>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
-		<tbody>
-
-			<s:iterator value="#roleList">
-				<tr class="TableDetail1 template">
-					<td>${roleName}&nbsp;</td>
-					<td><a id="${description}" class="roledescription">${description}&nbsp;</a>
+		<s:iterator value="#roleList" status="s">
+				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+					<td align="center">${s.count}&nbsp;</td>
+					<td align="center">${roleName}&nbsp;</td>
+					<td align="center"><a id="${description}" class="roledescription">${description}&nbsp;</a>
 					</td>
-					<td>${addDate}&nbsp;</td>
-					<td><s:a action="role_delete?id=%{id}"
-							onclick="return confirm('确定要删除吗？')">删除</s:a> <s:a
-							action="role_editUI?id=%{id}">修改</s:a>
+					<td  align="center">${addDate}&nbsp;</td>
+					<td  align="center">
+						<s:a action="role_delete?id=%{id}" onclick="return confirm('确定要删除吗？')">
+							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+						</s:a>
+						|
+						<s:a action="role_editUI?id=%{id}">
+							<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
+						</s:a>
+						|
 						<s:if test="#session.user.hasPrivilegeByName(privilegeName)">
-							<a id="${id}" class="rolePrivilege" title="${roleName}">设置权限</a>
+							<a id="${id}" class="rolePrivilege" style="cursor:pointer;" title="${roleName}">分配权限</a>
 						</s:if>
+						&nbsp;
 					</td>
 				</tr>
 			</s:iterator>
-
+		
+		<tbody>
+		<s:iterator value="#departmentList" status="s">
+			<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+				<td align="center">
+					<input type="checkbox" name="checkbox" class="checkbox" value="${id},${deptName}" />
+				&nbsp;
+				</td>
+				<td align="center">${s.count}&nbsp;</td>
+				<td align="center"><s:a action="department_list?parentId=%{id}">${deptName}</s:a>&nbsp;</td>
+				<td align="center">${parent.deptName}&nbsp;</td>
+				<td align="center">${deptLevel}&nbsp;</td>
+				<td align="center">${deptDescription}&nbsp;</td>
+				<td align="center">
+					<s:a action="department_editUI?id=%{id}">
+						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
+					</s:a>
+					|
+					<s:a action="department_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('您确定要删除吗？')">
+						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+					</s:a>
+					&nbsp;
+				</td>
+			</tr>
+		</s:iterator>
+			
 		</tbody>
 	</table>
-	<!-- 其他功能超链接 -->
-	<div id="TableTail">
-		<div id="TableTail_inside">
-			<s:a action="role_addUI">增加角色</s:a>
-		</div>
 	</div>
+</td>
+</tr>
+</tbody>
+</table>
+	</div>
+	
+
 	<script type="text/javascript">
         (function () {
             $('a.rolePrivilege').on('click', function (event) {

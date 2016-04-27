@@ -53,10 +53,10 @@
 			<one-to-many class="Class_" />
 		</set>		
 
-		<!-- courses属性，与Course类一对多 -->
-		<set name="courses">
+		<!-- courses属性，与Course类多对多 -->
+		<set name="courses" table="T_Department_Course">
 			<key column="Department_Id"></key>
-			<one-to-many class="Course" />
+			<many-to-many class="Course" column="Course_Id"></many-to-many>
 		</set>
 		
 	</class>

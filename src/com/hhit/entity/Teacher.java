@@ -22,7 +22,6 @@ public class Teacher implements java.io.Serializable{
 	private Integer id;
 	private String teaNum;
 	private String teaName;
-	private String teaPwd;
 	private String title;
 	private String sex;
 	private Timestamp birthday;
@@ -32,6 +31,8 @@ public class Teacher implements java.io.Serializable{
 	
 	private Department department;
 	private Set<Role> roles;
+	
+	private Set<Course> courses;
 	
 	public Integer getId() {
 		return id;
@@ -51,12 +52,7 @@ public class Teacher implements java.io.Serializable{
 	public void setTeaName(String teaName) {
 		this.teaName = teaName;
 	}
-	public String getTeaPwd() {
-		return teaPwd;
-	}
-	public void setTeaPwd(String teaPwd) {
-		this.teaPwd = teaPwd;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -98,6 +94,12 @@ public class Teacher implements java.io.Serializable{
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	public Set<Course> getCourses() {
+		return courses;
+	}
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
 	
 }

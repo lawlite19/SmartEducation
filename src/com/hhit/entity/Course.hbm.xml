@@ -25,9 +25,16 @@
 				<comment>课程介绍</comment>
 			</column>
 		</property>
-		<!-- department属性，本类与Department的多对一   -->
-		<many-to-one name="department" class="Department" column="Department_Id">
-		</many-to-one>
+		<!-- departments属性，本类与Department的多对多   -->
+		<set name="departments" table="T_Department_Course">
+			<key column="Course_Id"></key>
+			<many-to-many class="Department" column="Department_Id"></many-to-many>
+		</set>
+		<!-- teachers属性，本类与Teacher的多对多   -->
+		<set name="teachers" table="T_Teacher_Course">
+			<key column="Course_Id"></key>
+			<many-to-many class="Teacher" column="Teacher_Id"></many-to-many>
+		</set>
 		
 	</class>
 </hibernate-mapping>

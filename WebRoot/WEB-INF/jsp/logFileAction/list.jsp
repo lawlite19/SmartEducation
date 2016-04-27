@@ -12,10 +12,6 @@
            	    	 //alert(value[0]);
            	    	 //alert(value[1]);
            	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
-           	    		//if(value[1]=="admin"){
-           				//	alert("该用户为超级管理员,不能删除！");
-           				//	return;
-           				//}
            	    		$.ajax({ 
                	    		type: "post",
                	    		url: "logFile_bulkDelete.action", 
@@ -45,6 +41,26 @@
 	});
 
 </script>
+<!-- 查询输入框检查 -->
+<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请输入查询条件！', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if (!MM_Empty('txt_userNum', '用户账号')) return false;
+    }
+	</script>
   </head>
   
   <body>
@@ -64,10 +80,10 @@
                                                   按账号：
 				</td>
                <td>
-               		<s:textfield name="userNum" cssClass="inpu"></s:textfield>
+               		<s:textfield name="userNum" id="txt_userNum" cssClass="inpu"></s:textfield>
                </td>
                <td colspan="4" align="center">
-               		<s:submit cssClass="ttn" value="查询"></s:submit>
+               		<s:submit onclick="return Check();" cssClass="ttn" value="查询"></s:submit>
 			   </td>
         </tr>
     </tbody>
