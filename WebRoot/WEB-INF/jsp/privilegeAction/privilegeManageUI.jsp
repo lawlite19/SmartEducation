@@ -30,16 +30,30 @@
   <body>
   <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 系统管理 &gt; 系统功能管理</div>
-		系统功能树   
         <!-- 表单内容显示 -->
+         <div class="mframe">
         <div class="ItemBlockBorder">
             <div class="ItemBlock">
-                <table cellpadding="0" cellspacing="0" class="mainForm">
+            	<table width="90%" align="left" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">系统 </span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+                    <div>
+                <table width="91.8%" align="left" cellspacing="0" cellpadding="0">
 			   		<!--显示数据列表-->
 					<tbody id="TableData">
 						<tr class="TableDetail1">
 							<!-- 显示权限树 -->
-							<td>
+							<td rowspan="20">
 <!-- 显示树状结构内容 -->
 <ul id="tree">
 <%-- 显示一级菜单 --%>
@@ -84,36 +98,44 @@
 
 
 							</td>
+							<td>
+<!-- 添加功能 -->
+<s:form action="privilege_%{id == null ? 'add' : 'edit'}" method="post">
+<s:hidden name="id" />
+父级功能：
+<s:select name="privilegeId" cssClass="ddl" list="#selectPrivilegeList"
+		listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
+<br/>
+功能名称： <s:textfield name="privilegeName" cssClass="inpu" ></s:textfield>
+<br/>
+功能url： <s:textfield name="url" cssClass="inpu"></s:textfield>
+<br/>
+功能描述：<s:textarea name="description" cssClass="inpu"></s:textarea>
+<br/>
+<s:if test="%{id!=null}">
+	<s:submit cssClass="ttn" value="修改功能"  />
+</s:if>
+<s:else>
+	<s:submit cssClass="ttn" value="添加功能" />
+</s:else>
+</s:form>
+							</td>
 						</tr>
 					</tbody>
                 </table>
+                </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
             </div>
         </div>
-        
+       </div> 
         <script type="text/javascript">
         $(function(){
         	$("#tree").treeview();
         });
         </script>
-<!-- 添加功能 -->
-<s:form action="privilege_%{id == null ? 'add' : 'edit'}" method="post">
-<s:hidden name="id" />
-父级功能：
-<s:select name="privilegeId" cssClass="SelectStyle" list="#selectPrivilegeList"
-		listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
-<br/>
-功能名称： <s:textfield name="privilegeName" ></s:textfield>
-<br/>
-功能url： <s:textfield name="url"></s:textfield>
-<br/>
-功能描述：<s:textarea name="description"></s:textarea>
-<br/>
-<s:if test="%{id!=null}">
-	<s:submit value="修改功能" />
-</s:if>
-<s:else>
-	<s:submit value="添加功能" />
-</s:else>
-</s:form>
+
   </body>
 </html>
