@@ -1,13 +1,20 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns:wb="http://open.weibo.com/wb">
   <head>
     <title>测试用</title>
+    	<%@ include file="/WEB-INF/jsp/public/list.jspf" %>
 <!-- 微博js -->
 <script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2840992581"  charset="utf-8"></script>
-
+<script type="text/javascript">
+	$document.ready(function(){
+		var n=1;
+		$("#a").click(function(n){
+			n+=2;
+			alert(n);
+		});
+	});
+</script>
 
   </head>
   
@@ -55,5 +62,7 @@
 	});
 	
 	</script>
+	
+	<input type="button" id="a" value="test" />
   </body>
 </html>

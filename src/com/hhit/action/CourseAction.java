@@ -20,8 +20,8 @@ public class CourseAction extends BaseAction<Course>{
 	/** 列表 */
 	public String list() throws Exception{
 //		UserDetails userFind=getCurrentUser().getUserDetails();
-		List<Course> courseList=courseService.findByUser(userFind);
-		ActionContext.getContext().put("courseList", courseList);
+//		List<Course> courseList=courseService.findByUser(userFind);
+//		ActionContext.getContext().put("courseList", courseList);
 		return "list";
 	}
 	/** 删除 */
@@ -35,10 +35,10 @@ public class CourseAction extends BaseAction<Course>{
 	}
 	/** 添加 */
 	public String add() throws Exception{
-		UserDetails userDetailsFind=getCurrentUser().getUserDetails();
+//		UserDetails userDetailsFind=getCurrentUser().getUserDetails();
 		//设置相关属性
 		model.setAddTime(new Timestamp(new Date().getTime()));
-		model.setDepartment(userDetailsFind.getDepartment());
+//		model.setDepartment(userDetailsFind.getDepartment());
 //		model.setTeacher(userDetailsFind);
 		//保存
 		courseService.save(model);

@@ -132,9 +132,6 @@
 	</script>
 	
 	<!-- 微博登录开始 -->
-	
-	
-	
 	<script type="text/javascript">
 
 	WB2.anyWhere(function (W) {

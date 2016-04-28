@@ -7,10 +7,12 @@ import java.util.List;
 
 import javax.servlet.jsp.JspWriter;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.LogFile;
 import com.hhit.entity.Privilege;
 import com.hhit.entity.Role;
 import com.opensymphony.xwork2.ActionContext;
@@ -35,6 +37,9 @@ public class RoleAction extends BaseAction<Role> {
 	/** 删除 */
 	public String delete() throws Exception {
 		roleService.delete(model.getId());
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(), getCurrentUser().getUserType(),
+				ServletActionContext.getRequest().getRemoteAddr(), new Timestamp(new Date().getTime()),
+				"删除【角色id="+model.getId()+"】成功"));
 		return "toList";
 	}
 
@@ -88,7 +93,7 @@ public class RoleAction extends BaseAction<Role> {
 		// 准备数据 privilegeList
 		List<Privilege> privilegeList = privilegeService.findAll();
 		ActionContext.getContext().put("privilegeList", privilegeList);
-
+		
 		return "setPrivilegeUI";
 	}
 
@@ -103,6 +108,11 @@ public class RoleAction extends BaseAction<Role> {
 
 		// 3，更新到数据库
 		roleService.update(role);
+		
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(), getCurrentUser().getUserType(),
+				ServletActionContext.getRequest().getRemoteAddr(), new Timestamp(new Date().getTime()),
+				"给【"+role.getRoleName()+"】分配权限"));
+		
 		return "toList";
 	}
 

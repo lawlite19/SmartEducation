@@ -59,7 +59,7 @@
 				<td align="center">相关操作</td>
 			</tr>
 		</thead>
-
+		<tbody>
 		<!--显示数据列表-->
 		<s:iterator value="#roleList" status="s">
 				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
@@ -69,7 +69,7 @@
 					</td>
 					<td  align="center">${addDate}&nbsp;</td>
 					<td  align="center">
-						<s:a action="role_delete?id=%{id}" onclick="return confirm('确定要删除吗？')">
+						<s:a action="role_delete?id=%{id}" onclick="return confirm('确定要删除吗？注意不要随意删除角色哦！！')">
 							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 						</s:a>
 						|
@@ -85,31 +85,8 @@
 				</tr>
 			</s:iterator>
 		
-		<tbody>
-		<s:iterator value="#departmentList" status="s">
-			<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
-				<td align="center">
-					<input type="checkbox" name="checkbox" class="checkbox" value="${id},${deptName}" />
-				&nbsp;
-				</td>
-				<td align="center">${s.count}&nbsp;</td>
-				<td align="center"><s:a action="department_list?parentId=%{id}">${deptName}</s:a>&nbsp;</td>
-				<td align="center">${parent.deptName}&nbsp;</td>
-				<td align="center">${deptLevel}&nbsp;</td>
-				<td align="center">${deptDescription}&nbsp;</td>
-				<td align="center">
-					<s:a action="department_editUI?id=%{id}">
-						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
-					</s:a>
-					|
-					<s:a action="department_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('您确定要删除吗？')">
-						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
-					</s:a>
-					&nbsp;
-				</td>
-			</tr>
-		</s:iterator>
-			
+
+	
 		</tbody>
 	</table>
 	</div>

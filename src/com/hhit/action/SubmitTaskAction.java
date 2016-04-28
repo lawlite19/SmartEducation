@@ -22,14 +22,14 @@ public class SubmitTaskAction extends BaseAction<SubmitTask>{
 	/** 列表 */
 	public String list() throws Exception{
 		//准备数据
-		UserDetails userFind=getCurrentUser().getUserDetails();
-		List<Course> courseList=courseService.findByUser(userFind);
-		ActionContext.getContext().put("courseList", courseList);
+//		UserDetails userFind=getCurrentUser().getUserDetails();
+//		List<Course> courseList=courseService.findByUser(userFind);
+//		ActionContext.getContext().put("courseList", courseList);
 		
-		new QueryHelper(SubmitTask.class, "s")//
-		.addCondition(courseId!=null, "s.task.course=?", courseService.findById(courseId))//
-		.addCondition("s.task.course.student=?", userFind)//
-		.preparePageBean(submitTaskService, pageNum, pageSize);
+//		new QueryHelper(SubmitTask.class, "s")//
+//		.addCondition(courseId!=null, "s.task.course=?", courseService.findById(courseId))//
+//		.addCondition("s.task.course.student=?", userFind)//
+//		.preparePageBean(submitTaskService, pageNum, pageSize);
 		return "list";
 	}
 	/** 跳转提交作业界面 */

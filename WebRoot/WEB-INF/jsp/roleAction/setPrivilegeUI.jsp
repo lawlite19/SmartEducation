@@ -4,6 +4,7 @@
 <head>
 	<title>配置权限</title>
     <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/file.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/script/jquery_treeview/jquery.treeview.css" />
@@ -95,6 +96,13 @@
 
 							</td>
 						</tr>
+						<tr>
+							<td align="right">
+								<input type="submit" class="ttn" value="分配"/>
+								&nbsp;&nbsp;&nbsp;
+            					<input type="button" class="ttn" value="取消" id="btnCancel"/>
+							</td>
+						</tr>
 					</tbody>
                 </table>
             </div>
@@ -105,27 +113,7 @@
         	$("#tree").treeview();
         });
         </script>
-        
-        <!-- 表单操作 -->
-        <div id="InputDetailBar">
-            <input type="submit" value="分配"/>
-            <input type="button" value="取消" id="btnCancel"/>
-        </div>
 </s:form>
-
-
-<div class="Description">
-	说明：<br />
-	1，选中一个权限时：<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; a，应该选中他的所有直系上级。<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; b，应该选中他的所有直系下级。<br />
-	2，取消选择一个权限时：<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; a，应该取消选择他的所有直系下级。<br />
-	&nbsp;&nbsp;&nbsp;&nbsp; b，如果同级的权限都是未选择状态，就应该取消选中他的直接上级，并向上做这个操作。<br />
-
-	3，全选/取消全选。<br />
-	4，默认选中当前岗位已有的权限。<br />
-</div>
         <script>
             (function () {
                 $('#btnCancel').click(function () {
