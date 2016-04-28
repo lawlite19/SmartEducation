@@ -45,7 +45,7 @@ public class StudentAction extends BaseAction<Student> {
 		ActionContext.getContext().put("roleList", roleList);
 		
 		new QueryHelper(Student.class, "s")//
-		.addCondition((departmentId != null), "s.department.id=?",departmentId)//
+				.addCondition((departmentId != null), "s.department.id=?",departmentId)//
 				.addCondition((viewType == 0) && (inputTerm.trim().length() > 0),"s.stuName LIKE ?", "%" + inputTerm + "%")//
 				.addCondition((viewType == 1) && (inputTerm.trim().length() > 0),"s.stuNum LIKE ?", "%" + inputTerm + "%")//
 				.preparePageBean(studentService, pageNum, pageSize);
@@ -112,11 +112,13 @@ public class StudentAction extends BaseAction<Student> {
 		ActionContext.getContext().put("departmentList", departmentList);
 
 		// 准备回显的数据
-		UserDetails userDetails = userDetailsService.findById(model.getId());
-		ActionContext.getContext().getValueStack().push(userDetails);
-		if (userDetails.getDepartment() != null) {
-			departmentId = userDetails.getDepartment().getId();
+		Student stuFind=studentService.findById(model.getId());
+		ActionContext.getContext().getValueStack().push(stuFind);
+		if (stuFind.getDepartment() != null) {
+			departmentId = stuFind.getDepartment().getId();
 		}
+		//准备班级信息
+		//todo
 
 		return "saveUI";
 	}
@@ -125,21 +127,18 @@ public class StudentAction extends BaseAction<Student> {
 		// 1，从数据库中取出原对象
 		Student stuFind=studentService.findById(model.getId());
 
-//		// 2，设置要修改的属性
-//		userDetails.setUserName(model.getUserName());
-//		userDetails.setUserNum(model.getUserNum());
-//		userDetails.setSex(model.getSex());
-//		userDetails.setEmail(model.getEmail());
-//		userDetails.setBirthday(model.getBirthday());
-//		userDetails.setTelphone(model.getTelphone());
-//		userDetails.setQqNum(model.getQqNum());
-//		userDetails.setWeChatNum(model.getWeChatNum());
-//		userDetails.setOtherInfo(model.getOtherInfo());
-//		// >> 设置所属部门
-//		userDetails.setDepartment(departmentService.findById(departmentId));
-
+		// 2，设置要修改的属性
+		stuFind.setBirthday(model.getBirthday());
+		stuFind.setClass_(model.getClass_());
+		stuFind.setGrade(model.getGrade());
+		stuFind.setSex(model.getSex());
+		stuFind.setStuName(model.getStuName());
+		stuFind.setStuNum(model.getStuNum());
+		// >> 设置所属部门和班级
+		stuFind.setDepartment(departmentService.findById(departmentId));
+		
 		// 3，更新到数据库
-//		userDetailsService.update(userDetails);
+		studentService.update(stuFind);
 
 		return "toList";
 	}

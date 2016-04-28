@@ -23,6 +23,9 @@ public class Course implements java.io.Serializable{
 	private String courseName;
 	private Timestamp addTime;
 	private String description;
+	//add properties
+	private Float credit;
+	
 	private Set<Department> departments;
 	
 	private Set<Teacher> teachers;
@@ -62,6 +65,12 @@ public class Course implements java.io.Serializable{
 	}
 	public void setTeachers(Set<Teacher> teachers) {
 		this.teachers = teachers;
+	}
+	public Float getCredit() {
+		return credit;
+	}
+	public void setCredit(Float credit) {
+		this.credit = credit;
 	}
 
 }

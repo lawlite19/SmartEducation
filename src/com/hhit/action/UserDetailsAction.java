@@ -84,19 +84,19 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 
 	/** 禁用账户 */
 	public String stopUser() throws Exception {
-		UserDetails userDetails = userDetailsService.findById(model.getId());
-		User user = userDetails.getUser();
-		user.setIsUsable(0);
-		userService.update(user);
+//		UserDetails userDetails = userDetailsService.findById(model.getId());
+//		User user = userDetails.getUser();
+//		user.setIsUsable(0);
+//		userService.update(user);
 		return "toList";
 	}
 
 	/** 启用账户 */
 	public String enableUser() throws Exception {
-		UserDetails userDetails = userDetailsService.findById(model.getId());
-		User user = userDetails.getUser();
-		user.setIsUsable(1);
-		userService.update(user);
+//		UserDetails userDetails = userDetailsService.findById(model.getId());
+//		User user = userDetails.getUser();
+//		user.setIsUsable(1);
+//		userService.update(user);
 		return "toList";
 	}
 
@@ -128,15 +128,15 @@ public class UserDetailsAction extends BaseAction<UserDetails> {
 		userDetailsService.save(model);
 		// ** 保存用户登陆信息 */
 		// >> 设置默认密码为账号（要使用MD5摘要）
-		User userModel = new User();
-		String md5Digest = DigestUtils.md5Hex(model.getUserNum());
-		userModel.setPassword(md5Digest);
-		userModel.setIsUsable(1);
-		userModel.setUserDetails(model);
-		userModel.setUserNum(model.getUserNum());
-		userModel.setUserType("学生");
+//		User userModel = new User();
+//		String md5Digest = DigestUtils.md5Hex(model.getUserNum());
+//		userModel.setPassword(md5Digest);
+//		userModel.setIsUsable(1);
+//		userModel.setUserDetails(model);
+//		userModel.setUserNum(model.getUserNum());
+//		userModel.setUserType("学生");
 		// 保存到数据库
-		userService.save(userModel);
+//		userService.save(userModel);
 
 		return "toList";
 	}

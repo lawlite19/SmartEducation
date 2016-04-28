@@ -8,13 +8,7 @@
              $("#deleteSelected").click(function(){
             	 $("input:checked").each(function(){
             	 	 var value=$(this).val().split(",");
-           	    	 //alert(value[0]);
-           	    	 //alert(value[1]);
            	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
-           	    		//if(value[1]=="admin"){
-           				//	alert("该用户为超级管理员,不能删除！");
-           				//	return;
-           				//}
            	    		$.ajax({ 
                	    		type: "post",
                	    		url: "department_bulkDelete.action", 
@@ -38,7 +32,6 @@
    					}
         	    	 
         	     });
-        	   //window.location.reload();
       });
 
 	});

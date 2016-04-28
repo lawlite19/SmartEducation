@@ -24,15 +24,15 @@ public class TaskAction extends BaseAction<Task>{
 	/** 列表 */
 	public String list() throws Exception{
 		//准备数据
-		//查找登录用户对应的课程
-		UserDetails userDetails=getCurrentUser().getUserDetails();
-		List<Course> courseList=courseService.findByUser(userDetails);
-		ActionContext.getContext().put("courseList", courseList);
-		new QueryHelper(Task.class, "t")//
-		.addCondition("t.course.teacher=?", getCurrentUser().getUserDetails())//
-		.addCondition(courseId!=null, "t.course=?", courseService.findById(courseId))//
-		.addOrderProperty("id", false)//false为降序
-		.preparePageBean(taskService, pageNum, pageSize);
+//		//查找登录用户对应的课程
+//		UserDetails userDetails=getCurrentUser().getUserDetails();
+//		List<Course> courseList=courseService.findByUser(userDetails);
+//		ActionContext.getContext().put("courseList", courseList);
+//		new QueryHelper(Task.class, "t")//
+//		.addCondition("t.course.teacher=?", getCurrentUser().getUserDetails())//
+//		.addCondition(courseId!=null, "t.course=?", courseService.findById(courseId))//
+//		.addOrderProperty("id", false)//false为降序
+//		.preparePageBean(taskService, pageNum, pageSize);
 		return "list";
 	}
 	
@@ -40,10 +40,10 @@ public class TaskAction extends BaseAction<Task>{
 	public String addUI() throws Exception{
 		//准备数据
 		//查找登录用户对应的课程
-		UserDetails userDetails=getCurrentUser().getUserDetails();
-		List<Course> courseList=courseService.findByUser(userDetails);
-		ActionContext.getContext().put("courseList", courseList);
-		
+//		UserDetails userDetails=getCurrentUser().getUserDetails();
+//		List<Course> courseList=courseService.findByUser(userDetails);
+//		ActionContext.getContext().put("courseList", courseList);
+//		
 		return "saveUI";
 	}
 	/** 布置作业 */
@@ -60,13 +60,13 @@ public class TaskAction extends BaseAction<Task>{
 	public String editUI() throws Exception{
 		//准备数据
 		//课程select
-		UserDetails userDetails=getCurrentUser().getUserDetails();
-		List<Course> courseList=courseService.findByUser(userDetails);
-		ActionContext.getContext().put("courseList", courseList);
-		//传递过来的对象信息
-		Task taskFind=taskService.findById(model.getId());
-		courseId=taskFind.getCourse().getId();
-		ActionContext.getContext().getValueStack().push(taskFind);
+//		UserDetails userDetails=getCurrentUser().getUserDetails();
+//		List<Course> courseList=courseService.findByUser(userDetails);
+//		ActionContext.getContext().put("courseList", courseList);
+//		//传递过来的对象信息
+//		Task taskFind=taskService.findById(model.getId());
+//		courseId=taskFind.getCourse().getId();
+//		ActionContext.getContext().getValueStack().push(taskFind);
 		return "saveUI";
 	}
 	/** 修改作业 */
