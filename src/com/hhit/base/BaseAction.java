@@ -5,6 +5,7 @@ import java.lang.reflect.ParameterizedType;
 import javax.annotation.Resource;
 
 import com.hhit.entity.User;
+import com.hhit.service.IClassService;
 import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
 import com.hhit.service.IDataTypeService;
@@ -60,22 +61,12 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IStudentService studentService;//学生
 	@Resource
 	protected ITeacherService teacherService;//老师
-
-
-	
-	//--------------
-	@Resource
-	protected IUserDetailsService userDetailsService;// 用户详细信息
 	@Resource
 	protected IRoleService roleService;// 角色
 	@Resource
 	protected IDepartmentService departmentService;// 部门
 	@Resource
 	protected IPrivilegeService privilegeService;// 权限
-	@Resource 
-	protected IQQLoginInfoService qqLoginService;//qq第三方登录
-	@Resource
-	protected IWeiboInfoService weiboInfoService;//微博第三方登录
 	@Resource
 	protected IDataDictService dataDictService;//数据字典
 	@Resource
@@ -83,9 +74,22 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected ILogFileService logFileService; //日志
 	@Resource
-	protected ITaskService taskService;//老师布置作业
-	@Resource
 	protected ICourseService courseService;//课程
+	@Resource
+	protected IClassService classService;//班级
+	
+	//--------------
+	@Resource
+	protected IUserDetailsService userDetailsService;// 用户详细信息
+	@Resource 
+	protected IQQLoginInfoService qqLoginService;//qq第三方登录
+	@Resource
+	protected IWeiboInfoService weiboInfoService;//微博第三方登录
+	
+
+	@Resource
+	protected ITaskService taskService;//老师布置作业
+
 	@Resource
 	protected ISubmitTaskService submitTaskService;//学生提交作业
 	@Resource

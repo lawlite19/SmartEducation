@@ -143,12 +143,13 @@ public class Installer {
 		
 // ==============================================================
 		// 保存权限数据
-		Privilege menu1, menu2, menu3, menu4, menu5,menu6;
+		Privilege menu1, menu2, menu3, menu4, menu5,menu6,menu7;
 
 		// --------------------系统管理模块
 		menu1 = new Privilege("系统管理", null, null);
 		menu2 = new Privilege("系统设置", null, menu1);
-		menu3=new Privilege("部门管理", "/department_list", menu2);	
+		menu3=new Privilege("部门管理", "/department_list", menu2);
+		menu7=new Privilege("班级管理", "/mclass_list", menu2);
 		
 		menu4=new Privilege("系统功能", null, menu1);
 		menu5=new Privilege("系统功能管理", "/privilege_toPrivilegeUI", menu4);
@@ -164,6 +165,12 @@ public class Installer {
 		session.save(new Privilege("部门删除", "/department_delete", menu3));
 		session.save(new Privilege("部门添加", "/department_add", menu3));
 		session.save(new Privilege("部门修改", "/department_edit", menu3));
+		
+		session.save(new Privilege("班级列表", "/mclass_list", menu7));
+		session.save(new Privilege("班级删除", "/mclass_delete", menu7));
+		session.save(new Privilege("班级添加", "/mclass_add", menu7));
+		session.save(new Privilege("班级修改", "/mclass_edit", menu7));
+		
 		// --------------------用户权限模块
 		menu1 = new Privilege("用户权限", null, null);
 		menu2=new Privilege("用户管理", null, menu1);

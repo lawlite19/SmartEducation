@@ -41,10 +41,14 @@
         }
         return true;
     }
-	function Check() {
+	function CheckAdd() {
         if (!MM_Empty('select_parent', '父级功能')) return false;
         if (!MM_Empty('txt_privilegeName', '功能名称')) return false;
     }
+	function CheckEdit(){
+        if (!MM_Empty('select_edit_parent', '父级功能')) return false;
+        if (!MM_Empty('txt_edit_privilegeName', '功能名称')) return false;
+	}
 	</script>
   </head>
   
@@ -127,10 +131,9 @@
 
 							<td valign="top">
 <fieldset>
-	<legend>功能管理</legend>
+	<legend>添加功能</legend>
 		<!-- 添加功能 -->
-<s:form action="privilege_%{id == null ? 'add' : 'edit'}" method="post">
-<s:hidden name="id" />
+<s:form action="privilege_add" method="post">
 	<table>
 		<tbody>
 			<tr>
@@ -160,12 +163,7 @@
 			<tr>
 				<td> </td>
 				<td>
-					<s:if test="%{id!=null}">
-					<s:submit onclick="return Check();" cssClass="ttn" value="修改功能"  />
-					</s:if>
-					<s:else>
-					<s:submit onclick="return Check();" cssClass="ttn" value="添加功能" />
-					</s:else>
+					<s:submit onclick="return CheckAdd();" cssClass="ttn" value="添加功能" />
 				</td>
 			</tr>
 		</tbody>
@@ -175,7 +173,49 @@
 </s:form>
 	
 </fieldset>
+<fieldset>
+	<legend>修改功能</legend>
+<!-- 修改功能 -->
+<s:form action="privilege_edit" method="post">
+<s:hidden name="id" />
+	<table>
+		<tbody>
+			<tr>
+				<td><span class="addFont">父级功能：</span></td>
+				<td>
+					<s:select name="privilegeId" id="select_edit_parent" cssClass="ddl" list="#selectPrivilegeList"
+						listKey="id" listValue="privilegeName" headerKey="" headerValue="==请选择父级功能==" />
+					<span class="span_note">*</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能名称：</span></td>
+				<td>
+					<s:textfield name="privilegeName" id="txt_edit_privilegeName" cssClass="inpu" ></s:textfield>
+					<span class="span_note">*</span>
+				</td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能url：</span></td>
+				<td><s:textfield name="url" cssClass="inpu"></s:textfield></td>
+			</tr>
+			<tr>
+				<td><span class="addFont">功能描述：</span> </td>
+				<td><s:textarea name="description" cssClass="inpu" cssStyle="height:60px;width:240px"></s:textarea>
+				</td>
+			</tr>
+			<tr>
+				<td> </td>
+				<td>
+					<s:submit onclick="return CheckEdit();" cssClass="ttn" value="修改功能"  />
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
+
+</s:form>
+</fieldset>
 
 							</td>
 						</tr>

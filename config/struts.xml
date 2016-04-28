@@ -55,7 +55,13 @@
 			<result name="toList" type="redirectAction">teacher_list</result>
 			<result name="personalMaintainUI">/WEB-INF/jsp/teacherAction/personalMaintainUI.jsp</result>
 			<result name="personalMaintain"  type="redirectAction">teacher_personalMaintainUI</result>
-		</action>		
+		</action>	
+		<!-- 班级管理 -->
+		<action name="mclass_*" class="classAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/classAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/classAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">mclass_list</result>
+		</action>	
 		
 		
 		<!-- 用户详细信息管理 -->
@@ -140,8 +146,6 @@
 			<result name="list">/WEB-INF/jsp/spiderCourseAction/list.jsp</result>
  			<result name="toList" type="redirectAction">spiderCourse_list</result>
 			<result name="listCourseInfo">/WEB-INF/jsp/spiderCourseAction/listCourseInfo.jsp</result>
-		
-		
 		</action>
 	</package>
 
