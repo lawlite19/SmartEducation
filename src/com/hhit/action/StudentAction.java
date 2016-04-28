@@ -142,4 +142,23 @@ public class StudentAction extends BaseAction<Student> {
 
 		return "toList";
 	}
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
+	}
+	public int getViewType() {
+		return viewType;
+	}
+	public void setViewType(int viewType) {
+		this.viewType = viewType;
+	}
+	public String getInputTerm() {
+		return inputTerm;
+	}
+	public void setInputTerm(String inputTerm) {
+		this.inputTerm = inputTerm;
+	}
+	
 }
