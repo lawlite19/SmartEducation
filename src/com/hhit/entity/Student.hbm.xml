@@ -47,7 +47,7 @@
 		<many-to-one name="class_" class="Class_" column="Class_Id">
 		</many-to-one>
 		<!--role属性，本类与Role的多对一 -->
-		<many-to-one name="role" class="Role" column="Role_Id">
+		<many-to-one name="role" class="Role" column="Role_Id" lazy="false">
 		</many-to-one>
 	</class>
 </hibernate-mapping>

@@ -3,6 +3,8 @@
 <head>
 	<title>学生管理</title>
 	<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
+	<!-- 时间选择控件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 	<script type="text/javascript">
     function MM_Empty(ctrlId, msg) {
@@ -21,11 +23,37 @@
     }
 	function Check() {
         if (!MM_Empty('select_dept', '所属部门')) return false;
+        if (!MM_Empty('select_class', '所属班级')) return false;
         if (!MM_Empty('txt_stuNum', '登录名')) return false;
         if (!MM_Empty('txt_stuName', '姓名')) return false;
         if (!MM_Empty('txt_grade', '年级')) return false;
+        layer.load();
     }
 	</script>
+	<!-- 根据部门动态加载班级select -->
+<script>
+	function classChange() {
+		$("#select_class").empty();
+		$.ajax({
+			type : "post",
+			url : "mclass_findByDeptId.action",
+			data : {
+				"departmentId" : $("#select_dept").val()
+			},
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				//alert(data[0].id);
+				//alert(data[0].className);
+				//alert(data.length);
+				//var json = eval("(" + data + ")");
+				for (var i = 0; i < data.length; i++)
+					$("#select_class").append(
+							"<option value='"+data[i].id+"'>" + data[i].className+ "</option>");
+			}
+		});
+	};
+</script>
 </head>
 <body>
 <!-- 顶层 -->
@@ -66,6 +94,7 @@
                         	<s:select name="departmentId" cssClass="ddl" id="select_dept"
                         		list="#departmentList" listKey="id" listValue="deptName"
                         		headerKey="" headerValue="==请选择部门=="
+                        		onchange="classChange();"
                         	/>
                         	<span class="span_note">*</span>
                         </td>
@@ -73,7 +102,10 @@
                     <tr>
                     	<td class="addFont">所属班级</td>
                         <td>
-                        
+                        	<s:select name="classId" cssClass="ddl" id="select_class"
+                        		list="#classList" listKey="id" listValue="className"
+                        		headerKey="" headerValue="">
+                        	</s:select>
                         	<span class="span_note">*</span>
                         </td>
                     </tr>
@@ -99,7 +131,7 @@
 						</td>
                     </tr>
                     <tr><td  class="addFont">生日</td>
-                        <td><s:textfield name="birthday" cssClass="inpu"/></td>
+                        <td><s:textfield name="birthday" cssClass="inpu" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd',startDate:'1993-01-01'})"/></td>
                     </tr>
 
 					<tr><td  class="addFont">年级</td>

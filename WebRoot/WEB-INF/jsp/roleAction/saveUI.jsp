@@ -22,6 +22,7 @@
     }
 	function Check() {
         if (!MM_Empty('txt_roleName', '角色名称')) return false;
+        layer.load();
     }
 	</script>
 </head>

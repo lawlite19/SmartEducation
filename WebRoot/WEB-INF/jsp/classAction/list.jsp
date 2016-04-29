@@ -39,22 +39,23 @@
 </script>
 <!-- 查询输入框检查 -->
 <script type="text/javascript">
-    function MM_Empty(ctrlId, msg) {
-        var ctrl = document.getElementById(ctrlId);
-        if (!ctrl) return true;
-        if (ctrl.value.trim() == "") {
+    function MM_Empty(ctrl1Id, ctrl2Id) {
+        var ctrl1 = document.getElementById(ctrl1Id);
+        var ctrl2 = document.getElementById(ctrl2Id);
+        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
         	//正上方
         	layer.msg('请输入查询条件！', {
         	  offset: 0,
         	  shift: 6
         	});
-            ctrl.focus();
+            ctrl1.focus();
             return false;
         }
+        layer.load();
         return true;
     }
 	function Check() {
-        if ((!MM_Empty('select_dept', '上级部门'))&&(!MM_Empty('txt_inputTerm', '部门名称'))) return false;
+        return MM_Empty('select_dept', 'txt_inputTerm');
     }
 	</script>
 </head>

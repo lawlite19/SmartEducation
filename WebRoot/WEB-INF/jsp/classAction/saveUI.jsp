@@ -24,6 +24,7 @@
         if (!MM_Empty('txt_classNum', '班级编号')) return false;
         if (!MM_Empty('txt_className', '班级名称')) return false;
         if (!MM_Empty('txt_grade', '年级')) return false;
+        layer.load();
     }
 	</script>
 </head>

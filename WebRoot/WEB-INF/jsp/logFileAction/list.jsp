@@ -55,6 +55,7 @@
             ctrl.focus();
             return false;
         }
+        layer.load();
         return true;
     }
 	function Check() {

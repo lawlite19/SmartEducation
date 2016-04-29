@@ -54,15 +54,16 @@ public class User implements java.io.Serializable{
 		}
 
 		// 学生要判断是否含有这个权限
-		if(student!=null){
+		if(student.getRole()!=null){
 			for (Privilege priv : student.getRole().getPrivileges()) {
 				if (priv.getPrivilegeName().equals(name)) {
 					return true;
 				}
 			}
 		}
+
 		// 教师要判断是否含有这个权限
-		if(teacher!=null){
+		if(teacher.getRoles()!=null){
 			for (Role role : teacher.getRoles()) {
 				for (Privilege priv : role.getPrivileges()) {
 					if (priv.getPrivilegeName().equals(name)) {

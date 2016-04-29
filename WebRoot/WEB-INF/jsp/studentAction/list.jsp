@@ -47,22 +47,23 @@
 </script>
 <!-- 查询输入框检查 -->
 <script type="text/javascript">
-    function MM_Empty(ctrlId, msg) {
-        var ctrl = document.getElementById(ctrlId);
-        if (!ctrl) return true;
-        if (ctrl.value.trim() == "") {
+    function MM_Empty(ctrl1Id, ctrl2Id) {
+        var ctrl1 = document.getElementById(ctrl1Id);
+        var ctrl2 = document.getElementById(ctrl2Id);
+        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
         	//正上方
         	layer.msg('请输入查询条件！', {
         	  offset: 0,
         	  shift: 6
         	});
-            ctrl.focus();
+            ctrl1.focus();
             return false;
         }
+        layer.load();
         return true;
     }
 	function Check() {
-        if ((!MM_Empty('select_dept', '上级部门'))&&(!MM_Empty('txt_inputTerm', '部门名称'))) return false;
+		return MM_Empty('select_dept', 'txt_inputTerm');
     }
 	</script>
 </head>
@@ -138,9 +139,12 @@
 			<tr>
 				<td align="center">选择</td>
 				<td align="center">序号</td>
-				<td align="center">部门名称</td>
+				<td align="center">所属部门</td>
+				<td align="center">所属班级</td>
 				<td align="center">姓名</td>
 				<td align="center">账号</td>
+				<td align="center">年级</td>
+				<td align="center">性别</td>
 				<td align="center">相关操作</td>
 			</tr>
 		</thead>
@@ -154,8 +158,11 @@
 					</td>
 					<td align="center">${(currentPage-1)*10+s.count}</td>
 					<td align="center">${department.deptName}&nbsp;</td>
-					<td align="center" >${stuName}&nbsp;</td>
+					<td align="center">${class_.className}&nbsp;</td>
+					<td align="center">${stuName}&nbsp;</td>
 					<td align="center">${stuNum}&nbsp;</td>
+					<td align="center">${grade}&nbsp;</td>
+					<td align="center">${sex}&nbsp;</td>
 					<td align="center">
 					<s:a action="student_editUI?id=%{id}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />

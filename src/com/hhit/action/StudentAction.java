@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Class_;
 import com.hhit.entity.Department;
 import com.hhit.entity.Role;
 import com.hhit.entity.Student;
@@ -26,6 +27,7 @@ import com.opensymphony.xwork2.ActionContext;
 public class StudentAction extends BaseAction<Student> {
 
 	private Integer departmentId;
+	private Integer classId;
 	
 	private int viewType;// 0姓名；1账号
 	private String inputTerm = "";// 输入的词条
@@ -110,12 +112,20 @@ public class StudentAction extends BaseAction<Student> {
 		List<Department> departmentList = DepartmentUtils
 				.getAllDepartments(topList);
 		ActionContext.getContext().put("departmentList", departmentList);
-
+		
 		// 准备回显的数据
 		Student stuFind=studentService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(stuFind);
+		
+		// 准备数据, classList==>部门
+		List<Class_> classList=classService.findByDept(stuFind.getDepartment());
+		ActionContext.getContext().put("classList", classList);
+		
 		if (stuFind.getDepartment() != null) {
 			departmentId = stuFind.getDepartment().getId();
+		}
+		if(stuFind.getClass_()!=null){
+			classId=stuFind.getClass_().getId();
 		}
 		//准备班级信息
 		//todo
@@ -136,6 +146,7 @@ public class StudentAction extends BaseAction<Student> {
 		stuFind.setStuNum(model.getStuNum());
 		// >> 设置所属部门和班级
 		stuFind.setDepartment(departmentService.findById(departmentId));
+		stuFind.setClass_(classService.findById(classId));
 		
 		// 3，更新到数据库
 		studentService.update(stuFind);
@@ -160,5 +171,12 @@ public class StudentAction extends BaseAction<Student> {
 	public void setInputTerm(String inputTerm) {
 		this.inputTerm = inputTerm;
 	}
+	public Integer getClassId() {
+		return classId;
+	}
+	public void setClassId(Integer classId) {
+		this.classId = classId;
+	}
+	
 	
 }
