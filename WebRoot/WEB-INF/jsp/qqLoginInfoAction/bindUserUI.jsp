@@ -13,7 +13,7 @@
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">用户账号管理</span>
+                        <span class="tt">用户绑定</span>
                     </td>
                     <td class="tr"></td>
                 </tr>
@@ -23,59 +23,48 @@
                     </td>
                     <td class="mm">
                     <div>
+<s:form action="qqLoginInfo_bindUser.action" method="post">
+<s:hidden name="openId"></s:hidden>
 	<table class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<tbody>
 		<tr>
+			<td colspan="2" class="addFont">
+				<font color="red"><s:fielderror fieldName="bindInfo"/></font>
+			</td>
 		</tr>
-		<s:iterator value="#departmentList" status="s">
-			<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
-				<td align="center">
-					<input type="checkbox" name="checkbox" class="checkbox" value="${id},${deptName}" />
-				&nbsp;
-				</td>
-				<td align="center">${s.count}&nbsp;</td>
-				<td align="center"><s:a action="department_list?parentId=%{id}">${deptName}</s:a>&nbsp;</td>
-				<td align="center">${parent.deptName}&nbsp;</td>
-				<td align="center">${deptLevel}&nbsp;</td>
-				<td align="center">${deptDescription}&nbsp;</td>
-				<td align="center">
-					<s:a action="department_editUI?id=%{id}">
-						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
-					</s:a>
-					|
-					<s:a action="department_delete?id=%{id}&parentId=%{parent.id}" onclick="return window.confirm('您确定要删除吗？')">
-						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
-					</s:a>
-					&nbsp;
-				</td>
-			</tr>
-		</s:iterator>
-			
+		<tr>
+			<td class="addFont">用户名</td>
+			<td>
+				<s:textfield cssClass="inpu" name="userNum" ></s:textfield>
+				<span class="span_note">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="addFont">密&nbsp;码</td>
+			<td>
+				<s:textfield cssClass="inpu" name="password"></s:textfield>
+			</td>
+		</tr>
+		<tr>
+			<td><input id="manager" type="radio" value="管理员" name="userType" checked="checked" />
+			    	<label for="manager">管理员</label>
+				<input id="student" type="radio" value="学生" name="userType" />
+					<label for="student">学生</label> <br />
+				<input id="responsible" type="radio" value="负责人" name="userType" />
+					<label for="responsible">负责人</label> 
+				<input id="teacher" type="radio" value="老师" name="userType" /> 
+					<label for="teacher">老师</label></td>
+			<td></td>
+		</tr>
 		</tbody>
 	</table>
+	</s:form>
 	</div>
 </td>
 </tr>
 </tbody>
 </table>
 	</div>
-
-	<font color="red"><s:fielderror fieldName="bindInfo"/></font>
-	<form action="qqLoginInfo_bindUser.action" method="post">
-	<s:hidden name="openId"></s:hidden>
-		用户名<input name="userNum" /><br/>
-		密码<input name="password" /><br/>
-    <input type="radio" value="管理员" name="userType" checked="checked" />管理员
-    <br/>
-    <input type="radio" value="负责人" name="userType" />负责人
-    
-    <br/>
-        <input type="radio" value="学生" name="userType" />学生
-    <br/>
-        <input type="radio" value="老师" name="userType" />老师
-    <br/>
-		<input type="submit" value="提交" />
-	</form>
-
+	
 </body>
 </html>

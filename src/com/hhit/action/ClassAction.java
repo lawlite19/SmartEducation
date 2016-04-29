@@ -6,9 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+
+
 
 
 
@@ -34,6 +41,8 @@ public class ClassAction extends BaseAction<Class_>{
 
 	private Integer departmentId;
 	
+	//查询输入条件
+	private String inputTerm="";
 	//json
 	private String result;
 	
@@ -45,7 +54,9 @@ public class ClassAction extends BaseAction<Class_>{
 		ActionContext.getContext().put("departmentList", departmentList);
 		
 		// 准备分页信息
-		new QueryHelper(Class_.class, "c")//;
+		new QueryHelper(Class_.class, "c")//
+		.addCondition((departmentId != null), "c.department.id=?",departmentId)//
+		.addCondition(inputTerm.trim().length() > 0, "c.className LIKE ?", "%"+inputTerm+"%")
 		.preparePageBean(classService, pageNum, pageSize);
 		return "list";
 	}
@@ -125,6 +136,30 @@ public class ClassAction extends BaseAction<Class_>{
 
 		return null;
 	}
+	/** 根据部门查找对应的班级，用于动态加载班级select */
+	public String findByDeptId() throws Exception{
+		//查找部门
+		Department deptFind=departmentService.findById(departmentId);
+		List<Class_> classList=classService.findByDept(deptFind);
+		
+		JsonConfig jc=new JsonConfig(); 
+		//过滤掉不想要的属性，避免json死循环  
+    	jc.setJsonPropertyFilter(new PropertyFilter() {  
+    	public boolean apply(Object class_, String property, Object proValue) {
+    		if (property.equals("department")||property.equals("students")) {
+    			return true;  
+    		}
+    		else{  
+    			return false;  
+    		}  
+    	}  
+    	}); 
+    	//如果有关联属性，需取消延迟加载将映射文件内的lazy设置成false  
+    	JSONArray jsonArray = JSONArray.fromObject(classList,jc);
+
+		JsonUtil.toJson(ServletActionContext.getResponse(), jsonArray);
+		return null;
+	}
 
 
 	public Integer getDepartmentId() {
@@ -133,6 +168,14 @@ public class ClassAction extends BaseAction<Class_>{
 
 	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public String getInputTerm() {
+		return inputTerm;
+	}
+
+	public void setInputTerm(String inputTerm) {
+		this.inputTerm = inputTerm;
 	}
 
 

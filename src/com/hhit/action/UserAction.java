@@ -1,10 +1,13 @@
 package com.hhit.action;
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Role;
 import com.hhit.entity.User;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -27,6 +30,7 @@ public class UserAction extends BaseAction<User>{
 
 	/** 登录验证，成功跳转主页，否则重新登录 */
 	//说明:User表中只有两种类型，学生和老师，因为负责人、管理员也是教师
+	@SuppressWarnings("unchecked")
 	public String login() throws Exception {
 		// String s1=user.getUserNum().trim();
 		// String s2=user.getPassword().trim();
@@ -34,6 +38,14 @@ public class UserAction extends BaseAction<User>{
 		// 得到验证码
 		String code = ((String) ActionContext.getContext().getSession().get("randomCode")).toLowerCase();
 		if (code.equals((randomCode.trim().toLowerCase()))) {
+			//超级管理员单独验证，他不对应学生和老师
+			if(model.getUserType().equals("管理员")){
+				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(), "超级管理员");
+				if(null!=userFind){
+					ActionContext.getContext().getSession().put("user", userFind);
+					return "toIndex";
+				}
+			}
 			if (model.getUserType().equals("学生")) {
 				User userFind = userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
 				if (null != userFind) {
@@ -44,12 +56,18 @@ public class UserAction extends BaseAction<User>{
 				}
 			}
 			else{
-				//设置用户类型为 老师
-				model.setUserType("老师");
-				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
+				//查找用户，userType属性为--》老师
+				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),"老师");
 				if(null!=userFind){
-					ActionContext.getContext().getSession().put("user", userFind);
-					return "toIndex";
+					//查找对应的角色
+					List<Role> rolesList=(List<Role>) userFind.getTeacher().getRoles();
+					for (Role role : rolesList) {
+						if(role.getRoleName().equals(model.getUserType())){
+							ActionContext.getContext().getSession().put("user", userFind);
+							return "toIndex";
+						}
+					}
+					addFieldError("login", "账号或密码错误！");
 				}
 				else{
 					addFieldError("login", "账号或密码错误！");

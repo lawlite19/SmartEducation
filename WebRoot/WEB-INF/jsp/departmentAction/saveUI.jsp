@@ -23,6 +23,7 @@
         if (!MM_Empty('select_dept', '上级部门')) return false;
         if (!MM_Empty('txt_deptName', '部门名称')) return false;
         if (!MM_Empty('txt_deptLevel', '部门级别')) return false;
+        layer.load();
     }
 	</script>
 </head>
