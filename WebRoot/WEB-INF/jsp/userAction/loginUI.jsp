@@ -131,44 +131,46 @@
 			});
 	</script>
 	
-	<!-- 微博登录开始 -->
+	<!-- 微博登录开始
+	<div id="wb_connect_btn"></div> -->
 	<script type="text/javascript">
-
-	WB2.anyWhere(function (W) {
-	    W.widget.connectButton({
-	        id: "wb_connect_btn",
-	        type: '3,2',
-	        callback: {
-	            login: function (o) { //登录后的回调函数
-	                alert("login: " + o.name);
-	            	alert("id:"+o.id);
-	            	alert("avatar:"+o.avatar_large);
-	            	alert("location:"+o.location);
-	            	alert("gender:"+o.gender);
-	            	alert("粉丝:"+o.followers_count);
-	            	alert("关注:"+o.friends_count);
-	            	alert("等级:"+o.class);
-	            	alert("创建时间:"+o.created_at);
-	            	alert("描述:"+o.description);
-	    			$("#hidWeibo_Identifier").attr("value",o.id);
-	    			$("#hidWeibo_Name").attr("value",o.name);
-	    			$("#hidWeibo_Avatar").attr("value",o.avatar_large);
-	    			$("#hidWeibo_Location").attr("value",o.location);
-	    			$("#hidWeibo_Gender").attr("value",o.gender);
-	    			$("#hidWeibo_Followers").attr("value",o.followers_count);
-	    			$("#hidWeibo_Friends").attr("value",o.friends_count);
-	    			$("#hidWeibo_Class").attr("value",o.class);
-	    			$("#hidWeibo_CreateTime").attr("value",o.created_at);
-	    			$("#hidWeibo_Desc").attr("value",o.description);
-	    			
-	    			$("#formWeibo").submit();
-	            },
-	            logout: function () { //退出后的回调函数
-	                alert('logout');
-	            }
-	        }
-	    });
-	});
+	function weiboLogin(){
+	// 弹出登入窗口
+	WB2.login(function(){
+	    // 验证是否登入成功
+	    if(WB2.checkLogin()){
+	    	WB2.anyWhere(function (W) {
+	            // 调用 account/get_uid 接口，获取用户信息
+	            W.parseCMD('/account/get_uid.json', function(o, bStatus){
+	            	if(bStatus){
+	            		alert("login: " + o.name);
+		            	alert("id:"+o.id);
+		            	alert("avatar:"+o.avatar_large);
+		            	alert("location:"+o.location);
+		            	alert("gender:"+o.gender);
+		            	alert("粉丝:"+o.followers_count);
+		            	alert("关注:"+o.friends_count);
+		            	alert("等级:"+o.class);
+		            	alert("创建时间:"+o.created_at);
+		            	alert("描述:"+o.description);
+		    			$("#hidWeibo_Identifier").attr("value",o.id);
+		    			$("#hidWeibo_Name").attr("value",o.name);
+		    			$("#hidWeibo_Avatar").attr("value",o.avatar_large);
+		    			$("#hidWeibo_Location").attr("value",o.location);
+		    			$("#hidWeibo_Gender").attr("value",o.gender);
+		    			$("#hidWeibo_Followers").attr("value",o.followers_count);
+		    			$("#hidWeibo_Friends").attr("value",o.friends_count);
+		    			$("#hidWeibo_Class").attr("value",o.class);
+		    			$("#hidWeibo_CreateTime").attr("value",o.created_at);
+		    			$("#hidWeibo_Desc").attr("value",o.description);
+		    			
+		    			$("#formWeibo").submit();
+	            	}
+	            })
+			    });
+	    }})
+	    
+	}
 	
 	</script>
 <!-- 登录 -->
@@ -260,8 +262,7 @@
                                                 
                                                 <a style="cursor:pointer;" onclick="return window.open('https://graph.qq.com/oauth2.0/authorize?client_id=101304940&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.soeasystudy.com%2Fback.jsp', 'oauth2Login_10235' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');" id="qqAuthorizationUrl" class="qq"></a>
                                                
-                                                <a style="cursor:pointer;" onclick="return window.open('https://api.weibo.com/2/oauth2/authorize?client_id=2840992581&response_type=token&display=js&transport=html5&referer=http://www.soeasystudy.com/test.jsp" class="sina"></a>
-											<div id="wb_connect_btn"></div>
+                                                <a  style="cursor:pointer;" onclick="weiboLogin();" class="sina"></a>
                                             </fieldset>
                                         </td>
                                     </tr>
@@ -285,6 +286,35 @@
             </tr>
         </table>
     </form>
-
+    <!--  
+	<script type="text/javascript">
+	function weiboLogin(){
+		WB2.login(function() {
+			//alert('您已经登录');
+			alert("login: " + o.name);
+        	alert("id:"+o.id);
+        	alert("avatar:"+o.avatar_large);
+        	alert("location:"+o.location);
+        	alert("gender:"+o.gender);
+        	alert("粉丝:"+o.followers_count);
+        	alert("关注:"+o.friends_count);
+        	alert("等级:"+o.class);
+        	alert("创建时间:"+o.created_at);
+        	alert("描述:"+o.description);
+			$("#hidWeibo_Identifier").attr("value",o.id);
+			$("#hidWeibo_Name").attr("value",o.name);
+			$("#hidWeibo_Avatar").attr("value",o.avatar_large);
+			$("#hidWeibo_Location").attr("value",o.location);
+			$("#hidWeibo_Gender").attr("value",o.gender);
+			$("#hidWeibo_Followers").attr("value",o.followers_count);
+			$("#hidWeibo_Friends").attr("value",o.friends_count);
+			$("#hidWeibo_Class").attr("value",o.class);
+			$("#hidWeibo_CreateTime").attr("value",o.created_at);
+			$("#hidWeibo_Desc").attr("value",o.description);
+			
+			$("#formWeibo").submit();
+		});
+	}
+	</script>-->
 </body>
 </html>

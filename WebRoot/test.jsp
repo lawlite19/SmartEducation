@@ -19,6 +19,7 @@
   </head>
   
   <body>
+  	<wb:login-button type="3,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button>
     <!-- 微博登录开始 -->
 	
 	<div id="wb_connect_btn"></div>
