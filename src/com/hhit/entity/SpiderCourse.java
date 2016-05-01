@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class SpiderCourse {
 	private Integer id;
-	private String professionType;
+	private String professionTypeName;
 	private String name;
 	private String url;
 	private String info;
@@ -23,16 +23,21 @@ public class SpiderCourse {
 	
 	private Set<SpiderChapter> spiderChapters;
 	private Set<SpiderDocument> spiderDocuemnts;
+	
+	private SpiderProfessionType professionType;
+	
 	/** 默认构造函数 */
 	public SpiderCourse(){
 		
 	}
 	/** 构造函数 */
-	public SpiderCourse(String na,String ur,String in,String pr){
+	public SpiderCourse(String na,String ur,String in,String pr,String iu,SpiderProfessionType spt){
 		name=na;
 		url=ur;
 		info=in;
-		professionType=pr;
+		professionTypeName=pr;
+		imgUrl=iu;
+		professionType=spt;
 	}
 	public Integer getId() {
 		return id;
@@ -40,10 +45,17 @@ public class SpiderCourse {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getProfessionType() {
+
+	public String getProfessionTypeName() {
+		return professionTypeName;
+	}
+	public void setProfessionTypeName(String professionTypeName) {
+		this.professionTypeName = professionTypeName;
+	}
+	public SpiderProfessionType getProfessionType() {
 		return professionType;
 	}
-	public void setProfessionType(String professionType) {
+	public void setProfessionType(SpiderProfessionType professionType) {
 		this.professionType = professionType;
 	}
 	public String getName() {

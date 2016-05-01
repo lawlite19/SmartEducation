@@ -10,9 +10,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
+import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
 import com.hhit.service.ISpiderChapterService;
+import com.hhit.service.ISpiderCourseInfoService;
 import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionTypeService;
@@ -30,7 +32,9 @@ public class CourseSpider implements PageProcessor {
 	ISpiderProfessionTypeService spiderProfessionTypeService = (ISpiderProfessionTypeService) ac.getBean("spiderProfessionTypeServiceImpl");
 	ISpiderChapterService spiderChapterService = (ISpiderChapterService) ac.getBean("spiderChapterServiceImpl");
 	ISpiderDocumentService spiderDocumentService = (ISpiderDocumentService) ac.getBean("spiderDocumentServiceImpl");
+	ISpiderCourseInfoService spiderCourseInfoService = (ISpiderCourseInfoService) ac.getBean("spiderCourseInfoServiceImpl");
 
+	
 	private Site site = Site.me().setRetryTimes(5).setSleepTime(3000).setTimeOut(23000);
 
 	@Override
@@ -51,14 +55,20 @@ public class CourseSpider implements PageProcessor {
 	}
 
 	/**
-	 * 爬去课程信息
+	 * 爬取课程
 	 */
 	public void crawerCourse(Page page) {
+		/**
+		 * 得到上级传来的专业类型实体
+		 */
+		SpiderProfessionType professionTypeModel = (SpiderProfessionType) page.getRequest().getExtra(
+				"professionTypeModel");
+		
 		// <div class="label">
 		// 哲学 </div>
 
 		// 筛选专业类型
-		String professionType = page.getHtml()
+		String professionTypeName = page.getHtml()
 				.xpath("//div[@class='label']/text()").toString();
 		// <li class="ans-slow-anim">
 		// <div class="picArea ans-slow-anim"><a href="/course/198413.html"
@@ -87,12 +97,19 @@ public class CourseSpider implements PageProcessor {
 		List<String> infoList = page.getHtml()
 				.xpath("//div[@class='introArea2']/@title").all();
 		// page.putField("infoList", infoList);
-
+		
+		//筛选imgUrl
+//		<div class="picArea ans-slow-anim"><a href="/course/157855.html" target="_blank">
+//			<img src="http://p.ananas.chaoxing.com/star/258_153c/1383715356523iiuzg.jpg" width="178" height="109"></a>
+//		</div>
+		List<String> courseImgUrlList=page.getHtml().xpath("//div[@class='picArea ans-slow-anim']/a/img/@src").all();
+		
 		if (courseNameList.size() > 0) {
 			for (int i = 0; i < courseNameList.size(); i++) {
 				SpiderCourse model = new SpiderCourse(courseNameList.get(i)
 						.toString().trim(), courseUrlList.get(i).toString()
-						.trim(), infoList.get(i).toString(), professionType);
+						.trim(), infoList.get(i).toString(), professionTypeName,courseImgUrlList.get(i).toString(),
+						professionTypeModel);
 				spiderCourseService.save(model);
 
 				// Request request2=new
@@ -104,12 +121,13 @@ public class CourseSpider implements PageProcessor {
 						.setPriority(1).putExtra("courseModel", model));
 			}
 		}
+		//查找所有的课程类型
 		 List<SpiderProfessionType> list =
 		 spiderProfessionTypeService.findAll();
 		 for (int j = 2; j < list.size(); j++) {
-		 // 设置优先级为0
-		 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1000")
-		 .setPriority(0));
+			 // 设置优先级为0
+			 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1000").setPriority(0).
+					 putExtra("professionTypeModel", list.get(j)));
 		 }
 
 		// List<String> urlList=new ArrayList<String>();
@@ -121,7 +139,7 @@ public class CourseSpider implements PageProcessor {
 	}
 
 	/**
-	 * 爬取课程对应的章节、文档
+	 * 爬取课程对应的介绍、章节、文档
 	 */
 	public void crawCourseInfo(Page page) {
 		/**
@@ -135,6 +153,17 @@ public class CourseSpider implements PageProcessor {
 		// 筛选课程名
 		String courseName = page.getHtml()
 				.xpath("//div[@class='mt10 f33 l g5']/span/text()").toString();
+		/**
+		 * 爬取课程介绍
+		 */
+//		<div class="pl20">
+//        	<div class="mt5 ans-cc"><pre><p>本系列主要从以下要点用经济学的知识智慧解读中国，即经世致用之学与中国道路、当代中国的四次转型、中国农业组织：演化问题与改进、中国的社会运行成本问题、中国为何选择经济市场化之路、发展中的结构性问题、中国经济市场化改革的得与失，课程中老师多处举例，便于学生掌握并记忆。 &nbsp;</p><p><br></p></pre></div>
+//        </div>
+		String courseDesc=page.getHtml().xpath("//div[@class='pl20']/div[@class='mt5 ans-cc']/html()").toString();
+		//保存数据库
+		spiderCourseInfoService.save(new SpiderCourseInfo(courseDesc, courseModel));
+		
+		
 		// <li class="mb15 course_section fix">
 		// <!--<a class="wh"
 		// href="/nodedetailcontroller/visitnodedetail?knowledgeId=789300"
@@ -219,9 +248,12 @@ public class CourseSpider implements PageProcessor {
 	@Test
 	public void crawer() {
 
+		//2 对应哲学
+		SpiderProfessionType professionTypeModel = spiderProfessionTypeService.findById(2);
 		Spider.create(new CourseSpider())//
 				// 全部得到，不分页
-				.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
+				//.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
+				.addRequest(new Request(professionTypeModel.getUrl()+"/0/1000").setPriority(0).putExtra("professionTypeModel", professionTypeModel))
 				.thread(10)//
 				.run();
 	}

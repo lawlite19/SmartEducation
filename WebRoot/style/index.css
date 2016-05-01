@@ -1,0 +1,194 @@
+﻿@charset "utf-8";
+/* CSS Document */
+html,body,form,textarea,select,option,ol,ul,li,h1,h2,h3,h4,h5,h6,p,th,td,dl,dt,dd,menu,blockquote,fieldset,legend,button,input,hr,pre{margin: 0;padding: 0;}
+body{font-family:Microsoft YaHei, Arial;font-size:12px;color:#333;line-height:22px;background:#f9faf7;}
+ul,ol,img{border:0px;}
+li{list-style-type:none;}
+input,select,textarea{vertical-align:middle;outline:none;}
+a{color:#333;text-decoration:none;}
+a:hover{text-decoration:underline}
+.clear{clear:both;font-size:0;height:0;line-height:0;}
+.clearfix{overflow:hidden;zoom:1;}
+.leftF{float:left;}
+.rightF{float:right;}
+input{border:none;}
+/*王韬凯编辑*/
+.curseList{overflow:hidden;}
+.constr{width: 1000px;}
+/*.indexSpace{width:744px;overflow: hidden;}
+.indexSpace ul{width:900px;overflow:hidden;}
+.indexSpace ul li{width:130px;overflow:hidden;float:left;margin-right:65px;}
+.indexSpace ul li b{display:inline-block;}
+.indexSpace ul li strong{display:block;color:#0066ff;font-size:16px;font-weight:normal;list-style:none;text-align:center;}
+.indexSpace ul li span{display:block;}
+.indexSpace ul li span a{color:#999999;}*/
+.indexSpace{width:220;overflow: hidden;}
+.indexSpace ul{width:220px;overflow:hidden;}
+.indexSpace ul li{width:220px;overflow:hidden;margin-top:8px;}
+.indexSpace ul li b{display:inline-block;width:29px;float:left;margin-right:15px;}
+.indexSpace ul li b img{width: 100%;}
+.indexSpace ul li a{display:inline-block;color:#0066ff;line-height:29px;font-size:14px;float:left;}
+
+.indexSchool{}
+.indexSchool dl{overflow:hidden;margin-bottom:30px;}
+.indexSchool dl dt{width:140px;border:1px solid #bfbfbf;padding:4px;margin-right:20px;float:left;}
+.indexSchool dl dd{float:left;width:570px;}
+.indexSchool dl dt img{float:left;}
+.indexSchool dl dd h3{color:#0066ff;}
+.indexSchool dl dd h3 a{color:#0066ff;font-weight:normal;font-size:16px;}
+.indexSchool dl dd p{padding-top:20px;color:#666666;height:110px;overflow:hidden;}
+
+.indexSchool ul{width:850px;overflow:hidden;}
+.indexSchool ul li{width:125px;overflow:hidden;float:left;margin-right:25px;margin-bottom:20px;}
+.indexSchool ul li b{display:inline-block;width:80px;height:80px;padding:4px;border:1px solid #f1f2f1;}
+.indexSchool ul li b img{width:100%;}
+.indexSchool ul li a{display:block;color:#666666;line-height:25px;}
+
+.indexStar{}
+.indexStar ul{}
+.indexStar ul li{overflow:hidden;margin-bottom:35px;}
+.indexStar ul li span,.indexStar ul li var{display:inline-block;float:left;}
+.indexStar ul li span{width:110px;margin-right:20px;position:relative;}
+.indexStar ul li span img{width:100%;}
+.indexStar ul li b{width:110px;height:110px;background:url(../images/starbg.png) 0 0 no-repeat;position:absolute;top:0;left:0;z-index:5;}
+.indexStar ul li var{font-style:normal;}
+.indexStar ul li a{display:inline-block;}
+.indexStar ul li var a{line-height:110px;color:#0066ff;font-size:16px;}
+/*王韬凯编辑end*/
+.ans-slow-anim,.curseList dl {
+	transition:all 300ms ease;
+	-moz-transition:all 300ms ease;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 300ms ease;}
+
+.main{margin-bottom:100px;}
+.banner{ text-align:center; width:100%; position:relative; background:#386f84;}
+.bannerbg{ position:absolute; left:0; top:0; width:100%; background:#65b7e8 }
+.focusImage{width:1000px; margin:0px auto 0px;overflow:hidden; /*position:relative;*/}
+.scrollImg ul{width:1000px; height:402px; position:relative;}
+.scrollImg li{position:absolute; left:0; top:0;display:none;}
+.scrollImg img{
+	border:0px;display:block
+}
+.scrollImg .imageArea{float:left; 
+	margin-right:30px;
+	border:#ddd 1px solid;
+}
+.scrollImg dl{ color:#333; text-align:left; margin-top:80px;}
+/*.scrollImg dl dt,.scrollImg dl dt a{font-size:40px; line-height:40px;; color:#ffffff; margin-bottom:20px;}*/
+.scrollImg dl dd.tt{ line-height:30px;font-size:16px;}
+.scrollImg dl dd.info{ line-height:20px;font-size:12px;; margin-top:20px;}
+
+.ban_ic01{position:absolute;top:298px;width:154px;height:52px;left:5px;background:url(../images/btn_index.png) no-repeat;}
+.ban_ic01.next{background-position:0 -54px;}
+.ban_ic01.three{background-position:0 -108px;}
+
+.scrollNum{position:absolute; z-index:10;bottom:20px;left:50%;margin-left:-45px;}
+.scrollNum li{float:left;margin:0 8px;width:13px;height:12px; }
+.scrollNum li.current  a{width:13px;height:12px;display:block;background:url(../images/head_btn1.png) center no-repeat;}
+.scrollNum li a{width:13px;height:12px;display:block;background:url(../images/head_btn2.png) center no-repeat; }
+
+.scrollBg{width:100%;height:402px;position:relative;left:0;z-index:0;}
+.scrollBg li{width:100%;height:402px;position:absolute;left:0;left:0;display: none;}
+.scrollBg .img{width:1000px;margin:0 auto; position:relative}
+
+.indexBox{ width:1000px;  margin:15px auto; overflow:hidden}
+.indexBox .indexTittle p{ width:80px; height:30px; background:url(../images/mooctitle.gif) 0 0 no-repeat; margin-left:5px;}
+.indexBox .picAreaDiv{ /*margin-right:-40px;*/ width:1100px;}
+.indexBox .picAreaDiv ul li{float:left; margin:10px 45px 15px 0px ;border:#eee 1px solid; position:relative; text-align:center}
+.indexBox .picAreaDiv ul li .picArea{
+	width:216px;
+}
+.indexBox .picAreaDiv ul li i{ display:inline-block; height:18px;  background:url(images/zan_l.png) left top no-repeat; padding:0 0 0 18px; font-style:normal; line-height:18px; position:absolute; color:#333; top:104px; right:10px}
+.indexBox .picAreaDiv ul li i b{display:inline-block; height:18px; font-weight:normal; padding:0 10px 0 0 ; line-height:18px; background:url(images/zan_r.png) right top no-repeat; cursor:default }
+.indexBox .picAreaDiv ul li img{ width:216px;}
+.indexBox .picAreaDiv ul li:hover {
+	-webkit-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	-moz-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	-o-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+}
+.indexBox .picAreaDiv ul li:hover .picArea{opacity:.85;filter:alpha(opacity=85)}
+
+/*
+.indexBox .picAreaDiv ul li .picArea .cover{ position:absolute; left:0; top:0; width:178px; height:109px; display:none;}
+.indexBox .picAreaDiv ul li .picArea .cover a{ opacity:0.15; filter:alpha(opacity=15); display:block; width:100%; height:100%; background:#ffffff;}
+.indexBox .picAreaDiv ul li:hover .picArea .cover{ display:block;}
+*/
+.indexBox .picAreaDiv ul li .introArea{ width:216px; text-align:center;font-size:14px;; color:#333333; height:25px; line-height:25px; background:#fff;overflow:hidden;}
+.indexBox .picAreaDiv ul li .introArea a{text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;width:178px;}
+.indexBox .picAreaDiv ul li:hover .introArea a{text-decoration:underline;}
+
+.indexBox .picAreaDiv ul li .introArea2{ width:216px; text-align:center;font-size:12px;; color:#999999; height:25px; line-height:25px; background:#fff;overflow:hidden;}
+
+.indexBox .picAreaDiv .morePicDiv{ /*margin-top:15px;*/ height:56px; text-align:right;}
+.indexBox .picAreaDiv .morePicDiv a{ color:#666666;  font-size:14px; /*background:#fff;display:block; width:986px; height:22px;text-align:center;margin-left:5px; border:1px solid #eeeeee;*/ line-height:22px;  padding:10px 0; }
+/*.indexBox .picAreaDiv .morePicDiv a:hover{
+	-webkit-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	-moz-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	-o-box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+	box-shadow: 1px 1px 10px #acccf9, -1px -1px 10px #acccf9;
+}*/
+
+.indexBox1{width:1000px;  margin:0px auto 50px auto;}
+.indexBox1Left{ width:744px; float:left; margin-left:5px;}
+.indexBox1Left .indexTittle p{ margin-bottom:15px; width:80px; height:30px; text-align:left; font-family:"微软雅黑","宋体",tahoma, arial; font-size:18px; font-weight:bold; color:#333}
+.indexBox1Left .curseList ul li{ width:246px; float:left; border-right:2px solid #ffffff;}
+.indexBox1Left .curseList ul li dl{ overflow:hidden; border-bottom:1px solid #ffffff;}
+.indexBox1Left .curseList ul li dl dt{ margin:15px 0px 10px 20px; height:30px; line-height:30px; }
+.indexBox1Left .curseList ul li dl dt a{font-size:28px; ; color:#ffffff;}
+.indexBox1Left .curseList ul li dl dd{ text-indent:2em; margin:0px 0 0 20px;}
+.indexBox1Left .curseList ul li dl dd a{font-size:12px; ; color:#ffffff;}
+.indexBox1Left .curseList ul li .curse01{ background:#e8891a; height:254px;}
+.indexBox1Left .curseList ul li .curse02{ background:#d2656b; height:140px;}
+.indexBox1Left .curseList ul li .curse03{ background:#338ee2; height:165px;}
+.indexBox1Left .curseList ul li .curse04{ background:#62aead; height:140px;}
+.indexBox1Left .curseList ul li .curse05{ background:#338ee2; height:132px;}
+.indexBox1Left .curseList ul li .curse06{ background:#83c54f; height:121px;}
+.indexBox1Left .curseList ul li .curse07{ background:#39b57f; height:173px;}
+.indexBox1Left .curseList ul li .curse08{ background:#8b5aef; height:236px;}
+.indexBox1Left .curseList ul li .curse09{ background:#bda355; height:147px;}
+.indexBox1Left .curseList ul li .curse010{ background:#777777; height:161px;}
+.indexBox1Left .curseList ul li .curse011{ background:#62aead; height:157px;}
+.indexBox1Left .curseList ul li .curse012{ background:#e8891a; height:241px;}
+.indexBox1Left .curseList ul li .curse013{ background:#5f7fc9; height:251px;}
+.indexBox1Left .curseList ul li .curse014{ background:#f15f67; height:110px;}
+.indexBox1Left .curseList ul li .curse013 dt{margin:15px 0px 10px 20px;}
+/*.indexBox1Left .curseList ul li .curse09 dt,.indexBox1Left .curseList ul li .curse014 dt{margin:25px 0px 0 20px;}*/
+
+
+.indexBox1Right{ width:220px; float:right;}
+.indexBox1Right h4{ width:100%; text-align:left; margin:0 0 10px;text-align:left; font-family:"微软雅黑","宋体",tahoma, arial; font-size:18px; font-weight:bold; color:#333; line-height:26px}
+.indexBox1Right h4 img{ width:119px; height:27px;}
+.indexBox1Right p a img{ width:25px; height:30px; margin:0 23px 0 5px}
+.indexBox1Right .indexTittle p{ width:100px; height:30px; background:url(../images/mooctitle.gif) 0 -63px no-repeat;}
+.indexBox1Right .newcurseList ul li{
+	height:30px; line-height:30px;
+}
+.indexBox1Right .newcurseList ul li span{ float:right; color:#cccccc;}
+.indexBox1Right .newcurseList ul li a{color:#0066ff;font-size:14px;width: 9em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display:inline-block;
+}
+
+.footer{ background:#333333; padding:20px 0 30px 0; color:#ffffff;}
+.footer p{ text-align:center;}
+.footer p.top{font-size:16px; ; line-height:30px;}
+.footer p.bottom{font-size:12px; ; border-top:1px solid #484848; margin-top:20px; padding-top:20px;}
+
+.curseList dl{ opacity: 1}
+.curseList dl:hover{opacity: .85}
+
+.color0{ background:#e8891a;}
+.color1{ background:#d2656b;}
+.color2{ background:#338ee2;}
+.color3{ background:#f15f67;}
+.color4{ background:#62aead;}
+.color5{ background:#5f7fc9;}
+.color6{ background:#83c54f;}
+.color7{ background:#39b57f;}
+.color8{ background:#8b5aef;}
+.color9{ background:#777777;}
+

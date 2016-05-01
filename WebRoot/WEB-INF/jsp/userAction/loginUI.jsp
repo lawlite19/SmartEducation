@@ -26,6 +26,11 @@
         if (!MM_Empty('txt_code', '验证码')) return false;
     }
 	</script>
+	<script type="text/javascript">
+		function weiboLogin(){
+			$("#wb_connect_btn").click();
+		}
+	</script>
     <style type="text/css">
         .auto-style1 {
             width: 90px;
@@ -131,19 +136,16 @@
 			});
 	</script>
 	
-	<!-- 微博登录开始
-	<div id="wb_connect_btn"></div> -->
+	<!-- 微博登录开始-->
+	<div id="wb_connect_btn" style="display: none;"></div> 
 	<script type="text/javascript">
-	function weiboLogin(){
-	// 弹出登入窗口
-	WB2.login(function(){
-	    // 验证是否登入成功
-	    if(WB2.checkLogin()){
-	    	WB2.anyWhere(function (W) {
-	            // 调用 account/get_uid 接口，获取用户信息
-	            W.parseCMD('/account/get_uid.json', function(o, bStatus){
-	            	if(bStatus){
-	            		alert("login: " + o.name);
+		WB2.anyWhere(function (W) {
+		    W.widget.connectButton({
+		        id: "wb_connect_btn",
+		        //type: '3,2',
+		        callback: {
+		            login: function (o) { //登录后的回调函数
+		            	alert("login: " + o.name);
 		            	alert("id:"+o.id);
 		            	alert("avatar:"+o.avatar_large);
 		            	alert("location:"+o.location);
@@ -165,13 +167,13 @@
 		    			$("#hidWeibo_Desc").attr("value",o.description);
 		    			
 		    			$("#formWeibo").submit();
-	            	}
-	            })
-			    });
-	    }})
-	    
-	}
-	
+		            },
+		            logout: function () { //退出后的回调函数
+		                alert('logout');
+		            }
+		        }
+		    });
+		});
 	</script>
 <!-- 登录 -->
    <form id="formLogin" action="user_login.action" method="post">
