@@ -68,7 +68,7 @@ public class QQLoginInfoAction extends BaseAction<QQLoginInfo> {
 				bind(userFind);
 				return "toIndex";
 			} else {
-				addFieldError("login", "账号或密码错误！");
+				addFieldError("bindInfo", "账号或密码错误！");
 			}
 		}
 		else{

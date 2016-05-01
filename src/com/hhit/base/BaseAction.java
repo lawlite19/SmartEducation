@@ -18,6 +18,7 @@ import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
+import com.hhit.service.ISpiderProfessionTypeService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
@@ -77,6 +78,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ICourseService courseService;//课程
 	@Resource
 	protected IClassService classService;//班级
+	@Resource
+	protected ISpiderProfessionTypeService spiderProfessionTypeService;
 	
 	//--------------
 	@Resource

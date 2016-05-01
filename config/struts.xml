@@ -146,6 +146,7 @@
 			<result name="list">/WEB-INF/jsp/spiderCourseAction/list.jsp</result>
  			<result name="toList" type="redirectAction">spiderCourse_list</result>
 			<result name="listCourseInfo">/WEB-INF/jsp/spiderCourseAction/listCourseInfo.jsp</result>
+			<result name="show">/WEB-INF/jsp/spiderCourseAction/show.jsp</result>
 		</action>
 	</package>
 

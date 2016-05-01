@@ -30,8 +30,8 @@
 				<comment>图片地址</comment>
 			</column>
 		</property>
-		<property name="professionType" type="string">
-			<column name="ProfessionType">
+		<property name="professionTypeName" type="string">
+			<column name="ProfessionTypeName">
 				<comment>专业类型</comment>
 			</column>
 		</property>
@@ -46,5 +46,8 @@
 			<key column="SpiderCourse_Id"></key>
 			<one-to-many class="SpiderDocument" />
 		</set>
+		<!-- professionType属性，与 SpiderProfessionType类多对一-->
+		<many-to-one name="professionType" class="SpiderProfessionType" column="ProfessionType_Id">
+		</many-to-one>
 	</class>
 </hibernate-mapping>

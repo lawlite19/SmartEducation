@@ -13,13 +13,25 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 
-	/** 列表 */
+	private Integer professionId;
+	/** 列表--管理 */
 	public String list() throws Exception{
 		
 		new QueryHelper(SpiderCourse.class, "s")//
 		.preparePageBean(spiderCourseService, pageNum, pageSize);
 		return "list";
 	}
+	/** 列表--访问 */
+	public String show() throws Exception{
+		//准备信息--所有课程类型
+		ActionContext.getContext().put("professionTypeList", spiderProfessionTypeService.findAll());
+		//准备分页信息
+		new QueryHelper(SpiderCourse.class, "s")//
+		.addCondition((professionId!=null), "s.professionType=?", spiderProfessionService.findById(professionId))
+		.preparePageBean(spiderCourseService, pageNum, 12);
+		return "show";
+	}
+	
 	
 	/** 删除 */
 	public String delete() throws Exception{
@@ -36,6 +48,12 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		ActionContext.getContext().put("spiderDocumentList", spiderCourseFind.getSpiderDocuemnts());
 		
 		return "listCourseInfo";
+	}
+	public Integer getProfessionId() {
+		return professionId;
+	}
+	public void setProfessionId(Integer professionId) {
+		this.professionId = professionId;
 	}
 	
 }
