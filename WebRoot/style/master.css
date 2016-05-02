@@ -1,0 +1,52 @@
+/* CSS Document */
+
+
+*{margin:0;padding:0;}
+html{overflow-y:scroll;}
+body{margin:0;padding:0;color:#3b3b3b;font:12px/1.5 "΢���ź�", Arial, Helvetica, sans-serif; color:#333;}
+ul,ol,dl{list-style:none;}
+b,em,i,u,strong{font-weight:normal;font-style:normal;text-decoration:none;}
+h1,h2,h3,h4,h5,h6{font-size:14px;font-weight:normal;}
+a{color:#2681dc;text-decoration:none;}
+a:hover{text-decoration:none;}
+table{border-collapse:collapse; border-spacing:0; width:100%; border:0;}
+table th{font-weight:normal; text-align:left;}
+input,select,textarea{vertical-align:middle; font:12px/1.5 ����, Arial, Helvetica, sans-serif; color:#333; outline:none; resize:none;}
+textarea{overflow-y:auto;}
+img{border:0;}
+.clear{clear:both; height:0; font-size:0; line-height:0; overflow:hidden;}
+
+input{ height:22px; line-height:22px;}
+select{height:22px;}
+select option{ padding:3px;}
+
+
+/*select������*/
+.selectBox{ display:inline-block; vertical-align:top; position:relative; z-index:1; cursor:pointer; background-color:#fff; width:200px; border:1px solid #e2e3ea; border-top:1px solid #abadb3; line-height:23px; height:23px;}
+.selectBox p{  vertical-align:top; padding:0 10px 0 3px; background:url(../images/selArr.gif) no-repeat right 10px; margin-right:5px;}
+.selectBox ul{ width:200px; border:1px solid #000; border-left-color:#b2b2b2; border-top-color:#b2b2b2; position:absolute; z-index:1; top:24px; left:-1px; background-color:#fff;}
+.selectBox ul li a{ display:block; line-height:23px; height:23px; padding:0 3px; color:#333;}
+.selectBox ul li a:hover{ background-color:#3399ff; color:#fff;}
+
+
+.appBox{ position:relative; overflow:hidden;}
+.appBox input{ position:absolute; z-index:2; width:auto; right:0; top:0; -moz-opacity:0; opacity:0; filter:alpha(opacity=0); font-size:100px; cursor:pointer; height:34px; line-height:34px;}
+
+.text-align-justify{ text-align:justify; text-justify:inter-ideograph;}
+iframe.ans-insertvideo-online{margin-left: 0em !important;width: 620px !important;}
+iframe.ans-attach-online.ans-book {height: 600px !important;width: 620px !important;margin: 0 !important;padding: 0 !important;}
+iframe.ans-attach-online.insertdoc-online-ppt{height: 600px !important;width: 620px !important;margin: 0 !important;padding: 0 !important;}
+iframe.ans-attach-online.insertdoc-online-doc{height: 600px !important;width: 620px !important;margin: 0 !important;padding: 0 !important;}
+iframe.ans-attach-online.insertdoc-online-pdf{height: 600px !important;width: 620px !important;margin: 0 !important;padding: 0 !important;}
+.ans-book-title {width: 620px !important;}
+.ans-job-icon{display: none;}
+.ans-cc table{width: 600px !important;}
+
+/*课程报名弹框*/
+.courseAlert{display:none;background-color: #fff;border: 3px solid #ccc;position: fixed;visibility: visible;width: 340px;z-index: 201;left:0;top:200px;}
+.courseTilte{text-align:center;font-size:14px;height:27px;line-height:27px;}
+.ibox_close{ background:url(/img/icons.png);background-position: 0 -60px;display: inline-block; height: 20px;width: 20px;float:right;padding:0}
+.ibox_alert{font-size:12px;text-align:center;margin-right:5px;}
+.courseCon{text-align:center;padding:10px;}
+.courseCon a.bluebtn{ background-color: #187ed1;color: #fff;display:inline-block;margin:20px auto;padding:5px 10px;border-radius:5px;}
+.ibox_alert a{color:#2681dc;padding:0 3px}

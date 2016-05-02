@@ -191,4 +191,90 @@ input{border:none;}
 .color7{ background:#39b57f;}
 .color8{ background:#8b5aef;}
 .color9{ background:#777777;}
+.main{
+	margin-bottom:0;
+	position:relative;
+}
 
+.indexBox .picAreaDiv{
+	width:auto;
+}
+
+.indexBox{
+	margin:0 auto !important;
+	position:relative;	
+}
+
+.category{
+	width:95px;
+	text-align:right;
+	margin-top:65px;	
+	font-size:14px;
+	float:left;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.category li{
+	height:30px;
+	line-height:30px;
+	padding-right:30px;
+}
+
+.category li.current{
+	position:relative;
+}
+
+.arrow{
+	background:url(/SmartEducation/style/images/l_icons.png) left no-repeat;
+	width:13px;
+	height:19px;
+	position:absolute;
+	right:-13px;
+	/*top:5px;*/
+	margin-top:-25px;
+}
+
+.category li.current a{	
+	color:#2674ff
+}
+
+.picAreaDiv{
+	min-height:490px;
+	margin-left:95px;
+	border-left:#ddd 1px solid;
+	padding-top:25px;
+	padding-left:45px;
+	padding-bottom:105px;
+	background:#fff;
+	position:relative;
+}
+
+.indexBox .picAreaDiv ul li{
+	
+}
+
+.label {
+	margin-bottom:15px;
+	background:url(/SmartEducation/style/images/l_icons.png) -13px 0 no-repeat;
+	padding-left:20px;
+	margin-left:-5px;
+}
+.page{position:absolute;left:50%;padding-top:30px;}
+.page a{display:inline-block;padding:0 5px;height:25px;line-height:25px;border:1px solid #ddd;margin-right:5px;color:#555555;}
+.page em{list-style:none;display:inline-block;padding:0 5px;height:25px;line-height:25px;margin-right:5px;border:1px solid #898a8a;background:#898a8a;color:#fff;}
+/*分页*/
+.PageSelectorNum{
+	cursor: hand;
+	color:#333399;
+}
+
+.PageSelectorNum:hover{
+	color:#ff0000;
+	text-decoration:underline;
+}
+.pageView{
+	font-size: 14px;
+	text-align: center;
+}

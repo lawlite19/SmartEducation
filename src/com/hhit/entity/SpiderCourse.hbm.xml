@@ -37,7 +37,7 @@
 		</property>
 		
 		<!-- spiderChapters属性，与SpiderChapter类一对多 -->
-		<set name="spiderChapters">
+		<set name="spiderChapters" order-by="chapterNum" >
 			<key column="SpiderCourse_Id"></key>
 			<one-to-many class="SpiderChapter" />
 		</set>

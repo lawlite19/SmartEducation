@@ -15,6 +15,7 @@ import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.ISpiderChapterService;
+import com.hhit.service.ISpiderCourseInfoService;
 import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
@@ -80,6 +81,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IClassService classService;//班级
 	@Resource
 	protected ISpiderProfessionTypeService spiderProfessionTypeService;
+	@Resource
+	protected ISpiderCourseInfoService spiderCourseInfoService;
 	
 	//--------------
 	@Resource
