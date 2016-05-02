@@ -129,13 +129,6 @@ public class CourseSpider implements PageProcessor {
 			 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1000").setPriority(0).
 					 putExtra("professionTypeModel", list.get(j)));
 		 }
-
-		// List<String> urlList=new ArrayList<String>();
-		// for(int j=2;j<list.size();j++){
-		// urlList.add(list.get(j).getUrl()+"/0/1000");
-		// }
-		// //将后续urls作为请求
-		// page.addTargetRequests(urlList);
 	}
 
 	/**
@@ -177,6 +170,7 @@ public class CourseSpider implements PageProcessor {
 		/**
 		 * 爬取章节
 		 */
+
 		// 筛选url
 		List<String> chapterUrlList = page
 				.getHtml()

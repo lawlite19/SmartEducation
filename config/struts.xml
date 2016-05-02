@@ -141,13 +141,19 @@
 			<result name="submitTaskUI">/WEB-INF/jsp/submitTaskAction/submitTaskUI.jsp</result>
 			<result name="toList" type="redirectAction">course_list</result>
 		</action>
-		<!-- 爬取课程资源管理 -->
+		<!-- 爬取课程资源 -->
 		<action name="spiderCourse_*" class="spiderCourseAction" method="{1}">
+			<!-- 资源管理 -->
 			<result name="list">/WEB-INF/jsp/spiderCourseAction/list.jsp</result>
  			<result name="toList" type="redirectAction">spiderCourse_list</result>
 			<result name="listCourseInfo">/WEB-INF/jsp/spiderCourseAction/listCourseInfo.jsp</result>
+			<result name="toCourseInfoList" type="redirectAction">spiderCourse_listCourseInfo?id=${courseId}</result>
+			
+			<!-- 资源访问 -->
 			<result name="show">/WEB-INF/jsp/spiderCourseAction/show.jsp</result>
+			<result name="showCourseInfo">/WEB-INF/jsp/spiderCourseAction/showCourseInfo.jsp</result>
 		</action>
+
 	</package>
 
 </struts>    

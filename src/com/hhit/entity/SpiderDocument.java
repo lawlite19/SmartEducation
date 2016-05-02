@@ -23,7 +23,9 @@ public class SpiderDocument {
 	private String publisher;
 	private String publishDate;
 	private String imgUrl;
+	
 	private SpiderCourse spiderCourse;
+	
 	/** 默认构造函数 */
 	public SpiderDocument(){
 		

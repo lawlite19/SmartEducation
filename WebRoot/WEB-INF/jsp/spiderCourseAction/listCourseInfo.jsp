@@ -3,135 +3,108 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>显示所有课程资源</title>
-<%@include file="/WEB-INF/jsp/public/commons.jspf"%>
-<script>
-	$(function() {
-             $("#selectAll").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=true;
-           	   });
-             });
-             $("#selectNone").click(function(){
-            	 $(":checkbox").each(function(){
-           		    this.checked=false;
-           	   });
-           });
-             $("#selectOthers").click(function(){
-          	     $(":checkbox").each(function(){
-          		    this.checked=!this.checked;
-          	   });
-           });
-             $("#deleteSelected").click(function(){
-            	 $("input:checked").each(function(){
-            	 	 var value=$(this).val().split(",");
-           	    	 //alert(value[0]);
-           	    	 //alert(value[1]);
-           	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
-           	    		//if(value[1]=="admin"){
-           				//	alert("该用户为超级管理员,不能删除！");
-           				//	return;
-           				//}
-           	    		$.ajax({ 
-               	    		type: "post",
-               	    		url: "spiderCourse_bulkDelete.action", 
-               	    		data: {
-               	    			"id" : value[0]
-           	    			}, 
-               	    		dataType : "json",
-               	    		async : false,
-                            success: function(data) { 
-                            	 //var json = eval("(" + data + ")");
-								 var str = data.name;
-   								  if (str=="ok") {
-   		           				  	alert("删除成功");
-   		           				 	window.location.reload();
-   		           				  } else {
-   		           	                 alert("删除失败");  
-   		           				}
-               	    		} 
-               	       }); 
-   					}
-        	    	 
-        	     });
-        	   //window.location.reload();
-      });
-
-	});
-
-</script>
+<title>课程介绍</title>
+<%@include file="/WEB-INF/jsp/public/list.jspf"%>
 </head>
 <body>
-<div>
 <s:form action="spiderCourse_list" method="post">
 
 </s:form>
-</div>
-<div>
-<input type="button" id="selectAll" value="全选" />
-<input type="button" id="selectNone" value="全不选" />
-<input type="button" id="selectOthers" value="反选" />
-<input type="button" id="deleteSelected" value="删除" />
-</div>
+
 <h1>章节</h1>
-	<table>
+<div class="mframe">
+	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">课程章节</span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+                    <div>
+	<table  class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<!-- 表头-->
 		<thead>
 			<tr>
-				<td>选择</td>
-				<td>序号</td>
-				<td>章节编号</td>
-				<td>章节名字</td>
-				<td>章节url</td>
-				<td>相关操作</td>
+				<td align="center">选择</td>
+				<td align="center">序号</td>
+				<td align="center">章节编号</td>
+				<td align="center">章节名字</td>
+				<td align="center">对应课程</td>
+				<td align="center">相关操作</td>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
 		<tbody>
 			<s:iterator value="spiderChapterList" status="s">
-				<tr class="TableDetail1 template">
-					<td>
+				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+					<td align="center">
 						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${chapterName}" />
 					</td>
-					<td>${s.count}</td>
-					<td>
+					<td align="center">${s.count}</td>
+					<td align="center">
 						${chapterNum}
 					&nbsp;
 					</td>
-					<td>
-						${chapterName}
+					<td align="center">
+						<a href="${url}" target="_blank" >${chapterName}</a>
 					&nbsp;
 					</td>
-					<td>
-					<a href="${url}">${url}</a>
-					&nbsp;
-					</td>
-					<td>${courseName}&nbsp;</td>
+					
+					<td align="center">${courseName}&nbsp;</td>
 
-					<td><s:a action="spiderCourse_deleteChapter?id=%{id}"
-							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
+					<td align="center">
+						<s:a action="spiderCourse_deleteChapter?chapterId=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
+							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+						</s:a>
 						&nbsp;</td>
 				</tr>
 			</s:iterator>
 
 		</tbody>
 	</table>
+	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	
 	
 	<h1>参考教材</h1>
-<table>
+	<div class="mframe">
+	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="tl"></td>
+                    <td class="tm">
+                        <span class="tt">参考教材</span>
+                    </td>
+                    <td class="tr"></td>
+                </tr>
+                <tr>
+                <td class="tm">
+                        
+                    </td>
+                    <td class="mm">
+                    <div>
+<table   class="grid" cellspacing="0" cellpadding="6" rules="all" itemstyle-cssclass="tdbg" align="center" border="1" id="gvUserInfo">
 		<!-- 表头-->
 		<thead>
 			<tr>
-				<td>选择</td>
-				<td>序号</td>
-				<td>封面</td>
-				<td>教材名</td>
-				<td>教材地址</td>
-				<td>教材作者</td>
-				<td>出版社</td>
-				<td>出版日期</td>
-				<td>操作</td>
+				<td align="center">选择</td>
+				<td align="center">序号</td>
+				<td align="center">封面</td>
+				<td align="center">教材名</td>
+				<td align="center">教材作者</td>
+				<td align="center">出版社</td>
+				<td align="center">出版日期</td>
+				<td align="center">操作</td>
 			</tr>
 		</thead>
 
@@ -139,40 +112,40 @@
 		<tbody>
 			<s:iterator value="spiderDocumentList" status="s">
 				<tr class="TableDetail1 template">
-					<td>
+					<td align="center">
 						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${name}" />
 					</td>
-					<td>${s.count}</td>
-					<td>
+					<td align="center">${s.count}</td>
+					<td align="center">
 						<img alt="" src="${imgUrl}"/>
 					</td>
-					<td>
-						${name}
+					<td align="center">
+						<a href="${url}" target="_blank">${name}</a>
 					&nbsp;
 					</td>
-					<td>
-						<a href="${url}">${url}</a>
-					&nbsp;
-					</td>
-					<td>
+					
+					<td align="center">
 						${author}
 					&nbsp;
 					</td>
-					<td>${publisher}&nbsp;</td>
-					<td>${publishDate}&nbsp;</td>
-					<td><s:a action="spiderChapter_deleteDocument?id=%{id}"
-							onclick="return window.confirm('您确定要删除吗？')">删除</s:a>
+					<td align="center">${publisher}&nbsp;</td>
+					<td align="center">${publishDate}&nbsp;</td>
+					<td align="center">
+						<s:a action="spiderCourse_deleteDocument?documentId=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
+							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+						</s:a>
 						&nbsp;</td>
 				</tr>
 			</s:iterator>
 
 		</tbody>
 	</table>
-	<!-- 其他功能超链接 -->
-	<div id="TableTail">
-		<div id="TableTail_inside">
-			<s:a action="userDetails_addUI">添加用户</s:a>
-		</div>
 	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	
 </body>
 </html>

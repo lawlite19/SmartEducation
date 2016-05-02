@@ -1,0 +1,280 @@
+@charset "utf-8";
+.pct5{width:5%;}
+.pct10{width:10%;}
+.pct90{width:90%;}
+.pct94{width:94%;}
+.pct47{width:47%;}
+.pct45{width:45%;}
+.w60{width:60px;}
+.w75{width:75px;}
+.w85{width:85px;}
+.w120{width:120px;}
+.w126{width:126px;}
+.w186{width:186px;}
+.w230{width:230px;}
+.w250{width:250px;}
+.w270{width:270px;}
+.w308{width:308px;}
+.w347{width:347px;}
+.w320{width:320px;}
+.w710{width: 710px;}
+.w730{width: 730px;}
+.h140{height:140px;}
+.h150{height:150px}
+.h330{height:330px}
+.h380{height:380px}
+.lh44{line-height:44px;}
+.p40{padding:40px;}
+.pl75{padding-left:75px;}
+.pr50{padding-right:50px;}
+.pb30{padding-bottom:30px;}
+.mb-1{margin-bottom:-1px;}
+.ml30{margin-left:30px;}
+.ml35{margin-left:35px;}
+.ml40{margin-left:40px;}
+.ml45{margin-left:45px;}
+.ml60{margin-left:60px;}
+.ml80{margin-left:80px;}
+.mr60{margin-right:60px;}
+.bgfe{background-color:#FFFFE5;}
+.bg4a{background-color:#473A4C;}
+.bg56{background-color:#59666C;}
+.bb2wh{border-bottom:2px solid #fff;}
+.bb27d{border-bottom:2px solid #76BDF1;}
+.bl2wh{border-left:2px solid #fff;}
+.bl2e7{border-left:2px solid #e7e7e7;}
+.bdd7{border:1px solid #D7D7D7;}
+.bd6f{border:1px solid #0066FF;}
+.f18{font-size:18px;}
+.f30{font-size:30px;}
+.f33{font-size:33px;}
+.f44{font-size:44px;}
+.f54{font-size:54px;}
+.f42{font-size:42px;}
+.cda{color:#dadada;}
+.c9c{color:#9BABC4;}
+.c7d{color:#76BDF1;}
+.c6d{color:#6e7d99;}
+.cf6{color:#FFC861;}
+.c6c{color:#658ECE;}
+.cf5{color:#FF5353;}
+.c23{color:#2EAD3C;}
+.c56{color:#565656;}
+.c00{color:#0066FF;}
+.cac{color:#ADBACE;}
+.bged{background-color:#EDEDED;}
+.char_corr{width:8px;}
+.corg6{border-color:#666 transparent transparent;}
+.course_head{height:46px; line-height:46px; background-color:#105D87; color:#fff;}
+.course_info{background-color:#9FDBFB;}
+.course_info_tbox{line-height:20px; overflow:hidden;}
+.course_info_txt{margin-right:3em; overflow:hidden; float:left;}
+.course_txt_dotted{width:3em; height:1.31em; float:right; margin-top:-1.9em;}
+.course_img{width:184px; padding:5px; background-color:#fff;}
+.course_mylist{width:267px;}
+.course_tch_info{width:310px; padding:1px; background-color:#f3f3f3;}
+.course_tch_add{height:218px; color:#DFDFDF; position:relative;}
+.course_ta_plus{font-size:120px; position:absolute; left:90px; top:-15px;}
+.course_ta_txt{font-size:20px; font-weight:bold; position:absolute; left:94px; top:120px;}
+.course_tch_add:hover{cursor:pointer;}
+.course_sections_nav{width:860px; margin-right:120px; padding-left:120px; text-align:center; float:left;}
+.course_snav_off,.course_snav_on{margin-left:-1px; padding-top:6px; padding-bottom:7px; border-left:1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; border-right:1px solid #E6E6E6; font-size:14px; text-align:center;}
+.course_snav_on{background-color:#FAFBFC; border-top:1px solid #E6E6E6; color:#555; font-weight:bold;}
+.course_snav_off{background-color:#76BDF1; border-top:1px solid #76BDF1; color:#fff;}
+.course_snav_add{margin-top:-30px; margin-right:30px; font-size:16px; color:#76BDF1; float:right;}
+.course_content_list{margin-left:20px; list-style-type:decimal;}
+.course_content_list li{margin-bottom:10px;}
+.course_catalogue_nav{width:280px; line-height:20px; *margin-left:-310px; padding:1px; background-color:#EBEBEB; border:1px solid #C5C9CB; position:fixed;}
+.course_name_box{width:250px; height:40px; padding:5px 15px 25px; background-color:#fff; font-size:16px; font-weight:bold; position:absolute; top:35px; left:0; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; filter:alpha(opacity=80); opacity: 0.8;}
+.course_catalogue_content{margin-left:310px; margin-top:10px; padding:20px 60px 20px 60px; background-color:#fff; border:1px solid #C5C9CB;}
+.course_baseinfo_edit{width:186px}
+.address_book_box{width:280px; padding:15px; background-color:#efefef; position:absolute; left:463px; top:-14px;}
+.address_book_sel{width:80%; padding:1px 0 2px 25px; margin-left:auto; margin-right:auto; background-color:#fff;}
+.address_book_content{height:240px; line-height:20px; overflow-y:scroll;}
+.address_stulist_box{display:inline-block; width:347px; height:100px; padding:2px 3px 1px 5px; border:1px solid #C4D3EA; overflow-y:scroll;}
+.address_tch_input{display:inline-block; width:280px; padding:2px 3px 3px 5px; border:1px solid #C4D3EA; vertical-align:middle;}
+.address_list_span{display:inline-block; margin-right:10px; margin-bottom:5px; padding:1px 5px 2px; background-color:#E8EDFF;}
+.catalog_p{left:30px; top:-4px; position:absolute;}
+.course_title_box{width:682px; min-height:80px; padding:10px 10px 10px 40px; background:#fff; opacity:0.8; filter:Alpha(opacity=80); position:absolute; bottom:0; left:0;}
+.course_sum_box{padding-top:80px; padding-left:50px;}
+.go2menu_list{display:none; width:160px; background-color:#ccc; text-align:left; position:absolute; right:0; bottom:32px;}
+.go2menu_list li{padding-left:10px;}
+/*---------------共享资源------------------*/
+.resources_list:hover,.resources_list_on{background-color:#A8BDD0; color:#fff;}
+.resources_list_opt{visibility:hidden; color:#555; font-weight:bold;}
+.resources_list:hover .g9,.resources_list:hover .g5{color:#fff;}
+.resources_list:hover .resources_list_opt,.resources_list_on .resources_list_opt{visibility:visible;}
+.rescources_opt_box{width:140px; line-height:30px; background-color:#FFFFFF;}
+.res_opt_a{display:block; padding:0 5px; color:#555;}
+.res_opt_a:hover{background-color:#ACE0FF;}
+
+/*---------------模板------------------*/
+.btdwh{border-top:1px dashed #fff;}
+.wh_cricle_l{display:inline-block; width:86px; height:87px; line-height:87px; background:url(../img/cricle/wh_cricle_l.png); font-size:54px;  font-weight:bold; color:#72B1FF; text-align:center;}
+.metro_list{margin:2px 1px; padding:20px 15px; position:relative;}
+.course_head_3{height:46px; line-height:46px;}
+.yelbtn,.pikbtn{display:inline-block; font-weight:bold; text-align:center;}
+.yelbtn{background-color:#FFEA5D; color:#0D4AFD;}
+.yelbtn:hover{background-color:#F3BE32;}
+.bg34{background-color:#3B3F4B;}
+.c_tm3 .course_snav_off{background-color:#3B3F4B; border-top:1px solid #3B3F4B;}
+.c_tm3_list{line-height:36px;}
+.c_tm3_list li{margin-bottom:5px; background-color:#f3f3f3; font-size:14px;}
+.c_tm3_color{display:inline-block; width:36px; height:36px; margin-right:20px; font-size:16px; font-weight:bold; color:#fff; text-align:center;}
+.c_tm3_c1{background-color:#0DB9FB;}
+.c_tm3_c2{background-color:#4F7AFD;}
+.c_tm3_c3{background-color:#9E52FA;}
+.c_tm3_c4{background-color:#FB5F9E;}
+.c_tm3_c5{background-color:#FC9254;}
+.c_tm3_c6{background-color:#FDD331;}
+.c_tm3_c7{background-color:#82DD51;}
+.c_tm3_c8{background-color:#4EE7BB;}
+.cf5{color:#FF5C5D;}
+.pikbtn{background-color:#FF5C5D; color:#fff;}
+.lh40{line-height:40px;}
+
+.catalog_box{display:inline-block;width:auto; padding:20px 20px 20px 80px;margin-right:40px}
+.catalog_p{left:30px; top:-4px; position:absolute;}
+
+/*---------------分享链接------------------*/
+.share_link{background-color:#f3f3f3;height:26px;}
+/*---------------详情页------------------*/
+.bgf5{background-color:#F5F5F5;}
+
+.mr30{margin-right:30px;}
+.bgf9{background-color:#F9F9F9;}
+.brsh_video{-webkit-box-shadow:2px 4px 10px #666; -moz-box-shadow:2px 4px 10px #666; -o-box-shadow:2px 4px 10px #666; box-shadow:2px 4px 10px #666;}
+
+/*---------------教学资源------------------*/
+.resources_list:hover,.resources_list_on{background-color:#A8BDD0; color:#fff;}
+.resources_list_opt{visibility:hidden; color:#555; font-weight:bold;}
+.resources_list:hover .resources_list_opt,.resources_list_on .resources_list_opt{visibility:visible;}
+.resources_type{color:#555;}
+.resources_list:hover .course_tl_edit{visibility:visible;}
+.rescources_opt_box{width:140px; line-height:30px; background-color:#FFFFFF;}
+.res_opt_a{display:block; padding:0 5px; color:#555;}
+.res_opt_a:hover{background-color:#ACE0FF;}
+
+.res_tab,.res_tab_selected{padding:3px 15px 2px; background:#fff; font-size:15px; color:#fff;}
+.res_tab_selected{background-color:#29ADCB;}
+.res_tab{background-color:#999;}
+.res_cor{border-width:7px; background-color:#FFF; border-color:#29ADCB transparent transparent;}
+.bgf9{background-color:#f9f9f9;}
+
+/*----------开设教学班显示--------------*/
+.pct70{width:70%;}.pct63{width:63%;}
+.bdfd{border:1px solid #FFDD97;}
+.tips_p{padding:3px 5px 3px 10px;}
+.import_textarea{height: 100px; width: 450px;}
+
+/*----------开设教学班页面-------------*/
+.bge7{background-color:#e7e7e7;}
+.circle_blue{display:inline-block; width:33px; line-height:35px; background:url(../img/class/class_circle.png) -66px 0 no-repeat; font-size:16px; color:#fff; text-align:center;}
+.course_est_input{width:658px; padding:6px 10px 7px; border:1px solid #0066FF; font-size:14px;}
+.course_esttab_on,.course_esttab_off,.blog_nav_on,.blog_nav_off{
+	display:inline-block; 
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+	font-size:14px; 
+}
+.course_esttab_on,.course_esttab_off{padding:6px 15px; border-width:1px 1px 0 1px; border-style:solid; border-color:#0066FF;}
+.course_esttab_on{background-color:#0066FF; color:#fff;}
+.course_esttab_off{color:#0066FF;}
+.course_esttab_box{padding:20px 15px; border:1px solid #0066FF;}
+.course_est_code{background-color:#0066FF; color:#fff;}
+.tips_right{display:inline-block; width:34px; height:33px; margin-bottom:-3px; background:url(../img/tips_right.png) 0 0 no-repeat;}
+.mb46{margin-bottom:46px;}
+.pb46{padding-bottom:46px;}
+
+/*------------教师团队添加教师-----------*/
+.tch_add_box{width:815px;}
+.tch_add_title{height:30px; padding:5px; background-color:#efefef; font-size:14px; text-align:center;}
+.tch_add_cont{padding:40px 20px 35px 50px; font-size:14px;}
+.tch_desc_text{width: 373px; height: 75px;}
+
+/*----------教师空间--------------*/
+.ml-3{margin-left:-5px;}
+.pct65{width:65%;}
+.pct16{width:18%;}
+.w445{width:445px;}
+.bgc9{background-color:#999;}
+.tch_bg{width:40; height:40px; background:url(../img/course_bg.jpg) repeat;}
+.tch_edit_box{width:1000px;}
+.tch_nav_box{width:130px; padding:10px 26px 15px 0; line-height:30px; text-align:right;}
+.nav_border_eb{border-right:2px solid #ebebeb;}
+.nav_border_bf{border-right:1px solid #bfbfbf;}
+.tch_nav_box li{position:relative;}
+.tch_nav_on{padding-right:26px; border-right:3px solid #FE0E0E; font-size:20px; position:absolute; top:0; right:-28px; font-weight:bold;}
+.tch_notic_box{width:445px; padding:5px 8px; border:1px solid #ccc; color:#000;}
+.bl6a{border-left:2px solid #6EBA34;}
+.bl1c{border-left:2px solid #14BCD6;}
+.bl9d{border-left:2px solid #967DD9;}
+.blf9{border-left:2px solid #F9C939;}
+.tch_trends_list{display:inline-block; height:38px; background:url(../img/class/trends_list.png) 0 0 no-repeat;}
+.list_news{width:40px; background-position:0 0;}
+.list_work{width:38px; background-position:-40px 0;}
+.list_qa{width:38px; background-position:-78px 0;}
+.list_discuss{width:38px; background-position:-116px 0;}
+.course_notes_box{display:inline-block; width:240px; padding:3px 6px; background-color:#ECECEC; color:#000;}
+.course_notes_box_s{display:inline-block; padding:3px 6px; background-color:#FEE9BE; color:#000;}
+.bba5{border-bottom:2px solid #A5A5A5;}
+.bda5{border:2px solid #a5a5a5;}
+.bar{width:150px; padding:2px; background-color:#ccc; height:1px;}
+.greenbar{display:block; padding:2px; background-color:#02A83C; position:absolute; top:0;left:0; height:1px;}
+.tch_blog_box{padding:40px;}
+.blog_time_box{width:39px; padding:6px 7px; background-color:#6BA210; color:#fff; font-size:14px;}
+.blog_nav_on{border-width:1px 1px 0 1px; border-style:solid; border-color:#ccc; color:#555; }
+.blog_nav_on,.blog_nav_off{padding:3px 15px;}
+.blog_cont_box{padding:15px 20px; border:1px solid #ccc;}
+.hot_blog_box{border-width:0 1px 1px; border-style:solid; border-color:#ccc; width: 230px;}
+.hot_blog_box li{padding:10px 8px 15px; border-top:1px solid #ccc;}
+.num_list_green,.num_list_gray{padding:1px 5px; color:#fff; font-size:14px; font-weight:bold;}
+.num_list_green{background-color:#6CA613;}
+.num_list_gray{background-color:#676767;}
+.tch_reply_box{max-width:430px; padding: 5px 10px; margin-right:40px; background-color:#f3f3f3; line-height:20px;}
+.tch_mylist_box{width:245px; padding:10px; background-color:#fff; border:1px solid #ccc; overflow:hidden; white-space:nowrap;}
+.follow_1,.follow_2{display:inline-block; height:18px; background-repeat:no-repeat; background-image:url(../img/app/follow.png); vertical-align:middle;}
+.follow_1{width:24px; background-position:0 0;}
+.follow_2{width:16px; background-position:-24px 0;}
+.course_catalogue_list{line-height:24px; font-size:14px;}
+.course_single_list{margin-bottom:1px; padding:3px 0 3px 35px;}
+.course_single_list:hover{background-color:#555555; color:#fff;}
+.course_single_list:hover a{color:#fff;}
+.checkbox_out{visibility:hidden;}
+.course_single_list:hover .checkbox_out{visibility:visible;}
+.i_fav{background-image:url(../img/favorites/f_sprite.png);}
+.f_metro_m21{margin:2px 1px;}
+.f_metro_list{padding:20px 15px; position:relative;}
+.f_metro_opt{position:absolute; bottom:10px; right:10px;}
+.f_share{visibility:hidden;}
+.f_metro_list{border-width:2px; border-style:solid; border-color:transparent;}
+.f_metro_list:hover{background-color:#fff; border-color:#E8891A; color:#555;}
+.f_metro_list:hover .wh{color:#555;}
+.f_metro_list:hover .f_share{visibility:visible;}
+.f_file_l{display:inline-block; width:68px; height:64px; background:url(../img/favorites/f_sprite.png) 0 0 no-repeat;}
+.search_input{border:0;}
+.graybtn_l,.graybtn_r{display:inline-block; border-style:solid; border-color:#d1d1d1;}
+.graybtn_l{
+	border-width:1px 0 1px 1px;
+	-moz-border-radius-topleft:18px;
+	-moz-border-radius-bottomleft:18px;
+	-webkit-border-top-left-radius:18px;
+	-webkit-border-bottom-left-radius:18px;
+	border-top-left-radius:18px;
+	border-bottom-left-radius:18px;
+}
+.graybtn_r{
+	border-width:1px 1px 1px 0;
+	-moz-border-radius-topright:18px;
+	-moz-border-radius-bottomright:18px;
+	-webkit-border-top-right-radius:18px;
+	-webkit-border-bottom-right-radius:18px;
+	border-top-right-radius:18px;
+	border-bottom-right-radius:18px;
+}
+.course_list_table{width:99%; line-height:30px; border-width:1px 0 0 1px; border-style:solid; border-color:#e4e4e4;}
+.course_list_table td{padding-left:5px; border-right:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;}

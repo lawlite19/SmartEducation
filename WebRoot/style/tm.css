@@ -1,0 +1,23 @@
+@charset "utf-8";
+.w70{width:70px;}
+.w80{width:80px;}
+.bgblue{background-color:#0570ad;}
+.fa{font-family:Arial;}
+.f90{font-size:90px;}
+.p40{padding:40px;}
+.pl40{padding-left:40px;}
+.pb40{padding-bottom:40px;}
+.pr40{padding-right:40px;}
+.ml40{margin-left:40px;}
+.pct30{width:30%;}
+.pct78{width:78%;}
+.c167EFB{color:#167EFB;}
+.invCodeInput{width: 400px; height: 25px;}
+.bccc{border:1px solid #CCC;}
+.bddd{border:1px solid #DDDDDD;}
+.tchDescBox{padding: 20px 20px; min-width:400px; max-width: 600px; height: 240px;}
+.tchDescBoxShadow{-webkit-box-shadow:2px 4px 3px #555; -moz-box-shadow:2px 4px 3px #555; -o-box-shadow:2px 4px 3px #555; box-shadow:2px 4px 3px #555;}
+.tch_desc_corp1{width:8px; font-size:16px; color:#ccc; position:absolute; left:19px; *left:20px; left:19px\0; top:0px; top:0px\9;}
+.tch_desc_corp2{color:#FFF; position:absolute; left:20px; top:1px; top:2px\9;}
+.w330{width: 330px;}
+.tch_card{display:inline-block; width:32px; height:24px; background:url(../img/class/tch_card.png) 0 0 no-repeat;}
