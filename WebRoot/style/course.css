@@ -47,7 +47,7 @@
 .bd6f{border:1px solid #0066FF;}
 .f18{font-size:18px;}
 .f30{font-size:30px;}
-.f33{font-size:33px;}
+.f23{font-size:23px;}
 .f44{font-size:44px;}
 .f54{font-size:54px;}
 .f42{font-size:42px;}
@@ -95,7 +95,7 @@
 .address_tch_input{display:inline-block; width:280px; padding:2px 3px 3px 5px; border:1px solid #C4D3EA; vertical-align:middle;}
 .address_list_span{display:inline-block; margin-right:10px; margin-bottom:5px; padding:1px 5px 2px; background-color:#E8EDFF;}
 .catalog_p{left:30px; top:-4px; position:absolute;}
-.course_title_box{width:682px; min-height:80px; padding:10px 10px 10px 40px; background:#fff; opacity:0.8; filter:Alpha(opacity=80); position:absolute; bottom:0; left:0;}
+.course_title_box{width:682px; min-height:80px;  background:#fff; opacity:0.8; filter:Alpha(opacity=80); position:absolute; }
 .course_sum_box{padding-top:80px; padding-left:50px;}
 .go2menu_list{display:none; width:160px; background-color:#ccc; text-align:left; position:absolute; right:0; bottom:32px;}
 .go2menu_list li{padding-left:10px;}
@@ -278,3 +278,6 @@
 }
 .course_list_table{width:99%; line-height:30px; border-width:1px 0 0 1px; border-style:solid; border-color:#e4e4e4;}
 .course_list_table td{padding-left:5px; border-right:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;}
+.courseName{
+	text-align:center;
+}

@@ -575,4 +575,54 @@ a.mcalendar_selected{border-color:#A9D4DD; background-color:#2794A9; color:#fff;
 .lvtt{font-size: 22px;}
 .lvtv{color:#FF6600;font-style:italic;font-size: 22px;}
 
+html,body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
 
+.ans-book {
+	position: relative;
+	line-height: 22px;
+	clear: both;
+}
+
+.ans-book,.ans-book span {
+	display: block;
+	text-indent: 0;
+}
+
+.ans-book-cover img {
+	width: 68px;
+	margin: 0;
+}
+
+.ans-book::foucs {
+	background-color: #ccc;
+}
+
+.ans-book .ans-ref-bookname {
+	margin-top: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+	width: 44%;
+}
+
+.ans-book .ans-ref-bookname a {
+	color: #666666;
+	text-decoration: none;
+}
+
+.ans-book .ans-book-info {
+	position: absolute;
+	top: 0;
+	left: 85px;
+	width: 100%;
+}
+
+.ans-book .ans-ref-author,.ans-book .ans-ref-publish {
+	font-size: 12px;
+	color: #999;
+}
