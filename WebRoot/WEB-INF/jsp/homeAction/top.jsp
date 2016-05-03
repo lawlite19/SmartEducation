@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head >
@@ -216,20 +217,19 @@
         </div>
         <div class="member">
             <img src="${pageContext.request.contextPath}/style/images/q.png" />
-            您好：<!--  
-            <s:if test="%{user.teacher!=null}">
+            您好： 
+            <c:if test="${user.teacher!=null}">
+           老师  		
             	${user.teacher.teaName}
-            	[${user.userNum},
-            	<s:iterator value="user.userDetails.roles">
-            		${roleName}
+            	<s:iterator value="user.teacher.roles">
+            		[${roleName}]
             	</s:iterator>
-            	,${user.userNum}]
-            </s:if>
-            <s:if test="%{user.student!=null}">
-            学生
+            </c:if>
+            <c:if test="${user.student!=null}">
+            学生	  		${user.userNum}
             	${user.student.stuName}
-            </s:if>
-           	  -->
+            </c:if>
+           	  
         </div>
         <div class="s2"><a href="right.aspx" style="color: #1598E0" target="right">首页</a></div>
             <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" onclick="signOut();" style="color: #1598E0" target="_top">退出系统</a></div>

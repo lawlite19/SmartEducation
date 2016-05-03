@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="VisitCourseRecord" table="T_VisitCourseRecord">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="count" type="integer">	
+			<column name="Count">
+				<comment>访问次数</comment>
+			</column>
+		</property>
+		
+		<!--student属性，本类与Student的多对一关系-->
+		<many-to-one name="student" class="Student">
+			<column name="Student_Id"></column>
+		</many-to-one>
+		
+		<!-- spiderCourse属性，本类与 SpiderCourse的多对一-->
+		<many-to-one name="spiderCourse" class="SpiderCourse">
+			<column name="SpiderCourse_Id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

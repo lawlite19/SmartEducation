@@ -10,6 +10,7 @@ import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
 import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
+import com.hhit.service.IFavoriteService;
 import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
@@ -80,9 +81,12 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected IClassService classService;//班级
 	@Resource
-	protected ISpiderProfessionTypeService spiderProfessionTypeService;
+	protected ISpiderProfessionTypeService spiderProfessionTypeService;//爬虫学科类型
 	@Resource
-	protected ISpiderCourseInfoService spiderCourseInfoService;
+	protected ISpiderCourseInfoService spiderCourseInfoService;//爬虫课程信息
+	@Resource
+	protected IFavoriteService favoriteService;//收藏夹
+	
 	
 	//--------------
 	@Resource

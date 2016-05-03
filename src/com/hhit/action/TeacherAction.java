@@ -1,5 +1,7 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,9 +12,12 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import ChartDirector.GetSessionImage;
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Department;
+import com.hhit.entity.LogFile;
 import com.hhit.entity.Role;
 import com.hhit.entity.Student;
 import com.hhit.entity.Teacher;
@@ -46,21 +51,21 @@ public class TeacherAction extends BaseAction<Teacher>{
 		List<Department> departmentList = DepartmentUtils
 				.getAllDepartments(topList);
 		ActionContext.getContext().put("departmentList", departmentList);
-//		// 准备数据, roleList
-//		List<Role> roleList = roleService.findAll();
-//		ActionContext.getContext().put("roles", roleList);
 		
 		new QueryHelper(Teacher.class, "t")//
 		.addCondition((departmentId != null), "t.department.id=?",departmentId)//
 				.addCondition((viewType == 0) && (inputTerm.trim().length() > 0),"t.teaName LIKE ?", "%" + inputTerm + "%")//
 				.addCondition((viewType == 1) && (inputTerm.trim().length() > 0),"t.teaNum LIKE ?", "%" + inputTerm + "%")//
-				.preparePageBean(studentService, pageNum, pageSize);
+				.preparePageBean(teacherService, pageNum, pageSize);
 
 		return "list";
 	}
 	/** 删除 */
 	public String delete() throws Exception{
 		teacherService.delete(model.getId());
+		logFileService.save(new LogFile(getCurrentUser().getUserNum(), getCurrentUser().getUserType(),
+				ServletActionContext.getRequest().getRemoteAddr(), new Timestamp(new Date().getTime()),
+				"删除【老师id="+model.getId()+"】成功"));
 		return "toList";
 	}
 	/** 批量删除 */

@@ -153,7 +153,9 @@
 			<result name="show">/WEB-INF/jsp/spiderCourseAction/show.jsp</result>
 			<result name="showCourseInfo">/WEB-INF/jsp/spiderCourseAction/showCourseInfo.jsp</result>
 		</action>
-
+		<!-- 收藏夹 -->
+		<action name="favorite_*" class="favoriteAction" method="{1}">
+		</action>
 	</package>
 
 </struts>    

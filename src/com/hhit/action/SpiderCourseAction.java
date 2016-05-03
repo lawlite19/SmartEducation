@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Favorite;
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderDocument;
@@ -63,6 +64,14 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 	public String showCourseInfo() throws Exception{
 		//找到课程对象
 		SpiderCourse courseFind=spiderCourseService.findById(courseId);
+		//课程Id--显示，用于收藏该课程
+		ActionContext.getContext().put("courseId", courseFind.getId());
+		//课程名--显示课程名
+		ActionContext.getContext().put("courseName", courseFind.getName());
+		//准备数据--是否收藏
+		Favorite favorFind=favoriteService.findByStuAndCourse(getCurrentUser().getStudent(),courseFind);
+		ActionContext.getContext().put("favorFind", favorFind);
+		
 		//准备数据--课程介绍
 		ActionContext.getContext().getValueStack().push(spiderCourseInfoService.findByCourse(courseFind));
 		//准备数据--课程参考教材
@@ -71,7 +80,7 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		//根据课程查找章节
 		List<SpiderChapter> chapterList= spiderChapterService.findByCourse(courseFind);
 		ActionContext.getContext().put("chapterList", chapterList);
-		
+
 		
 		return "showCourseInfo";
 	}

@@ -127,8 +127,6 @@ public class StudentAction extends BaseAction<Student> {
 		if(stuFind.getClass_()!=null){
 			classId=stuFind.getClass_().getId();
 		}
-		//准备班级信息
-		//todo
 
 		return "saveUI";
 	}

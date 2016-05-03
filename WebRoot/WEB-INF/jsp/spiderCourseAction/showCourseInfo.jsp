@@ -4,13 +4,14 @@
 <html>
 <head>
 <title>课程信息</title>
+<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
+<!-- layer弹窗插件 -->
+<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/course.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/master.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/tm.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/comm.css" />
-
-<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 <style type="text/css">
 			pre {white-space: pre-wrap;       
 				/* css-3 */white-space: -moz-pre-wrap;  
@@ -19,66 +20,103 @@
 				/* Opera 7 */word-wrap: break-word;       
 				/* Internet Explorer 5.5+ */
 				font-size:14px;
+			}
+			.span_text{
+				font-size:16px;
+				color:black;
 			} 
-			
+			.div_favorite{
+				float:right;
+				vertical-align: middle
+			}
 			.zev_content p{word-wrap: break-word;word-break:break-all;}
 </style>
-<style type="text/css">
-	html,body {
-		margin: 0px;
-		padding: 0px;
-		height: 100%;
+<!-- 收藏ajax请求 -->
+<script>
+		function ajaxFavorite(baseUrl,courseId){
+			layer.msg('处理中', {icon: 16});
+			$.ajax({ 
+   	    		type: "post",
+   	    		url: "favorite_add.action", 
+   	    		data: {
+   	    			"courseId" : courseId
+	    			}, 
+   	    		dataType : "json",
+   	    		async : false,
+                success: function(data) { 
+                	 //var json = eval("(" + data + ")");
+					 var str = data.name;
+						  if (str=="favorOK") {
+							layer.msg('收藏成功', {time: 2000, icon:6});
+							var realImgUrl=baseUrl+"style/images/ic_action_favor_on_pressed.png";
+							alert(realImgUrl);
+							$("#img_favorite").attr(src,realImgUrl);
+          				  } else {
+          					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
+          				}
+   	    		} 
+   	       }); 
+		}
+</script>
+<!-- 取消收藏ajax -->
+<script type="text/javascript">
+	function ajaxCancleFavorite(baseUrl,courseId){
+		layer.msg('处理中', {icon: 16});
+		$.ajax({ 
+	    		type: "post",
+	    		url: "favorite_delete.action", 
+	    		data: {
+	    			"courseId" : courseId
+    			}, 
+	    		dataType : "json",
+	    		async : false,
+            success: function(data) { 
+            	 //var json = eval("(" + data + ")");
+				 var str = data.name;
+					  if (str=="canclefavorOK") {
+						layer.msg('收藏成功', {time: 2000, icon:6});
+						var realImgUrl=baseUrl+"/style/images/ic_action_favor_on_pressed.png";
+						alert(realImgUrl);
+						$("#img_favorite").attr(src,realImgUrl);
+      				  } else {
+      					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
+      				}
+	    		} 
+	       }); 
 	}
-	
-	.ans-book {
-		position: relative;
-		line-height: 22px;
-		clear: both;
-	}
-	
-	.ans-book,.ans-book span {
-		display: block;
-		text-indent: 0;
-	}
-	
-	.ans-book-cover img {
-		width: 68px;
-		margin: 0;
-	}
-	
-	.ans-book::foucs {
-		background-color: #ccc;
-	}
-	
-	.ans-book .ans-ref-bookname {
-		margin-top: 5px;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		display: block;
-		width: 44%;
-	}
-	
-	.ans-book .ans-ref-bookname a {
-		color: #666666;
-		text-decoration: none;
-	}
-	
-	.ans-book .ans-book-info {
-		position: absolute;
-		top: 0;
-		left: 85px;
-		width: 100%;
-	}
-	
-	.ans-book .ans-ref-author,.ans-book .ans-ref-publish {
-		font-size: 12px;
-		color: #999;
-	}
-  </style>
+</script>
 </head>
 <body>
 <div class="constr bgwh fix mb46">
+<div class="pct66 l pb40">
+<!-- 课程名称 -->
+   <div class="mt10 f23 g5 courseName">
+                <span>${courseName}</span>
+   </div>
+<!-- 收藏按钮 -->
+
+<s:if test="#favorFind!=null">
+<a onclick="ajaxCancleFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
+	<div class="div_favorite">
+			<img id="img_favorite"  alt="已收藏" src="${pageContext.request.contextPath}/style/images/ic_action_favor_on_pressed.png" width="40px" height="40px"
+			style="margin-bottom: -13px"
+			/>
+			<span class="span_text">已收藏</span>
+	</div>
+</a>
+</s:if>
+<s:else>
+<a onclick="ajaxFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
+	<div class="div_favorite">
+			<img id="img_favorite"  alt="收藏" src="${pageContext.request.contextPath}/style/images/ic_action_favor_pressed.png" width="40px" height="40px"
+			style="margin-bottom: -13px"
+			/>
+			<span class="span_text">收藏</span>
+	</div>
+</a>
+</s:else>
+</div>
+
 <!-- 课程介绍 -->
 	<div class="pct66 l pb40">
 	<div class="ml30 mr30">
