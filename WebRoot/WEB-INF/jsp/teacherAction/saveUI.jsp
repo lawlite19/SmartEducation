@@ -23,10 +23,9 @@
     }
 	function Check() {
         if (!MM_Empty('select_dept', '所属部门')) return false;
-        if (!MM_Empty('select_class', '所属班级')) return false;
-        if (!MM_Empty('txt_stuNum', '登录名')) return false;
-        if (!MM_Empty('txt_stuName', '姓名')) return false;
-        if (!MM_Empty('txt_grade', '年级')) return false;
+        if (!MM_Empty('txt_teaNum', '登录名')) return false;
+        if (!MM_Empty('txt_teaName', '姓名')) return false;
+        if (!MM_Empty('select_role', '角色')) return false;
         layer.load();
     }
 	</script>
@@ -59,10 +58,10 @@
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 学生管理 &gt; 
 <s:if test="%{id == null}">
-添加学生信息
+添加老师信息
 </s:if>
 <s:else>
-修改学生信息
+修改老师信息
 </s:else>
 </div>
 <!-- 信息开始 -->
@@ -73,7 +72,7 @@
           	<tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">学生信息</span>
+                        <span class="tt">老师信息</span>
                     </td>
                     <td class="tr"></td>
             </tr>
@@ -83,7 +82,7 @@
                     </td>
                     <td class="mm">
                     <div>
-<s:form action="student_%{id == null ? 'add' : 'edit'}">
+<s:form action="teacher_%{id == null ? 'add' : 'edit'}">
     	<s:hidden name="id"></s:hidden>
 <table cellspacing="0" cellpadding="6"  align="center" border="0">
 		<!-- 表头-->
@@ -94,33 +93,24 @@
                         	<s:select name="departmentId" cssClass="ddl" id="select_dept"
                         		list="#departmentList" listKey="id" listValue="deptName"
                         		headerKey="" headerValue="==请选择部门=="
-                        		onchange="classChange();"
                         	/>
                         	<span class="span_note">*</span>
                         </td>
                     </tr>
-                    <tr>
-                    	<td class="addFont">所属班级</td>
-                        <td>
-                        	<s:select name="classId" cssClass="ddl" id="select_class"
-                        		list="#classList" listKey="id" listValue="className"
-                        		headerKey="" headerValue="">
-                        	</s:select>
-                        	<span class="span_note">*</span>
-                        </td>
-                    </tr>
+                    
                     <tr><td  class="addFont">登录名</td>
-                        <td><s:textfield name="stuNum" cssClass="inpu" id="txt_stuNum" />
+                        <td><s:textfield name="teaNum" cssClass="inpu" id="txt_teaNum" />
                         <span class="span_note">*</span>
 							（登录名要唯一，设置为学号或工号）
 						</td>
                     </tr>
                     <tr><td  class="addFont">姓名</td>
-                        <td><s:textfield name="stuName" cssClass="inpu" id="txt_stuName"/>
+                        <td><s:textfield name="teaName" cssClass="inpu" id="txt_teaName"/>
                         	<span class="span_note">*</span>
                         </td>
                         
                     </tr>
+
 					<tr><td  class="addFont">性别</td>
                         <td>
                         	<%--
@@ -130,16 +120,36 @@
 							<s:radio name="sex" list="{'男', '女'}"></s:radio>
 						</td>
                     </tr>
+                    <tr><td  class="addFont">职称</td>
+                    <td><s:textfield name="title" cssClass="inpu" id="txt_title"/>
+                        </td>
+                    </tr>
                     <tr><td  class="addFont">生日</td>
                         <td><s:textfield name="birthday" cssClass="inpu" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd',startDate:'1993-01-01'})"/></td>
                     </tr>
 
-					<tr><td  class="addFont">年级</td>
-                        <td><s:textfield name="grade" cssClass="inpu" id="txt_grade"/>
-                        <span class="span_note">*</span>
+					<tr><td  class="addFont">来校时间</td>
+                        <td><s:textfield name="inTime" cssClass="inpu" id="txt_inTime" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd',startDate:'1993-01-01'})"/>
                         </td>
                         
                     </tr>
+                    <tr><td  class="addFont">最终学历</td>
+                        <td><s:textfield name="finalEdu" cssClass="inpu" id="txt_finalEdu"/>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+					<td class="addFont">角色</td>
+                        <td>
+                        	<s:select name="roleIds" cssClass="ddl" id="select_role"
+                        		multiple="true" size="10" cssStyle="height:100px;"
+                        		list="#roleList" listKey="id" listValue="roleName"
+                        	/>
+                        	<span class="span_note">*</span>
+							(按住Ctrl键可以多选或取消选择)
+                        </td>
+                    </tr>
+               
                     <tr>
                     	<td>
                     		

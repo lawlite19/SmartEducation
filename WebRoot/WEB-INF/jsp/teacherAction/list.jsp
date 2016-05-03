@@ -9,8 +9,6 @@
              $("#deleteSelected").click(function(){
             	 $("input:checked").each(function(){
             	 	 var value=$(this).val().split(",");
-           	    	 //alert(value[0]);
-           	    	 //alert(value[1]);
            	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
            	    		//if(value[1]=="admin"){
            				//	alert("该用户为超级管理员,不能删除！");
@@ -29,6 +27,7 @@
 								 var str = data.name;
    								  if (str=="ok") {
    		           				  	alert("删除成功");
+   		           				  	layer.load();
    		           				 	window.location.reload();
    		           				  } else {
    		           	                 alert("删除失败");  
@@ -38,12 +37,31 @@
    					}
         	    	 
         	     });
-        	   //window.location.reload();
       });
-
 	});
 
 </script>
+<!-- 查询输入框检查 -->
+<script type="text/javascript">
+    function MM_Empty(ctrl1Id, ctrl2Id) {
+        var ctrl1 = document.getElementById(ctrl1Id);
+        var ctrl2 = document.getElementById(ctrl2Id);
+        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
+        	//正上方
+        	layer.msg('请输入查询条件！', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl1.focus();
+            return false;
+        }
+        layer.load();
+        return true;
+    }
+	function Check() {
+		return MM_Empty('select_dept', 'txt_inputTerm');
+    }
+	</script>
 </head>
 <body>
 <!-- 顶层 -->
@@ -64,27 +82,21 @@
                                      按部门：
 				</td>
                <td>
-               		<s:select name="departmentId" cssClass="ddl" list="#departmentList"
+               		<s:select name="departmentId" id="select_dept" cssClass="ddl" list="#departmentList"
 					listKey="id" listValue="deptName" headerKey="" headerValue="==请选择部门==" />
                </td>
                <td>
                    <s:select name="viewType" list="#{0:'姓名', 1:'账号'}" cssClass="ddl" />
    			   </td>
                <td>
-                   <s:textfield name="inputTerm" cssClass="inpu"></s:textfield>
+                   <s:textfield name="inputTerm" id="txt_inputTerm" cssClass="inpu"></s:textfield>
                </td>
                <td>
                </td> 
                <td colspan="4" align="center">
-                   <input type="submit" value="查询" class="ttn" />
+               	<s:submit value="查询" cssClass="ttn" onclick="return Check();" ></s:submit>
 			   </td>
-			   <td width="150">
-			   </td>
-			   <td colspan="4" align="right">
-			   		<s:form action="teacher_addUI">
-			   			<s:submit cssClass="ttn" value="添加老师"></s:submit>
-			   		</s:form>
-			   </td>
+			   
         </tr>
     </tbody>
 </table>
@@ -96,14 +108,21 @@
 </s:form>
 <!-- 引入选择按钮 -->
 <%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
-
+<!-- 添加按钮 -->
+<table align="center" cellspacing="3" cellpadding="5">
+	<tr>
+		<td class="bbtn btn-primary" align="center">
+			<s:a action="teacher_addUI" style="color:white;text-decoration: none;">添加老师</s:a>
+		</td>
+	</tr>
+</table>
 
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">用户账号管理</span>
+                        <span class="tt">老师管理</span>
                     </td>
                     <td class="tr"></td>
                 </tr>
@@ -122,6 +141,8 @@
 				<td align="center">部门名称</td>
 				<td align="center">姓名</td>
 				<td align="center">账号</td>
+				<td align="center">职称</td>
+				<td align="center">角色</td>
 				<td align="center">相关操作</td>
 			</tr>
 		</thead>
@@ -137,6 +158,12 @@
 					<td align="center">${department.deptName}&nbsp;</td>
 					<td align="center" >${teaName}&nbsp;</td>
 					<td align="center">${teaNum}&nbsp;</td>
+					<td align="center">${title}&nbsp;</td>
+					<td align="center">
+					<s:iterator value="roles" status="s">
+						${s.count}、${roleName}
+					</s:iterator>
+					</td>
 					<td align="center">
 					<s:a action="teacher_editUI?id=%{id}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />

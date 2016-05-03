@@ -34,6 +34,20 @@ public class Teacher implements java.io.Serializable{
 	
 	private Set<Course> courses;
 	
+	/**
+	 * 默认构造函数
+	 */
+	public Teacher(String tNum,String tName){
+		teaNum=tNum;
+		teaName=tName;
+	}
+	/**
+	 * 构造函数
+	 */
+	public Teacher(){
+		
+	}
+	
 	public Integer getId() {
 		return id;
 	}

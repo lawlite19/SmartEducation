@@ -97,6 +97,30 @@ public class Installer {
 		session.save(stu14);
 		session.save(stu15);
 // ==============================================================
+		//保存老师信息
+		Teacher tea1=new Teacher("01001", "teaTest1");
+		Teacher tea2=new Teacher("01002", "teaTest2");
+		Teacher tea3=new Teacher("01003", "teaTest3");
+		Teacher tea4=new Teacher("01004", "teaTest4");
+		Teacher tea5=new Teacher("01005", "teaTest5");
+		Teacher tea6=new Teacher("01006", "teaTest6");
+		Teacher tea7=new Teacher("01007", "teaTest7");
+		Teacher tea8=new Teacher("01008", "teaTest8");
+		Teacher tea9=new Teacher("01009", "teaTest9");
+		Teacher tea10=new Teacher("01010", "teaTest10");
+		Teacher tea11=new Teacher("01011", "teaTest11");
+		session.save(tea1);
+		session.save(tea2);
+		session.save(tea3);
+		session.save(tea4);
+		session.save(tea5);
+		session.save(tea6);
+		session.save(tea7);
+		session.save(tea8);
+		session.save(tea9);
+		session.save(tea10);
+		session.save(tea11);
+// ==============================================================
 		// 保存用户信息
 		String pwd=DigestUtils.md5Hex("123456");
 		User user1=new User("2012122710", pwd, "学生",stu1,null);
@@ -130,6 +154,18 @@ public class Installer {
 		session.save(user13);
 		session.save(user14);
 		session.save(user15);
+		
+		session.save(new User("01001", pwd, "老师", null, tea1));
+		session.save(new User("01002", pwd, "老师", null, tea2));
+		session.save(new User("01003", pwd, "老师", null, tea3));
+		session.save(new User("01004", pwd, "老师", null, tea4));
+		session.save(new User("01005", pwd, "老师", null, tea5));
+		session.save(new User("01006", pwd, "老师", null, tea6));
+		session.save(new User("01007", pwd, "老师", null, tea7));
+		session.save(new User("01008", pwd, "老师", null, tea8));
+		session.save(new User("01009", pwd, "老师", null, tea9));
+		session.save(new User("010010", pwd, "老师", null, tea10));
+		session.save(new User("010011", pwd, "老师", null, tea11));
 // ==============================================================
 		// 保存角色
 		Role role1=new Role("管理员", "管理员功能", new Timestamp(new Date().getTime()));
