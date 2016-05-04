@@ -20,6 +20,8 @@ public class SpiderCourse {
 	private String url;
 	private String info;
 	private String imgUrl;
+	//===新增
+	private Integer visitCount; 
 	
 	private Set<SpiderChapter> spiderChapters;
 	private Set<SpiderDocument> spiderDocuemnts;
@@ -31,13 +33,14 @@ public class SpiderCourse {
 		
 	}
 	/** 构造函数 */
-	public SpiderCourse(String na,String ur,String in,String pr,String iu,SpiderProfessionType spt){
+	public SpiderCourse(String na,String ur,String in,String pr,String iu,SpiderProfessionType spt,Integer count){
 		name=na;
 		url=ur;
 		info=in;
 		professionTypeName=pr;
 		imgUrl=iu;
 		professionType=spt;
+		visitCount=count;
 	}
 	public Integer getId() {
 		return id;
@@ -94,7 +97,11 @@ public class SpiderCourse {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
-	
-	
+	public Integer getVisitCount() {
+		return visitCount;
+	}
+	public void setVisitCount(Integer visitCount) {
+		this.visitCount = visitCount;
+	}
+
 }

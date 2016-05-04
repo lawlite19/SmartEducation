@@ -109,7 +109,7 @@ public class CourseSpider implements PageProcessor {
 				SpiderCourse model = new SpiderCourse(courseNameList.get(i)
 						.toString().trim(), courseUrlList.get(i).toString()
 						.trim(), infoList.get(i).toString(), professionTypeName,courseImgUrlList.get(i).toString(),
-						professionTypeModel);
+						professionTypeModel,0);
 				spiderCourseService.save(model);
 
 				// Request request2=new

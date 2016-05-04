@@ -8,6 +8,29 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 
+<script type="text/javascript">
+	function ajaxRecord(courseId) {
+		layer.load();
+		$.ajax({ 
+	    		type: "post",
+	    		url: "spiderCourse_recordCount.action", 
+	    		data: {
+	    			"courseId" : courseId
+    			}, 
+	    		dataType : "json",
+	    		async : false,
+            	success: function(data) { 
+            	 //var json = eval("(" + data + ")");
+				 var str = data.name;
+					  if (str=="favorOK") {
+						layer.msg('收藏成功', {time: 2000, icon:6});
+      				  } else {
+      					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
+      				}
+	    		} 
+	       }); 
+	}
+</script>
 </head>
 
 <body>
@@ -31,7 +54,7 @@
 			<s:iterator value="recordList" status="s">
 				<li class="ans-slow-anim">
 					<div class="picArea ans-slow-anim">
-						<a href="spiderCourse_showCourseInfo.action?courseId=${id}" > 
+						<a href="spiderCourse_showCourseInfo.action?courseId=${id}" onclick="ajaxRecord('${id}');" > 
 							<img src="${imgUrl}" width="178" height="109">
 						</a>
 					</div>

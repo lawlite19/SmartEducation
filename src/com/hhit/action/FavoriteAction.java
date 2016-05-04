@@ -49,6 +49,19 @@ public class FavoriteAction extends BaseAction<Favorite>{
 		
 		return null;
 	}
+	/** 删除--取消收藏 */
+	public String delete() throws Exception{
+		Map<String, String> map=new HashMap<String,String>();
+		//查找课程对象，model.getId()为课程的Id
+		SpiderCourse courseFind= spiderCourseService.findById(courseId);
+
+		favoriteService.deleteByStuAndCourse(getCurrentUser().getStudent(),courseFind);
+		result="canclefavorOK";
+		map.put("name", result);
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
 
 	public Integer getCourseId() {
 		return courseId;
