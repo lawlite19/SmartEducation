@@ -20,4 +20,12 @@ public class FavoriteServiceImpl extends DaoSupportImpl<Favorite> implements IFa
 		.uniqueResult();
 	}
 
+	@Override
+	public void deleteByStuAndCourse(Student student, SpiderCourse courseFind) {
+		getSession().createQuery("DELETE FROM Favorite WHERE student=? AND spiderCourse=?")//
+		.setParameter(0, student)//
+		.setParameter(1, courseFind)//
+		.executeUpdate();
+	}
+
 }

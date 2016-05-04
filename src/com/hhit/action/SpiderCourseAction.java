@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import com.hhit.entity.Favorite;
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderDocument;
+import com.hhit.entity.Student;
+import com.hhit.entity.VisitCourseRecord;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -81,6 +86,12 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		List<SpiderChapter> chapterList= spiderChapterService.findByCourse(courseFind);
 		ActionContext.getContext().put("chapterList", chapterList);
 
+//		//增加课程访问次数 ====不好，交给ajax处理
+//		Integer count= courseFind.getVisitCount();
+//		synchronized (count) {
+//			courseFind.setVisitCount(count++);
+//		}
+//		//增加学生访问次数
 		
 		return "showCourseInfo";
 	}
@@ -124,6 +135,38 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		spiderDocumentService.delete(documentId);
 		return "toCourseInfoList";
 	}
+	
+	/** 记录用户操作--ajax--synchronized关键字，多线程并发时只能一个一个访问 */
+	public String recordCount() throws Exception{
+		//课程次数,this代表当前代码块
+		synchronized (this) {
+			SpiderCourse courseFind=spiderCourseService.findById(courseId);
+			Integer count=0;
+			if(courseFind.getVisitCount()!=null)
+				count=courseFind.getVisitCount();
+			courseFind.setVisitCount(count++);
+			spiderCourseService.update(courseFind);
+		}
+		//用户访问次数
+		synchronized (this) {
+			SpiderCourse courseFind=spiderCourseService.findById(courseId);
+			Student stuFind=getCurrentUser().getStudent();
+		    VisitCourseRecord visitModel=visitCourseRecordService.findByStuAndCourse(stuFind,courseFind);
+			if(visitModel!=null){
+				Integer count=visitModel.getCount();
+				visitModel.setCount(count++);
+				visitCourseRecordService.update(visitModel);
+			}
+			else{
+				visitModel=new VisitCourseRecord(stuFind, courseFind,1);
+				visitCourseRecordService.save(visitModel);
+			}
+			
+			visitCourseRecordService.save(visitModel);
+		}
+		return null;
+	}
+	
 	public Integer getProfessionId() {
 		return professionId;
 	}

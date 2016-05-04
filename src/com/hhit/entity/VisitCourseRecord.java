@@ -19,6 +19,21 @@ public class VisitCourseRecord {
 	private Student student;
 	private SpiderCourse spiderCourse;
 	
+	/**
+	 * 默认构造函数 
+	 */
+	public VisitCourseRecord(){
+		
+	}
+	/**
+	 * 构造函数 
+	 */
+	public VisitCourseRecord(Student stu,SpiderCourse sc,Integer cou){
+		student=stu;
+		spiderCourse=sc;
+		count=cou;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

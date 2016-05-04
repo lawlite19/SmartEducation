@@ -35,6 +35,11 @@
 				<comment>专业类型</comment>
 			</column>
 		</property>
+		<property name="visitCount" type="integer">
+			<column name="VisitCount">
+				<comment>访问次数</comment>
+			</column>
+		</property>
 		
 		<!-- spiderChapters属性，与SpiderChapter类一对多 -->
 		<set name="spiderChapters" order-by="chapterNum" >

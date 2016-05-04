@@ -27,6 +27,7 @@ import com.hhit.service.ITaskService;
 import com.hhit.service.ITeacherService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
+import com.hhit.service.IVisitCourseRecordService;
 import com.hhit.service.IWeiboInfoService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -85,7 +86,9 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected ISpiderCourseInfoService spiderCourseInfoService;//爬虫课程信息
 	@Resource
-	protected IFavoriteService favoriteService;//收藏夹
+	protected IFavoriteService favoriteService;//学生收藏夹
+	@Resource
+	protected IVisitCourseRecordService visitCourseRecordService;//学生访问次数
 	
 	
 	//--------------

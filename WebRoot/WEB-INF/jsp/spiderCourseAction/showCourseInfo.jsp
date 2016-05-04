@@ -44,16 +44,15 @@
    	    		dataType : "json",
    	    		async : false,
                 success: function(data) { 
-                	 //var json = eval("(" + data + ")");
-					 var str = data.name;
-						  if (str=="favorOK") {
-							layer.msg('收藏成功', {time: 2000, icon:6});
-							var realImgUrl=baseUrl+"style/images/ic_action_favor_on_pressed.png";
-							alert(realImgUrl);
-							$("#img_favorite").attr(src,realImgUrl);
-          				  } else {
-          					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
-          				}
+                	var str = data.name;
+					  if (str=="favorOK") {
+						layer.msg('收藏成功', {time: 2000, icon:6});
+						var onclickFunction="ajaxCancleFavorite('"+baseUrl+"','"+courseId+"');";
+						$("#a_favorite").remove();
+						$("#div_favorite").append("<a id='a_cancleFavorite' onclick="+onclickFunction+" href='#'> <div class='div_favorite'> <img id='img_favorite'  alt='已收藏' src="+baseUrl+"/style/images/ic_action_favor_on_pressed.png width='40px' height='40px' style='margin-bottom: -13px'/> <span class='span_text'> 已收藏 </span> </div> </a>");
+    				  } else {
+    					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
+    				}
    	    		} 
    	       }); 
 		}
@@ -74,12 +73,12 @@
             	 //var json = eval("(" + data + ")");
 				 var str = data.name;
 					  if (str=="canclefavorOK") {
-						layer.msg('收藏成功', {time: 2000, icon:6});
-						var realImgUrl=baseUrl+"/style/images/ic_action_favor_on_pressed.png";
-						alert(realImgUrl);
-						$("#img_favorite").attr(src,realImgUrl);
+						layer.msg('取消成功', {time: 2000, icon:6});
+						var onclickFunction="ajaxFavorite('"+baseUrl+"','"+courseId+"');";
+						$("#a_cancleFavorite").remove();
+						$("#div_favorite").append("<a id='a_favorite' onclick="+onclickFunction+" href='#'> <div class='div_favorite'> <img id='img_favorite'  alt='已收藏' src="+baseUrl+"/style/images/ic_action_favor_pressed.png width='40px' height='40px' style='margin-bottom: -13px'/> <span class='span_text'> 收藏 </span> </div> </a>");
       				  } else {
-      					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
+      					layer.msg('服务器错误，取消失败',{time: 2000, icon:5});
       				}
 	    		} 
 	       }); 
@@ -88,7 +87,7 @@
 </head>
 <body>
 <div class="constr bgwh fix mb46">
-<div class="pct66 l pb40">
+<div class="pct66 l pb40" id="div_favorite">
 <!-- 课程名称 -->
    <div class="mt10 f23 g5 courseName">
                 <span>${courseName}</span>
@@ -96,7 +95,7 @@
 <!-- 收藏按钮 -->
 
 <s:if test="#favorFind!=null">
-<a onclick="ajaxCancleFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
+<a id="a_cancleFavorite" onclick="ajaxCancleFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
 	<div class="div_favorite">
 			<img id="img_favorite"  alt="已收藏" src="${pageContext.request.contextPath}/style/images/ic_action_favor_on_pressed.png" width="40px" height="40px"
 			style="margin-bottom: -13px"
@@ -106,7 +105,7 @@
 </a>
 </s:if>
 <s:else>
-<a onclick="ajaxFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
+<a id="a_favorite" onclick="ajaxFavorite('${pageContext.request.contextPath}','${courseId}');" href="#" >	
 	<div class="div_favorite">
 			<img id="img_favorite"  alt="收藏" src="${pageContext.request.contextPath}/style/images/ic_action_favor_pressed.png" width="40px" height="40px"
 			style="margin-bottom: -13px"
@@ -136,7 +135,7 @@
 					<div class="mt5 ans-cc">
 						<s:iterator value="documentFind">
 							<span class="ans-book"><span class="ans-book-cover">
-							<a href="${url}" class="as-ref-link" id="ext-gen1037">
+							<a href="${url}"  class="as-ref-link" id="ext-gen1037">
 								<img src="${imgUrl}"></a></span><span class="ans-book-info">
 								<span class="ans-ref-bookname"><a href="${url}" class="as-ref-link" id="ext-gen1038">
 									${name}
