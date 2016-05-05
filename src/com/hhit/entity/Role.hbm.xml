@@ -32,9 +32,7 @@
 			<many-to-many class="Privilege" column="Privilege_Id"></many-to-many>
 		</set>
 		
-		<!-- student属性，与 Student类多对一-->
-		<many-to-one name="student" class="Student" column="Student_Id">
-		</many-to-one>
+
 		<!-- teachers属性，与 Teacher类多对多-->
 		<set name="teachers" table="T_Teacher_Role" lazy="false">
 			<key column="Role_Id"></key>

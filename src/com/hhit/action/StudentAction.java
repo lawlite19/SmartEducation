@@ -1,10 +1,13 @@
 package com.hhit.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,9 @@ public class StudentAction extends BaseAction<Student> {
 	
 	// ajax json返回
 	private String result;
+	//存储图片文件
+	private File picture;
+	private String pictureFileName;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -151,6 +157,45 @@ public class StudentAction extends BaseAction<Student> {
 
 		return "toList";
 	}
+	/** 个人信息维护界面  */
+	public String personalMaintainUI() throws Exception{
+		//得到学生放到栈顶
+		ActionContext.getContext().getValueStack().push(getCurrentUser().getStudent());
+		
+		return "personalMaintainUI";
+	}
+	/** 提交个人信息 */
+	public String personalMaintain() throws Exception{
+		//取出源对象
+		Student stuFind=getCurrentUser().getStudent();
+		if (picture != null) {
+			// 获取当前应用程序物理路径
+			String rootPath = ServletActionContext.getServletContext()
+					.getRealPath("/");
+			File tarDir = new File(rootPath + "/studentImgs");
+			if (tarDir.exists()) {
+				tarDir.mkdirs();
+			}
+			File tarFile = new File(tarDir, pictureFileName);
+			try {
+				FileUtils.copyFile(picture, tarFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//设置图片
+			stuFind.setPhoto(pictureFileName);
+		}
+		//设置其他属性
+		stuFind.setBirthday(model.getBirthday());
+		stuFind.setSex(model.getSex());
+		stuFind.setStuName(model.getStuName());
+		
+		//更新
+		studentService.update(stuFind);
+		return "personalMaintain";
+	}
+	
+	
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -175,6 +220,19 @@ public class StudentAction extends BaseAction<Student> {
 	public void setClassId(Integer classId) {
 		this.classId = classId;
 	}
+	public File getPicture() {
+		return picture;
+	}
+	public void setPicture(File picture) {
+		this.picture = picture;
+	}
+	public String getPictureFileName() {
+		return pictureFileName;
+	}
+	public void setPictureFileName(String pictureFileName) {
+		this.pictureFileName = pictureFileName;
+	}
+
 	
 	
 }
