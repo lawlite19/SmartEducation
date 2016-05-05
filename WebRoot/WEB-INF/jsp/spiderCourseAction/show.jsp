@@ -4,13 +4,20 @@
 <html>
 <head>
 <title>显示所有课程资源</title>
+<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
+<!-- layer弹窗插件 -->
+<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 
 <script type="text/javascript">
 	function ajaxRecord(courseId) {
-		layer.load();
+		//点击之后禁止再次点击
+		//loading层
+		layer.load(0,{
+  			shade: [0.8,'#000'] //0.1透明度的白色背景
+		});
 		$.ajax({ 
 	    		type: "post",
 	    		url: "spiderCourse_recordCount.action", 

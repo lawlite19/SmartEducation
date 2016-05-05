@@ -28,7 +28,6 @@ public class Role implements java.io.Serializable{
 	private Timestamp addTime;
 	
 	private Set<Privilege> privileges;
-	private Student student;
 	private Set<Teacher> teachers;
 	/**
 	 * 默认构造函数,用户初始化，有重载则不可缺少
@@ -77,13 +76,6 @@ public class Role implements java.io.Serializable{
 		this.addTime = addTime;
 	}
 
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
 
 	public Set<Teacher> getTeachers() {
 		return teachers;

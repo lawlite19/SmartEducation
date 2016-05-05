@@ -144,7 +144,7 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 			Integer count=0;
 			if(courseFind.getVisitCount()!=null)
 				count=courseFind.getVisitCount();
-			courseFind.setVisitCount(count++);
+			courseFind.setVisitCount(count+1);
 			spiderCourseService.update(courseFind);
 		}
 		//用户访问次数
@@ -154,15 +154,13 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		    VisitCourseRecord visitModel=visitCourseRecordService.findByStuAndCourse(stuFind,courseFind);
 			if(visitModel!=null){
 				Integer count=visitModel.getCount();
-				visitModel.setCount(count++);
+				visitModel.setCount(count+1);
 				visitCourseRecordService.update(visitModel);
 			}
 			else{
 				visitModel=new VisitCourseRecord(stuFind, courseFind,1);
 				visitCourseRecordService.save(visitModel);
 			}
-			
-			visitCourseRecordService.save(visitModel);
 		}
 		return null;
 	}
