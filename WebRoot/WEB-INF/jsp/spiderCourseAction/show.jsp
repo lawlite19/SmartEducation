@@ -9,8 +9,36 @@
 <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/search.css" />
+
 <script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 
+<!-- 检测搜索框是否输入 -->
+<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请填写'+msg, {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if (!MM_Empty('txt_search', '搜索内容')) return false;
+        layer.load();
+    }
+	function Check2() {
+        if (!MM_Empty('txt_search2', '搜索内容')) return false;
+        layer.load();
+    }
+	</script>
+<!-- 记录用户操作 -->
 <script type="text/javascript">
 	function ajaxRecord(courseId) {
 		//点击之后禁止再次点击
@@ -27,17 +55,27 @@
 	    		dataType : "json",
 	    		async : false,
             	success: function(data) { 
-            	 //var json = eval("(" + data + ")");
-				 var str = data.name;
-					  if (str=="favorOK") {
-						layer.msg('收藏成功', {time: 2000, icon:6});
-      				  } else {
-      					layer.msg('服务器错误，收藏失败',{time: 2000, icon:5});
-      				}
-	    		} 
+            	 //不做事
+            	}
 	       }); 
 	}
 </script>
+<!-- 键盘事件--按下ctrl+enter弹出搜索 -->
+<script type="text/javascript" language=JavaScript charset="UTF-8">
+      document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==32 && e.ctrlKey){ // 按 Space
+            	layer.confirm("<form action='spiderCourse_show.action' method='post'><input type='text' name='searchInfo' id='txt_search'> <input class='button' onclick='return Check();' type='submit' value='搜索'></form><br/>", 
+            	{
+            		  skin: 'layui-layer-molv',
+            		  shift: 2,//动画类型
+            		  offset: 0,
+					  btn:0
+            	});
+        };
+      }
+</script>
+
 </head>
 
 <body>
@@ -48,13 +86,20 @@
 		<div class="picAreaDiv">
 			<div style="height:550px;float:left;"></div>
 
-			<div class="label">
+			<div class="label" style="margin: 0;">
 			<s:if test="%{name!=null}">
 				${name}
 			</s:if>
 			<s:else>
 				全部
 			</s:else>
+<!-- 搜索框 -->
+<div class="container">
+<s:form action="spiderCourse_show" method="post">
+<input type="text" name="searchInfo" id="txt_search2">
+<input class="button" onclick="return Check2();" type="submit" value="搜索">
+</s:form>
+</div>
 			</div>
 <!-- 课程信息 -->
 			<ul style="overflow:hidden;">
@@ -98,6 +143,7 @@
 <!-- 分页提交信息 -->
 <s:form action="spiderCourse_show" method="post">
 <input type="hidden" name="professionId" value="${professionId}" />
+<input type="hidden" name="searchInfo" value="${searchInfo}">
 </s:form>
 </body>
 </html>

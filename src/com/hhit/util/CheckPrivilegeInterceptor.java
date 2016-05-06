@@ -26,7 +26,10 @@ public class CheckPrivilegeInterceptor extends AbstractInterceptor {
 				// 如果是去登录，就放行
 				return invocation.invoke();
 			} else {
-				// 如果不是去登录，就转到登录页面
+				// 如果不是去登录
+					//-->绑定
+				if(privUrl.startsWith("/qqLoginInfo")||privUrl.startsWith("/weiboInfo"))
+					return invocation.invoke();
 				return "loginUI";
 			}
 		}

@@ -191,7 +191,7 @@ public class CourseSpider implements PageProcessor {
 				SpiderChapter model = new SpiderChapter(chapterNumList.get(i)
 						.toString(), chapterNameList.get(i).toString(),
 						chapterUrlList.get(i).toString(), courseName,
-						courseModel);
+						courseModel,null);
 				spiderChapterService.save(model);
 			}
 		}

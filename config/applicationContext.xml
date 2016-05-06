@@ -74,7 +74,8 @@
 				</prop>
 				<!-- 显示sql语句 -->
 				<prop key="show_sql">true</prop>
-				
+				<!-- 自动建表 
+				<prop key="hibernate.hbm2ddl.auto">update</prop>-->
 			</props>
 		</property>
 		<property name="mappingResources">

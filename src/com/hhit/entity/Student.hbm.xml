@@ -41,10 +41,10 @@
 			</column>
 		</property>
 		<!--department属性，本类与Department的多对一 -->
-		<many-to-one name="department" class="Department" column="Department_Id">
+		<many-to-one name="department" class="Department" column="Department_Id" lazy="false">
 		</many-to-one>
 		<!--class_属性，本类与Class_的多对一 -->
-		<many-to-one name="class_" class="Class_" column="Class_Id">
+		<many-to-one name="class_" class="Class_" column="Class_Id" lazy="false">
 		</many-to-one>
 		<!--role属性，本类与Role的多对一 -->
 		<many-to-one name="role" class="Role" column="Role_Id" lazy="false">

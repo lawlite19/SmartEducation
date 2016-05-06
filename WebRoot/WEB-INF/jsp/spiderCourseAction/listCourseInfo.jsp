@@ -5,6 +5,47 @@
 <head>
 <title>课程介绍</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
+<script>
+	$(function() {
+             $("#deleteSelected").click(function(){
+            	 $("input:checked").each(function(){
+            	 	 var value=$(this).val().split(",");
+           	    	 //alert(value[0]);
+           	    	 //alert(value[1]);
+           	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
+           	    		//if(value[1]=="admin"){
+           				//	alert("该用户为超级管理员,不能删除！");
+           				//	return;
+           				//}
+           	    		$.ajax({ 
+               	    		type: "post",
+               	    		url: "spiderCourse_chapterBulkDelete.action", 
+               	    		data: {
+               	    			"chapterId" : value[0]
+           	    			}, 
+               	    		dataType : "json",
+               	    		async : false,
+                            success: function(data) { 
+                            	 //var json = eval("(" + data + ")");
+								 var str = data.name;
+   								  if (str=="ok") {
+   		           				  	alert("删除成功");
+   		           				  	layer.load();
+   		           				 	window.location.reload();
+   		           				  } else {
+   		           	                 alert("删除失败");  
+   		           				}
+               	    		} 
+               	       }); 
+   					}
+        	    	 
+        	     });
+        	   //window.location.reload();
+      });
+
+	});
+
+</script>
 </head>
 <body>
 <s:form action="spiderCourse_list" method="post">
@@ -12,6 +53,8 @@
 </s:form>
 
 <h1>章节</h1>
+<!-- 引入选择按钮 -->
+<%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
