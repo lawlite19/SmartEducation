@@ -39,5 +39,8 @@
 		<many-to-one name="teachType" class="DataDict" column="TeachType_Id"></many-to-one>
 		<!--course属性，本类与Course的多对一 -->
 		<many-to-one name="course" class="Course" column="Course_Id"></many-to-one>
+		<!--teacher属性，本类与Teacher多对一  -->
+		<many-to-one name="teacher" class="Teacher" column="Teacher_Id"></many-to-one>
+		
 	</class>
 </hibernate-mapping>

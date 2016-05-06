@@ -157,6 +157,10 @@
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>
+		<!-- 教学进程 -->
+		<action name="teachProcess_*" class="teachProcessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachProcessAction/list.jsp</result>
+		</action>
 	</package>
 
 <!-- App端接口package -->

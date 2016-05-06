@@ -24,6 +24,7 @@ import com.hhit.service.ISpiderProfessionTypeService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITeachProcessService;
 import com.hhit.service.ITeacherService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
@@ -67,6 +68,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ITeacherService teacherService;//老师
 	@Resource
 	protected IRoleService roleService;// 角色
+	@Resource 
+	protected IQQLoginInfoService qqLoginService;//qq第三方登录
+	@Resource
+	protected IWeiboInfoService weiboInfoService;//微博第三方登录
 	@Resource
 	protected IDepartmentService departmentService;// 部门
 	@Resource
@@ -89,20 +94,14 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IFavoriteService favoriteService;//学生收藏夹
 	@Resource
 	protected IVisitCourseRecordService visitCourseRecordService;//学生访问次数
-	
+	@Resource
+	protected ITeachProcessService teachProcessService;//教学进程
 	
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息
-	@Resource 
-	protected IQQLoginInfoService qqLoginService;//qq第三方登录
-	@Resource
-	protected IWeiboInfoService weiboInfoService;//微博第三方登录
-	
-
 	@Resource
 	protected ITaskService taskService;//老师布置作业
-
 	@Resource
 	protected ISubmitTaskService submitTaskService;//学生提交作业
 	@Resource

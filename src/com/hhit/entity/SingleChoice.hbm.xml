@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="SingleChoice" table="T_SingleChoice">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="questionCode" type="integer">	
+			<column name="QuestionCode">
+				<comment>问题编号</comment>
+			</column>
+		</property>
+		<property name="knowledgeName" type="string">
+			<column name="KnowledgeName">
+				<comment>知识点名字</comment>
+			</column>
+		</property>
+		<property name="modifyTime" type="timestamp">
+			<column name="ModifyTime">
+				<comment>修改时间</comment>
+			</column>
+		</property>
+		<property name="addTime" type="timestamp">
+			<column name="AddTime">
+				<comment>添加时间</comment>
+			</column>
+		</property>
+		<property name="answer" type="string">
+			<column name="Answer" length="10">
+				<comment>答案</comment>
+			</column>
+		</property>
+		<property name="question" type="text">
+			<column name="Question">
+				<comment>问题</comment>
+			</column>
+		</property>
+		<property name="answerA" type="string">
+			<column name="AnswerA">
+				<comment>A选项</comment>
+			</column>
+		</property>
+		<property name="answerB" type="string">
+			<column name="AnswerB">
+				<comment>B选项</comment>
+			</column>
+		</property>
+		<property name="answerC" type="string">
+			<column name="AnswerC">
+				<comment>C选项</comment>
+			</column>
+		</property>
+		<property name="answerD" type="string">
+			<column name="AnswerD">
+				<comment>D选项</comment>
+			</column>
+		</property>
+		<property name="difExponent" type="integer">
+			<column name="DifExponent">
+				<comment>知识点名字</comment>
+			</column>
+		</property>
+		
+		<property name="usedCount" type="integer">
+			<column name="UsedCount">
+				<comment>使用次数</comment>
+			</column>
+		</property>
+		<property name="questionType" type="string">
+			<column name="QuestionType" length="10">
+				<comment>题目类型</comment>
+			</column>
+		</property>
+
+		<!-- course属性，与Course多对一 -->
+		<many-to-one name="course" class="Course" column="Course_Id">
+		</many-to-one>
+		<!-- chapter属性，与Chapter多对一 -->
+		<many-to-one name="chapter" class="Chapter" column="Chapter_Id">
+		</many-to-one>
+		<!-- teacher属性，与Teacher多对一 -->
+		<many-to-one name="teacher" class="Teacher" column="Teacher_Id">
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>

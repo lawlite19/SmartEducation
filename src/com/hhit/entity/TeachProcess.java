@@ -23,8 +23,12 @@ public class TeachProcess implements java.io.Serializable{
 	private Integer lessonCount;
 	private String chapter;
 	private String lessonContent;
+	
+	
 	private DataDict teachType;
 	private Course course;
+	private Teacher teacher; 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -76,6 +80,12 @@ public class TeachProcess implements java.io.Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 	
 }

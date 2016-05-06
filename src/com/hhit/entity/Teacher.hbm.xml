@@ -55,7 +55,7 @@
 			<many-to-many class="Role" column="Role_Id"></many-to-many>
 		</set>
 		<!-- courses属性，本类与Course的多对多   -->
-		<set name="courses" table="T_Teacher_Course">
+		<set name="courses" table="T_Teacher_Course" lazy="false">
 			<key column="Teacher_Id"></key>
 			<many-to-many class="Course" column="Course_Id"></many-to-many>
 		</set>
