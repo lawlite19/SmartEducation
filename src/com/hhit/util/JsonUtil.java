@@ -4,13 +4,18 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+
+
+
+
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
+import net.sf.json.util.CycleDetectionStrategy;
 
 import com.google.gson.Gson;
 
 public class JsonUtil {
-	//转化成json
+	//使用Gson--->xx转化成json
     public static void toJson(HttpServletResponse response, Object data) 
         throws IOException {
         Gson gson = new Gson();
@@ -22,6 +27,20 @@ public class JsonUtil {
         out.print(result);
         out.flush();
         out.close();
+    }
+    //过滤掉关联的外键
+    public static JSONObject jsonFilter(Object obj, String[] filterNames){
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setIgnoreDefaultExcludes(false);    
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);    //防止自包含
+         
+        if(filterNames != null){
+            //这里是核心，过滤掉不想使用的属性
+            jsonConfig .setExcludes(filterNames) ;
+        }
+        JSONObject jsonObj = JSONObject.fromObject(obj, jsonConfig);
+        return jsonObj;
+         
     }
   
 }

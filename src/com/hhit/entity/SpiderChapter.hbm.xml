@@ -34,5 +34,15 @@
 		<!-- spiderCourse属性，与SpiderCourse多对一 -->
 		<many-to-one name="spiderCourse" class="SpiderCourse" column="SpiderCourse_Id">
 		</many-to-one>
+		
+		<!-- parent属性，本类与SpiderChapter（上级）多对一 -->
+		<many-to-one name="parent" class="SpiderChapter" column="Parent_Id"></many-to-one>
+		
+		<!-- children属性，本类与Department（下级）一对多 -->
+		<!-- 级联删除，即删除上级，下级都删除 -->
+		<set name="children" cascade="delete" order-by="id ASC">
+			<key column="Parent_Id"></key>
+			<one-to-many class="SpiderChapter"/>
+		</set>
 	</class>
 </hibernate-mapping>

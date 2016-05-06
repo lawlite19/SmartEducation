@@ -8,7 +8,7 @@
 	<!-- 把主题配置为simple -->
 	<constant name="struts.ui.theme" value="simple" />
 
-
+<!-- 网站端package -->
 	<package name="default" namespace="/" extends="struts-default">
 		<interceptors>
 			<!-- 声明拦截器 -->
@@ -47,6 +47,7 @@
 			<result name="toList" type="redirectAction">student_list</result>
 			<result name="personalMaintainUI">/WEB-INF/jsp/studentAction/personalMaintainUI.jsp</result>
 			<result name="personalMaintain"  type="redirectAction">student_personalMaintainUI</result>
+			<result name="myFavorite">/WEB-INF/jsp/studentAction/myFavorite.jsp</result>
 		</action>
 		<!-- 老师管理 -->
 		<action name="teacher_*" class="teacherAction" method="{1}">
@@ -158,4 +159,9 @@
 		</action>
 	</package>
 
+<!-- App端接口package -->
+	<package name="app" extends="struts-default" namespace="/App">
+		<action name="user_*" class="userAction" method="{1}">
+		</action>
+	</package>
 </struts>    

@@ -92,6 +92,17 @@
    <div class="mt10 f23 g5 courseName">
                 <span>${courseName}</span>
    </div>
+   <div align="right">
+  	<span style="text-size:12px;">
+  		访问次数：
+  		<s:if test="#visitCount!=null">
+  			${visitCount}
+  		</s:if>
+  		<s:else>
+  		0
+  		</s:else>
+	</span>
+</div>
 <!-- 收藏按钮 -->
 
 <s:if test="#favorFind!=null">
@@ -152,17 +163,17 @@
 			</div>
 	</div>
 
-
 <!-- 课程章节 -->
 
 	<div class="cell bgblue wh">
 		<div id="courseUnit" class="courseArticle mt25 pb20 f24 wh tc">课程章节</div>
-		<s:iterator value="chapterList" var="chapter" status="s">
 		
+		<s:iterator value="chapterList" var="chapter" status="s">
 		<div class="p20 btdwh fix">
 			<div class="wh_cricle_l mr20 l cblue chapter_index">${s.count}</div>
 			<div class="cell">
-					<div class="f16">${courseName}</div>
+					<div class="f16">${chapterName}</div>
+					<s:iterator value="children">
 				<ul class="mt10">
 					
 						<li class="mb15 course_section fix">
@@ -173,6 +184,7 @@
 						</li>
 					
 				</ul>
+				</s:iterator>
 			</div>
 		</div>
 		</s:iterator>

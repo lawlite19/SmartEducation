@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 	//json返回
 	private String result;
 	
+	//搜索
+	private String searchInfo;
+	
 	
 	/** 列表--管理 */
 	public String list() throws Exception{
@@ -58,10 +62,13 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 			ActionContext.getContext().getValueStack().push(spiderProfessionTypeService.findById(professionId));
 			ActionContext.getContext().put("professionId", professionId);
 		}
-			
+		if(searchInfo!=null){
+			ActionContext.getContext().put("searchInfo", searchInfo);
+		}
 		//分页信息
 		new QueryHelper(SpiderCourse.class, "s")//
 		.addCondition((professionId!=null), "s.professionType=?", spiderProfessionTypeService.findById(professionId))
+		.addCondition((searchInfo!=null), "s.name LIKE ? OR s.info LIKE ?", "%"+searchInfo+"%","%"+searchInfo+"%")
 		.preparePageBean(spiderCourseService, pageNum, 12);
 		return "show";
 	}
@@ -73,6 +80,8 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		ActionContext.getContext().put("courseId", courseFind.getId());
 		//课程名--显示课程名
 		ActionContext.getContext().put("courseName", courseFind.getName());
+		//访问次数--显示访问次数
+		ActionContext.getContext().put("visitCount", courseFind.getVisitCount());
 		//准备数据--是否收藏
 		Favorite favorFind=favoriteService.findByStuAndCourse(getCurrentUser().getStudent(),courseFind);
 		ActionContext.getContext().put("favorFind", favorFind);
@@ -164,7 +173,21 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		}
 		return null;
 	}
-	
+	/** 批量删除 */
+	public String chapterBulkDelete() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 直接根据id删除
+		spiderChapterService.delete(chapterId);
+		result = "ok";
+		map.put("name", result);
+		// // 将要返回的map对象进行json处理
+		// JSONObject json = JSONObject.fromObject(map);
+		// // 调用json对象的toString方法转换为字符串然后赋值给result
+		// this.result = json.toString();
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+
+		return null;
+	}
 	public Integer getProfessionId() {
 		return professionId;
 	}
@@ -188,6 +211,12 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 	}
 	public void setDocumentId(Integer documentId) {
 		this.documentId = documentId;
+	}
+	public String getSearchInfo() {
+		return searchInfo;
+	}
+	public void setSearchInfo(String searchInfo) {
+		this.searchInfo = searchInfo;
 	}
 	
 }

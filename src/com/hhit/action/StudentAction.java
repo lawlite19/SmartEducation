@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Department;
+import com.hhit.entity.Favorite;
 import com.hhit.entity.Role;
+import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.Student;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
@@ -40,6 +42,8 @@ public class StudentAction extends BaseAction<Student> {
 	//存储图片文件
 	private File picture;
 	private String pictureFileName;
+	
+	//我的收藏需要
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -194,7 +198,23 @@ public class StudentAction extends BaseAction<Student> {
 		studentService.update(stuFind);
 		return "personalMaintain";
 	}
-	
+	/** 我的收藏 */
+	public String myFavorite() throws Exception{
+		//准备信息--所有课程类型
+//		ActionContext.getContext().put("professionTypeList", spiderProfessionTypeService.findAll());
+		//准备信息--点击的课程类型名
+//		if(professionId!=null){
+//			ActionContext.getContext().getValueStack().push(spiderProfessionTypeService.findById(professionId));
+//			ActionContext.getContext().put("professionId", professionId);
+//		}
+			
+		//分页信息
+		new QueryHelper(Favorite.class, "f")//
+		.addCondition("f.student=?", getCurrentUser().getStudent())
+		.preparePageBean(favoriteService, pageNum, 12);
+		
+		return "myFavorite";
+	}
 	
 	public Integer getDepartmentId() {
 		return departmentId;
