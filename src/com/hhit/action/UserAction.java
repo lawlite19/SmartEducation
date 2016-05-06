@@ -1,5 +1,6 @@
 package com.hhit.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +80,8 @@ public class UserAction extends BaseAction<User>{
 				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),"老师");
 				if(null!=userFind){
 					//查找对应的角色
-					List<Role> rolesList=(List<Role>) userFind.getTeacher().getRoles();
+					//Set转为List
+					List<Role> rolesList=new ArrayList<>(userFind.getTeacher().getRoles());
 					for (Role role : rolesList) {
 						if(role.getRoleName().equals(model.getUserType())){
 							ActionContext.getContext().getSession().put("user", userFind);

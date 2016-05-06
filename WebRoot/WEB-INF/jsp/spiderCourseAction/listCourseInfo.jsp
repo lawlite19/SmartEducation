@@ -108,6 +108,31 @@
 						</s:a>
 						&nbsp;</td>
 				</tr>
+				<s:iterator value="children">
+				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+					<td align="center">
+						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${chapterName}" />
+					</td>
+					<td align="center">${s.count}</td>
+					<td align="center">
+						${chapterNum}
+					&nbsp;
+					</td>
+					<td align="center">
+						<a href="${url}" target="_blank" >${chapterName}</a>
+					&nbsp;
+					</td>
+					
+					<td align="center">${courseName}&nbsp;</td>
+
+					<td align="center">
+						<s:a action="spiderCourse_deleteChapter?chapterId=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
+							<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
+						</s:a>
+						&nbsp;</td>
+				</tr>
+				
+				</s:iterator>
 			</s:iterator>
 
 		</tbody>

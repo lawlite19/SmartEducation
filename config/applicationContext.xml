@@ -91,6 +91,10 @@
 			<value>com/hhit/entity/Class_.hbm.xml</value>
 			<value>com/hhit/entity/Department.hbm.xml</value>
 			<value>com/hhit/entity/Course.hbm.xml</value>
+			<value>com/hhit/entity/Chapter.hbm.xml</value>
+			<value>com/hhit/entity/Judgement.hbm.xml</value>
+			<value>com/hhit/entity/SingleChoice.hbm.xml</value>
+			<value>com/hhit/entity/TeachProcess.hbm.xml</value>
 			<!-- 数据字典 -->
 			<value>com/hhit/entity/DataType.hbm.xml</value>
 			<value>com/hhit/entity/DataDict.hbm.xml</value>
