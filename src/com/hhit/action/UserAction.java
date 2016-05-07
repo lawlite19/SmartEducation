@@ -181,7 +181,7 @@ public class UserAction extends BaseAction<User>{
 						ClassPropertyFilter.DepartmentFilter(map, deptFind);
 						//角色
 						List<Role> rolesFind=(List<Role>) teaFind.getRoles();
-						ClassPropertyFilter.RoleFilter(map, rolesFind);
+						ClassPropertyFilter.ListRoleFilter(map, rolesFind);
 					}
 				}
 				result="账号或密码错误！";

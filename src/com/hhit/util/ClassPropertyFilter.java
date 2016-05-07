@@ -30,9 +30,15 @@ public class ClassPropertyFilter {
 		map.put("class_", JsonUtil.jsonFilter(class_, classProperty));
 	}
 	//角色list过滤
-	public static void RoleFilter(Map<String,Object> map,List<Role> roles){
+	public static void ListRoleFilter(Map<String,Object> map,List<Role> roles){
 		String[] roleProperty={"privileges","teachers"};
-		map.put("role", JsonUtil.jsonFilter(roles, roleProperty));
+		map.put("roles", JsonUtil.jsonListFilter(roles, roleProperty));
 	}
+	//课程list过滤
+	public static void ListCourseFilter(Map<String,Object> map,List<Course> courses){
+		String[] roleProperty={"departments","teachers"};
+		map.put("courses", JsonUtil.jsonListFilter(courses, roleProperty));
+	}
+
 	
 }
