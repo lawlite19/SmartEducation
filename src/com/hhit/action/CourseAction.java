@@ -1,6 +1,7 @@
 package com.hhit.action;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.hhit.base.BaseAction;
 import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Role;
+import com.hhit.entity.Teacher;
 import com.hhit.entity.UserDetails;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.QueryHelper;
@@ -25,6 +27,8 @@ public class CourseAction extends BaseAction<Course>{
 	private Integer[] departmentIds;
 	
 	private String inputTerm = "";// 输入的词条
+	
+	private Integer[] courseIds;
 	
 	/** 列表 */
 	public String list() throws Exception{
@@ -88,7 +92,68 @@ public class CourseAction extends BaseAction<Course>{
 		courseService.update(courseFind);
 		return "toList";
 	}
-
+	/** 老师添加自己的课程界面 */
+	public String addMyCourseUI() throws Exception{
+		//准备数据--部门
+		List<Department> topList=departmentService.findTopList();
+		ActionContext.getContext().put("departmentList", DepartmentUtils.getAllDepartments(topList));
+		//回显--老师所属部门
+		Department deptFind;
+		if((deptFind=getCurrentUser().getTeacher().getDepartment())!=null){
+			departmentIds=new Integer[1];
+			departmentIds[0]=deptFind.getId();
+			//准备数据 -- 对应部门的所有课程
+//			if(deptFind.getDeptLevel()>2){
+				List<Course> courseList=new ArrayList<>(deptFind.getCourses()) ;
+				ActionContext.getContext().put("courseList", courseList);
+//			}
+//			else{
+//				List<Course> courseList=courseService.findByDepartment(deptFind);
+//				ActionContext.getContext().put("courseList", courseList);
+//			}
+		}
+		return "addMyCourseUI";
+	}
+	/** 老师添加自己的课程 */
+	public String addNewMyCourse() throws Exception{
+		//-->保存到课程表
+		//设置相关属性
+		model.setAddTime(new Timestamp(new Date().getTime()));
+		
+		List<Department> deptList=departmentService.findByIds(departmentIds);
+		model.setDepartments(new HashSet<>(deptList));
+		courseService.save(model);
+		//保存
+		//--》保存到老师任课表
+		Teacher teaFind=getCurrentUser().getTeacher();
+//		if(teaFind.getCourses()==null){
+//			List<Course> courseList=new ArrayList<Course>();
+//			courseList.add(model);
+//			teaFind.setCourses(new HashSet<Course>(courseList));
+//			teacherService.update(teaFind);
+//		}
+//		else{
+			List<Course> courseList=new ArrayList<Course>(teaFind.getCourses());
+			courseList.add(model);
+			teaFind.setCourses(new HashSet<Course>(courseList));
+			teacherService.update(teaFind);
+//		}
+		
+		
+		return "toTeachProcessList";
+	}
+	/**从现有课程中选择到老师的课程*/
+	public String addMyCourse() throws Exception{
+		//查找选择的课程
+		List<Course> courseList=courseService.findByIds(courseIds);
+		//找到老师
+		Teacher teaFind=getCurrentUser().getTeacher();
+		teaFind.setCourses(new HashSet<>(courseList));
+		//更新
+		teacherService.update(teaFind);
+		return "toTeachProcessList";
+	}
+	
 	public Integer[] getDepartmentIds() {
 		return departmentIds;
 	}
@@ -100,6 +165,12 @@ public class CourseAction extends BaseAction<Course>{
 	}
 	public void setInputTerm(String inputTerm) {
 		this.inputTerm = inputTerm;
+	}
+	public Integer[] getCourseIds() {
+		return courseIds;
+	}
+	public void setCourseIds(Integer[] courseIds) {
+		this.courseIds = courseIds;
 	}
 	
 }

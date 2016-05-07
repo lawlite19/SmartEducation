@@ -47,7 +47,7 @@
 		</property>		
 		
 		<!--department属性，本类与Department的多对一关系-->
-		<many-to-one name="department" class="Department" column="Department_Id">
+		<many-to-one name="department" class="Department" column="Department_Id" lazy="false">
 		</many-to-one>
 		<!-- roles属性，本类与Role类的多对多 -->
 		<set name="roles" table="T_Teacher_Role" lazy="false">

@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/search.css" />
 
-<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
 
 <!-- 检测搜索框是否输入 -->
 <script type="text/javascript">
@@ -53,7 +52,7 @@
 	    			"courseId" : courseId
     			}, 
 	    		dataType : "json",
-	    		async : false,
+	    		async : true,
             	success: function(data) { 
             	 //不做事
             	}
