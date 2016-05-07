@@ -54,7 +54,7 @@
 		</set>		
 
 		<!-- courses属性，与Course类多对多 -->
-		<set name="courses" table="T_Department_Course">
+		<set name="courses" table="T_Department_Course" lazy="false">
 			<key column="Department_Id"></key>
 			<many-to-many class="Course" column="Course_Id"></many-to-many>
 		</set>

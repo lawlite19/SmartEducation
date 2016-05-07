@@ -22,7 +22,7 @@
 		</property>
 		
 		<!--dataDicts属性，本类与DataDict的一对多-->
-		<set name="dataDicts">
+		<set name="dataDicts" lazy="false">
 			<key column="DataType_Id"></key>
 			<one-to-many class="DataDict" />
 		</set>

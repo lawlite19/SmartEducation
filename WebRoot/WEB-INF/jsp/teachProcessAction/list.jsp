@@ -1,77 +1,28 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>课程进程</title>
 <script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
-<!-- layer弹窗插件 -->
+<!--Layer插件弹出对话框-->
 <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/search.css" />
-
-<script>
-	$(function() {
-             $("#deleteSelected").click(function(){
-            	 $("input:checked").each(function(){
-            	 	 var value=$(this).val().split(",");
-           	    	 //alert(value[0]);
-           	    	 //alert(value[1]);
-           	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
-           	    		//if(value[1]=="admin"){
-           				//	alert("该用户为超级管理员,不能删除！");
-           				//	return;
-           				//}
-           	    		$.ajax({ 
-               	    		type: "post",
-               	    		url: "student_bulkDelete.action", 
-               	    		data: {
-               	    			"id" : value[0]
-           	    			}, 
-               	    		dataType : "json",
-               	    		async : false,
-                            success: function(data) { 
-                            	 //var json = eval("(" + data + ")");
-								 var str = data.name;
-   								  if (str=="ok") {
-   		           				  	alert("删除成功");
-   		           				  	layer.load();
-   		           				 	window.location.reload();
-   		           				  } else {
-   		           	                 alert("删除失败");  
-   		           				}
-               	    		} 
-               	       }); 
-   					}
-        	    	 
-        	     });
-        	   //window.location.reload();
-      });
-
-	});
-
-</script>
-<!-- 查询输入框检查 -->
-<script type="text/javascript">
-    function MM_Empty(ctrl1Id, ctrl2Id) {
-        var ctrl1 = document.getElementById(ctrl1Id);
-        var ctrl2 = document.getElementById(ctrl2Id);
-        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
-        	//正上方
-        	layer.msg('请输入查询条件！', {
-        	  offset: 0,
-        	  shift: 6
-        	});
-            ctrl1.focus();
-            return false;
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
+<!--鼠标悬浮变色相关代码开始-->
+    <script type="text/javascript">
+        var _oldColor;
+        function SetNewColor(source) {
+            _oldColor = source.style.backgroundColor;
+            source.style.backgroundColor = '#E8F5FE';
         }
-        layer.load();
-        return true;
-    }
-	function Check() {
-		return MM_Empty('select_dept', 'txt_inputTerm');
-    }
-	</script>
+        function SetOldColor(source) {
+            source.style.backgroundColor = _oldColor;
+        }
+    </script>
+<!--鼠标悬浮变色相关代码结束-->
+
 </head>
 <body>
 <div class="main">
@@ -82,27 +33,24 @@
 			<div style="height:550px;float:left;"></div>
 
 			<div class="label" style="margin: 0;">
-			<s:if test="%{name!=null}">
-				${name}
-			</s:if>
-			<s:else>
-				全部
-			</s:else>
-<!-- 搜索框 -->
-<div class="container">
-<s:form action="spiderCourse_show" method="post">
-<input type="text" name="searchInfo" id="txt_search2">
-<input class="button" onclick="return Check2();" type="submit" value="搜索">
-</s:form>
-</div>
+				<span id="span_courseName">${courseName}</span>
+<!-- 添加教学进程 -->
+<!-- 添加按钮 -->
+<table align="center" cellspacing="3" cellpadding="5">
+	<tr>
+		<td class="bbtn btn-primary" align="center">
+			<a href="#" onclick="AddTeachProcess('${courseId}')"  style="color:white;text-decoration: none;">添加</a>
+		</td>
+	</tr>
+</table>
 			</div>
+
 <!-- 教学进程信息 -->
 			<ul style="overflow:hidden;">
 <table width="91.8%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">用户账号管理</span>
                     </td>
                     <td class="tr"></td>
                 </tr>
@@ -116,14 +64,14 @@
 		<!-- 表头-->
 		<thead>
 			<tr>
-				<td align="center">选择</td>
-				<td align="center">序号</td>
-				<td align="center">章节名称</td>
-				<td align="center">开始日期</td>
-				<td align="center">周次</td>
-				<td align="center">节次</td>
-				<td align="center">教学内容</td>
-				<td align="center">教学方式</td>
+				<th align="center">序号</th>
+				<th align="center">周次</th>
+				<th align="center">授课日期</th>
+				<th align="center">教学内容</th>
+				<th align="center">节次</th>
+				<th align="center">教学方式</th>
+				<th align="center">教学章节</th>
+				<th align="center">操作</th>
 			</tr>
 		</thead>
 
@@ -131,21 +79,19 @@
 		<tbody>
 			<s:iterator value="teachProcessList" status="s">
 			<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
-					<td  align="center">
-						<input type="checkbox" name="checkbox" class="checkbox" value="${id},${chapter}" />
-					</td>
 					<td align="center">${s.count}</td>
-					<td align="center">${startData}&nbsp;</td>
 					<td align="center">${weekCount}&nbsp;</td>
-					<td align="center">${lessonCount}&nbsp;</td>
+					<td align="center">${startData}&nbsp;</td>
 					<td align="center">${lessonContent}&nbsp;</td>
+					<td align="center">${lessonCount}&nbsp;</td>
 					<td align="center">${teachType.dictName}&nbsp;</td>
+					<td align="center">${chapter}&nbsp;</td>
 					<td  align="center">
-					<s:a action="teachProcess_editUI?id=%{id}">
+					<s:a action="teachProcess_editUI?id=%{id}&courseId=%{courseId}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
 					</s:a>
 					|
-					<s:a action="teachProcess_delete?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
+					<s:a action="teachProcess_delete?id=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
 						&nbsp;</td>
@@ -162,17 +108,17 @@
 			</ul>
 		</div>
 <!-- 我的课程信息 -->
-		<ul class="category">
+		<ul class="category" style="width:115px;">
 			<s:iterator value="couseList" var="num">
 				<s:if test="%{courseId==id}">
 					<li  class="current">
-						<s:a action="teachProcess_list?courseId=${id}">${name}</s:a>
+						<s:a action="teachProcess_list?courseId=%{id}">${courseName}</s:a>
 					</li>
-					<div class="arrow"></div>
+					<div class="arrow" style="right: 7px;"></div>
 				</s:if>
 				<s:else>
 					<li>
-						<s:a action="teachProcess_list?courseId=${id}">${name}</s:a>
+						<s:a action="teachProcess_list?courseId=%{id}">${courseName}</s:a>
 					</li>
 				</s:else>
 			</s:iterator>
@@ -180,5 +126,23 @@
 		<div class="clearfix" style="clear:both"></div>
 </div>
 </div>
+<!-- layer弹出层 -->
+	<script type="text/javascript">
+	function AddTeachProcess(courseId) {
+		var courseName = $("#span_courseName").html();
+		//iframe层
+        layer.open({
+          type: 2,
+          title: '课程名：'+courseName+'',
+          shadeClose: true,
+          shade: 0.1,
+          area: ['600px', '90%'],
+          content: 'teachProcess_addUI.action?courseId=' + courseId, //iframe的url
+          yes:function(index){
+        	  layer.close(index);
+          }
+        }); 
+	}
+    </script>
 </body>
 </html>

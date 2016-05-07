@@ -1,0 +1,144 @@
+body,a,table,div,span,td,th,input,select,p,li,textarea{font-size:9pt;font-family:ËÎÌו}
+
+input.dlgBtnCommon {width:60px}
+input.dlgBtnBrowse {width:63px;height:18px;margin-left:2px;padding-top:0px;}
+input.dlgBtnFind {width:80px}
+
+td.TB_Left{background-image: url(tbleft.gif);background-repeat:no-repeat;width:7px;}
+td.TB_Right{background-image: url(tbright.gif);background-repeat:no-repeat;background-position:right;height:26px;width:8px;}
+td.TB_Center{background-image: url(tbbg.gif);height: 26px;}
+
+td.TB_Btn_Padding{padding:0px 0px 0px 0px}
+
+
+.TB_Btn_Image{overflow: hidden;width: 16px;height: 16px;margin: 2px;background-repeat: no-repeat;}
+.TB_Btn_Image img{position: relative;}
+
+.TB_Btn, .TB_Btn_Over, .TB_Btn_Down, .TB_Btn_Checked {width:22px;height:22px;margin:0px;border:0px;}
+
+.TB_Btn_Over{
+	margin:0px;
+	border:1px solid #000080;
+	height:20px;
+	width:20px;
+	background-image:url(btnover.gif);
+}
+.TB_Btn_Down{
+	margin:0px;
+	border:1px solid #000080;
+	height:20px;
+	width:20px;
+	background-image:url(btndown.gif);
+}
+.TB_Btn_Checked{
+	margin:0px;
+	border:1px solid #000080;
+	height:20px;
+	width:20px;
+	background-image:url(btnchecked.gif);
+}
+
+
+.TB_Sep
+{
+	border-left: #6b90cd 1px solid;
+	border-right: #ffffff 1px solid;
+	font-size: 0px;
+	height: 15px;
+	top: 4px;
+	width:0px
+}
+
+
+.Menu_Image{overflow: hidden;width: 16px;height: 16px;margin: 2px;background-repeat: no-repeat;border-width:0px;}
+.Menu_Image img{position: relative;}
+
+
+
+
+body{background-color:#9ebef5; padding:2px; margin:0px;}
+select{background: #eeeeee;}
+
+
+
+#eWebEditor{
+	border-width:2px\9;
+	border-style:inset\9;
+	margin:0px;
+	padding:0px;
+}
+
+#eWebEditorTextarea{
+	border-width:2px\9;
+	border-style:inset\9;
+	margin:0px;
+	padding:0px;
+	SCROLLBAR-BASE-COLOR:#9EBEF5;
+	background-color:#FFFFFF;
+	overflow-y:scroll;
+}
+
+
+
+textarea.codemode{}
+textarea.textmode{}
+
+#eWebEditor_EditareaTD {
+	border-width:0px\9;
+	background-color:#ffffff;
+}
+
+
+/* IE9+firefox */
+:root #eWebEditor {border-width:1px;border-style: solid;border-color:#404040 #D4D0C8 #D4D0C8 #404040;}
+:root #eWebEditorTextarea {border-width:1px;border-style: solid;border-color:#404040 #D4D0C8 #D4D0C8 #404040;}
+:root #eWebEditor_EditareaTD {border-width:1px;border-style: solid;border-color:#808080 #FFFFFF #FFFFFF #808080;}
+
+
+.SB_Btn_Image{overflow:hidden;width:16px;height:16px;margin:0px;background-repeat:no-repeat;border:0px;}
+
+
+
+
+td.SB{height:22px;padding-top:1px}
+
+table.SB{
+	height:21px;
+	background-color: #9ebef5;
+}
+
+table.SB_Mode {height:20px}
+td.SB_Mode_Left{width:10px}
+td.SB_Mode_Sep{width:5px}
+
+td.SB_Mode_BtnOff 
+{
+padding:1px 5px 1px 5px;
+border:1px solid;
+border-color:#FFFFFF #808080 #808080 #FFFFFF;
+cursor:pointer;
+}
+
+td.SB_Mode_BtnOn
+{
+padding:1px 5px 1px 5px;
+border:1px solid;
+border-color:#808080 #FFFFFF #FFFFFF #808080;
+background-color: #EEEEEE;
+}
+
+
+table.SB_Size {height:20px}
+td.SB_Size_Sep {width:5px}
+td.SB_Size_Right {width:40px}
+td.SB_Size_Btn {cursor:pointer;}
+
+td.SB_Size_Btn div{overflow: hidden;width: 16px;height: 16px;margin: 2px;background-repeat: no-repeat;border-width:0px;}
+td.SB_Size_Btn img{position: relative;}
+
+td.SB_Mode_BtnOff div, td.SB_Mode_BtnOn div{overflow: hidden;width: 16px;height: 16px;margin:0px 2px 0px 2px;background-repeat: no-repeat;border-width:0px;}
+td.SB_Mode_BtnOff img, td.SB_Mode_BtnOn img{position: relative;}
+
+
+.TableResizeSepV{background-image:url(tableresizesep_v.gif);}
+.TableResizeSepH{background-image:url(tableresizesep_h.gif);}

@@ -1,0 +1,162 @@
+body,a,table,div,span,td,th,input,select,p,li,textarea{font-size:9pt;font-family:ËÎÌו}
+
+input.dlgBtnCommon {width:60px}
+input.dlgBtnBrowse {width:63px;height:18px;margin-left:2px;padding-top:0px;}
+input.dlgBtnFind {width:80px}
+
+td {line-height:150%}
+
+.imgButton {border:1px solid #f5f5f4;}
+.imgButtonOver {border:1px solid #0A246A; background-color:#b6bdd2;cursor:hand;}
+.imgButtonOut {border:1px solid #f5f5f4;}
+.imgButtonDown {border:1px inset;}
+
+/*fieldset {border:2px groove}*/
+fieldset {border: 1px solid #006600;padding:0px;}
+fieldset {border:1px solid #D7E0E7;}
+fieldset {border:1px solid #A0B0C3;}
+legend {margin-left:7px;margin-left:2px \9;}
+
+/*input,select {border:1px solid #87A3C1;}*/
+
+input.dlgBtn
+{
+	background-image:url(dlgbtnbg.gif);
+	background-repeat:repeat-x;
+	background-position:0 -1px;
+	background-color:#DDF0FF;
+	border:1px solid #87A3C1;
+	color:#174B73;
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-size:inherit;
+	color:inherit;
+	z-index:inherit;
+	cursor:pointer!important;
+	cursor:hand;
+	height:20px;
+	padding-top:0px;
+	padding-top:2px\9;
+}
+
+.red {color:red}
+
+
+
+
+.tab_layout1,.tab_left,.tab_center,.tab_right{background-image:url(dlgtabbg.gif);}
+
+.tab_layout1{background-repeat:repeat;height:27px;background-position:0px -120px;margin-bottom:5px;}
+.tab_layout1 td, .tab_layout1 table{height:27px;}
+.tab_begin{width:20px;}
+.tab_sep{width:3px;}
+
+.tab_left,.tab_right{width:3px;background-repeat:no-repeat;}
+.tab_center{background-repeat:repeat;padding-left:10px;padding-right:10px;color:#000000;cursor:default;}
+
+.tab_on .tab_left {background-position:0px 0px;}
+.tab_on .tab_right {background-position:-3px 0px;}
+.tab_on .tab_center {background-position:0px -30px;font-weight:bold;padding-top:2px;}
+
+.tab_off .tab_left {background-position:0px -60px;}
+.tab_off .tab_right {background-position:-3px -60px;}
+.tab_off .tab_center {background-position:0px -90px;padding-top:5px;}
+
+.tab_over .tab_left {background-position:0px 0px;}
+.tab_over .tab_right {background-position:-3px 0px;}
+.tab_over .tab_center {background-position:0px -30px;font-weight:bold;padding-top:2px;}
+
+/* ie9 */
+:root .tab_on .tab_center {height:25px\9;}
+:root .tab_over .tab_center {height:25px\9;}
+:root .tab_off .tab_center {height:22px\9;}
+
+
+
+body,p,span,td,fieldset,legend {cursor:default}
+
+
+
+html, body
+{
+	background-color: transparent;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+
+
+body, td, input, select, textarea
+{
+	font-size: 12px;
+}
+
+body, .BackColor
+{
+	background-color: #f7f8fd;
+}
+
+* html .blocker
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 12;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+
+.cover
+{
+	position: absolute;
+	top: 0px;
+	left: 14px;
+	right: 14px;
+	bottom: 18px;
+	z-index: 11;
+}
+
+.PopupBody
+{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background-color: transparent;
+	padding: 0px;
+}
+
+
+.tl, .tr, .ml, .mr, .bl, .br
+{
+	position: absolute;
+	background-image: url(dialog0.gif);
+	background-repeat: no-repeat;
+}
+
+.tc, .bc
+{
+	position: absolute;
+	background-image: url(dialog1.gif);
+	background-repeat: no-repeat;
+}
+
+.tl {top:0px; left:0px; width:20px; height: 28px; background-position:0px 0px;}
+.tr {top:0px; right:0px; width:4px; height:28px; background-position:-45px 0px;}
+.ml {top:28px; left:0px; bottom:2px; width:2px; background-position:-90px 0px; background-repeat:repeat-y;}
+.mr {top:28px; right:0px; bottom:2px; width:2px; background-position:-93px 0px; background-repeat:repeat-y;}
+.bl {bottom:0px; left:0px; width:2px; height:2px; background-position:-50px -23px;overflow:hidden}
+.br {bottom:0px; right:0px; width:2px; height:2px; background-position:-53px -23px;overflow:hidden}
+
+.tc {top:0px; left:20px; right:4px; height:28px; background-position:0px 0px; background-repeat:repeat-x;}
+.bc {bottom:0px; left:2px; right:2px; height:2px; background-position:0px -30px; background-repeat:repeat-x;overflow:hidden;}
+
+
+.mc {top:28px; left:2px; right:2px; bottom:2px; position:absolute; text-align:center;}
+
+.TitleCaption {left:5px; top:8px; font-size:12px; font-weight:bold;color:#ffffff;position:absolute;cursor:default;white-space:nowrap;}
+.TitleCloseButton {width:19px;height:19px;background:url(dialog0.gif) no-repeat -50px 0px;position:absolute;top:4px;right:0px;}
+.TitleCloseButtonHover {width:19px;height:19px;background:url(dialog0.gif) no-repeat -70px 0px;position:absolute;top:4px;right:0px;}
+.TitleCloseButton:hover {background-position:-70px 0px;}
+
+

@@ -135,6 +135,9 @@
 			<result name="list">/WEB-INF/jsp/courseAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/courseAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">course_list</result>
+			<result name="addMyCourseUI">/WEB-INF/jsp/courseAction/addMyCourseUI.jsp</result>
+			<result name="toTeachProcessList" type="redirectAction">teachProcess_list</result>
+		
 		</action>
 		<!-- 学生提交作业管理 -->
 		<action name="submitTask_*" class="submitTaskAction" method="{1}">
@@ -160,6 +163,9 @@
 		<!-- 教学进程 -->
 		<action name="teachProcess_*" class="teachProcessAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/teachProcessAction/list.jsp</result>
+			<result name="noCourseError">/WEB-INF/jsp/teachProcessAction/noCourseError.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/teachProcessAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">teachProcess_list?courseId=${courseId}</result>
 		</action>
 	</package>
 

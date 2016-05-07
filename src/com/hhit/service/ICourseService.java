@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hhit.base.IDaoSupport;
 import com.hhit.entity.Course;
+import com.hhit.entity.Department;
 import com.hhit.entity.UserDetails;
 
 public interface ICourseService extends IDaoSupport<Course>{

@@ -47,3 +47,28 @@ input.zt_s_input { width:241px; height:24px; padding-left:3px; padding-right:2px
 .kefu {position: relative;float: right;height: 36px;padding-right: 50px;}
 .kefu a{color: #fff;line-height: 45px;text-decoration: none;font-size: 12px;}
 
+/* 添加的 */
+td, div {font-size:12px;word-wrap:break-word;}
+.grid {border:1px solid #E8F5FE;width:100%;}
+.gridHead {background:#E8F5FE;font-weight:bold;color:black;height:28px;text-align:center }
+.grid td { border:1px #C6D8DA solid;}
+.grid th { border:1px #C6D8DA solid;text-align:center}
+th {color:#333;font-weight:bold;text-align:right}
+th label {font-weight:normal}
+hr {border:1px solid #C6D8DA;width:100%;}
+.div_contenttop{width:98%;margin-left:auto;margin-right:auto;}
+.table_pop{padding-top:30px;padding-left:20px;}
+.content_table{margin-left:80px;margin-right:auto;}
+.mframe {width:98%;margin-left:auto;margin-right:auto;}
+.mframe table {table-layout:fixed;}
+.mframe td table {table-layout:auto;}
+.mframe td.tm {height:26px; line-height:26px;background:url(../style/images/bg1.gif) repeat-x 0 -84px;border-top:#C6DAE5 1px solid;border-bottom:#C6DAE5 1px solid;}
+.mframe td.tl {width:1px;background:#C6DAE5;}
+.mframe td.tr {width:1px;background:#C6DAE5;}
+.mframe span.tt {color:#00080D;font-weight:bold;padding-left:35px; font-size:12px; background:url(../style/images/ico1.gif) no-repeat 11px 5px; display:block;}
+.mframe td.mm {background:white;padding:3px;}
+.mframe td.ml {width:1px;background:#C6DAE5;}
+.mframe td.mr {width:1px;background:#C6DAE5;}
+.mframe td.bm {height:13px;border-top:1px solid #C6DAE5; font:0px;}
+.mframe td.bl {width:0px;background:none transparent scroll repeat 0% 0%;}
+.mframe td.br {width:0px;background:none transparent scroll repeat 0% 0%;}
