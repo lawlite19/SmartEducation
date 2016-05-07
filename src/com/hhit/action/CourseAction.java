@@ -3,19 +3,29 @@ package com.hhit.action;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Role;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.UserDetails;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
+import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -29,6 +39,9 @@ public class CourseAction extends BaseAction<Course>{
 	private String inputTerm = "";// 输入的词条
 	
 	private Integer[] courseIds;
+	
+	//ajax传递过来
+	private Integer departmentId;
 	
 	/** 列表 */
 	public String list() throws Exception{
@@ -102,15 +115,7 @@ public class CourseAction extends BaseAction<Course>{
 		if((deptFind=getCurrentUser().getTeacher().getDepartment())!=null){
 			departmentIds=new Integer[1];
 			departmentIds[0]=deptFind.getId();
-			//准备数据 -- 对应部门的所有课程
-//			if(deptFind.getDeptLevel()>2){
-				List<Course> courseList=new ArrayList<>(deptFind.getCourses()) ;
-				ActionContext.getContext().put("courseList", courseList);
-//			}
-//			else{
-//				List<Course> courseList=courseService.findByDepartment(deptFind);
-//				ActionContext.getContext().put("courseList", courseList);
-//			}
+			ActionContext.getContext().put("courseList", deptFind.getCourses());
 		}
 		return "addMyCourseUI";
 	}
@@ -153,7 +158,25 @@ public class CourseAction extends BaseAction<Course>{
 		teacherService.update(teaFind);
 		return "toTeachProcessList";
 	}
-	
+
+	public String findByDeptId() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		//查找部门
+		Department deptFind=departmentService.findById(departmentId);
+		if(deptFind.getCourses().size()>0){
+			map.put("name", "success");
+			List<Course> courseList=new ArrayList<>(deptFind.getCourses());
+			//过滤属性
+			ClassPropertyFilter.ListCourseFilter(map, courseList);
+		}
+		else
+			map.put("name", "noCourse");
+		
+		//转为json并输出
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	public Integer[] getDepartmentIds() {
 		return departmentIds;
 	}
@@ -171,6 +194,12 @@ public class CourseAction extends BaseAction<Course>{
 	}
 	public void setCourseIds(Integer[] courseIds) {
 		this.courseIds = courseIds;
+	}
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 	
 }

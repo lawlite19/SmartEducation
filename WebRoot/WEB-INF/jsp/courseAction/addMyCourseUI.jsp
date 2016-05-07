@@ -56,6 +56,39 @@
     }
 	
 	</script>
+<!-- 根据部门动态加载系 -->
+<script>
+	function deptChange() {
+		$("#select_course").empty();
+		$.ajax({
+			type : "post",
+			url : "course_findByDeptId.action",
+			data : {
+				"departmentId" : $("#select_dept").val()
+			},
+			dataType : "json",
+			async : true,
+			success : function(data) {
+				//alert(data[0].id);
+				//alert(data[0].className);
+				//alert(data.length);
+				//var json = eval("(" + data + ")");
+				if(data.name=="noCourse"){
+					//正上方
+		        	layer.msg('该系没有课程', {
+		        	  offset: 0,
+		        	  shift: 6
+		        	});
+				}
+				else if(data.name=="success")
+				for (var i = 0; i < data.courses.length; i++)
+					$("#select_course").append(
+							"<option value='"+data.courses[i].id+"'>" + data.courses[i].courseName+ "</option>");
+			}
+		});
+	};
+</script>
+
 </head>
 <body>
 <!-- 顶层 -->
@@ -86,7 +119,19 @@
 		<!-- 表头-->
 		<tbody> 
 					
-                    <tr><td  class="addFont">课程描述</td>
+                    <tr>
+                    	<td  class="addFont">
+                    		部门
+						</td>
+						<td>
+							<s:select id="select_dept" name="departmentId" list="#departmentList" cssClass="ddl"
+                        		 listKey="id" listValue="deptName" headerKey="" headerValue="" onchange="deptChange();"/>
+						</td>
+					</tr>
+					<tr>
+						<td  class="addFont">
+							课程
+						</td>
                         <td>
                         	<s:select id="select_course" name="courseIds" list="#courseList" cssClass="ddl" multiple="true"
                         		size="20" listKey="id" listValue="courseName" style="height:200px;"/>
