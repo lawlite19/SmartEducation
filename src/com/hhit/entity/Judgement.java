@@ -24,10 +24,12 @@ public class Judgement {
 	private Integer usedCount;
 	private String questionType;
 	
+	private String teacherNum;
+	
 	
 	private Course course;
 	private Chapter chapter;
-	private Teacher teacher;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -94,11 +96,11 @@ public class Judgement {
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
-	public Teacher getTeacher() {
-		return teacher;
+	public String getTeacherNum() {
+		return teacherNum;
 	}
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+	public void setTeacherNum(String teacherNum) {
+		this.teacherNum = teacherNum;
 	}
 	
 	
