@@ -17,10 +17,8 @@ import com.hhit.entity.Class_;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.Role;
-import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.Student;
 import com.hhit.entity.User;
-import com.hhit.entity.UserDetails;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -76,10 +74,6 @@ public class StudentAction extends BaseAction<Student> {
 		userDetailsService.delete(model.getId());
 		result = "ok";
 		map.put("name", result);
-		// // 将要返回的map对象进行json处理
-		// JSONObject json = JSONObject.fromObject(map);
-		// // 调用json对象的toString方法转换为字符串然后赋值给result
-		// this.result = json.toString();
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 
 		return null;
@@ -180,6 +174,10 @@ public class StudentAction extends BaseAction<Student> {
 			if (tarDir.exists()) {
 				tarDir.mkdirs();
 			}
+			//设置图片名为自己的学号
+			//-->以.切分
+			String [] strArray = pictureFileName.split("\\."); 
+			pictureFileName=getCurrentUser().getUserNum()+"."+strArray[strArray.length-1];
 			File tarFile = new File(tarDir, pictureFileName);
 			try {
 				FileUtils.copyFile(picture, tarFile);

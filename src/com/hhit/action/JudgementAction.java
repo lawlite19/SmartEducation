@@ -1,12 +1,20 @@
 package com.hhit.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -35,6 +43,9 @@ public class JudgementAction extends BaseAction<Judgement>{
 	
 	//json返回
 	private String result;
+	//存储上传excel文件
+	private File questionBank;
+	private String questionBankFileName;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -133,13 +144,82 @@ public class JudgementAction extends BaseAction<Judgement>{
 	public String bulkDelete() throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 直接根据id删除
-		userDetailsService.delete(model.getId());
+		judgementService.delete(model.getId());
 		result = "ok";
 		map.put("name", result);
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-
+	
+	/** 批量导入 */
+	public String bulkImport() throws Exception{
+		
+		//上传到服务器目录-->/questionBankUpload目录
+		if (questionBank != null) {
+			// 获取当前应用程序物理路径
+			String rootPath = ServletActionContext.getServletContext()
+					.getRealPath("/");
+			File tarDir = new File(rootPath + "/questionBankUpload");
+			if (!tarDir.exists()) {
+				tarDir.mkdirs();
+			}
+			//修改文件名字为当天日期
+			//以.切分
+			String [] strArray=questionBankFileName.split("\\.");
+			SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
+			String timeString=sdf.format(new Date());
+			questionBankFileName="\\Judgement"+timeString+"."+strArray[strArray.length-1];
+			File tarFile = new File(tarDir, questionBankFileName);
+			try {
+				FileUtils.copyFile(questionBank, tarFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			//数据导入操作
+			//需要解析的Excel文件
+			String str[]=new String[5];
+			Integer difficult = null;
+			File file = new File(tarDir+questionBankFileName);
+			try {
+				//创建Excel，读取文件内容
+				//HSSFWorkbook workbook = new HSSFWorkbook(FileUtils.openInputStream(file));
+				//高版本的用XSSF
+				XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+				//读取默认第一个工作表sheet
+				XSSFSheet sheet = workbook.getSheetAt(0);
+				int firstRowNum = 3;
+				//获取sheet中最后一行行号
+				int lastRowNum = sheet.getLastRowNum();
+				for (int i = firstRowNum; i <=lastRowNum; i++) {
+					XSSFRow row = sheet.getRow(i);
+					//获取当前行最后单元格列号
+					//int lastCellNum = row.getLastCellNum();
+					for (int j = 0; j < 6; j++) {
+						XSSFCell cell = row.getCell(j);
+						if(j==5)
+							difficult=(int) cell.getNumericCellValue();
+						else
+							str[j] = cell.getStringCellValue();
+					}
+					Course courseFind=courseService.findByCourseName(str[1]);
+					//构造函数
+					Judgement judgeModel=new Judgement(str[0], courseFind, str[2], str[3], str[4], difficult, new Timestamp(new Date().getTime()), 0);
+					//保存数据库
+					judgementService.save(judgeModel);
+				}
+				workbook.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return "toList";
+	}
+	
+	
+	
+//==================
 	public String getTxtCourseName() {
 		return txtCourseName;
 	}
@@ -178,6 +258,22 @@ public class JudgementAction extends BaseAction<Judgement>{
 
 	public void setChapterId(Integer chapterId) {
 		this.chapterId = chapterId;
+	}
+
+	public File getQuestionBank() {
+		return questionBank;
+	}
+
+	public void setQuestionBank(File questionBank) {
+		this.questionBank = questionBank;
+	}
+
+	public String getQuestionBankFileName() {
+		return questionBankFileName;
+	}
+
+	public void setQuestionBankFileName(String questionBankFileName) {
+		this.questionBankFileName = questionBankFileName;
 	}
 	
 }
