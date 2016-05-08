@@ -10,9 +10,6 @@ import java.sql.Timestamp;
 //
 //
 
-
-
-
 public class SingleChoice {
 	private Integer id;
 	private Integer questionCode;

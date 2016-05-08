@@ -30,9 +30,34 @@ public class Judgement {
 	private Course course;
 	private Chapter chapter;
 	
+	/**
+	 * 默认构造函数
+	 */
+	public Judgement(){
+		
+	}
+	
+	/**
+	 * 构造函数
+	 */
+	public Judgement(String teacherNum, Course course, String knowledgeName,
+			String question, String answer, Integer difExponent,
+			Timestamp addTime, Integer usedCount) {
+		super();
+		this.teacherNum = teacherNum;
+		this.course = course;
+		this.knowledgeName = knowledgeName;
+		this.question = question;
+		this.answer = answer;
+		this.difExponent = difExponent;
+		this.addTime = addTime;
+		this.usedCount = usedCount;
+	}
 	public Integer getId() {
 		return id;
 	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

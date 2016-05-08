@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,14 @@ public class CourseServiceImpl extends DaoSupportImpl<Course> implements
 		return getSession().createQuery("FROM Course WHERE teacher=?")//
 				.setParameter(0, userDetails)//
 				.list();
+	}
+
+	@Override
+	public Course findByCourseName(String string) {
+		
+		return (Course) getSession().createQuery("FROM Course WHERE courseName=?")//
+				.setParameter(0, string)//
+				.uniqueResult();
 	}
 
 }

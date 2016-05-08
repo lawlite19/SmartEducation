@@ -6,19 +6,87 @@
     <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
     
+<!-- 检查上传文件与选择信息是否符合 -->
+<script type="text/javascript">
+	String.prototype.endWith=function(endStr){
+	  var d=this.length-endStr.length;
+	  return (d>=0&&this.lastIndexOf(endStr)==d);
+	};
+	function Check() {
+		//验证上传文件格式
+		var filePath=$("#file_xlsFile").val();
+		var index = filePath.lastIndexOf(".");
+		//alert(filePath);
+		if(index < 0) {
+			//正上方
+        	layer.msg('上传的文件格式不正确!', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+			return false;
+		}
+		else {
+			var ext = filePath.substring(index + 1, filePath.length);
+			//alert(ext);
+			if((ext!="xls")&&(ext!="xlsx")) {
+				//正上方
+	        	layer.msg('只能上传xls和xlsx的文件', {
+	        	  offset: 0,
+	        	  shift: 6
+	        	});
+				return false;
+			}
+		}
+		//验证上传文件名
+		var num=$("#select_questionType").val();
+		var index1 = filePath.lastIndexOf("\\");
+		var fileName = filePath.substring(index1 + 1, filePath.length);
+		//alert(fileName);
+		//return false;
+		if(num=="1"){
+			if(fileName!="JudgementTemplate.xlsx"){
+				//正上方
+	        	layer.msg('您选择的信息来源与上传的文件不符！', {
+	        	  offset: 0,
+	        	  shift: 6
+	        	});
+	            return false;
+			}
+		}
+		else{
+			if(fileName!="SingleChoiceTemplate.xlsx"){
+				//正上方
+	        	layer.msg('您选择的信息来源与上传的文件不符！', {
+	        	  offset: 0,
+	        	  shift: 6
+	        	});
+	            return false;
+			}
+		}
+		return true;
+		//loading层
+		layer.load(0,{
+  			shade: [0.5,'#000'] //0.1透明度的白色背景
+		});
+    }
+	</script>
+    
     <!-- 改变下载链接 -->
     <script type="text/javascript">
-    	function ChangeA() {
+    	function ChangeA(path) {
     		// 1-->判断题；2-->单选题
 			var num=$("#select_questionType").val();
     		if(num=="1"){
-    			$("#a_download").attr("href","123"); 
+    			$("#a_download").attr("href",path+"/questionBankTemplate/JudgementTemplate.xlsx"); 
+    			$("#form_questionBank").attr("action","judgement_bulkImport.action");
     		}
     		else if(num=="2"){
-    			$("#a_download").attr("href","345"); 
+    			$("#a_download").attr("href",path+"/questionBankTemplate/SingleChoiceTemplate.xlsx"); 
+    			$("#form_questionBank").attr("action","singleChoice_bulkImport.action");
     		}
     		else{
     			$("#a_download").attr("href","#"); 
+    			$("#form_questionBank").attr("action","");
     		}
 		}
     </script>
@@ -45,30 +113,31 @@
                     </td>
                     <td class="mm">
                     <div>
-<s:form action="" method="post">
-<s:hidden name="id"></s:hidden>
+<s:form action="judgement_bulkImport" method="post" id="form_questionBank" enctype="multipart/form-data">
 <table cellspacing="0" cellpadding="6"  align="center" border="0">
 		<!-- 表头-->
 		<tbody> 
 			        <tr>
                         <td class="addFont">选择信息来源：</td>
                         <td>
-                        	<s:select list="#{'1':'判断题题库','2':'单选题题库'}" onchange="ChangeA();" name="questionType" id="select_questionType" cssClass="ddl"></s:select>
+                        	<select onchange="ChangeA('${pageContext.request.contextPath}');" name="questionType" id="select_questionType" class="ddl">
+                        		<option value="1">判断题题库</option>
+                        		<option value="2">单选题题库</option>
+                        	</select>
                         </td>
                     </tr>
                     <tr>
                         <td class="addFont">模&nbsp;板&nbsp;下&nbsp;载&nbsp;：</td>
                         <td>
-                        	<s:a href="#" id="a_download">
+                        	<a href="${pageContext.request.contextPath}/questionBankTemplate/JudgementTemplate.xlsx" id="a_download">
                         		<span class="blue" style="text-decoration:underline; cursor:pointer">下载模板</span>
-                        	</s:a>
+                        	</a>
                         </td>
                     </tr>
                      <tr>
                         <td class="addFont">选择导入文件：</td>
                         <td>
-                     		 <input type="file" accept=".xls,.xlsx" name="questionFile" id="file_xlsFile" />
-
+                     		 <input type="file" accept=".xls,.xlsx" name="questionBank" id="file_xlsFile" />
                         </td>
                     </tr>
                     <tr>
