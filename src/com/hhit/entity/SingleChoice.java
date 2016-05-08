@@ -29,9 +29,11 @@ public class SingleChoice {
 	private Integer usedCount;
 	private String questionType;
 	
+	private String teacherNum;
+	
 	private Course course;
 	private Chapter chapter;
-	private Teacher teacher;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -123,17 +125,17 @@ public class SingleChoice {
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
 	public Integer getDifExponent() {
 		return difExponent;
 	}
 	public void setDifExponent(Integer difExponent) {
 		this.difExponent = difExponent;
+	}
+	public String getTeacherNum() {
+		return teacherNum;
+	}
+	public void setTeacherNum(String teacherNum) {
+		this.teacherNum = teacherNum;
 	}
 	
 	

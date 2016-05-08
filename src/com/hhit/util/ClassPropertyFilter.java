@@ -39,6 +39,12 @@ public class ClassPropertyFilter {
 		String[] roleProperty={"departments","teachers"};
 		map.put("courses", JsonUtil.jsonListFilter(courses, roleProperty));
 	}
+	//章节list过滤
+	public static void ListChapterFilter(Map<String,Object> map,List<Chapter> chapters){
+		String[] chapterProperty={"course"};
+		map.put("chapters", JsonUtil.jsonListFilter(chapters, chapterProperty));
+	}
+
 
 	
 }

@@ -76,15 +76,16 @@
 				<comment>题目类型</comment>
 			</column>
 		</property>
-
+		<property name="teacherNum" type="string">
+			<column name="TeacherNum" length="20">
+				<comment>老师工号</comment>
+			</column>
+		</property>
 		<!-- course属性，与Course多对一 -->
 		<many-to-one name="course" class="Course" column="Course_Id">
 		</many-to-one>
 		<!-- chapter属性，与Chapter多对一 -->
 		<many-to-one name="chapter" class="Chapter" column="Chapter_Id">
-		</many-to-one>
-		<!-- teacher属性，与Teacher多对一 -->
-		<many-to-one name="teacher" class="Teacher" column="Teacher_Id">
 		</many-to-one>
 		
 	</class>

@@ -167,6 +167,26 @@
 			<result name="saveUI">/WEB-INF/jsp/teachProcessAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">teachProcess_list?courseId=${courseId}</result>
 		</action>
+		<!-- 判断题 -->
+		<action name="judgement_*" class="judgementAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/judgementAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/judgementAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">judgement_list</result>
+		</action>
+		<!-- 单选题 -->
+		<action name="singleChoice_*" class="singleChoiceAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/singleChoiceAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/singleChoiceAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">singleChoice_list</result>
+		</action>
+		<!-- 章节 -->
+		<action name="chapter_*" class="chapterAction" method="{1}">
+    	</action>
+		<!-- 题库批量导入 -->
+		<action name="questionBank_*" class="questionBankAction" method="{1}">
+			<result name="bulkImportUI">/WEB-INF/jsp/questionBankAction/bulkImportUI.jsp</result>
+    	</action>
+		
 	</package>
 
 <!-- App端接口package -->

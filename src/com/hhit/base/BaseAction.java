@@ -5,16 +5,19 @@ import java.lang.reflect.ParameterizedType;
 import javax.annotation.Resource;
 
 import com.hhit.entity.User;
+import com.hhit.service.IChapterService;
 import com.hhit.service.IClassService;
 import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
 import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IFavoriteService;
+import com.hhit.service.IJudgementService;
 import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ISingleChoiceService;
 import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseInfoService;
 import com.hhit.service.ISpiderCourseService;
@@ -96,7 +99,12 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IVisitCourseRecordService visitCourseRecordService;//学生访问次数
 	@Resource
 	protected ITeachProcessService teachProcessService;//教学进程
-	
+	@Resource
+	protected IJudgementService judgementService;//判断题
+	@Resource
+	protected ISingleChoiceService singleChoiceService;//单选题
+	@Resource
+	protected IChapterService chapterService;//章节
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息
