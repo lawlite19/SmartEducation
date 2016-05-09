@@ -209,7 +209,7 @@
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 
 	</div>
-	<!-- 加载全部信息 -->
+	<!-- tips加载全部信息 -->
 <script type="text/javascript">
 (function(){
 	//显示答案描述

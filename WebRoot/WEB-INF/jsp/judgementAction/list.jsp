@@ -161,7 +161,16 @@
 					<td align="center">${course.courseName}&nbsp;</td>
 					<td align="center">${chapter.chapterName}&nbsp;</td>
 					<td align="center">${knowledgeName}&nbsp;</td>
-					<td align="center">${question}&nbsp;</td>
+					<td align="center">
+				    <s:if test="question.length()>10">
+						<a class="questionDetails" id="${question}" style="cursor:pointer;">
+							${question.substring(0,10)} .....
+						</a>
+					</s:if>
+					<s:else>
+							${question}
+					</s:else>
+					&nbsp;</td>
 					<td align="center">${answer}&nbsp;</td>
 					<td align="center">${difExponent}&nbsp;</td>
 					<td align="center">${addTime}&nbsp;</td>
@@ -188,5 +197,20 @@
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 
 	</div>
+	<!-- tips加载全部信息 -->
+<script type="text/javascript">
+(function(){
+	//问题描述
+	$('a.questionDetails').on('click',function(event){
+		var value = $(this).attr("id");
+		  //tips层-左
+		 index=layer.tips(value, this, {
+		  tips: [1, '#78BA32'],
+		  time:4000 //4s关闭
+		});
+	});
+})();
+
+</script>
 </body>
 </html>

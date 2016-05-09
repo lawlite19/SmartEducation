@@ -2,6 +2,8 @@ package com.hhit.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,13 +173,15 @@ public class StudentAction extends BaseAction<Student> {
 			String rootPath = ServletActionContext.getServletContext()
 					.getRealPath("/");
 			File tarDir = new File(rootPath + "/studentImgs");
-			if (tarDir.exists()) {
+			if (!tarDir.exists()) {
 				tarDir.mkdirs();
 			}
 			//设置图片名为自己的学号
 			//-->以.切分
 			String [] strArray = pictureFileName.split("\\."); 
-			pictureFileName=getCurrentUser().getUserNum()+"."+strArray[strArray.length-1];
+			SimpleDateFormat sdf =   new SimpleDateFormat( "-yyyy-MM-dd-HH-mm-ss" );
+			String timeString=sdf.format(new Date());
+			pictureFileName=getCurrentUser().getUserNum()+timeString+"."+strArray[strArray.length-1];
 			File tarFile = new File(tarDir, pictureFileName);
 			try {
 				FileUtils.copyFile(picture, tarFile);
