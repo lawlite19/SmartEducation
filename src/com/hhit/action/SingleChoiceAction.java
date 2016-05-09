@@ -69,6 +69,7 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 		List<Course> courseList=courseService.findAll();
 		ActionContext.getContext().put("courseList", courseList);
 		//准备数据--章节
+		@SuppressWarnings("unchecked")
 		List<Chapter> chapterList=Collections.EMPTY_LIST;
 		ActionContext.getContext().put("chapterList", chapterList);
 		return "saveUI";
@@ -89,6 +90,7 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 		return "toList";
 	}
 	/** 修改页面 */
+	@SuppressWarnings("unchecked")
 	public String editUI() throws Exception {
 		//准备数据--课程
 		List<Course> courseList=courseService.findAll();
@@ -201,7 +203,8 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 					}
 					Course courseFind=courseService.findByCourseName(str[1]);
 					//构造函数
-					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind, str[2], str[3], str[4], str[5], str[6], str[7], str[8], difficult);
+					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind, str[2], str[3], str[4], str[5], str[6], str[7], str[8], difficult,
+							new Timestamp(new Date().getTime()),0);
 					//保存数据库
 					singleChoiceService.save(singleChoiceFind);
 				}

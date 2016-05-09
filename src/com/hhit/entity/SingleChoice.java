@@ -43,7 +43,7 @@ public class SingleChoice {
 	 */
 	public SingleChoice(String teacherNum, Course course, String knowledgeName,
 			String question, String answer, String answerA, String answerB,
-			String answerC, String answerD, Integer difExponent) {
+			String answerC, String answerD, Integer difExponent,Timestamp addTime,Integer usedCount) {
 		super();
 		this.teacherNum = teacherNum;
 		this.course = course;
@@ -55,6 +55,8 @@ public class SingleChoice {
 		this.answerC = answerC;
 		this.answerD = answerD;
 		this.difExponent = difExponent;
+		this.addTime=addTime;
+		this.usedCount=usedCount;
 	}
 
 	public Integer getId() {
