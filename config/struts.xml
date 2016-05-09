@@ -48,6 +48,8 @@
 			<result name="personalMaintainUI">/WEB-INF/jsp/studentAction/personalMaintainUI.jsp</result>
 			<result name="personalMaintain"  type="redirectAction">student_personalMaintainUI</result>
 			<result name="myFavorite">/WEB-INF/jsp/studentAction/myFavorite.jsp</result>
+		    <result name="visitRecord">/WEB-INF/jsp/studentAction/visitRecord.jsp</result>
+		
 		</action>
 		<!-- 老师管理 -->
 		<action name="teacher_*" class="teacherAction" method="{1}">

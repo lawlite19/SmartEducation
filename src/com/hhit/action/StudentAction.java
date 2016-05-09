@@ -3,6 +3,7 @@ package com.hhit.action;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,13 +15,21 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import ChartDirector.Axis;
+import ChartDirector.Chart;
+import ChartDirector.GetSessionImage;
+import ChartDirector.XYChart;
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
+import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.Student;
 import com.hhit.entity.User;
+import com.hhit.entity.VisitCourseRecord;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -42,6 +51,7 @@ public class StudentAction extends BaseAction<Student> {
 	//存储图片文件
 	private File picture;
 	private String pictureFileName;
+	
 	
 	//我的收藏需要
 	
@@ -209,7 +219,6 @@ public class StudentAction extends BaseAction<Student> {
 //			ActionContext.getContext().getValueStack().push(spiderProfessionTypeService.findById(professionId));
 //			ActionContext.getContext().put("professionId", professionId);
 //		}
-			
 		//分页信息
 		new QueryHelper(Favorite.class, "f")//
 		.addCondition("f.student=?", getCurrentUser().getStudent())
@@ -217,7 +226,66 @@ public class StudentAction extends BaseAction<Student> {
 		
 		return "myFavorite";
 	}
-	
+	/** 浏览记录 */
+	public String visitRecord() throws Exception{
+		int i,recordCount=0;
+		//取出学生
+		Student stuFind=getCurrentUser().getStudent();
+		//取出访问的课程
+		String hql="FROM VisitCourseRecord WHERE student=?";
+		List<Object> parameters=new ArrayList<Object>();
+		parameters.add(stuFind);
+		int s=parameters.size();
+		PageBean pageBean=visitCourseRecordService.getPageBean(pageNum, 15, hql, parameters);
+		
+		List<VisitCourseRecord> courseList=pageBean.getRecordList();
+		ActionContext.getContext().getValueStack().push(pageBean);
+		
+		//记录条数
+		recordCount=courseList.size();
+		//数据--显示访问记录数
+		double[] count=new double[courseList.size()];
+		for(i=0;i<recordCount;i++){
+			count[i]=courseList.get(i).getCount();
+		}
+		//数据--要显示的标题
+		String[] labels = new String[courseList.size()];
+		for(i=0;i<recordCount;i++){
+			labels[i]=courseList.get(i).getSpiderCourse().getName();
+		}
+		// 创建600*360的chart
+		XYChart c = new XYChart(1000, 800);
+		c.setDefaultFonts("simsun.ttc");
+		// 添加图形的标题 ---- 18pt Times Bold Italic font
+		c.addTitle("访问课程记录", "宋体", 18);
+		// Set the plotarea at (60, 40) and of size 500 x 280 pixels. Use a vertical gradient color from
+		// light blue (eeeeff) to deep blue (0000cc) as background. Set border and grid lines to white
+		// (ffffff).
+		c.setPlotArea(100, 40, 800, 300, c.linearGradientColor(100, 40, 60, 280, 0xeeeeff, 0x0000cc), -1,
+		    0xffffff, 0xffffff);
+		// Add a multi-color bar chart layer using the supplied data. Use soft lighting effect with light
+		// direction from left.
+		c.addBarLayer3(count).setBorderColor(Chart.Transparent, Chart.softLighting(Chart.Left));
+		// 设置文字旋转90度
+		c.xAxis().setLabels(labels);
+		//设置文字以及方向
+		c.xAxis().setLabelStyle("宋体", 10).setFontAngle(65);
+		// Draw the ticks between label positions (instead of at label positions)
+		c.xAxis().setTickOffset(0.5);
+		// Add a title to the y axis with 10pt Arial Bold font
+		c.yAxis().setTitle("访问次数","宋体",12);
+		// Set axis line width to 2 pixels
+		c.xAxis().setWidth(2);
+		c.yAxis().setWidth(2);
+		// Output the chart
+		String chart1URL = c.makeSession(ServletActionContext.getRequest(), "chart1");
+		// Include tool tip for the chart
+		String imageMap1 = c.getHTMLImageMap("", "", "title='{xLabel}: US$ {value}M'");
+
+		ActionContext.getContext().put("chart1URL", chart1URL);
+		ActionContext.getContext().put("imageMap1", imageMap1);
+		return "visitRecord";
+	}
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -254,7 +322,5 @@ public class StudentAction extends BaseAction<Student> {
 	public void setPictureFileName(String pictureFileName) {
 		this.pictureFileName = pictureFileName;
 	}
-
-	
 	
 }

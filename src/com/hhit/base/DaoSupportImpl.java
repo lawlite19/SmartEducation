@@ -106,7 +106,7 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 		{
 			for(int i=0;i<parameters.size();i++)
 			{
-				listQuery.setParameter(i, parameters.get(i));
+				countQuery.setParameter(i, parameters.get(i));
 			}
 		}
 		Long count=(Long) countQuery.uniqueResult();//执行查询
