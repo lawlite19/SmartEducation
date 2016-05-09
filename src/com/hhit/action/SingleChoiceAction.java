@@ -1,12 +1,20 @@
 package com.hhit.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Course;
-import com.hhit.entity.Judgement;
 import com.hhit.entity.SingleChoice;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -35,6 +42,9 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 	
 	//json返回
 	private String result;
+	//存储上传excel文件
+	private File questionBank;
+	private String questionBankFileName;
 
 	/** 列表 */
 	public String list() throws Exception {
@@ -137,6 +147,78 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	/** 批量导入 */
+	public String bulkImport() throws Exception{
+		
+		//上传到服务器目录-->/questionBankUpload目录
+		if (questionBank != null) {
+			// 获取当前应用程序物理路径
+			String rootPath = ServletActionContext.getServletContext()
+					.getRealPath("/");
+			File tarDir = new File(rootPath + "/questionBankUpload");
+			if (!tarDir.exists()) {
+				tarDir.mkdirs();
+			}
+			//修改文件名字为当天日期
+			//以.切分
+			String [] strArray=questionBankFileName.split("\\.");
+			SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss" );
+			String timeString=sdf.format(new Date());
+			questionBankFileName="\\SingleChoice"+timeString+"."+strArray[strArray.length-1];
+			File tarFile = new File(tarDir, questionBankFileName);
+			try {
+				FileUtils.copyFile(questionBank, tarFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+				addFieldError("questionBankInfo", "文件上传出错！");
+				return "tobulkImportUI";
+			}
+			//数据导入操作
+			//需要解析的Excel文件
+			String str[]=new String[9];
+			Integer difficult = null;
+			File file = new File(tarDir+questionBankFileName);
+			try {
+				//创建Excel，读取文件内容
+				//HSSFWorkbook workbook = new HSSFWorkbook(FileUtils.openInputStream(file));
+				//高版本的用XSSF
+				XSSFWorkbook workbook = new XSSFWorkbook(FileUtils.openInputStream(file));
+				//读取默认第一个工作表sheet
+				XSSFSheet sheet = workbook.getSheetAt(0);
+				int firstRowNum = 3;
+				//获取sheet中最后一行行号
+				int lastRowNum = sheet.getLastRowNum();
+				for (int i = firstRowNum; i <=lastRowNum; i++) {
+					XSSFRow row = sheet.getRow(i);
+					//获取当前行最后单元格列号
+					//int lastCellNum = row.getLastCellNum();
+					for (int j = 0; j < 10; j++) {
+						XSSFCell cell = row.getCell(j);
+						if(j==9)
+							difficult=(int) cell.getNumericCellValue();
+						else
+							str[j] = cell.getStringCellValue();
+					}
+					Course courseFind=courseService.findByCourseName(str[1]);
+					//构造函数
+					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind, str[2], str[3], str[4], str[5], str[6], str[7], str[8], difficult);
+					//保存数据库
+					singleChoiceService.save(singleChoiceFind);
+				}
+				workbook.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				addFieldError("questionBankInfo", "导入出错！");
+				return "tobulkImportUI";
+			}
+		}
+		else{
+			addFieldError("questionBankInfo", "文件错误！");
+			return "tobulkImportUI";
+		}
+		return "toList";
+	}
 	public Integer getCourseId() {
 		return courseId;
 	}
@@ -175,6 +257,18 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 
 	public void setTxtQuestion(String txtQuestion) {
 		this.txtQuestion = txtQuestion;
+	}
+	public File getQuestionBank() {
+		return questionBank;
+	}
+	public void setQuestionBank(File questionBank) {
+		this.questionBank = questionBank;
+	}
+	public String getQuestionBankFileName() {
+		return questionBankFileName;
+	}
+	public void setQuestionBankFileName(String questionBankFileName) {
+		this.questionBankFileName = questionBankFileName;
 	}
 
 	

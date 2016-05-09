@@ -31,6 +31,32 @@ public class SingleChoice {
 	private Course course;
 	private Chapter chapter;
 	
+	
+	/**
+	 * 默认构造函数
+	 */
+	public SingleChoice() {
+		
+	}
+	/**
+	 * 构造函数
+	 */
+	public SingleChoice(String teacherNum, Course course, String knowledgeName,
+			String question, String answer, String answerA, String answerB,
+			String answerC, String answerD, Integer difExponent) {
+		super();
+		this.teacherNum = teacherNum;
+		this.course = course;
+		this.knowledgeName = knowledgeName;
+		this.question = question;
+		this.answer = answer;
+		this.answerA = answerA;
+		this.answerB = answerB;
+		this.answerC = answerC;
+		this.answerD = answerD;
+		this.difExponent = difExponent;
+	}
+
 	public Integer getId() {
 		return id;
 	}

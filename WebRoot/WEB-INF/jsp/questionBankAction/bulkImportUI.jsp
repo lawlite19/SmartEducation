@@ -15,6 +15,14 @@
 	function Check() {
 		//验证上传文件格式
 		var filePath=$("#file_xlsFile").val();
+		if(filePath==""){
+			//正上方
+        	layer.msg('请先选择上传文件!', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+			return false;
+		}
 		var index = filePath.lastIndexOf(".");
 		//alert(filePath);
 		if(index < 0) {
@@ -63,11 +71,11 @@
 	            return false;
 			}
 		}
-		return true;
 		//loading层
 		layer.load(0,{
   			shade: [0.5,'#000'] //0.1透明度的白色背景
 		});
+		return true;
     }
 	</script>
     
@@ -109,7 +117,7 @@
             </tr>
             <tr>
                 <td class="tm">
-                        
+                      
                     </td>
                     <td class="mm">
                     <div>
@@ -117,6 +125,14 @@
 <table cellspacing="0" cellpadding="6"  align="center" border="0">
 		<!-- 表头-->
 		<tbody> 
+		<tr>
+                        <td colspan="2" align="center">
+                        	<font style="color:red;font-size:16px;">  
+                        		<s:fielderror fieldName="questionBankInfo"/>
+							</font>
+                        </td>
+                    </tr>
+                      
 			        <tr>
                         <td class="addFont">选择信息来源：</td>
                         <td>
