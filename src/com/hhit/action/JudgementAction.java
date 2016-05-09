@@ -174,6 +174,8 @@ public class JudgementAction extends BaseAction<Judgement>{
 				FileUtils.copyFile(questionBank, tarFile);
 			} catch (IOException e) {
 				e.printStackTrace();
+				addFieldError("questionBankInfo", "文件上传出错！");
+				return "tobulkImportUI";
 			}
 			//数据导入操作
 			//需要解析的Excel文件
@@ -211,8 +213,15 @@ public class JudgementAction extends BaseAction<Judgement>{
 				
 			} catch (IOException e) {
 				e.printStackTrace();
+				addFieldError("questionBankInfo", "文件导入出错！");
+				return "tobulkImportUI";
 			}
 			
+		}
+		else
+		{
+			addFieldError("questionBankInfo", "文件上传错误！");
+			return "tobulkImportUI";
 		}
 		return "toList";
 	}
