@@ -36,7 +36,7 @@
 			<many-to-many class="Department" column="Department_Id"></many-to-many>
 		</set>
 		<!-- teachers属性，本类与Teacher的多对多   -->
-		<set name="teachers" table="T_Teacher_Course">
+		<set name="teachers" table="T_Teacher_Course" order-by="id ASC">
 			<key column="Course_Id"></key>
 			<many-to-many class="Teacher" column="Teacher_Id"></many-to-many>
 		</set>

@@ -50,7 +50,6 @@ public class UserAction extends BaseAction<User>{
 
 	/** 登录验证，成功跳转主页，否则重新登录 */
 	//说明:User表中只有两种类型，学生和老师，因为负责人、管理员也是教师
-	@SuppressWarnings("unchecked")
 	public String login() throws Exception {
 		// String s1=user.getUserNum().trim();
 		// String s2=user.getPassword().trim();

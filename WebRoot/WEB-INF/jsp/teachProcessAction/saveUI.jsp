@@ -25,6 +25,7 @@
         if (!MM_Empty('select_weekCount', '周次')) return false;
         if (!MM_Empty('txt_startData', '授课日期')) return false;
         if (!MM_Empty('select_lessonCount', '上课节次')) return false;
+        if (!MM_Empty('select_teachType', '教学方式')) return false;
         layer.load();
     }
 	</script>
@@ -144,7 +145,7 @@
                         <td>
                         	<s:submit value="提交" onclick="return Check();" cssClass="ttn"></s:submit>
                         	&nbsp;&nbsp;&nbsp;
-                        	<input type="button" class="ttn" onclick="javascript:history.go(-1);" value="返回" />
+                        	<input id="btnCancel" type="button" class="ttn" onclick="javascript:history.go(-1);" value="返回" />
                         </td>
                     </tr>
 		</tbody>
@@ -158,6 +159,13 @@
 	</tbody>
      </table>
 </div>
-
+        <script>
+            (function () {
+                $('#btnCancel').click(function () {
+                	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                	parent.layer.close(index); //再执行关闭 
+                });
+            })();
+        </script>
 </body>
 </html>
