@@ -4,6 +4,7 @@
 <head>
 <title>单选题列表</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
+<!-- 批量删除 -->
 <script>
 	$(function() {
              $("#deleteSelected").click(function(){
@@ -33,7 +34,6 @@
    					}
         	    	 
         	     });
-        	   //window.location.reload();
       });
 
 	});
@@ -61,6 +61,7 @@
 		return MM_Empty('txt_courseName','txt_knowledgeName', 'txt_question');
     }
 	</script>
+
 </head>
 <body>
 <!-- 顶层 -->
@@ -160,13 +161,30 @@
 					<td align="center">${course.courseName}&nbsp;</td>
 					<td align="center">${chapter.chapterName}&nbsp;</td>
 					<td align="center">${knowledgeName}&nbsp;</td>
-					<td align="center">${question}&nbsp;</td>
+					<td align="center">
+					<s:if test="question.length()>10">
+						<a class="questionDetails" id="${question}" style="cursor:pointer;">
+							${question.substring(0,10)} .....
+						</a>
+					</s:if>
+					<s:else>
+							${question}
+					</s:else>
+					&nbsp;</td>
 					<td align="center">${answer}&nbsp;</td>
 					<td align="center">
-					A：${answerA}<br/>
-					B：${answerB}<br/>
-					C：${answerC}<br/>
-					D：${answerD}
+					<s:if test="answerA.length()>10">
+						<a class="answerDetails" id="A:${answerA}<br/>B:${answerB}<br/>C:${answerC}<br/>D:${answerD}"
+						style="cursor:pointer;">
+							A：${answerA.substring(0,10)} .....
+						</a>
+					</s:if>
+					<s:else>
+						<a class="answerDetails" id="A:${answerA}<br/>B:${answerB}<br/>C:${answerC}<br/>D:${answerD}"
+						style="cursor:pointer;">
+							A：${answerA} .....
+						</a>
+					</s:else>
 					</td>
 					<td align="center">
 					<s:a action="singleChoice_editUI?id=%{id}">
@@ -191,5 +209,28 @@
 	<%@include file="/WEB-INF/jsp/public/pageView.jspf"%>
 
 	</div>
+	<!-- 加载全部信息 -->
+<script type="text/javascript">
+(function(){
+	//显示答案描述
+	$('a.answerDetails').on('click', function (event) {
+	    var value = $(this).attr("id");
+	  //tips层-左
+		 index=layer.tips(value, this, {
+		  tips: [1, '#78BA32'],
+		  time:4000 //4s关闭
+		});
+	});
+	$('a.questionDetails').on('click',function(event){
+		var value = $(this).attr("id");
+		  //tips层-左
+		 index=layer.tips(value, this, {
+		  tips: [1, '#78BA32'],
+		  time:4000 //4s关闭
+		});
+	});
+})();
+
+</script>
 </body>
 </html>

@@ -35,5 +35,5 @@
           		    this.checked=!this.checked;
           	   });
            });
-	})();
+	});
 </script>
