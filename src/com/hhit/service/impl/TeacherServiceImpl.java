@@ -12,5 +12,13 @@ import com.hhit.service.ITeacherService;
 public class TeacherServiceImpl extends DaoSupportImpl<Teacher> implements
 		ITeacherService {
 
+	@Override
+	public Teacher findByTeacherNum(String teacherNum) {
+		return (Teacher) getSession().createQuery("FROM Teacher WHERE teaNum=?")//
+		.setParameter(0, teacherNum)//
+		.uniqueResult();
+		
+	}
+
 
 }

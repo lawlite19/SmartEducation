@@ -1,0 +1,31 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.p_apiInfo{
+	margin-left: 50px;
+    font-size: 16px;
+    color: green;
+}
+.span_apiInfo{
+	margin-left: 50px;
+    font-size: 16px;
+}
+.span_apiProperty{
+	font-size:17px;
+	color:blue;
+}
+.span_apiPropertyInfo{
+	font-size:17px;
+	color:orange;
+}
+.span_apiButton{
+		margin-left: 120px;
+		font-size: 16px;
+}
+.span_apiSuccess{
+		font-size: 16px;
+		color:green;
+}
+.span_apiNormal{
+		font-size: 16px;
+		color:black;
+}

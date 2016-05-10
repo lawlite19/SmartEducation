@@ -1,6 +1,7 @@
 package com.hhit.action;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,16 +13,14 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import ChartDirector.GetSessionImage;
-
 import com.hhit.base.BaseAction;
-import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.LogFile;
 import com.hhit.entity.Role;
-import com.hhit.entity.Student;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -43,6 +42,8 @@ public class TeacherAction extends BaseAction<Teacher>{
 	
 	// ajax json返回
 	private String result;
+	
+	private String teacherNum;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -169,6 +170,30 @@ public class TeacherAction extends BaseAction<Teacher>{
 
 		return "toList";
 	}
+	/** 老师对应的课程(老师可以自己添加课程) */
+	public String findTeacherCourse() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		//根据工号查找
+		Teacher teaFind=teacherService.findByTeacherNum(teacherNum);
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			if(teaFind.getCourses().size()>0){
+				List<Course> courseList=new ArrayList<>(teaFind.getCourses());
+				//过滤
+				ClassPropertyFilter.ListCourseFilter(map, courseList);
+				map.put("name", "success");
+			}
+			else{
+				map.put("name","noCourse");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	
+	
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -198,6 +223,12 @@ public class TeacherAction extends BaseAction<Teacher>{
 	}
 	public void setRoleIds(Integer[] roleIds) {
 		this.roleIds = roleIds;
+	}
+	public String getTeacherNum() {
+		return teacherNum;
+	}
+	public void setTeacherNum(String teacherNum) {
+		this.teacherNum = teacherNum;
 	}
 	
 }

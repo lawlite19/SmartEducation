@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.hhit.entity.User;
 import com.hhit.service.IChapterService;
+import com.hhit.service.IClassSelectCourseService;
 import com.hhit.service.IClassService;
 import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
@@ -105,6 +106,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ISingleChoiceService singleChoiceService;//单选题
 	@Resource
 	protected IChapterService chapterService;//章节
+	@Resource
+	protected IClassSelectCourseService classSelectCourseService;
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息

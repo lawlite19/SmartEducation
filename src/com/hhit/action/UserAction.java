@@ -142,7 +142,6 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String appLogin() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
-		model.setUserType("学生");
 		if (model.getUserType().equals("学生")) {
 			User userFind = userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
 			if (null != userFind) {
@@ -156,6 +155,7 @@ public class UserAction extends BaseAction<User>{
 				//班级
 				Class_ classFind=stuFind.getClass_();
 				ClassPropertyFilter.ClassFilter(map, classFind);
+				map.put("name", "success");
 				JsonUtil.toJson(ServletActionContext.getResponse(), map);
 			} else {
 				result="账号或密码错误！";
@@ -165,10 +165,10 @@ public class UserAction extends BaseAction<User>{
 		}
 		else{
 			//查找用户，userType属性为--》老师
-			User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),"老师");
+			User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
 			if(null!=userFind){
 				//查找对应的角色
-				List<Role> rolesList=(List<Role>) userFind.getTeacher().getRoles();
+				List<Role> rolesList=new ArrayList<Role>(userFind.getTeacher().getRoles());
 				for (Role role : rolesList) {
 					if(role.getRoleName().equals(model.getUserType())){
 						ActionContext.getContext().getSession().put("user", userFind);
@@ -179,8 +179,9 @@ public class UserAction extends BaseAction<User>{
 						Department deptFind=teaFind.getDepartment();
 						ClassPropertyFilter.DepartmentFilter(map, deptFind);
 						//角色
-						List<Role> rolesFind=(List<Role>) teaFind.getRoles();
-						ClassPropertyFilter.ListRoleFilter(map, rolesFind);
+						ClassPropertyFilter.ListRoleFilter(map, rolesList);
+						map.put("name", "success");
+						JsonUtil.toJson(ServletActionContext.getResponse(), map);
 					}
 				}
 				result="账号或密码错误！";

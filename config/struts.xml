@@ -189,8 +189,20 @@
 		<!-- 题库批量导入 -->
 		<action name="questionBank_*" class="questionBankAction" method="{1}">
 			<result name="bulkImportUI">/WEB-INF/jsp/questionBankAction/bulkImportUI.jsp</result>
+    	
     	</action>
+    	<!-- 班级选课 -->
+		<action name="classSelectCourse_*" class="classSelectCourseAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/classSelectCourseAction/list.jsp</result>
+    		<result name="saveUI">/WEB-INF/jsp/classSelectCourseAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">classSelectCourse_list</result>
+			
+    	</action>
+		<!-- 接口API -->
+		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
+			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
 		
+		</action>
 	</package>
 
 <!-- App端接口package -->
