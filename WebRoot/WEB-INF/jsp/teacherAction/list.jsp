@@ -10,10 +10,6 @@
             	 $("input:checked").each(function(){
             	 	 var value=$(this).val().split(",");
            	    	 if (confirm("确定要删除"+value[1]+"吗?")) {
-           	    		//if(value[1]=="admin"){
-           				//	alert("该用户为超级管理员,不能删除！");
-           				//	return;
-           				//}
            	    		$.ajax({ 
                	    		type: "post",
                	    		url: "teacher_bulkDelete.action", 
@@ -172,7 +168,7 @@
 					<s:a action="teacher_delete?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
-					<s:a action="teacher_initPassword?id=%{id}">
+					<s:a action="teacher_initPassword?id=%{id}" onclick="return window.confirm('初始化密码为123456')">
 						初始化密码
 					</s:a> &nbsp;</td>
 				</tr>

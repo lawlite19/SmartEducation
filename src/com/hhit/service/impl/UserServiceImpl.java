@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.base.DaoSupportImpl;
+import com.hhit.entity.Student;
+import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
 import com.hhit.entity.UserDetails;
 import com.hhit.service.IUserService;
@@ -38,6 +40,18 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 		return (User) getSession().createQuery("FROM User WHERE userDetails=?")//
 		.setParameter(0, userDetails)//
 		.list().get(0);
+	}
+	@Override
+	public User findByStudent(Student stuFind) {
+		return (User) getSession().createQuery("FROM User WHERE student=?")//
+				.setParameter(0, stuFind)//
+				.uniqueResult();
+	}
+	@Override
+	public User findByTeacher(Teacher teaFind) {
+		return (User) getSession().createQuery("FROM User WHERE teacher=?")//
+				.setParameter(0, teaFind)//
+				.uniqueResult();
 	}
 
 	

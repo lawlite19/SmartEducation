@@ -180,6 +180,16 @@ public class TeacherAction extends BaseAction<Teacher>{
 
 		return "toList";
 	}
+	/** 初始化密码 */
+	public String initPassword() throws Exception{
+		Teacher teaFind=teacherService.findById(model.getId());
+		User userFind=userService.findByTeacher(teaFind);
+		
+		userFind.setPassword(DigestUtils.md5Hex("123456"));
+		//更新用户
+		userService.update(userFind);
+		return "toList";
+	}
 	/** 老师对应的课程(老师可以自己添加课程) */
 	public String findTeacherCourse() throws Exception{
 		Map<String, Object> map=new HashMap<>();

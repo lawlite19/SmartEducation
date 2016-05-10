@@ -15,14 +15,11 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import ChartDirector.Axis;
 import ChartDirector.Chart;
-import ChartDirector.GetSessionImage;
 import ChartDirector.XYChart;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
-import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
@@ -167,6 +164,16 @@ public class StudentAction extends BaseAction<Student> {
 
 		return "toList";
 	}
+	/** 初始化密码 */
+	public String initPassword() throws Exception{
+		Student stuFind=studentService.findById(model.getId());
+		User userFind=userService.findByStudent(stuFind);
+		userFind.setPassword(DigestUtils.md5Hex("123456"));
+		
+		//更新用户
+		userService.update(userFind);
+		return "toList";
+	}
 	/** 个人信息维护界面  */
 	public String personalMaintainUI() throws Exception{
 		//得到学生放到栈顶
@@ -235,7 +242,6 @@ public class StudentAction extends BaseAction<Student> {
 		String hql="FROM VisitCourseRecord WHERE student=?";
 		List<Object> parameters=new ArrayList<Object>();
 		parameters.add(stuFind);
-		int s=parameters.size();
 		PageBean pageBean=visitCourseRecordService.getPageBean(pageNum, 15, hql, parameters);
 		
 		List<VisitCourseRecord> courseList=pageBean.getRecordList();
