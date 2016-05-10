@@ -69,10 +69,6 @@
 			dataType : "json",
 			async : true,
 			success : function(data) {
-				//alert(data[0].id);
-				//alert(data[0].className);
-				//alert(data.length);
-				//var json = eval("(" + data + ")");
 				if(data.name=="noCourse"){
 					//正上方
 		        	layer.msg('该系没有课程', {

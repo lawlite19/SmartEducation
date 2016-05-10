@@ -2,6 +2,7 @@ package com.hhit.action;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.ClassSelectCourse;
+import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.LogFile;
@@ -44,6 +47,13 @@ public class TeacherAction extends BaseAction<Teacher>{
 	private String result;
 	
 	private String teacherNum;
+	
+	//老师自己添加课程对应的班级需要
+	private Integer courseId;
+	//班级
+	private Integer[] classIds;
+	//
+	private Integer classSelectCourseId;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -192,7 +202,80 @@ public class TeacherAction extends BaseAction<Teacher>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-	
+	/** 添加课程对应的班级列表界面 */
+	public String listCourseClass() throws Exception{
+		Teacher teaFind=getCurrentUser().getTeacher();
+		if(teaFind.getCourses().size()<1){
+			return "noCourseError";
+		}
+		else{
+			//准备数据--老师对应课程
+			List<Course> couseList=new ArrayList<>(teaFind.getCourses());
+			ActionContext.getContext().put("couseList", couseList);
+
+		}
+		if(courseId==null){
+			//准备数据--第一门课程的教学进程
+			List<Course> couseList=new ArrayList<>(teaFind.getCourses());
+			Course courseFind=couseList.get(0);
+			//准备数据--课程名
+			ActionContext.getContext().getValueStack().push(courseFind);
+
+			List<ClassSelectCourse> classSelectCourseList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(),courseFind);
+			ActionContext.getContext().put("classSelectCourseList", classSelectCourseList);
+			courseId=courseFind.getId();
+		}
+		else{
+			//准备数据--课程名
+			ActionContext.getContext().getValueStack().push(courseService.findById(courseId));
+			//准备数据--课程id
+			ActionContext.getContext().put("courseId", courseId);
+			//准备数据--对应课程的教学进程
+			List<ClassSelectCourse> classSelectCourseList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(),courseService.findById(courseId));
+			ActionContext.getContext().put("classSelectCourseList", classSelectCourseList);
+		}
+		
+		return "listCourseClass";
+	}
+	/** 添加课程班级界面 */
+	@SuppressWarnings("unchecked")
+	public String addCourseClassUI() throws Exception{
+		//准备数据--课程名
+		Course courseFind=courseService.findById(courseId);
+		ActionContext.getContext().getValueStack().push(courseFind);
+		//准备数据--部门
+		List<Department> topList=departmentService.findTopList();
+		List<Department> departmentList=DepartmentUtils.getAllDepartments(topList);
+		ActionContext.getContext().put("departmentList", departmentList);
+		//准备数据--班级--空集合
+		List<Class_> classList=Collections.EMPTY_LIST;
+		ActionContext.getContext().put("classList", classList);
+		return "saveCourseClassUI";
+	}
+	/** 添加课程班级 */
+	public String addCourseClass() throws Exception{
+		Teacher teaFind=getCurrentUser().getTeacher();
+		//找到班级
+		List<Class_> classList= classService.findByIds(classIds);
+		//找到课程
+		Course courseFind=courseService.findById(courseId);
+		for(int i=0;i<classList.size();i++){
+			//保存选课表
+			classSelectCourseService.save(new ClassSelectCourse(""+classList.get(i).getId()+"-"+teaFind.getTeaNum()+"-"+courseId,
+					teaFind.getTeaNum(), classList.get(i), courseFind));
+		}
+		//准备数据--courseId
+		ActionContext.getContext().put("courseId", courseId);
+		return "toListCourseClass";
+	}
+	/** 删除课程班级 */
+	public String deleteCourseClass() throws Exception{
+		classSelectCourseService.delete(classSelectCourseId);
+		
+		//courseId携带过去
+		ActionContext.getContext().put("courseId", courseId);
+		return "toListCourseClass";
+	}
 	
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -229,6 +312,24 @@ public class TeacherAction extends BaseAction<Teacher>{
 	}
 	public void setTeacherNum(String teacherNum) {
 		this.teacherNum = teacherNum;
+	}
+	public Integer getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+	public Integer[] getClassIds() {
+		return classIds;
+	}
+	public void setClassIds(Integer[] classIds) {
+		this.classIds = classIds;
+	}
+	public Integer getClassSelectCourseId() {
+		return classSelectCourseId;
+	}
+	public void setClassSelectCourseId(Integer classSelectCourseId) {
+		this.classSelectCourseId = classSelectCourseId;
 	}
 	
 }

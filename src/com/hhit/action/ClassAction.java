@@ -25,10 +25,12 @@ import org.springframework.stereotype.Controller;
 
 
 
+
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Department;
 import com.hhit.entity.LogFile;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -138,26 +140,18 @@ public class ClassAction extends BaseAction<Class_>{
 	}
 	/** 根据部门查找对应的班级，用于动态加载班级select */
 	public String findByDeptId() throws Exception{
+		Map<String, Object> map=new HashMap<>();
 		//查找部门
 		Department deptFind=departmentService.findById(departmentId);
 		List<Class_> classList=classService.findByDept(deptFind);
-		
-		JsonConfig jc=new JsonConfig(); 
-		//过滤掉不想要的属性，避免json死循环  
-    	jc.setJsonPropertyFilter(new PropertyFilter() {  
-    	public boolean apply(Object class_, String property, Object proValue) {
-    		if (property.equals("department")||property.equals("students")) {
-    			return true;  
-    		}
-    		else{  
-    			return false;  
-    		}  
-    	}  
-    	}); 
-    	//如果有关联属性，需取消延迟加载将映射文件内的lazy设置成false  
-    	JSONArray jsonArray = JSONArray.fromObject(classList,jc);
-
-		JsonUtil.toJson(ServletActionContext.getResponse(), jsonArray);
+		if(classList.size()>0){
+			ClassPropertyFilter.ListClassFilter(map, classList);
+			map.put("name", "success");
+		}
+		else{
+			map.put("name", "noClass");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
 

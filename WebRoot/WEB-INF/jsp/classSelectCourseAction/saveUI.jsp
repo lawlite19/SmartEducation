@@ -137,6 +137,7 @@
 						<td class="addFont">课程</td>
                         <td>
                         <s:select id="select_course" name="courseId" list="courseList" headerKey="" headerValue=""
+                        listKey="id" listValue="courseName"
                          cssClass="ddl" >
                         </s:select>
                         	<span class="span_note">*</span>
