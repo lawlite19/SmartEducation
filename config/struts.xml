@@ -58,6 +58,11 @@
 			<result name="toList" type="redirectAction">teacher_list</result>
 			<result name="personalMaintainUI">/WEB-INF/jsp/teacherAction/personalMaintainUI.jsp</result>
 			<result name="personalMaintain"  type="redirectAction">teacher_personalMaintainUI</result>
+			<result name="listCourseClass">/WEB-INF/jsp/teacherAction/listCourseClass.jsp</result>
+			<result name="noCourseError" type="redirectAction">teachProcess_noCourseError</result>
+			<result name="saveCourseClassUI">/WEB-INF/jsp/teacherAction/saveCourseClassUI.jsp</result>
+			<result name="toListCourseClass" type="redirectAction">teacher_listCourseClass?courseId=${courseId}</result>
+			
 		</action>	
 		<!-- 班级管理 -->
 		<action name="mclass_*" class="classAction" method="{1}">
@@ -139,7 +144,7 @@
 			<result name="toList" type="redirectAction">course_list</result>
 			<result name="addMyCourseUI">/WEB-INF/jsp/courseAction/addMyCourseUI.jsp</result>
 			<result name="toTeachProcessList" type="redirectAction">teachProcess_list</result>
-		
+			
 		</action>
 		<!-- 学生提交作业管理 -->
 		<action name="submitTask_*" class="submitTaskAction" method="{1}">

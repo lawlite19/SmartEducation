@@ -14,6 +14,7 @@ import com.hhit.base.BaseAction;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.Teacher;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -77,11 +78,13 @@ public class ClassSelectCourseAction extends BaseAction<ClassSelectCourse>{
 	public String editUI() throws Exception {
 		//准备数据--源对象
 		ClassSelectCourse classSelectCourseFind=classSelectCourseService.findById(model.getId());
+		ActionContext.getContext().getValueStack().push(classSelectCourseFind);
 		// 准备数据--班级
 		List<Class_> classList=classService.findAll();
 		ActionContext.getContext().put("classList", classList);
 		//准备数据--课程
-		List<Course> courseList=new ArrayList<>(teacherService.findByTeacherNum(classSelectCourseFind.getTeacherNum()).getCourses());
+		Teacher teaFind=teacherService.findByTeacherNum(classSelectCourseFind.getTeacherNum());
+		List<Course> courseList=new ArrayList<>(teaFind.getCourses());
 		ActionContext.getContext().put("courseList", courseList);
 		// 准备回显--班级
 		classId=classSelectCourseFind.getClass_().getId();

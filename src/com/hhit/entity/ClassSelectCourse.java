@@ -17,7 +17,25 @@ public class ClassSelectCourse {
 	private Class_ class_;
 	private Course course;
 	
+	/**
+	 * 默认构造函数
+	 */
+	public ClassSelectCourse() {
+	}
 	
+	/**
+	 * 构造函数
+	 */
+	public ClassSelectCourse(String selectNum, String teacherNum,
+			Class_ class_, Course course) {
+		super();
+		this.selectNum = selectNum;
+		this.teacherNum = teacherNum;
+		this.class_ = class_;
+		this.course = course;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
