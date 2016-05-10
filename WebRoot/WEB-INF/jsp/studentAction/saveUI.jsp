@@ -43,13 +43,25 @@
 			dataType : "json",
 			async : false,
 			success : function(data) {
-				//alert(data[0].id);
-				//alert(data[0].className);
-				//alert(data.length);
-				//var json = eval("(" + data + ")");
-				for (var i = 0; i < data.length; i++)
-					$("#select_class").append(
-							"<option value='"+data[i].id+"'>" + data[i].className+ "</option>");
+				if(data.name=="success"){
+					for (var i = 0; i < data.classes.length; i++)
+						$("#select_class").append(
+								"<option value='"+data.classes[i].id+"'>" + data.classes[i].className+ "</option>");
+				}
+				else if(data.name=="noClass"){
+					//正上方
+		        	layer.msg('该部门没有班级', {
+		        	  offset: 0,
+		        	  shift: 6
+		        	});
+				}
+				else{
+					//正上方
+		        	layer.msg('服务器错误', {
+		        	  offset: 0,
+		        	  shift: 6
+		        	});
+				}
 			}
 		});
 	};
