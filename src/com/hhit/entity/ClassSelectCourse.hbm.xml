@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="ClassSelectCourse" table="T_ClassSelectCourse">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="selectNum" type="string">	
+			<column name="SelectNum" length="50">
+				<comment>编号--自动生成</comment>
+			</column>
+		</property>
+		<property name="teacherNum" type="string">	
+			<column name="TeacherNum" length="20">
+				<comment>老师编号</comment>
+			</column>
+		</property>
+		<!--class_属性，本类与Class_的一对一  -->
+		<many-to-one name="class_" class="Class_" column="Class_Id">
+		</many-to-one>
+		<!--course属性，本类与Course的一对一  -->
+		<many-to-one name="course" class="Course" column="Course_Id">
+		</many-to-one>	
+	</class>
+</hibernate-mapping>

@@ -17,7 +17,7 @@ public class ClassPropertyFilter {
 	//老师过滤
 	public static void TeacherFilter(Map<String,Object> map,Teacher tea){
 		String[] teaProperty={"department","roles","courses"};
-		map.put("student", JsonUtil.jsonFilter(tea, teaProperty));
+		map.put("teacher", JsonUtil.jsonFilter(tea, teaProperty));
 	}
 	//部门过滤
 	public static void DepartmentFilter(Map<String,Object> map,Department dept){

@@ -15,6 +15,7 @@
 	</div>
 	<s:form name="student_visitRecord" method="post" >
 	</s:form>
+<!-- 分页 -->
 	<div class="pageView" style="font-size:20px;">
 页次：${currentPage}/${pageCount}&nbsp; 每页：${pageSize}条&nbsp;
 总记录条数：${recordCount}&nbsp;
