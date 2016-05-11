@@ -153,6 +153,18 @@
 			<result name="show">/WEB-INF/jsp/spiderCourseAction/show.jsp</result>
 			<result name="showCourseInfo">/WEB-INF/jsp/spiderCourseAction/showCourseInfo.jsp</result>
 		</action>
+		<!-- 评价基础信息管理 -->
+		<action name="term_*" class="termAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/termAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/termAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">term_list</result>
+		</action>
+		<!-- 学生评价指标管理 -->
+			<action name="stuAccount_*" class="stuAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/stuAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/stuAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">stuAccount_list</result>
+		</action>
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>

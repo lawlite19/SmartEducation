@@ -21,10 +21,12 @@ import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
+import com.hhit.service.IStuAccountService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
 import com.hhit.service.ITeacherService;
+import com.hhit.service.ITermService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IVisitCourseRecordService;
@@ -114,6 +116,11 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected ISpiderDocumentService spiderDocumentService;//爬虫课程文档
 
+	
+	@Resource
+	protected ITermService termService;//评价基础信息
+	@Resource
+	protected IStuAccountService stuAccountService;//学生评价指标信息
 	/**
 	 * 获取当前登录的用户
 	 */

@@ -107,8 +107,9 @@
 			<!-- 记录用户数据 -->
 			<value>com/hhit/entity/Favorite.hbm.xml</value>	
 			<value>com/hhit/entity/VisitCourseRecord.hbm.xml</value>
-			
-			
+			<!-- 评价指标 -->
+			<value>com/hhit/entity/ATerm.hbm.xml</value>
+			<value>com/hhit/entity/AStudentAccessAccount.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
