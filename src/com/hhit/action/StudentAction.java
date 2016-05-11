@@ -19,7 +19,9 @@ import ChartDirector.Chart;
 import ChartDirector.XYChart;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
@@ -27,6 +29,7 @@ import com.hhit.entity.Role;
 import com.hhit.entity.Student;
 import com.hhit.entity.User;
 import com.hhit.entity.VisitCourseRecord;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
@@ -48,6 +51,7 @@ public class StudentAction extends BaseAction<Student> {
 	//存储图片文件
 	private File picture;
 	private String pictureFileName;
+	
 	
 	
 	//我的收藏需要
@@ -291,6 +295,37 @@ public class StudentAction extends BaseAction<Student> {
 		ActionContext.getContext().put("chart1URL", chart1URL);
 		ActionContext.getContext().put("imageMap1", imageMap1);
 		return "visitRecord";
+	}
+
+	
+//app接口	
+//====================================
+	public String appStudentCourse() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		//根据学号找到学生
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			Class_ classFind=stuFind.getClass_();
+			//根据班级查找选课
+			List<ClassSelectCourse> classSelectCourseList = classSelectCourseService.findByClass(classFind);
+			if(classSelectCourseList.size()<1){
+				map.put("name", "noCourse");
+			}
+			else{
+				//课程
+				List<Course> courseList=new ArrayList<>();
+				for(int i=0;i<classSelectCourseList.size();i++){
+					courseList.add(classSelectCourseList.get(i).getCourse());
+				}
+				ClassPropertyFilter.ListCourseFilter(map, courseList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
 	}
 	public Integer getDepartmentId() {
 		return departmentId;

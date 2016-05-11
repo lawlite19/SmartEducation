@@ -203,16 +203,32 @@
 			<result name="toList" type="redirectAction">classSelectCourse_list</result>
 			
     	</action>
-		<!-- 接口API -->
+		<!-- 接口API说明界面 -->
 		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
 			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
+			<result name="studentCourseUI">/WEB-INF/jsp/interfaceAPIAction/studentCourseUI.jsp</result>
+			<result name="courseTypeUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/courseTypeUI.jsp</result>
+			<result name="spiderCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseUI.jsp</result>
+			<result name="spiderCourseInfoUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseInfoUI.jsp</result>
+			<result name="myFavoriteUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/myFavoriteUI.jsp</result>
+			<result name="cancleMyFavoriteUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/cancleMyFavoriteUI.jsp</result>
 		
 		</action>
 	</package>
 
 <!-- App端接口package -->
 	<package name="app" extends="struts-default" namespace="/App">
+		<!-- 用户 -->
 		<action name="user_*" class="userAction" method="{1}">
+		</action>
+		<!-- 学生 -->
+		<action name="student_*" class="studentAction" method="{1}">
+		</action>
+		<!-- 课程类型 -->
+		<action name="spiderCourse_*" class="spiderCourseAction" method="{1}">
+		</action>
+		<!-- 我的收藏 -->
+		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>
 	</package>
 </struts>    
