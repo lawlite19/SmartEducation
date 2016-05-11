@@ -13,5 +13,12 @@ import com.hhit.service.IStudentService;
 @Transactional
 public class StudentServiceImpl extends DaoSupportImpl<Student> implements IStudentService{
 
+	@Override
+	public Student findByStuNum(String stuNum) {
+		return (Student) getSession().createQuery("FROM Student WHERE stuNum=?")//
+				.setParameter(0, stuNum)//
+				.uniqueResult();
+	}
+
 
 }

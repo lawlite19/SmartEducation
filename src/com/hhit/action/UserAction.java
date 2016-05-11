@@ -145,7 +145,7 @@ public class UserAction extends BaseAction<User>{
 		if (model.getUserType().equals("学生")) {
 			User userFind = userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
 			if (null != userFind) {
-				ActionContext.getContext().getSession().put("user", userFind);
+				//ActionContext.getContext().getSession().put("user", userFind);
 				//学生
 				Student stuFind=userFind.getStudent();
 				ClassPropertyFilter.StudentFilter(map, stuFind);
@@ -171,7 +171,7 @@ public class UserAction extends BaseAction<User>{
 				List<Role> rolesList=new ArrayList<Role>(userFind.getTeacher().getRoles());
 				for (Role role : rolesList) {
 					if(role.getRoleName().equals(model.getUserType())){
-						ActionContext.getContext().getSession().put("user", userFind);
+						//ActionContext.getContext().getSession().put("user", userFind);
 						//老师
 						Teacher teaFind=userFind.getTeacher();
 						ClassPropertyFilter.TeacherFilter(map, teaFind);

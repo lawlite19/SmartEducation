@@ -2,13 +2,23 @@ package com.hhit.util;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.apache.struts2.ServletActionContext;
-
-import com.hhit.entity.*;
+import com.hhit.entity.Chapter;
+import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
+import com.hhit.entity.Department;
+import com.hhit.entity.Role;
+import com.hhit.entity.SpiderChapter;
+import com.hhit.entity.SpiderCourse;
+import com.hhit.entity.SpiderCourseInfo;
+import com.hhit.entity.SpiderDocument;
+import com.hhit.entity.SpiderProfessionType;
+import com.hhit.entity.Student;
+import com.hhit.entity.Teacher;
 
 public class ClassPropertyFilter {
+//实体类过滤
+//======================================
 	//学生过滤
 	public static void StudentFilter(Map<String,Object> map,Student stu){
 		String[] stuProperty={"role","department","class_"};
@@ -29,6 +39,15 @@ public class ClassPropertyFilter {
 		String[] classProperty={"department","students"};
 		map.put("class_", JsonUtil.jsonFilter(class_, classProperty));
 	}
+	//爬取课程信息过滤
+	public static void SpiderCourseInfoFilter(Map<String,Object> map,SpiderCourseInfo spiderCourseInfo){
+		String[] spiderCourseInfoProperty={"spiderCourse"};
+		map.put("spiderCourseInfo", JsonUtil.jsonFilter(spiderCourseInfo, spiderCourseInfoProperty));
+	}
+	
+	
+//list过滤
+//==============================================
 	//角色list过滤
 	public static void ListRoleFilter(Map<String,Object> map,List<Role> roles){
 		String[] roleProperty={"privileges","teachers"};
@@ -36,8 +55,8 @@ public class ClassPropertyFilter {
 	}
 	//课程list过滤
 	public static void ListCourseFilter(Map<String,Object> map,List<Course> courses){
-		String[] roleProperty={"departments","teachers"};
-		map.put("courses", JsonUtil.jsonListFilter(courses, roleProperty));
+		String[] courseProperty={"departments","teachers"};
+		map.put("courses", JsonUtil.jsonListFilter(courses, courseProperty));
 	}
 	//章节list过滤
 	public static void ListChapterFilter(Map<String,Object> map,List<Chapter> chapters){
@@ -46,9 +65,27 @@ public class ClassPropertyFilter {
 	}
 	//班级list过滤
 	public static void ListClassFilter(Map<String,Object> map,List<Class_> classList){
-		String[] chapterProperty={"department","students"};
-		map.put("classes", JsonUtil.jsonListFilter(classList, chapterProperty));
+		String[] classProperty={"department","students"};
+		map.put("classes", JsonUtil.jsonListFilter(classList, classProperty));
 	}
-
-	
+	//爬虫专业类型list过滤
+	public static void ListSpiderProfessTypeFilter(Map<String,Object> map,List<SpiderProfessionType> spiderProfessTypeList){
+		String[] spiderProfessionTypeProperty={""};
+		map.put("spiderProfessionTypes", JsonUtil.jsonListFilter(spiderProfessTypeList, spiderProfessionTypeProperty));
+	}
+	//爬虫课程list过滤
+	public static void ListSpiderCourseFilter(Map<String,Object> map,List<SpiderCourse> spiderCourseList){
+		String[] spiderCourseProperty={"spiderChapters","spiderDocuemnts","professionType"};
+		map.put("spiderCourses", JsonUtil.jsonListFilter(spiderCourseList, spiderCourseProperty));
+	}
+	//爬取课程章节list过滤
+	public static void ListSpiderChapterFilter(Map<String,Object> map,List<SpiderChapter> spiderChapterList){
+		String[] spiderChapterProperty={"spiderCourse","parent"};
+		map.put("spiderChapters", JsonUtil.jsonListFilter(spiderChapterList, spiderChapterProperty));
+	}
+	//爬取参考教材list过滤
+	public static void ListSpiderDocumentrFilter(Map<String,Object> map,List<SpiderDocument> spiderDocumentList){
+		String[] spiderDocumentProperty={"spiderCourse"};
+		map.put("spiderDocuments", JsonUtil.jsonListFilter(spiderDocumentList, spiderDocumentProperty));
+	}
 }

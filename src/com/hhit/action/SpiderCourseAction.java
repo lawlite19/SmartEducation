@@ -1,8 +1,14 @@
 package com.hhit.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+
+
 
 
 
@@ -14,11 +20,15 @@ import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Favorite;
+import com.hhit.entity.PageBean;
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
+import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
+import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.Student;
 import com.hhit.entity.VisitCourseRecord;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -188,6 +198,77 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 
 		return null;
 	}
+
+//app
+//===========================================
+	//查询所有专业类型
+	public String appCourseType() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		
+		List<SpiderProfessionType> spiderProfessionTypeList= spiderProfessionTypeService.findAll();
+		if(spiderProfessionTypeList.size()<1){
+			map.put("name", "noProfessionType");
+		}
+		else{
+			ClassPropertyFilter.ListSpiderProfessTypeFilter(map, spiderProfessionTypeList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//根据专业id分页查找课程
+	public String appListCourse() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		SpiderProfessionType spiderProfessionType=spiderProfessionTypeService.findById(professionId);
+		if(spiderProfessionType==null){
+			map.put("name", "noProfessionType");
+		}
+		else{
+			String hql="FROM SpiderCourse WHERE professionType=?";
+			List<Object> parameters=new ArrayList<Object>();
+			parameters.add(spiderProfessionType);
+			PageBean pageBean =spiderCourseService.getPageBean(pageNum, pageSize, hql, parameters);
+			if(pageBean==null){
+				map.put("name", "noCourse");
+			}
+			else{
+				List<SpiderCourse> spiderCourseList=pageBean.getRecordList();
+				ClassPropertyFilter.ListSpiderCourseFilter(map, spiderCourseList);
+				map.put("count", pageBean.getRecordCount());
+				map.put("currentPage", pageBean.getCurrentPage());
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//根据课程id查找课程信息
+	public String appListCourseInfo() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		//查找课程
+		SpiderCourse courseFind=spiderCourseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourseInfo");
+		}
+		else{
+			//课程介绍
+			SpiderCourseInfo courseInfoFind=spiderCourseInfoService.findByCourse(courseFind);
+			ClassPropertyFilter.SpiderCourseInfoFilter(map, courseInfoFind);
+			//课程章节
+			List<SpiderChapter> chapterInfoList=spiderChapterService.findByCourse(courseFind);
+			ClassPropertyFilter.ListSpiderChapterFilter(map, chapterInfoList);
+			//课程文档
+			List<SpiderDocument> documentList=spiderDocumentService.findByCourse(courseFind);
+			ClassPropertyFilter.ListSpiderDocumentrFilter(map, documentList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	
+	
+	
+//=======
 	public Integer getProfessionId() {
 		return professionId;
 	}
