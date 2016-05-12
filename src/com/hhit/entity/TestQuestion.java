@@ -19,10 +19,28 @@ public class TestQuestion {
 	private SingleChoice singleChoice;
 	private TestPaper testPaper;
 	
+	/**
+	 * 默认构造函数
+	 */
+	public TestQuestion(){
+		
+	}
+	/**
+	 * 构造函数
+	 */
+	public TestQuestion(Judgement judgement, SingleChoice singleChoice,
+			TestPaper testPaper) {
+		this.judgement = judgement;
+		this.singleChoice = singleChoice;
+		this.testPaper = testPaper;
+	}
+	
+	
 	
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

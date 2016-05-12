@@ -30,6 +30,8 @@ import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
 import com.hhit.service.ITeachProcessService;
 import com.hhit.service.ITeacherService;
+import com.hhit.service.ITestPaperService;
+import com.hhit.service.ITestQuestionService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IVisitCourseRecordService;
@@ -107,7 +109,12 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected IChapterService chapterService;//章节
 	@Resource
-	protected IClassSelectCourseService classSelectCourseService;
+	protected IClassSelectCourseService classSelectCourseService;//班级选课
+	@Resource
+	protected ITestPaperService testPaperService;//测试卷
+	@Resource
+	protected ITestQuestionService testQuestionService;//判断题
+	
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息

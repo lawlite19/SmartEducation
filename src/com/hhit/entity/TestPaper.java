@@ -28,11 +28,35 @@ public class TestPaper {
 	private Course course;
 	private Chapter chapter;
 	private Set<TestQuestion> testQuestions;
+
 	
+	
+	/**
+	 * 默认构造函数
+	 */
+	public TestPaper() {
+	}
+	/***
+	 * 
+	 * @return
+	 */
+	public TestPaper(String testType, Integer questionCount,
+			Integer submitCount, Timestamp endTime, String teaNum,
+			Class_ class_, Course course, Chapter chapter) {
+		this.testType = testType;
+		this.questionCount = questionCount;
+		this.submitCount = submitCount;
+		this.endTime = endTime;
+		this.teaNum = teaNum;
+		this.class_ = class_;
+		this.course = course;
+		this.chapter = chapter;
+	}
 	
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

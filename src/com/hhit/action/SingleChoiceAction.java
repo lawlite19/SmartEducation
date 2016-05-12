@@ -55,7 +55,7 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 		if(teaFind!=null){
 			// 准备分页信息
 			new QueryHelper(SingleChoice.class, "s")//
-			.addCondition("s.teacherNum", teaFind.getTeaNum())//
+			.addCondition("s.teacherNum=?", teaFind.getTeaNum())//
 			.addCondition(txtCourseName.trim()!="", "s.course.courseName LIKE ?", "%"+txtCourseName.trim()+"%")//
 			.addCondition(txtKnowledgeName.trim()!="", "s.knowledgeName LIKE ?", "%"+txtKnowledgeName.trim()+"%")//
 			.addCondition(txtQuestion.trim()!="", "s.question LIKE ?", "%"+txtQuestion.trim()+"%")

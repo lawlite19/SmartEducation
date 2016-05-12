@@ -46,7 +46,7 @@
 		<many-to-one name="chapter" class="Chapter" column="Chapter_Id">
 		</many-to-one>
 		<!-- testQuestions属性，本类与TestQuestion的一对多  -->
-		<set name="testQuestions">
+		<set name="testQuestions" lazy="false">
 			<key column="TestPaper_Id"></key>
 			<one-to-many class="TestQuestion" />
 		</set>
