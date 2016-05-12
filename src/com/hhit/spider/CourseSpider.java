@@ -126,7 +126,7 @@ public class CourseSpider implements PageProcessor {
 		 spiderProfessionTypeService.findAll();
 		 for (int j = 2; j < list.size(); j++) {
 			 // 设置优先级为0
-			 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1000").setPriority(0).
+			 page.addTargetRequest(new Request(list.get(j).getUrl()+"/0/1400").setPriority(0).
 					 putExtra("professionTypeModel", list.get(j)));
 		 }
 	}
@@ -170,7 +170,12 @@ public class CourseSpider implements PageProcessor {
 		/**
 		 * 爬取章节
 		 */
+//		<div class="cell">
+//      <a class="wh wh1" style="cursor:default">
+//	<div class="f16">第一章 Java概述</div>
 
+		
+		List<String> chapterNameOneList=page.getHtml().xpath("//div[@class='cell']/a[@class='wh']/div[@class='f16']/text()").all();
 		// 筛选url
 		List<String> chapterUrlList = page
 				.getHtml()
@@ -186,13 +191,21 @@ public class CourseSpider implements PageProcessor {
 				.xpath("//div[@class='f16 pct80 pr10 r']/text()").all();
 		// page.putField("chapterNameList", chapterNameList);
 
-		if (chapterUrlList.size() > 0) {
-			for (int i = 0; i < chapterUrlList.size(); i++) {
-				SpiderChapter model = new SpiderChapter(chapterNumList.get(i)
-						.toString(), chapterNameList.get(i).toString(),
-						chapterUrlList.get(i).toString(), courseName,
-						courseModel,null);
-				spiderChapterService.save(model);
+		if (chapterNameOneList.size() > 0) {
+			for (int i = 0; i < chapterNameOneList.size(); i++) {
+				//保存一级标题
+				SpiderChapter modelOne=new SpiderChapter("", chapterNameOneList.get(i).toString(), "", courseName, courseModel,null);
+				spiderChapterService.save(modelOne);
+				for(int j=0;j<chapterNameList.size();j++){
+					if(chapterNumList.get(j).startsWith(""+(i+1)+".")){
+						//保存二级标题
+						SpiderChapter model = new SpiderChapter(chapterNumList.get(j)
+								.toString(), chapterNameList.get(j).toString(),
+								chapterUrlList.get(j).toString(), courseName,
+								null,modelOne);
+						spiderChapterService.save(model);
+					}
+				}
 			}
 		}
 
@@ -247,8 +260,8 @@ public class CourseSpider implements PageProcessor {
 		Spider.create(new CourseSpider())//
 				// 全部得到，不分页
 				//.addUrl("http://mooc.chaoxing.com/category/01/0/1000")//
-				.addRequest(new Request(professionTypeModel.getUrl()+"/0/1000").setPriority(0).putExtra("professionTypeModel", professionTypeModel))
-				.thread(10)//
+				.addRequest(new Request(professionTypeModel.getUrl()+"/0/1400").setPriority(0).putExtra("professionTypeModel", professionTypeModel))
+				.thread(20)//
 				.run();
 	}
 }

@@ -99,25 +99,61 @@
 			</ul>
 		</div>
 <!-- 我的课程信息 -->
-
-		<ul class="category" style="width:115px;">
+		<div id="Menu">
+			<ul id="MenuUl" class="category" style="width:115px;margin-top:0px;">
 			<s:iterator value="couseList" var="num">
 				<s:if test="%{courseId==id}">
-					<li  class="current">
+					<li  class="current" style="margin-top:100px;">
 						<s:a action="teacher_listCourseClass?courseId=%{id}">${courseName}</s:a>
+						<ul style="" class="MenuLevel2" id="aa"  style="text-align:right;">
+							<%-- 显示二级菜单 --%>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}/"> 课前预习</a>
+									</div>
+								</li>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}/"> 课堂测试</a>
+									</div>
+								</li>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}/"> 课后复习</a>
+									</div>
+								</li>
+						</ul>
 					</li>
 					
 					<div class="arrow" style="right: 7px;"></div>
 				</s:if>
 				<s:else>
-					<li>
+					<li  style="margin-top:100px;">
 						<s:a action="teacher_listCourseClass?courseId=%{id}">${courseName}</s:a>
+						<ul style="" class="MenuLevel2" id="aa" style="text-align:right;">
+							<%-- 显示二级菜单 --%>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}"> 课前预习</a>
+									</div>
+								</li>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}"> 课堂测试</a>
+									</div>
+								</li>
+								<li style="padding-right:0;">
+									<div class="level2Style">
+										<a href="${pageContext.request.contextPath}"> 课后复习</a>
+									</div>
+								</li>
+						</ul>
 					</li>
 				</s:else>
 			</s:iterator>
-		</ul>
-		<div class="clearfix" style="clear:both"></div>
+			</ul>
 
+		</div>
 </div>
 </div>
 </body>

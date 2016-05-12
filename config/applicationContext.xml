@@ -113,8 +113,11 @@
 			<!-- 记录用户数据 -->
 			<value>com/hhit/entity/Favorite.hbm.xml</value>	
 			<value>com/hhit/entity/VisitCourseRecord.hbm.xml</value>
-			
-			
+			<!-- App问题 -->
+			<value>com/hhit/entity/TestPaper.hbm.xml</value>
+			<value>com/hhit/entity/TestQuestion.hbm.xml</value>
+			<value>com/hhit/entity/TeaAnswer.hbm.xml</value>
+			<value>com/hhit/entity/StuQuestion.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

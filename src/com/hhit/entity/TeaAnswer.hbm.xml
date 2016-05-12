@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TeaAnswer" table="T_TeaAnswer">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="teaNum" type="string">	
+			<column name="TeaNum" length="20">
+				<comment>老师工号</comment>
+			</column>
+		</property>
+		<property name="content" type="text">
+			<column name="Content">
+				<comment>回答内容</comment>
+			</column>
+		</property>
+		<property name="addTime" type="timestamp">
+			<column name="AddTime">
+				<comment>回答时间</comment>
+			</column>
+		</property>
+		<!-- stuQuestion属性，本类与StuQuestion的一对一   -->
+		<many-to-one name="stuQuestion" class="StuQuestion" column="StuQuestion_Id">
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>
