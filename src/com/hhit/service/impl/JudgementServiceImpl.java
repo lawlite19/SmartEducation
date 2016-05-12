@@ -11,4 +11,20 @@ import com.hhit.service.IJudgementService;
 @Transactional
 public class JudgementServiceImpl extends DaoSupportImpl<Judgement> implements IJudgementService{
 
+	@Override
+	public Judgement findMaxRecord() {
+		return  (Judgement) getSession().createQuery("FROM Judgement ORDER BY id DESC")//
+		.setFirstResult(0)//
+		.setMaxResults(1)//
+		.uniqueResult();
+	}
+
+	@Override
+	public Judgement findMinRecord() {
+		return (Judgement) getSession().createQuery("FROM Judgement")//
+				.setFirstResult(0)//
+				.setMaxResults(1)//
+				.uniqueResult();
+	}
+
 }

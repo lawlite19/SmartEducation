@@ -62,13 +62,19 @@
 			<result name="noCourseError" type="redirectAction">teachProcess_noCourseError</result>
 			<result name="saveCourseClassUI">/WEB-INF/jsp/teacherAction/saveCourseClassUI.jsp</result>
 			<result name="toListCourseClass" type="redirectAction">teacher_listCourseClass?courseId=${courseId}</result>
-			
+			<result name="myCourseUI">/WEB-INF/jsp/teacherAction/myCourseUI.jsp</result>
+			<result name="autoMakeQuestion" type="redirectAction">teacher_myCourseUI?courseId=${courseId}</result>
+			<result name="toMyCourseUI" type="redirectAction">teacher_myCourseUI?courseId=${courseId}</result>
+			<result name="seeTestPaperUI">/WEB-INF/jsp/teacherAction/seeTestPaperUI.jsp</result>
+			<result name="toSeeTestPaperUI" type="redirectAction">teacher_seeTestPaperUI?testPaperId=${testPaperId}</result>
+		
 		</action>	
 		<!-- 班级管理 -->
 		<action name="mclass_*" class="classAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/classAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/classAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">mclass_list</result>
+			
 		</action>	
 		
 		

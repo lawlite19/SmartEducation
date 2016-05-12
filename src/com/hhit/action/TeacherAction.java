@@ -9,19 +9,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Synchronization;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Chapter;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.Department;
+import com.hhit.entity.Judgement;
 import com.hhit.entity.LogFile;
 import com.hhit.entity.Role;
+import com.hhit.entity.SingleChoice;
 import com.hhit.entity.Teacher;
+import com.hhit.entity.TestPaper;
+import com.hhit.entity.TestQuestion;
 import com.hhit.entity.User;
 import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
@@ -54,6 +61,18 @@ public class TeacherAction extends BaseAction<Teacher>{
 	private Integer[] classIds;
 	//
 	private Integer classSelectCourseId;
+	
+	//doInfo:1-->课前预习2-->课堂测试3-->课后复习
+	private Integer doInfo;
+	private Integer judgementCount;
+	private Integer singleChoiceCount;
+	private Timestamp endTime;
+	private Integer chapterId;
+	
+	private Integer testPaperId;
+	
+	private Integer singleChoiceId;
+	private Integer judgementId;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -287,6 +306,274 @@ public class TeacherAction extends BaseAction<Teacher>{
 		return "toListCourseClass";
 	}
 	
+	/** 布置课前预习、课堂测试、课后复习界面 */
+	public String myCourseUI() throws Exception{
+		Teacher teaFind=getCurrentUser().getTeacher();
+		if(teaFind.getCourses().size()<1){
+			return "noCourseError";
+		}
+		else{
+			//准备数据--老师对应课程
+			List<Course> couseList=new ArrayList<>(teaFind.getCourses());
+			ActionContext.getContext().put("couseList", couseList);
+		}
+		if(courseId!=null){
+			
+			Course courseFind=courseService.findById(courseId);
+			ActionContext.getContext().getValueStack().push(courseFind);
+			//准备数据--章节
+			List<Chapter> chapterList=chapterService.findByCourse(courseFind);
+			ActionContext.getContext().put("chapterList", chapterList);
+			//准备数据--老师教的班级
+			List<ClassSelectCourse> classSelectList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(), courseFind);
+			List<Class_> classList=new ArrayList<>();
+			for(int i=0;i<classSelectList.size();i++){
+				classList.add(classSelectList.get(i).getClass_());
+			}
+			ActionContext.getContext().put("classList", classList);
+			//准备数据--doInfo
+			ActionContext.getContext().put("doInfo", doInfo);
+			//准备分页数据--测试paper
+			//-->处理doInfo
+			String testType="";
+			switch (doInfo) {
+			case 1:
+				testType="课前预习";
+				break;
+			case 2:
+				testType="课堂测试";
+				break;
+			case 3:
+				testType="课后复习";
+				break;
+			default:
+				break;
+			}
+			new QueryHelper(TestPaper.class, "t")//
+			.addCondition("t.course=?", courseFind)//
+			.addCondition("t.teaNum=?", getCurrentUser().getTeacher().getTeaNum())//
+			.addCondition(testType!="","t.testType=?", testType)//
+			.preparePageBean(testPaperService, pageNum, pageSize);
+			
+		}
+		else{
+			//准备章节空集合
+			List<Chapter> chapterList=Collections.EMPTY_LIST;
+			ActionContext.getContext().put("chapterList", chapterList);
+			//准备班级空集合
+			List<Class_> classList=Collections.EMPTY_LIST;
+			ActionContext.getContext().put("classList", classList);
+			//准备数据--所有测试
+			new QueryHelper(TestPaper.class, "t")//
+			.addCondition("t.teaNum=?", getCurrentUser().getTeacher().getTeaNum())//
+			.preparePageBean(testPaperService, pageNum, pageSize);
+		}
+			
+		return "myCourseUI";
+	}
+	
+	/** 自动生成测试提库 */
+	public String autoMakeQuestion() throws Exception{
+		Teacher teaFind=getCurrentUser().getTeacher();
+		//测试题目总数
+		Integer questionCount=judgementCount+singleChoiceCount;
+		//设置测试题目类型
+		String testType="";
+		switch (doInfo) {
+		case 1:
+			testType="课前预习";
+			break;
+		case 2:
+			testType="课堂测试";
+			break;
+		case 3:
+			testType="课后复习";
+			break;
+		default:
+			break;
+		}
+		//保存测试卷
+		TestPaper testPaperModel=new TestPaper(testType, questionCount, 0, endTime, teaFind.getTeaNum(), classService.findById(classId),
+				courseService.findById(courseId), chapterService.findById(chapterId));
+		testPaperService.save(testPaperModel);
+		
+		/*
+		 * 生成判断题
+		 */
+		//最后一条记录Id
+		int maxId=judgementService.findMaxRecord().getId();
+		//第一条记录Id
+		int minId=judgementService.findMinRecord().getId();
+		int random,i=0;
+		List<Integer> intList=new ArrayList<>();
+		//生成minId--maxId之间的judgementCount个随机数
+		while(i<judgementCount){
+			random=minId+(int)(Math.random()*(maxId-minId));
+			if(!intList.contains(random)){
+				intList.add(random);
+				i++;
+			}
+		}
+		//保存判断题
+		for(i=0;i<judgementCount;i++){
+			int recordId=intList.get(i);
+			Judgement judgementFind=judgementService.findById(recordId);
+			//没有找到记录
+			if(judgementFind==null){
+				//距离小的Id近
+				if((maxId-recordId)>(recordId-minId)){
+					while(judgementFind==null){
+						recordId++;
+						if(!intList.contains(recordId)){
+							judgementFind=judgementService.findById(recordId);
+							TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
+							testQuestionService.save(questionModel);
+						}
+					}
+				}
+				//距离大的Id近
+				else{
+					while(judgementFind==null){
+						recordId--;
+						//集合中没有这个记录
+						if(!intList.contains(recordId)){
+							judgementFind=judgementService.findById(recordId);
+							TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
+							testQuestionService.save(questionModel);
+						}
+					}
+				}
+			}
+			else{
+				//保存
+				TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
+				testQuestionService.save(questionModel);
+			}
+		}
+		/**
+		 * 生成单选题
+		 */
+		/*
+		 * 生成判断题
+		 */
+		//最后一条记录Id
+		int maxSingleId=singleChoiceService.findMaxRecord().getId();
+		//第一条记录Id
+		int minSingleId=singleChoiceService.findMinRecord().getId();
+		int j=0;
+		List<Integer> singleList=new ArrayList<>();
+		//生成minId--maxId之间的judgementCount个随机数
+		while(j<judgementCount){
+			random=maxSingleId+(int)(Math.random()*(minSingleId-maxSingleId));
+			if(!singleList.contains(random)){
+				singleList.add(random);
+				j++;
+			}
+		}
+		//保存判断题
+		for(j=0;j<singleChoiceCount;j++){
+			int recordId=intList.get(j);
+			SingleChoice singleFind=singleChoiceService.findById(recordId);
+			//没有找到记录
+			if(singleFind==null){
+				//距离小的Id近
+				if((maxSingleId-recordId)>(recordId-minSingleId)){
+					while(singleFind==null){
+						recordId++;
+						if(!intList.contains(recordId)){
+							singleFind=singleChoiceService.findById(recordId);
+							TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
+							testQuestionService.save(questionModel);
+						}
+					}
+				}
+				//距离大的Id近
+				else{
+					while(singleFind==null){
+						recordId--;
+						//集合中没有这个记录
+						if(!intList.contains(recordId)){
+							singleFind=singleChoiceService.findById(recordId);
+							TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
+							testQuestionService.save(questionModel);
+						}
+					}
+				}
+			}
+			else{
+				//保存
+				TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
+				testQuestionService.save(questionModel);
+			}
+		}
+		//准备数据--courseId
+		ActionContext.getContext().put("courseId", courseId);
+		
+		return "autoMakeQuestion";
+	}
+	/** 删除测试paper */
+	public String deleteTestPaper() throws Exception{
+		testPaperService.delete(testPaperId);
+		//携带courseId
+		ActionContext.getContext().put("courseId", courseId);
+		return "toMyCourseUI";
+	}
+	/** 查看习题 */
+	public String seeTestPaperUI() throws Exception{
+		//准备数据--单选列表
+		TestPaper testPaperFind=testPaperService.findById(testPaperId);
+		List<TestQuestion> testQuestionList=new ArrayList<>(testPaperFind.getTestQuestions());
+		List<Judgement> judgementList=new ArrayList<>();
+		for(int i=0;i<testQuestionList.size();i++){
+			if(testQuestionList.get(i).getJudgement()!=null){
+				judgementList.add(testQuestionList.get(i).getJudgement());
+			}
+		}
+		ActionContext.getContext().put("judgementList", judgementList);
+		//准备数据--单选
+		List<SingleChoice> singleChoiceList=new ArrayList<SingleChoice>();
+		for(int i=0;i<testQuestionList.size();i++){
+			if(testQuestionList.get(i).getSingleChoice()!=null){
+				singleChoiceList.add(testQuestionList.get(i).getSingleChoice());
+			}
+		}
+		ActionContext.getContext().put("singleChoiceList", singleChoiceList);
+		//准备--testPaperId
+		ActionContext.getContext().put("testPaperId", testPaperId);
+		return "seeTestPaperUI";
+	}
+	/** 删除单选题目 */
+	public String deleteSingleChoice() throws Exception{
+		//删除
+		SingleChoice singleFind=singleChoiceService.findById(singleChoiceId);
+		testQuestionService.deleteBySingleChoice(singleFind);
+		//修改paper题目数量---同步操作
+		synchronized (this) {
+			TestPaper testPaper=testPaperService.findById(testPaperId);
+			testPaper.setQuestionCount(testPaper.getQuestionCount()-1);
+			testPaperService.update(testPaper);
+		}
+		//准备--testPaperId
+		ActionContext.getContext().put("testPaperId", testPaperId);
+		return "toSeeTestPaperUI";
+	}
+	/**  */
+	public String deleteJudgement() throws Exception{
+		//删除
+		Judgement judgeFind=judgementService.findById(judgementId);
+		testQuestionService.deleteByJudgement(judgeFind);
+		//修改paper题目数量---同步操作
+		synchronized (this) {
+			TestPaper testPaper=testPaperService.findById(testPaperId);
+			testPaper.setQuestionCount(testPaper.getQuestionCount()-1);
+			testPaperService.update(testPaper);
+		}
+		//准备--testPaperId
+		ActionContext.getContext().put("testPaperId", testPaperId);
+		return "toSeeTestPaperUI";
+	}
+	
+//==============================	
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -341,5 +628,52 @@ public class TeacherAction extends BaseAction<Teacher>{
 	public void setClassSelectCourseId(Integer classSelectCourseId) {
 		this.classSelectCourseId = classSelectCourseId;
 	}
-	
+	public Integer getDoInfo() {
+		return doInfo;
+	}
+	public void setDoInfo(Integer doInfo) {
+		this.doInfo = doInfo;
+	}
+	public Integer getJudgementCount() {
+		return judgementCount;
+	}
+	public void setJudgementCount(Integer judgementCount) {
+		this.judgementCount = judgementCount;
+	}
+	public Integer getSingleChoiceCount() {
+		return singleChoiceCount;
+	}
+	public void setSingleChoiceCount(Integer singleChoiceCount) {
+		this.singleChoiceCount = singleChoiceCount;
+	}
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
+	public Integer getChapterId() {
+		return chapterId;
+	}
+	public void setChapterId(Integer chapterId) {
+		this.chapterId = chapterId;
+	}
+	public Integer getTestPaperId() {
+		return testPaperId;
+	}
+	public void setTestPaperId(Integer testPaperId) {
+		this.testPaperId = testPaperId;
+	}
+	public Integer getSingleChoiceId() {
+		return singleChoiceId;
+	}
+	public void setSingleChoiceId(Integer singleChoiceId) {
+		this.singleChoiceId = singleChoiceId;
+	}
+	public Integer getJudgementId() {
+		return judgementId;
+	}
+	public void setJudgementId(Integer judgementId) {
+		this.judgementId = judgementId;
+	}
 }
