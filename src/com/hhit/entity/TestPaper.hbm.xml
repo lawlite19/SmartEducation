@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TestPaper" table="T_TestPaper">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="testType" type="string">	
+			<column name="TestType" length="50">
+				<comment>课程名</comment>
+			</column>
+		</property>
+		<property name="questionCount" type="integer">
+			<column name="QuestionCount">
+				<comment>添加时间</comment>
+			</column>
+		</property>
+		<property name="submitCount" type="integer">
+			<column name="SubmitCount">
+				<comment>课程介绍</comment>
+			</column>
+		</property>
+		<property name="endTime" type="timestamp">
+			<column name="EndTime">
+				<comment>学分</comment>
+			</column>
+		</property>	
+		<property name="teaNum" type="string">
+			<column name="TeaNum" length="20">
+				<comment>学分</comment>
+			</column>
+		</property>		
+		<!-- class_属性，本类与Class_的一对一   -->
+		<many-to-one name="class_" class="Class_" column="Class_Id">
+		</many-to-one>
+
+		<!-- course属性，本类与Course的一对一  -->
+		<many-to-one name="course" class="Course" column="Course_Id">
+		</many-to-one>
+		<!-- chapter属性，本类与Chapter的一对一  -->
+		<many-to-one name="chapter" class="Chapter" column="Chapter_Id">
+		</many-to-one>
+		<!-- testQuestions属性，本类与TestQuestion的一对多  -->
+		<set name="testQuestions">
+			<key column="TestPaper_Id"></key>
+			<one-to-many class="TestQuestion" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

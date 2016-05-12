@@ -22,7 +22,9 @@ import org.springframework.stereotype.Controller;
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Course;
+import com.hhit.entity.Judgement;
 import com.hhit.entity.SingleChoice;
+import com.hhit.entity.Teacher;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -49,12 +51,25 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 	/** 列表 */
 	public String list() throws Exception {
 
-		// 准备分页信息
-		new QueryHelper(SingleChoice.class, "s")//
-		.addCondition(txtCourseName.trim()!="", "s.course.courseName LIKE ?", "%"+txtCourseName.trim()+"%")//
-		.addCondition(txtKnowledgeName.trim()!="", "s.knowledgeName LIKE ?", "%"+txtKnowledgeName.trim()+"%")//
-		.addCondition(txtQuestion.trim()!="", "s.question LIKE ?", "%"+txtQuestion.trim()+"%")
-		.preparePageBean(singleChoiceService, pageNum, pageSize);
+		Teacher teaFind=getCurrentUser().getTeacher();
+		if(teaFind!=null){
+			// 准备分页信息
+			new QueryHelper(SingleChoice.class, "s")//
+			.addCondition("s.teacherNum", teaFind.getTeaNum())//
+			.addCondition(txtCourseName.trim()!="", "s.course.courseName LIKE ?", "%"+txtCourseName.trim()+"%")//
+			.addCondition(txtKnowledgeName.trim()!="", "s.knowledgeName LIKE ?", "%"+txtKnowledgeName.trim()+"%")//
+			.addCondition(txtQuestion.trim()!="", "s.question LIKE ?", "%"+txtQuestion.trim()+"%")
+			.preparePageBean(singleChoiceService, pageNum, pageSize);
+		}
+		else{
+			// 准备分页信息
+			new QueryHelper(SingleChoice.class, "s")//
+			.addCondition(txtCourseName.trim()!="", "s.course.courseName LIKE ?", "%"+txtCourseName.trim()+"%")//
+			.addCondition(txtKnowledgeName.trim()!="", "s.knowledgeName LIKE ?", "%"+txtKnowledgeName.trim()+"%")//
+			.addCondition(txtQuestion.trim()!="", "s.question LIKE ?", "%"+txtQuestion.trim()+"%")
+			.preparePageBean(singleChoiceService, pageNum, pageSize);
+		}
+
 		return "list";
 	}
 	/** 删除 */
