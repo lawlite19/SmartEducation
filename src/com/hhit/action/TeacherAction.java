@@ -74,6 +74,9 @@ public class TeacherAction extends BaseAction<Teacher>{
 	private Integer singleChoiceId;
 	private Integer judgementId;
 	
+	private String newPwd;
+	private String oldPwd;
+	
 	/** 列表 */
 	public String list() throws Exception {
 		// 准备数据, departmentList
@@ -508,7 +511,8 @@ public class TeacherAction extends BaseAction<Teacher>{
 		}
 		//准备数据--courseId
 		ActionContext.getContext().put("courseId", courseId);
-		
+		//准备数据--doInfo
+		ActionContext.getContext().put("doInfo", doInfo);
 		return "autoMakeQuestion";
 	}
 	/** 删除测试paper */
@@ -557,7 +561,7 @@ public class TeacherAction extends BaseAction<Teacher>{
 		ActionContext.getContext().put("testPaperId", testPaperId);
 		return "toSeeTestPaperUI";
 	}
-	/**  */
+	/** 删除paper中的题目 */
 	public String deleteJudgement() throws Exception{
 		//删除
 		Judgement judgeFind=judgementService.findById(judgementId);
@@ -572,7 +576,29 @@ public class TeacherAction extends BaseAction<Teacher>{
 		ActionContext.getContext().put("testPaperId", testPaperId);
 		return "toSeeTestPaperUI";
 	}
-	
+	//修改密码
+	public String appModifyPwd() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		User userFind=userService.findByUserNum(model.getTeaNum(),"老师");
+		if(userFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			String digest=DigestUtils.md5Hex(oldPwd);
+			if(userFind.getPassword().equals(digest)){
+				userFind.setPassword(DigestUtils.md5Hex(newPwd));
+				userService.update(userFind);
+				map.put("name", "success");
+			}
+			else{
+				map.put("name", "oldPwdError");
+			}
+			
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 //==============================	
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -675,5 +701,17 @@ public class TeacherAction extends BaseAction<Teacher>{
 	}
 	public void setJudgementId(Integer judgementId) {
 		this.judgementId = judgementId;
+	}
+	public String getNewPwd() {
+		return newPwd;
+	}
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
+	}
+	public String getOldPwd() {
+		return oldPwd;
+	}
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
 	}
 }

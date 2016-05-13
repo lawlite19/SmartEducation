@@ -8,6 +8,8 @@ import com.hhit.entity.User;
 import com.hhit.service.IChapterService;
 import com.hhit.service.IClassSelectCourseService;
 import com.hhit.service.IClassService;
+import com.hhit.service.ICourseDiscussService;
+import com.hhit.service.ICourseScoreService;
 import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
 import com.hhit.service.IDataTypeService;
@@ -25,9 +27,11 @@ import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
+import com.hhit.service.IStuQuestionService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITeaAnswerService;
 import com.hhit.service.ITeachProcessService;
 import com.hhit.service.ITeacherService;
 import com.hhit.service.ITestPaperService;
@@ -114,6 +118,14 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ITestPaperService testPaperService;//测试卷
 	@Resource
 	protected ITestQuestionService testQuestionService;//判断题
+	@Resource
+	protected ICourseScoreService courseScoreService;//爬取课程评分
+	@Resource
+	protected ICourseDiscussService courseDiscussService;//爬取课程讨论
+	@Resource
+	protected IStuQuestionService stuQuestionService;//学生问题
+	@Resource
+	protected ITeaAnswerService teaAnswerService;//老师回答
 	
 	//--------------
 	@Resource

@@ -121,6 +121,13 @@
                         	<span class="span_note">*</span>
                         </td>
                     </tr>
+                    <tr><td  class="addFont">题目</td>
+                        <td><s:textfield name="question" cssClass="inpu" id="txt_question" cssStyle="display:none;"/>
+                        	<iframe id="eWebEditor1" src="${pageContext.request.contextPath}/ewebeditor/ewebeditor.htm?id=txt_question&style=standard"  frameborder="0"  scrolling="no"  width="540" height="300"></iframe>
+                        	<span class="span_note">*</span>
+                        </td>
+                        
+                    </tr>
                     <tr>
                     	<td class="addFont">章节</td>
                         <td>
@@ -137,25 +144,25 @@
                     </tr>
                    <tr><td  class="addFont">答案A</td>
                         <td>
-                       		<s:textarea name="answerA" id="txt_answerA" cssClass="inpu" cssStyle="height:100px;width:200px;"></s:textarea>
+                       		<s:textarea name="answerA" id="txt_answerA" cssClass="inpu" cssStyle="height:100px;width:400px;"></s:textarea>
 							<span class="span_note">*</span>
 						</td>
                     </tr>
                      <tr><td  class="addFont">答案B</td>
                         <td>
-                       		<s:textarea name="answerB" id="txt_answerB" cssClass="inpu" cssStyle="height:100px;width:200px;"></s:textarea>
+                       		<s:textarea name="answerB" id="txt_answerB" cssClass="inpu" cssStyle="height:100px;width:400px;"></s:textarea>
 							<span class="span_note">*</span>
 						</td>
                     </tr>
                      <tr><td  class="addFont">答案C</td>
                         <td>
-                       		<s:textarea name="answerC" id="txt_answerC" cssClass="inpu" cssStyle="height:100px;width:200px;"></s:textarea>
+                       		<s:textarea name="answerC" id="txt_answerC" cssClass="inpu" cssStyle="height:100px;width:400px;"></s:textarea>
 							<span class="span_note">*</span>
 						</td>
                     </tr>
                      <tr><td  class="addFont">答案D</td>
                         <td>
-                       		<s:textarea name="answerD" id="txt_answerD" cssClass="inpu" cssStyle="height:100px;width:200px;"></s:textarea>
+                       		<s:textarea name="answerD" id="txt_answerD" cssClass="inpu" cssStyle="height:100px;width:400px;"></s:textarea>
 							<span class="span_note">*</span>
 						</td>
                     </tr>
@@ -170,13 +177,7 @@
                        		<s:select name="difExponent" list="#{1:'1级',2:'2级',3:'3级',4:'4级',5:'5级'}" cssClass="ddl"></s:select>
                         </td>
                     </tr>
-                     <tr><td  class="addFont">题目</td>
-                        <td><s:textfield name="question" cssClass="inpu" id="txt_question" cssStyle="display:none;"/>
-                        	<iframe id="eWebEditor1" src="${pageContext.request.contextPath}/ewebeditor/ewebeditor.htm?id=txt_question&style=standard"  frameborder="0"  scrolling="no"  width="540" height="300"></iframe>
-                        	<span class="span_note">*</span>
-                        </td>
-                        
-                    </tr>
+                     
                     <tr>
                     	<td>
                     		

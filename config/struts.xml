@@ -63,7 +63,7 @@
 			<result name="saveCourseClassUI">/WEB-INF/jsp/teacherAction/saveCourseClassUI.jsp</result>
 			<result name="toListCourseClass" type="redirectAction">teacher_listCourseClass?courseId=${courseId}</result>
 			<result name="myCourseUI">/WEB-INF/jsp/teacherAction/myCourseUI.jsp</result>
-			<result name="autoMakeQuestion" type="redirectAction">teacher_myCourseUI?courseId=${courseId}</result>
+			<result name="autoMakeQuestion" type="redirectAction">teacher_myCourseUI?courseId=${courseId}&amp;doInfo=${doInfo}</result>
 			<result name="toMyCourseUI" type="redirectAction">teacher_myCourseUI?courseId=${courseId}</result>
 			<result name="seeTestPaperUI">/WEB-INF/jsp/teacherAction/seeTestPaperUI.jsp</result>
 			<result name="toSeeTestPaperUI" type="redirectAction">teacher_seeTestPaperUI?testPaperId=${testPaperId}</result>
@@ -218,6 +218,11 @@
 			<result name="spiderCourseInfoUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseInfoUI.jsp</result>
 			<result name="myFavoriteUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/myFavoriteUI.jsp</result>
 			<result name="cancleMyFavoriteUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/cancleMyFavoriteUI.jsp</result>
+			<result name="myFavoriteCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/myFavoriteCourseUI.jsp</result>
+			<result name="stuModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/stuModifyPasswordUI.jsp</result>
+			<result name="teaModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyPasswordUI.jsp</result>
+			<result name="spiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseScoreUI.jsp</result>
+			<result name="spiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseDiscussUI.jsp</result>
 		
 		</action>
 	</package>
@@ -230,11 +235,20 @@
 		<!-- 学生 -->
 		<action name="student_*" class="studentAction" method="{1}">
 		</action>
+		<!-- 学生 -->
+		<action name="teacher_*" class="teacherAction" method="{1}">
+		</action>
 		<!-- 课程类型 -->
 		<action name="spiderCourse_*" class="spiderCourseAction" method="{1}">
 		</action>
 		<!-- 我的收藏 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
+		</action>
+		<!-- 课程评分 -->
+		<action name="courseScore_*" class="courseScoreAction" method="{1}">
+		</action>
+		<!-- 课程讨论 -->
+		<action name="courseDiscuss_*" class="courseDiscussAction" method="{1}">
 		</action>
 	</package>
 </struts>    

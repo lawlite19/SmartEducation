@@ -17,4 +17,6 @@ public interface IUserService extends IDaoSupport<User> {
 	User findByStudent(Student stuFind);
 	//根据老师查找用户
 	User findByTeacher(Teacher teaFind);
+	//根据账号查找
+	User findByUserNum(String stuNum,String userType);
 }

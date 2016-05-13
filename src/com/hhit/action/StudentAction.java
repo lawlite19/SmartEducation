@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.mapping.Array;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -26,6 +27,7 @@ import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
+import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.Student;
 import com.hhit.entity.User;
 import com.hhit.entity.VisitCourseRecord;
@@ -51,7 +53,9 @@ public class StudentAction extends BaseAction<Student> {
 	//存储图片文件
 	private File picture;
 	private String pictureFileName;
-	
+	//
+	private String oldPwd;
+	private String newPwd;
 	
 	
 	//我的收藏需要
@@ -66,7 +70,7 @@ public class StudentAction extends BaseAction<Student> {
 		// 准备数据, roleList
 		List<Role> roleList = roleService.findAll();
 		ActionContext.getContext().put("roleList", roleList);
-		
+
 		new QueryHelper(Student.class, "s")//
 				.addCondition((departmentId != null), "s.department.id=?",departmentId)//
 				.addCondition((viewType == 0) && (inputTerm.trim().length() > 0),"s.stuName LIKE ?", "%" + inputTerm + "%")//
@@ -296,10 +300,10 @@ public class StudentAction extends BaseAction<Student> {
 		ActionContext.getContext().put("imageMap1", imageMap1);
 		return "visitRecord";
 	}
-
-	
 //app接口	
 //====================================
+	
+	//学生课程
 	public String appStudentCourse() throws Exception{
 		Map<String, Object> map=new HashMap<String,Object>();
 		//根据学号找到学生
@@ -327,6 +331,61 @@ public class StudentAction extends BaseAction<Student> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//学生的收藏
+	public String appMyFavorite() throws Exception{
+		Map<String,Object> map=new HashMap<String,Object>();
+		//找到学生
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			//找到收藏
+			List<Favorite> favoriteList=favoriteService.findByStudent(stuFind);
+			if(favoriteList.size()<1){
+				map.put("name", "noFavorite");
+			}
+			else{
+				//填充课程
+				List<SpiderCourse> courseList=new ArrayList<>();
+				for(int i=0;i<favoriteList.size();i++){
+					courseList.add(favoriteList.get(i).getSpiderCourse());
+				}
+				ClassPropertyFilter.ListSpiderCourseFilter(map, courseList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	//修改密码
+	public String appModifyPwd() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		User userFind=userService.findByUserNum(model.getStuNum(),"学生");
+		if(userFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			String digest=DigestUtils.md5Hex(oldPwd);
+			if(userFind.getPassword().equals(digest)){
+				userFind.setPassword(DigestUtils.md5Hex(newPwd));
+				userService.update(userFind);
+				map.put("name", "success");
+			}
+			else{
+				map.put("name", "oldPwdError");
+			}
+			
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	
+	
+	
+//=============================	
 	public Integer getDepartmentId() {
 		return departmentId;
 	}
@@ -362,6 +421,18 @@ public class StudentAction extends BaseAction<Student> {
 	}
 	public void setPictureFileName(String pictureFileName) {
 		this.pictureFileName = pictureFileName;
+	}
+	public String getOldPwd() {
+		return oldPwd;
+	}
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
+	public String getNewPwd() {
+		return newPwd;
+	}
+	public void setNewPwd(String newPwd) {
+		this.newPwd = newPwd;
 	}
 	
 }

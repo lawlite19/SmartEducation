@@ -45,7 +45,16 @@
 				<comment>来校时间</comment>
 			</column>
 		</property>		
-		
+		<property name="telphone" type="string">
+			<column name="Telphone" length="20">
+				<comment>手机号</comment>
+			</column>
+		</property>
+		<property name="qqNum" type="string">
+			<column name="QQNum" length="20">
+				<comment>qq号码</comment>
+			</column>
+		</property>
 		<!--department属性，本类与Department的多对一关系-->
 		<many-to-one name="department" class="Department" column="Department_Id" lazy="false">
 		</many-to-one>

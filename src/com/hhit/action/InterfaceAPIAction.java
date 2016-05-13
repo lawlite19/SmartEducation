@@ -25,6 +25,14 @@ public class InterfaceAPIAction {
 	public String courseChapterUI() throws Exception{
 		return "courseChapterUI";
 	}
+	/** 学生修改密码 */
+	public String stuModifyPasswordUI() throws Exception{
+		return "stuModifyPasswordUI";
+	}
+	/** 老师修改密码 */
+	public String teaModifyPasswordUI() throws Exception{
+		return "teaModifyPasswordUI";
+	}
 
 	
 	
@@ -58,5 +66,17 @@ public class InterfaceAPIAction {
 	/** 取消收藏课程 */
 	public String cancleMyFavoriteUI() throws Exception{
 		return "cancleMyFavoriteUI";
+	}
+	/** 学生收藏的课程 */
+	public String myFavoriteCourseUI() throws Exception{
+		return "myFavoriteCourseUI";
+	}
+	/** 课程评分 */
+	public String spiderCourseScoreUI() throws Exception{
+		return "spiderCourseScoreUI";
+	}
+	/** 课程讨论 */
+	public String spiderCourseDiscussUI() throws Exception{
+		return "spiderCourseDiscussUI";
 	}
 }

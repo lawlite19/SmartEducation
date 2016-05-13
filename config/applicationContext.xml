@@ -75,7 +75,7 @@
 				<!-- 显示sql语句 -->
 				<prop key="show_sql">true</prop>
 				<!-- 自动建表
-				<prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>  -->
 			</props>
 		</property>
 		<property name="mappingResources">
@@ -118,6 +118,10 @@
 			<value>com/hhit/entity/TestQuestion.hbm.xml</value>
 			<value>com/hhit/entity/TeaAnswer.hbm.xml</value>
 			<value>com/hhit/entity/StuQuestion.hbm.xml</value>
+			<!-- App爬取课程评分、评论 -->
+			<value>com/hhit/entity/CourseDiscuss.hbm.xml</value>
+			<value>com/hhit/entity/CourseScore.hbm.xml</value>
+			
 			</list>
 		</property>
 	</bean>

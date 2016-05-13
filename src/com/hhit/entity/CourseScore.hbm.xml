@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 学生课程评分 -->
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="CourseScore" table="T_CourseScore">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="stuNum" type="string">	
+			<column name="StuNum" length="20">
+				<comment>学生学号</comment>
+			</column>
+		</property>
+		<property name="score" type="float">
+			<column name="Score">
+				<comment>学生评分</comment>
+			</column>
+		</property>
+		<property name="addTime" type="timestamp">
+			<column name="AddTime">
+				<comment>评分时间</comment>
+			</column>
+		</property>
+		<!-- spiderCourse属性，与SpiderCourse类一对一 -->	
+		<many-to-one name="spiderCourse" class="SpiderCourse" column="SpiderCourse_Id">
+		</many-to-one>
+	</class>
+</hibernate-mapping>
