@@ -71,4 +71,12 @@ public class InterfaceAPIAction {
 	public String myFavoriteCourseUI() throws Exception{
 		return "myFavoriteCourseUI";
 	}
+	/** 课程评分 */
+	public String spiderCourseScoreUI() throws Exception{
+		return "spiderCourseScoreUI";
+	}
+	/** 课程讨论 */
+	public String spiderCourseDiscussUI() throws Exception{
+		return "spiderCourseDiscussUI";
+	}
 }

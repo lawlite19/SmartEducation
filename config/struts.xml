@@ -221,7 +221,9 @@
 			<result name="myFavoriteCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/myFavoriteCourseUI.jsp</result>
 			<result name="stuModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/stuModifyPasswordUI.jsp</result>
 			<result name="teaModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyPasswordUI.jsp</result>
-			
+			<result name="spiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseScoreUI.jsp</result>
+			<result name="spiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseDiscussUI.jsp</result>
+		
 		</action>
 	</package>
 
@@ -241,6 +243,12 @@
 		</action>
 		<!-- 我的收藏 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
+		</action>
+		<!-- 课程评分 -->
+		<action name="courseScore_*" class="courseScoreAction" method="{1}">
+		</action>
+		<!-- 课程讨论 -->
+		<action name="courseDiscuss_*" class="courseDiscussAction" method="{1}">
 		</action>
 	</package>
 </struts>    
