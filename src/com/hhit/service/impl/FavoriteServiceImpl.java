@@ -1,5 +1,7 @@
 package com.hhit.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,14 @@ public class FavoriteServiceImpl extends DaoSupportImpl<Favorite> implements IFa
 		.setParameter(0, student)//
 		.setParameter(1, courseFind)//
 		.executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Favorite> findByStudent(Student stuFind) {
+		return getSession().createQuery("FROM Favorite WHERE student=?")//
+				.setParameter(0, stuFind)//
+				.list();
 	}
 
 }

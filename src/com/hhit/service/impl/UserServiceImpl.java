@@ -53,6 +53,13 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 				.setParameter(0, teaFind)//
 				.uniqueResult();
 	}
+	@Override
+	public User findByUserNum(String stuNum, String userType) {
+		return (User) getSession().createQuery("FROM User WHERE userNum=? AND userType=?")//
+				.setParameter(0, stuNum)//
+				.setParameter(1, userType)//
+				.uniqueResult();
+	}
 
 	
 }

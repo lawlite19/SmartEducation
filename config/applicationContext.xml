@@ -118,6 +118,10 @@
 			<value>com/hhit/entity/TestQuestion.hbm.xml</value>
 			<value>com/hhit/entity/TeaAnswer.hbm.xml</value>
 			<value>com/hhit/entity/StuQuestion.hbm.xml</value>
+			<!-- App爬取课程评分、评论 -->
+			<value>com/hhit/entity/CourseDiscuss.hbm.xml</value>
+			<value>com/hhit/entity/CourseScore.hbm.xml</value>
+			
 			</list>
 		</property>
 	</bean>

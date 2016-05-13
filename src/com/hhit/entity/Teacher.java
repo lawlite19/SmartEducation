@@ -19,6 +19,9 @@ public class Teacher implements java.io.Serializable{
 	private Timestamp birthday;
 	private String finalEdu;
 	private Timestamp inTime;
+	// new add
+	private String telphone;
+	private String qqNum;
 	
 	
 	private Department department;
@@ -106,6 +109,18 @@ public class Teacher implements java.io.Serializable{
 	}
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
+	}
+	public String getTelphone() {
+		return telphone;
+	}
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
+	}
+	public String getQqNum() {
+		return qqNum;
+	}
+	public void setQqNum(String qqNum) {
+		this.qqNum = qqNum;
 	}
 	
 }

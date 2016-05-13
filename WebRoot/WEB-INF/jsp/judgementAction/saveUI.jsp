@@ -117,6 +117,13 @@
                         	<span class="span_note">*</span>
                         </td>
                     </tr>
+                    <tr><td  class="addFont">题目</td>
+                        <td><s:textfield name="question" cssClass="inpu" id="txt_question" cssStyle="display:none;"/>
+                        	<iframe id="eWebEditor1" src="${pageContext.request.contextPath}/ewebeditor/ewebeditor.htm?id=txt_question&style=standard"  frameborder="0"  scrolling="no"  width="540" height="300"></iframe>
+                        	<span class="span_note">*</span>
+                        </td>
+                        
+                    </tr>
                     <tr>
                     	<td class="addFont">章节</td>
                         <td>
@@ -143,13 +150,7 @@
                        		<s:select name="difExponent" list="#{1:'1级',2:'2级',3:'3级',4:'4级',5:'5级'}" cssClass="ddl"></s:select>
                         </td>
                     </tr>
-                     <tr><td  class="addFont">题目</td>
-                        <td><s:textfield name="question" cssClass="inpu" id="txt_question" cssStyle="display:none;"/>
-                        	<iframe id="eWebEditor1" src="${pageContext.request.contextPath}/ewebeditor/ewebeditor.htm?id=txt_question&style=standard"  frameborder="0"  scrolling="no"  width="540" height="300"></iframe>
-                        	<span class="span_note">*</span>
-                        </td>
-                        
-                    </tr>
+                     
                     <tr>
                     	<td>
                     		
