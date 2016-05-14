@@ -2,6 +2,7 @@ package com.hhit.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,6 @@ import java.util.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.mapping.Array;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -20,6 +20,7 @@ import ChartDirector.Chart;
 import ChartDirector.XYChart;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Chapter;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
@@ -29,6 +30,8 @@ import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.Student;
+import com.hhit.entity.TeachProcess;
+import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
 import com.hhit.entity.VisitCourseRecord;
 import com.hhit.util.ClassPropertyFilter;
@@ -57,6 +60,9 @@ public class StudentAction extends BaseAction<Student> {
 	private String oldPwd;
 	private String newPwd;
 	
+	//我的课程
+	private Integer courseId;
+	private String teacherNum;
 	
 	//我的收藏需要
 	
@@ -300,6 +306,39 @@ public class StudentAction extends BaseAction<Student> {
 		ActionContext.getContext().put("imageMap1", imageMap1);
 		return "visitRecord";
 	}
+	//我的课程
+	public String myReceivePush() throws Exception{
+		//数据--学生
+		Student stuFind=getCurrentUser().getStudent();
+		//数据--班级
+		Class_ classFind=stuFind.getClass_();
+		//数据--选课
+		List<ClassSelectCourse> classSelectCourseList=classSelectCourseService.findByClass(classFind);
+//		//班级对应课程
+//		List<Course> courseList=new ArrayList<>();
+//		for(int i=0;i<classSelectCourseList.size();i++){
+//			courseList.add(classSelectCourseList.get(i).getCourse());
+//		}
+		ActionContext.getContext().put("classSelectCourseList", classSelectCourseList);
+		if(courseId!=null){
+			//当前时间
+			Timestamp nowTime=new Timestamp(new Date().getTime());
+			//根据账号找到老师
+			Teacher teaFind=teacherService.findByTeacherNum(teacherNum);
+			//课程
+			Course courseFind=courseService.findById(courseId);
+			//查找规定时间的教学进程
+			List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourseAndTime(teaFind, courseFind,nowTime);
+			//得到章节
+			List<Chapter> chapterList=new ArrayList<>();
+			for(int i=0;i<teachProcessList.size();i++){
+				chapterList.add(teachProcessList.get(i).getChapter());
+			}
+			ActionContext.getContext().put("chapterList", chapterList);
+		}
+		return "myReceivePush";
+	}
+	
 //app接口	
 //====================================
 	
@@ -384,7 +423,6 @@ public class StudentAction extends BaseAction<Student> {
 	}
 	
 	
-	
 //=============================	
 	public Integer getDepartmentId() {
 		return departmentId;
@@ -433,6 +471,18 @@ public class StudentAction extends BaseAction<Student> {
 	}
 	public void setNewPwd(String newPwd) {
 		this.newPwd = newPwd;
+	}
+	public Integer getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(Integer courseId) {
+		this.courseId = courseId;
+	}
+	public String getTeacherNum() {
+		return teacherNum;
+	}
+	public void setTeacherNum(String teacherNum) {
+		this.teacherNum = teacherNum;
 	}
 	
 }

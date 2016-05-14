@@ -128,7 +128,11 @@
 			<tr>
 						<td class="addFont">教学章节</td>
                         <td>
-                        	<s:textfield name="chapter" cssClass="inpu"></s:textfield>
+                        	<s:select name="chapterId" cssClass="ddl" id="select_chapter"
+                        		list="#chapterList" listKey="id" listValue="chapterName"
+                        		headerKey="" headerValue="==请选择课程章节==">
+                        	</s:select>
+                        	<span class="span_note">*</span>
                         </td>
 			</tr>
 			<tr>

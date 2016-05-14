@@ -3,13 +3,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>课程进程</title>
-<script language="javascript" src="${pageContext.request.contextPath}/script/jquery-2.0.0.min.js"></script>
-<!--Layer插件弹出对话框-->
-<script src="${pageContext.request.contextPath}/layer/layer.js"></script>
+<title>根据课程进程</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
+<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 <!--鼠标悬浮变色相关代码开始-->
     <script type="text/javascript">
         var _oldColor;
@@ -22,13 +20,6 @@
         }
     </script>
 <!--鼠标悬浮变色相关代码结束-->
-<script>
-        (function () {
-            	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-            	parent.layer.close(index); //再执行关闭 
-            	//$("#form_closeLayer").submit();
-        })();
-</script>
 </head>
 <body>
 <div class="main">
@@ -41,15 +32,26 @@
 				<span id="span_courseName">${courseName}</span>
 <!-- 添加教学进程 -->
 <!-- 添加按钮 -->
+<s:form action="pushStrategy_updateTeachPorcess" method="post">
+<s:hidden name="courseId"></s:hidden>
 <table align="center" cellspacing="3" cellpadding="5">
 	<tr>
-		<td class="bbtn btn-primary" align="center">
-			<!--  <a href="#" onclick="AddTeachProcess('${courseId}')"  style="color:white;text-decoration: none;">添加</a>
-			-->
-			<s:a action="teachProcess_addUI?courseId=%{courseId}" style="color:white;text-decoration: none;">添加</s:a>
+		<td align="center">
+			章节:<s:select list="chapterList" name="chapterId" id="select_chapter" listKey="id" listValue="chapterName" headerKey=""
+			   headerValue="==请选择章节==" cssClass="ddl">
+			   </s:select>
+		</td>		
+		<td align="center">
+			章节:<s:select list="#{1:'1天',2:'2天',3:'3天',4:'4天',5:'5天',6:'6天',7:'7天'}" name="dayId" id="select_day" 
+			     headerKey="" headerValue="==请选择提前天数==" cssClass="ddl">
+			   </s:select>
+		</td>
+		<td  align="center">
+			<s:submit value="提交" cssClass="ttn"></s:submit>
 		</td>
 	</tr>
 </table>
+</s:form>
 			</div>
 
 <!-- 教学进程信息 -->
@@ -76,47 +78,22 @@
 				<th align="center">序号</th>
 				<th align="center">周次</th>
 				<th align="center">授课日期</th>
-				<th align="center">教学内容</th>
-				<th align="center">节次</th>
-				<th align="center">教学方式</th>
+				<th align="center">推送日期</th>
 				<th align="center">教学章节</th>
-				<th align="center">操作</th>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
 		<tbody>
-			<s:iterator value="teachProcessList" status="s">
+		<s:iterator value="teachProcessList" status="s">
 			<tr style="height:30px;" onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
 					<td align="center">${s.count}</td>
 					<td align="center">${weekCount}&nbsp;</td>
 					<td align="center">${startData}&nbsp;</td>
-					<td align="center">
-					<s:if test="lessonContent.length()>15">
-						<a class="lessonContentDetails" id="${lessonContent}"
-						style="cursor:pointer;">
-							${lessonContent.substring(0,15)}  .....
-						</a>
-					</s:if>
-					<s:else>
-						${lessonContent}&nbsp;
-					</s:else>
-					</td>
-					<td align="center">${lessonCount}&nbsp;</td>
-					<td align="center">${teachType.dictName}&nbsp;</td>
+					<td align="center">${pushTime}&nbsp;</td>
 					<td align="center">${chapter.chapterName}&nbsp;</td>
-					<td  align="center">
-					<s:a action="teachProcess_editUI?id=%{id}&courseId=%{courseId}">
-						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
-					</s:a>
-					|
-					<s:a action="teachProcess_delete?id=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
-						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
-					</s:a>
-						&nbsp;</td>
 				</tr>
 			</s:iterator>
-
 		</tbody>
 	</table>
 	</div>
@@ -132,13 +109,13 @@
 			<s:iterator value="couseList" var="num">
 				<s:if test="%{courseId==id}">
 					<li  class="current">
-						<s:a action="teachProcess_list?courseId=%{id}">${courseName}</s:a>
+						<s:a action="pushStrategy_accordTeachProcess?courseId=%{id}">${courseName}</s:a>
 					</li>
 					<div class="arrow" style="right: 7px;"></div>
 				</s:if>
 				<s:else>
 					<li>
-						<s:a action="teachProcess_list?courseId=%{id}">${courseName}</s:a>
+						<s:a action="pushStrategy_accordTeachProcess?courseId=%{id}">${courseName}</s:a>
 					</li>
 				</s:else>
 			</s:iterator>
@@ -146,44 +123,5 @@
 		<div class="clearfix" style="clear:both"></div>
 </div>
 </div>
-<!-- 提交表单 -->
-<s:form id="form_closeLayer" action="teachProcess_list" method="post">
-	<s:hidden name="courseId" ></s:hidden>
-</s:form>
-<!-- layer弹出层 
-	<script type="text/javascript">
-	function AddTeachProcess(courseId) {
-		var courseName = $("#span_courseName").html();
-		//iframe层
-        layer.open({
-          type: 2,
-          title: '课程名：'+courseName+'',
-          shadeClose: true,
-          shade: 0.1,
-          area: ['600px', '90%'],
-          content: 'teachProcess_addUI.action?courseId=' + courseId, //iframe的url
-          yes:function(index){
-          	  $("#form_closeLayer").submit();
-        	  layer.close(index);
-          }
-        }); 
-	}
-    </script>-->
-<!-- tips加载全部信息 -->
-<script type="text/javascript">
-(function(){
-	//显示教学内容
-	$('a.lessonContentDetails').on('click', function (event) {
-	    var value = $(this).attr("id");
-	  //tips层-左
-		 index=layer.tips(value, this, {
-		  tips: [1, '#78BA32'],
-		  time:4000 //4s关闭
-		});
-	});
-
-})();
-
-</script>
 </body>
 </html>

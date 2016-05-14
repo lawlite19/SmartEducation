@@ -89,13 +89,13 @@ public class ChapterSpiderHhit implements PageProcessor{
 		if (chapterNameOneList.size() > 0) {
 			for (int i = 0; i < chapterNameOneList.size(); i++) {
 				//保存一级标题
-				Chapter modelOne=new Chapter("", chapterNameOneList.get(i).toString(), courseName, courseModel,null);
+				Chapter modelOne=new Chapter("", chapterNameOneList.get(i).toString(),"", courseName, courseModel,null);
 				chapterService.save(modelOne);
 				for(int j=0;j<chapterNameList.size();j++){
 					if(chapterNumList.get(j).startsWith(""+(i+1)+".")){
 						//保存二级标题
 						Chapter model = new Chapter(chapterNumList.get(j)
-								.toString(), chapterNameList.get(j).toString(),
+								.toString(), chapterNameList.get(j).toString(),chapterUrlList.get(i).toString(),
 								 courseName,null,modelOne);
 						chapterService.save(model);
 					}

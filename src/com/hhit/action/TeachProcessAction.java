@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Chapter;
 import com.hhit.entity.Course;
 import com.hhit.entity.DataDict;
 import com.hhit.entity.DataType;
@@ -21,6 +22,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	
 	private Integer courseId;
 	private Integer teachTypeId;
+	private Integer chapterId;
 	
 	/** 列表 */
 	public String list() throws Exception{
@@ -65,6 +67,9 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		//准备数据--教学方式--001
 		DataType dataTypeFind=dataTypeService.findByNum("001");
 		ActionContext.getContext().put("teachTypeList", dataTypeFind.getDataDicts());
+		//准备数据--课程对应章节
+		List<Chapter> chapterList=chapterService.findByCourse(courseService.findById(courseId));
+		ActionContext.getContext().put("chapterList", chapterList);
 		return "saveUI";
 	}
 	/** 添加对应课程教学进程 */
@@ -79,6 +84,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		model.setCourse(courseFind);
 		model.setTeacher(teaFind);
 		model.setTeachType(dataDictFind);
+		model.setChapter(chapterService.findById(chapterId));
 		//保存
 		teachProcessService.save(model);
 		//将courseId携带过去
@@ -95,9 +101,16 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		//准备数据--教学方式--001
 		DataType dataTypeFind=dataTypeService.findByNum("001");
 		ActionContext.getContext().put("teachTypeList", dataTypeFind.getDataDicts());
+		//准备数据--课程对应章节
+		List<Chapter> chapterList=chapterService.findByCourse(courseService.findById(courseId));
+		ActionContext.getContext().put("chapterList", chapterList);
 		//回显数据--教学方式
 		if(teachProcessFind.getTeachType()!=null)
 			teachTypeId=teachProcessFind.getTeachType().getId();
+		//回显数据
+		if(teachProcessFind.getChapter()!=null){
+			chapterId=teachProcessFind.getChapter().getId();
+		}
 		return "saveUI";
 	}
 	/** 修改对应课程教学进程*/
@@ -108,6 +121,8 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		Teacher teaFind=getCurrentUser().getTeacher();
 		//查找--教学方式
 		DataDict dataDictFind=dataDictService.findById(teachTypeId);
+		//查找--章节
+		Chapter chapterFind=chapterService.findById(chapterId);
 		//设置属性
 		processFind.setChapter(model.getChapter());
 		processFind.setLessonContent(model.getLessonContent());
@@ -116,6 +131,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		processFind.setWeekCount(model.getWeekCount());
 		processFind.setTeacher(teaFind);
 		processFind.setTeachType(dataDictFind);
+		processFind.setChapter(chapterFind);
 		//更新
 		teachProcessService.update(processFind);
 		//将courseId携带过去
@@ -143,4 +159,11 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	public void setTeachTypeId(Integer teachTypeId) {
 		this.teachTypeId = teachTypeId;
 	}
+	public Integer getChapterId() {
+		return chapterId;
+	}
+	public void setChapterId(Integer chapterId) {
+		this.chapterId = chapterId;
+	}
+	
 }
