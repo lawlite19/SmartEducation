@@ -11,4 +11,11 @@ import com.hhit.service.IDataDictService;
 @Transactional
 public class DataDictServiceImpl extends DaoSupportImpl<DataDict> implements IDataDictService{
 
+	@Override
+	public DataDict findByDictNum(String dictNum) {
+		return (DataDict) getSession().createQuery("FROM DataDict WHERE dictNum=?")//
+				.setParameter(0, dictNum)//
+				.uniqueResult();
+	}
+
 }

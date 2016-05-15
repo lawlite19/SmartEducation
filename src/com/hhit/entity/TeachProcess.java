@@ -21,10 +21,13 @@ public class TeachProcess implements java.io.Serializable{
 	private Timestamp startData;
 	private Integer weekCount;
 	private Integer lessonCount;
-	private String chapter;
+
 	private String lessonContent;
 	
+	//new add
+	private Timestamp pushTime;
 	
+	private Chapter chapter;
 	private DataDict teachType;
 	private Course course;
 	private Teacher teacher; 
@@ -53,10 +56,10 @@ public class TeachProcess implements java.io.Serializable{
 	public void setLessonCount(Integer lessonCount) {
 		this.lessonCount = lessonCount;
 	}
-	public String getChapter() {
+	public Chapter getChapter() {
 		return chapter;
 	}
-	public void setChapter(String chapter) {
+	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
 	public String getLessonContent() {
@@ -65,7 +68,6 @@ public class TeachProcess implements java.io.Serializable{
 	public void setLessonContent(String lessonContent) {
 		this.lessonContent = lessonContent;
 	}
-
 	public DataDict getTeachType() {
 		return teachType;
 	}
@@ -86,6 +88,12 @@ public class TeachProcess implements java.io.Serializable{
 	}
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+	public Timestamp getPushTime() {
+		return pushTime;
+	}
+	public void setPushTime(Timestamp pushTime) {
+		this.pushTime = pushTime;
 	}
 	
 }

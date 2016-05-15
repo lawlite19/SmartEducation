@@ -20,6 +20,11 @@
 				<comment>章节名称</comment>
 			</column>
 		</property>
+		<property name="url" type="string">
+			<column name="Url">
+				<comment>链接地址</comment>
+			</column>
+		</property>
 		<property name="courseName" type="string">
 			<column name="CourseName">
 				<comment>章节名称</comment>

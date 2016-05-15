@@ -72,13 +72,16 @@ public class DataDictAction extends BaseAction<DataDict> {
 
 	/** 修改 */
 	public String edit() throws Exception {
+		//取出源对象
+		DataDict dataDictFind=dataDictService.findById(model.getId());
 		// 设置属性
-		model.setDataType(dataTypeService.findById(dataTypeId));
-		model.setDictNum(model.getDictNum());
-		model.setDictName(model.getDictName());
-		model.setDescription(model.getDescription());
+		dataDictFind.setDataType(dataTypeService.findById(dataTypeId));
+		dataDictFind.setDictNum(model.getDictNum());
+		dataDictFind.setDictName(model.getDictName());
+		dataDictFind.setDescription(model.getDescription());
+		
 		// 更新数据库
-		dataDictService.update(model);
+		dataDictService.update(dataDictFind);
 
 		return "toList";
 	}
@@ -101,6 +104,17 @@ public class DataDictAction extends BaseAction<DataDict> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	/** 检查编号 */
+	public String checkDictNum() throws Exception{
+		Map<String, String> map=new HashMap<>();
+		DataDict dataDictFind=dataDictService.findByDictNum(model.getDictNum());
+		if(dataDictFind!=null){
+			map.put("name", "error");
+			JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		}
+		return null;
+	}
+	
 
 	public Integer getDataTypeId() {
 		return dataTypeId;

@@ -25,14 +25,14 @@
 				<comment>授课节次</comment>
 			</column>
 		</property>
-		<property name="chapter" type="string">
-			<column name="chapter">
-				<comment>授课章节</comment>
-			</column>
-		</property>
 		<property name="lessonContent" type="text">
 			<column name="lessonContent">
 				<comment>课程内容</comment>
+			</column>
+		</property>
+		<property name="pushTime" type="timestamp">
+			<column name="PushTime">
+				<comment>推送时间</comment>
 			</column>
 		</property>
 		<!--teachType属性，本类与DataDict的多对一，单项 -->
@@ -41,6 +41,8 @@
 		<many-to-one name="course" class="Course" column="Course_Id"></many-to-one>
 		<!--teacher属性，本类与Teacher多对一  -->
 		<many-to-one name="teacher" class="Teacher" column="Teacher_Id"></many-to-one>
+		<!--chapter属性，本类与Chapter一对一  -->
+		<many-to-one name="chapter" class="Chapter" column="Chapter_Id" lazy="false"></many-to-one>
 		
 	</class>
 </hibernate-mapping>

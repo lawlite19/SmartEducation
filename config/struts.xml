@@ -49,6 +49,7 @@
 			<result name="personalMaintain"  type="redirectAction">student_personalMaintainUI</result>
 			<result name="myFavorite">/WEB-INF/jsp/studentAction/myFavorite.jsp</result>
 		    <result name="visitRecord">/WEB-INF/jsp/studentAction/visitRecord.jsp</result>
+			<result name="myReceivePush">/WEB-INF/jsp/studentAction/myReceivePush.jsp</result>
 		
 		</action>
 		<!-- 老师管理 -->
@@ -76,7 +77,12 @@
 			<result name="toList" type="redirectAction">mclass_list</result>
 			
 		</action>	
-		
+		<!-- 推送策略 -->
+    	<action name="pushStrategy_*" class="pushStrategyAction" method="{1}">
+    		<result name="accordTeachProcess">/WEB-INF/jsp/pushStrategyAction/accordTeachProcess.jsp</result>
+    		<result name="toAccordTeachProcess" type="redirectAction">pushStrategy_accordTeachProcess?courseId=${courseId}</result>
+    	
+    	</action>
 		
 		<!-- 用户详细信息管理 -->
 		<action name="userDetails_*" class="userDetailsAction" method="{1}">
