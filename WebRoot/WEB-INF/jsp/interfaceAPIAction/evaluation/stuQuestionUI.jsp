@@ -2,37 +2,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>登录</title>
+<title>学生课程提问</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/api.css" />
-
-<!-- 查询输入框检查 -->
-<script type="text/javascript">
-    function MM_Empty(ctrl1Id, ctrl2Id) {
-        var ctrl1 = document.getElementById(ctrl1Id);
-        var ctrl2 = document.getElementById(ctrl2Id);
-        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
-        	//正上方
-        	layer.msg('请输入查询条件！', {
-        	  offset: 0,
-        	  shift: 6
-        	});
-            ctrl1.focus();
-            return false;
-        }
-        layer.load();
-        return true;
-    }
-	function Check() {
-		return MM_Empty('select_dept', 'txt_inputTerm');
-    }
-	</script>
 </head>
 <body>
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 接口文档 &gt; 接口信息</div>
 <!-- 信息开始 -->
-<s:form action="/App/user_appLogin.action" method="post">
+<s:form action="/App/stuQuestion_appStuQuestion.action" method="post">
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
           <tbody>
@@ -55,74 +33,57 @@
 					<div>
 							<h2>接口地址</h2>
 									<p class="p_apiInfo">
-										${pageContext.request.contextPath}/App/user_appLogin.action
+										${pageContext.request.contextPath}/App/stuQuestion_appStuQuestion.action
 									</p>
 								<br/>
 								<h2>需要传递的数据</h2>
 								<br/>
 								<span class="span_apiInfo">
-									账号：<span class="span_apiProperty">userNum</span>
+									学号：<span class="span_apiProperty">stuNum</span>
 								</span>
 								<br/>
 								<span class="span_apiInfo">
-									密码：<span class="span_apiProperty">password</span>
+									课程Id：<span class="span_apiProperty">courseId</span>
 								</span>
 								<br/>
 								<span class="span_apiInfo">
-									用户类型：<span class="span_apiProperty">userType</span>
-									,对应的数据为
-									<span class="span_apiPropertyInfo">
-									老师
-									</span>
-									和
-									<span class="span_apiPropertyInfo">
-									学生
-									</span>
+									问题内容：<span class="span_apiProperty">content</span>
 								</span>
-					</div>
+								
 					<!-- 返回json数据说明-->
 					<div  class="addFont">
 						<h2>返回json数据说明</h2>
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
 							name：&nbsp;<span class="span_apiSuccess">success</span><span class="span_apiNormal">-->查询成功</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="span_apiWarning">noStudent</span><span class="span_apiNormal">-->没有学生</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="span_apiWarning">noCourse</span><span class="span_apiNormal">-->没有课程</span>
+								
 						</span>
 						<br/>
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
-							teacher：&nbsp;<span class="span_apiNormal">老师信息</span>
+							courses：&nbsp;<span class="span_apiNormal">学生课程信息</span>
 						</span>
-						</span>
-						<br/>
-						<span class="span_apiInfo">
-						<span class="span_apiProperty">
-							student：&nbsp;<span class="span_apiNormal">学生信息</span>
-							&nbsp;&nbsp;<span class="span_apiProperty">photo</span>
-							<span class="span_apiNormal">-->只是照片的名字，真正的路径为：</span>
-							<span class="span_apiSuccess">域名/studentImgs/照片名称</span>
-						</span>
-						</span>
-						<br/>
 						</span>
 					</div>
 					<!-- 测试 -->
 					<div class="addFont">
 						<h2>测试</h2>
 						<span class="span_apiInfo">
-							userNum: <s:textfield cssClass="inpu" name="userNum"></s:textfield>
+							stuNum: <s:textfield cssClass="inpu" name="stuNum"></s:textfield>
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-						password:<s:textfield cssClass="inpu" name="password"></s:textfield>
+							courseId: <s:textfield cssClass="inpu" name="courseId"></s:textfield>
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-						userType: <input id="student" type="radio" value="学生" name="userType" />
-    						   <label for="student">学生</label>
-        					   <input id="teacher" type="radio" value="老师" name="userType" />
-                               <label for="teacher">老师</label>
-                        </span>
-                        <br/><br/>
+							content: <s:textarea cssClass="inpu" name="content"></s:textarea>
+						</span>
+						<br/><br/>
                         <span class="span_apiButton">
                         	<s:submit value="提交"   cssClass="ttn"></s:submit>
                         </span>

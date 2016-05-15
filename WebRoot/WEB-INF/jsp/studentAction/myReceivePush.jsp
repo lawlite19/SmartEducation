@@ -30,22 +30,6 @@
 
 			<div class="label" style="margin: 0;">
 				<span id="span_courseName">${courseName}</span>
-<!-- 添加教学进程 -->
-<!-- 添加按钮 -->
-<s:form action="student_myReceivePush" method="post">
-<s:hidden name="courseId"></s:hidden>
-<table align="center" cellspacing="3" cellpadding="5">
-	<tr>
-		<td align="center">
-		</td>		
-		<td align="center">
-		</td>
-		<td  align="center">
-			<s:submit value="提交" cssClass="ttn"></s:submit>
-		</td>
-	</tr>
-</table>
-</s:form>
 			</div>
 
 <!-- 教学进程信息 -->
@@ -108,7 +92,6 @@
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/see.png"  />
 					</a>
 					&nbsp;</td>
-
 				</tr>
 			</s:iterator>
 		</s:iterator>

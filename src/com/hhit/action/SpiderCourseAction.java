@@ -5,20 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-
-
-
-
-
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.CourseDiscuss;
+import com.hhit.entity.CourseScore;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
 import com.hhit.entity.SpiderChapter;
@@ -52,6 +45,8 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 	
 	//搜索
 	private String searchInfo;
+	
+	private String stuNum;
 	
 	
 	/** 列表--管理 */
@@ -260,6 +255,22 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 			//课程文档
 			List<SpiderDocument> documentList=spiderDocumentService.findByCourse(courseFind);
 			ClassPropertyFilter.ListSpiderDocumentrFilter(map, documentList);
+			//课程评分
+			CourseScore courseScoreFind=courseScoreService.findByStuNumAndCourse(stuNum, courseFind);
+			if(courseScoreFind==null){
+				map.put("scoreName", "noScore");
+			}
+			else{
+				ClassPropertyFilter.SpiderCourseScoreFilter(map, courseScoreFind);
+			}
+			//课程讨论
+			List<CourseDiscuss> courseDiscussList=courseDiscussService.findByCourse(courseFind);
+			if(courseDiscussList.size()<1){
+				map.put("discussName", "noDiscuss");
+			}
+			else{
+				ClassPropertyFilter.ListSpiderCourseDiscussFilter(map, courseDiscussList);
+			}
 			map.put("name", "success");
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
@@ -298,6 +309,12 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 	}
 	public void setSearchInfo(String searchInfo) {
 		this.searchInfo = searchInfo;
+	}
+	public String getStuNum() {
+		return stuNum;
+	}
+	public void setStuNum(String stuNum) {
+		this.stuNum = stuNum;
 	}
 	
 }

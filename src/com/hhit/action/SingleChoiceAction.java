@@ -111,7 +111,6 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 		List<Course> courseList=courseService.findAll();
 		ActionContext.getContext().put("courseList", courseList);
 
-
 		// 准备回显的数据
 		SingleChoice singleChoiceFind=singleChoiceService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(singleChoiceFind);
@@ -192,7 +191,7 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 			}
 			//数据导入操作
 			//需要解析的Excel文件
-			String str[]=new String[9];
+			String str[]=new String[10];
 			Integer difficult = null;
 			File file = new File(tarDir+questionBankFileName);
 			try {
@@ -209,16 +208,17 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 					XSSFRow row = sheet.getRow(i);
 					//获取当前行最后单元格列号
 					//int lastCellNum = row.getLastCellNum();
-					for (int j = 0; j < 10; j++) {
+					for (int j = 0; j < 11; j++) {
 						XSSFCell cell = row.getCell(j);
-						if(j==9)
+						if(j==10)
 							difficult=(int) cell.getNumericCellValue();
 						else
 							str[j] = cell.getStringCellValue();
 					}
 					Course courseFind=courseService.findByCourseName(str[1]);
+					Chapter chapter=chapterService.findByCourseAndLikeChapterName(courseFind,str[2]);
 					//构造函数
-					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind, str[2], str[3], str[4], str[5], str[6], str[7], str[8], difficult,
+					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind,chapter, str[3], str[4], str[5], str[6], str[7], str[8],str[9], difficult,
 							new Timestamp(new Date().getTime()),0);
 					//保存数据库
 					singleChoiceService.save(singleChoiceFind);

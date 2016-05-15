@@ -112,7 +112,8 @@
 			<!-- App爬取课程评分、评论 -->
 			<value>com/hhit/entity/CourseDiscuss.hbm.xml</value>
 			<value>com/hhit/entity/CourseScore.hbm.xml</value>
-			
+			<!-- 题目记录 -->
+			<value>com/hhit/entity/QuestionErrorRecord.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

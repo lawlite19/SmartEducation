@@ -33,6 +33,23 @@ public class InterfaceAPIAction {
 	public String teaModifyPasswordUI() throws Exception{
 		return "teaModifyPasswordUI";
 	}
+	/** 学生信息--根据学号 */
+	public String stuInfoUI() throws Exception{
+		return "stuInfoUI";
+	}
+	/** 老师信息--根据工号号 */
+	public String teaInfoUI() throws Exception{
+		return "teaInfoUI";
+	}
+	/** 学生修改个人信息 */
+	public String stuModifyInfoUI() throws Exception{
+		return "stuModifyInfoUI";
+	}
+	/** 老师修改个人信息 */
+	public String teaModifyInfoUI() throws Exception{
+		return "teaModifyInfoUI";
+	}
+	
 
 	
 	
@@ -40,11 +57,30 @@ public class InterfaceAPIAction {
 //实时测评接口
 //=======================================
 	
-	
-	
-	
-	
-	
+	/** 教学进程 */
+	public String teachProcessUI() throws Exception{
+		return "teachProcessUI";
+	}
+	/** 学生提问 */
+	public String stuQuestionUI() throws Exception{
+		return "stuQuestionUI";
+	}
+	/** 学生提问问题列表 */
+	public String listStuQuestionUI() throws Exception{
+		return "listStuQuestionUI";
+	}
+	/** 老师回答 */
+	public String teaAnswerUI() throws Exception{
+		return "teaAnswerUI";
+	}
+	/** 老师问题列表 */
+	public String listTeaQuestionUI() throws Exception{
+		return "listTeaQuestionUI";
+	}
+	/** 学生问题详情 */
+	public String stuQuestionDetailsUI() throws Exception{
+		return "stuQuestionDetailsUI";
+	}
 //电子书包接口
 //=======================================
 	/** 专业类型 */

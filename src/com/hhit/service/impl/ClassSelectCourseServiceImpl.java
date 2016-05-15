@@ -32,4 +32,12 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 				.list();
 	}
 
+	@Override
+	public ClassSelectCourse findByClassAndCourse(Class_ classFind, Course courseFind) {
+		return (ClassSelectCourse) getSession().createQuery("FROM ClassSelectCourse WHERE class_=? AND course=?")//
+				.setParameter(0, classFind)//
+				.setParameter(1, courseFind)//
+				.uniqueResult();
+	}
+
 }

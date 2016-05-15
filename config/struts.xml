@@ -229,7 +229,19 @@
 			<result name="teaModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyPasswordUI.jsp</result>
 			<result name="spiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseScoreUI.jsp</result>
 			<result name="spiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseDiscussUI.jsp</result>
-		
+			<result name="teachProcessUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teachProcessUI.jsp</result>
+			<result name="courseChapterUI">/WEB-INF/jsp/interfaceAPIAction/courseChapterUI.jsp</result>
+			<result name="stuQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuQuestionUI.jsp</result>
+			<result name="teaAnswerUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaAnswerUI.jsp</result>
+			<result name="listStuQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/listStuQuestionUI.jsp</result>
+			<result name="listTeaQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/listTeaQuestionUI.jsp</result>
+			<result name="stuQuestionDetailsUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuQuestionDetailsUI.jsp</result>
+			<result name="stuInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuInfoUI.jsp</result>
+			<result name="teaInfoUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoUI.jsp</result>
+			<result name="stuModifyInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuModifyInfoUI.jsp</result>
+			<result name="teaModifyInfoUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyInfoUI.jsp</result>
+			
+			
 		</action>
 	</package>
 
@@ -255,6 +267,18 @@
 		</action>
 		<!-- 课程讨论 -->
 		<action name="courseDiscuss_*" class="courseDiscussAction" method="{1}">
+		</action>
+		<!-- 教学进程 -->
+		<action name="teachProcess_*" class="teachProcessAction" method="{1}">
+		</action>
+		<!-- 章节 -->
+		<action name="chapter_*" class="chapterAction" method="{1}">
+		</action>
+		<!-- 学生提问 -->
+		<action name="stuQuestion_*" class="stuQuestionAction" method="{1}">
+		</action>
+		<!-- 老师回答 -->
+		<action name="teaAnswer_*" class="teaAnswerAction" method="{1}">
 		</action>
 	</package>
 </struts>    

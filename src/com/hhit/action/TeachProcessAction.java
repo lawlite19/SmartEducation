@@ -1,18 +1,26 @@
 package com.hhit.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Chapter;
+import com.hhit.entity.ClassSelectCourse;
+import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.DataDict;
 import com.hhit.entity.DataType;
+import com.hhit.entity.Student;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
+import com.hhit.util.ClassPropertyFilter;
+import com.hhit.util.JsonUtil;
 import com.opensymphony.xwork2.ActionContext;
 
 @SuppressWarnings("serial")
@@ -23,6 +31,9 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	private Integer courseId;
 	private Integer teachTypeId;
 	private Integer chapterId;
+	
+	//app
+	private String stuNum;
 	
 	/** 列表 */
 	public String list() throws Exception{
@@ -146,6 +157,41 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		return "toList";
 	}
 	
+	
+//app	
+//=============================================	
+	public String appCourseTeachProcess() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		//找到课程
+		Course courseFind=courseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			//找到学生
+			Student stuFind=studentService.findByStuNum(stuNum);
+			if(stuFind==null){
+				map.put("name", "noStudent");
+			}
+			else{
+				//找到班级
+				Class_ classFind=stuFind.getClass_();
+				//根据班级和课程找到班级选课
+				ClassSelectCourse classCourseFind=classSelectCourseService.findByClassAndCourse(classFind,courseFind);
+				//得到老师工号
+				String teaNum=classCourseFind.getTeacherNum();
+				//找到老师
+				Teacher teaFind=teacherService.findByTeacherNum(teaNum);
+				//根据工号和课程找到教学进程
+				List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind, courseFind);
+				ClassPropertyFilter.ListTeachPorcessFilter(map, teachProcessList);
+			}
+		}
+		
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	
 	//=========
 	public Integer getCourseId() {
 		return courseId;
@@ -165,5 +211,10 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	public void setChapterId(Integer chapterId) {
 		this.chapterId = chapterId;
 	}
-	
+	public String getStuNum() {
+		return stuNum;
+	}
+	public void setStuNum(String stuNum) {
+		this.stuNum = stuNum;
+	}
 }

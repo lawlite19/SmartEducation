@@ -38,6 +38,29 @@ public class ChapterAction extends BaseAction<Chapter>{
 		return null;
 	}
 
+//app
+//========================
+	public String appCourseChapter() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		//找到课程
+		Course courseFind=courseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			List<Chapter> chapterList=chapterService.findByCourse(courseFind);
+			if(chapterList.size()>0){
+				ClassPropertyFilter.ListChapterFilter(map, chapterList);
+				map.put("name", "success");
+			}
+			else{
+				map.put("name", "noChapter");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+
 	public Integer getCourseId() {
 		return courseId;
 	}

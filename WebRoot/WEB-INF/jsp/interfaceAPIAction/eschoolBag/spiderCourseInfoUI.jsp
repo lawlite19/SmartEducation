@@ -76,6 +76,14 @@
 						<br/>
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
+							scoreName：&nbsp;<span class="span_apiSuccess">success</span><span class="span_apiNormal">-->查询成功</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="span_apiWarning">noCourseInfo</span><span class="span_apiNormal">-->没有此课程</span>
+						</span>
+						<br/>
+						
+						<span class="span_apiInfo">
+						<span class="span_apiProperty">
 							spiderCourseInfo：&nbsp;<span class="span_apiNormal">课程介绍信息</span>
 						</span>
 						</span>
@@ -93,6 +101,29 @@
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
 							spiderDocuments：&nbsp;<span class="span_apiNormal">课程参考教材</span>
+						</span>
+						</span>
+						<br/>
+						<span class="span_apiInfo">
+						<span class="span_apiProperty">
+							scoreName：&nbsp;<span class="span_apiSuccess">noScore</span><span class="span_apiNormal">-->还没有评分</span>
+						</span>
+						</span>
+						<br/>
+						<span class="span_apiInfo">
+						<span class="span_apiProperty">
+							courseScore：&nbsp;<span class="span_apiNormal">-->课程评分</span>
+						</span>
+						</span>
+						<span class="span_apiInfo">
+						<span class="span_apiProperty">
+							discussName：&nbsp;<span class="span_apiSuccess">noDiscuss</span><span class="span_apiNormal">-->还没有讨论</span>
+						</span>
+						</span>
+						<br/>
+						<span class="span_apiInfo">
+						<span class="span_apiProperty">
+							courseDiscusses：&nbsp;<span class="span_apiNormal">-->课程讨论信息</span>
 						</span>
 						</span>
 						</span>

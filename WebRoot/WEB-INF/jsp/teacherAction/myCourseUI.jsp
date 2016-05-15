@@ -121,6 +121,7 @@
                </td> 
                <td colspan="4" align="center">
                	<s:submit value="生成测试" cssClass="ttn" onclick="return Check();" ></s:submit>
+               	<span style="color:red;"><s:fielderror name="errorInfo"></s:fielderror></span>
 			   </td>
 			   
         </tr>
