@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class ATerm implements java.io.Serializable {
 
+	// Fields
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	private String name;
 	private Date startTime;
@@ -61,5 +61,6 @@ public class ATerm implements java.io.Serializable {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
+
 
 }

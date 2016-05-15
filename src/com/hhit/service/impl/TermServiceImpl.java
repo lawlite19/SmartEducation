@@ -23,5 +23,11 @@ public class TermServiceImpl extends DaoSupportImpl<ATerm> implements
 				.list();
 	}
 
+	@Override
+	public int findMaxId() {
+        String hql="select max(Id) from ATerm t";
+		return (int)getSession().createQuery(hql).uniqueResult();
+	}
+
 	
 }

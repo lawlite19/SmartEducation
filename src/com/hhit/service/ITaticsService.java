@@ -3,10 +3,10 @@ package com.hhit.service;
 import java.util.List;
 
 import com.hhit.base.IDaoSupport;
+import com.hhit.entity.ATatics;
 import com.hhit.entity.ATerm;
 
-public interface ITermService extends IDaoSupport<ATerm> {
-
-	List<ATerm> findList();
+public interface ITaticsService extends IDaoSupport<ATatics> {
+	List<ATatics> findByTerm(ATerm termFind);
 	int findMaxId();
 }

@@ -12,9 +12,11 @@ import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IFavoriteService;
 import com.hhit.service.ILogFileService;
+import com.hhit.service.IPeerAccountService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ISelfAccountService;
 import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseInfoService;
 import com.hhit.service.ISpiderCourseService;
@@ -25,6 +27,8 @@ import com.hhit.service.IStuAccountService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITaticsService;
+import com.hhit.service.ITeachAccountService;
 import com.hhit.service.ITeacherService;
 import com.hhit.service.ITermService;
 import com.hhit.service.IUserDetailsService;
@@ -121,6 +125,15 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ITermService termService;//评价基础信息
 	@Resource
 	protected IStuAccountService stuAccountService;//学生评价指标信息
+	@Resource
+	protected ISelfAccountService selfAccountService;//学生评价指标信息
+	@Resource
+	protected ITaticsService taticsService;//评价策略信息
+	@Resource
+	protected IPeerAccountService peerAccountService;//同行评价指标信息
+	@Resource
+	protected ITeachAccountService teachAccountService;//教学模式指标信息
+	
 	/**
 	 * 获取当前登录的用户
 	 */

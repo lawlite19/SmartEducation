@@ -110,6 +110,10 @@
 			<!-- 评价指标 -->
 			<value>com/hhit/entity/ATerm.hbm.xml</value>
 			<value>com/hhit/entity/AStudentAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ASelfAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ATatics.hbm.xml</value>
+			<value>com/hhit/entity/APeerAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ATeachingAccount.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

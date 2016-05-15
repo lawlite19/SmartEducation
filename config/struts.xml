@@ -165,6 +165,28 @@
 			<result name="saveUI">/WEB-INF/jsp/stuAccountAction/saveUI.jsp</result>
 			<result name="toList" type="redirectAction">stuAccount_list</result>
 		</action>
+		<!-- 自我评价指标管理 -->
+			<action name="selfAccount_*" class="selfAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/selfAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/selfAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">selfAccount_list</result>
+		</action>
+		<!-- 同行评价指标管理 -->
+			<action name="peerAccount_*" class="peerAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/peerAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/peerAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">peerAccount_list</result>
+		</action>
+		<!-- 教学模式指标管理 -->
+			<action name="teachAccount_*" class="teachAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/teachAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">teachAccount_list</result>
+		</action>
+		<!-- 评价策略管理 -->
+			<action name="tatics_*" class="taticsAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/taticsAction/list.jsp</result>
+		</action>
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>

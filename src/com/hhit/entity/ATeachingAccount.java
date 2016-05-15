@@ -1,40 +1,41 @@
 package com.hhit.entity;
 
 /**
- * ASelfAccessAccount entity. @author MyEclipse Persistence Tools
+ * ATeachingAccount entity. @author MyEclipse Persistence Tools
  */
 
-public class ASelfAccessAccount implements java.io.Serializable {
+public class ATeachingAccount implements java.io.Serializable {
 
 	// Fields
 	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 	private ATerm ATerm;
-	private double allPoint;
 	private String description;
+	private Double allPoint;
 	private String descriptionA;
-	private double APoint;
+	private Double APoint;
 	private String descriptionB;
-	private double BPoint;
+	private Double BPoint;
 	private String descriptionC;
-	private double CPoint;
+	private Double CPoint;
 	private String descriptionD;
-	private double DPoint;
+	private Double DPoint;
 
 	// Constructors
 
 	/** default constructor */
-	public ASelfAccessAccount() {
+	public ATeachingAccount() {
 	}
 
 	/** full constructor */
-	public ASelfAccessAccount(ATerm ATerm, double allPoint, String description,
-			String descriptionA, double APoint, String descriptionB,
-			double BPoint, String descriptionC, double CPoint,
-			String descriptionD, double DPoint) {
+	public ATeachingAccount(ATerm ATerm, String description, Double allPoint,
+			String descriptionA, Double APoint, String descriptionB,
+			Double BPoint, String descriptionC, Double CPoint,
+			String descriptionD, Double DPoint) {
 		this.ATerm = ATerm;
-		this.allPoint = allPoint;
 		this.description = description;
+		this.allPoint = allPoint;
 		this.descriptionA = descriptionA;
 		this.APoint = APoint;
 		this.descriptionB = descriptionB;
@@ -63,20 +64,20 @@ public class ASelfAccessAccount implements java.io.Serializable {
 		this.ATerm = ATerm;
 	}
 
-	public double getAllPoint() {
-		return this.allPoint;
-	}
-
-	public void setAllPoint(double allPoint) {
-		this.allPoint = allPoint;
-	}
-
 	public String getDescription() {
 		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Double getAllPoint() {
+		return this.allPoint;
+	}
+
+	public void setAllPoint(Double allPoint) {
+		this.allPoint = allPoint;
 	}
 
 	public String getDescriptionA() {
@@ -87,11 +88,11 @@ public class ASelfAccessAccount implements java.io.Serializable {
 		this.descriptionA = descriptionA;
 	}
 
-	public double getAPoint() {
+	public Double getAPoint() {
 		return this.APoint;
 	}
 
-	public void setAPoint(double APoint) {
+	public void setAPoint(Double APoint) {
 		this.APoint = APoint;
 	}
 
@@ -103,11 +104,11 @@ public class ASelfAccessAccount implements java.io.Serializable {
 		this.descriptionB = descriptionB;
 	}
 
-	public double getBPoint() {
+	public Double getBPoint() {
 		return this.BPoint;
 	}
 
-	public void setBPoint(double BPoint) {
+	public void setBPoint(Double BPoint) {
 		this.BPoint = BPoint;
 	}
 
@@ -119,11 +120,11 @@ public class ASelfAccessAccount implements java.io.Serializable {
 		this.descriptionC = descriptionC;
 	}
 
-	public double getCPoint() {
+	public Double getCPoint() {
 		return this.CPoint;
 	}
 
-	public void setCPoint(double CPoint) {
+	public void setCPoint(Double CPoint) {
 		this.CPoint = CPoint;
 	}
 
@@ -135,11 +136,11 @@ public class ASelfAccessAccount implements java.io.Serializable {
 		this.descriptionD = descriptionD;
 	}
 
-	public double getDPoint() {
+	public Double getDPoint() {
 		return this.DPoint;
 	}
 
-	public void setDPoint(double DPoint) {
+	public void setDPoint(Double DPoint) {
 		this.DPoint = DPoint;
 	}
 

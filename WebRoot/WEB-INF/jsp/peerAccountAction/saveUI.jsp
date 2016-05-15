@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>学生评价指标管理</title>
+	<title>同行评价指标管理</title>
 	<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 	<script type="text/javascript">
@@ -31,10 +31,10 @@
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 班级管理 &gt; 
 <s:if test="%{id == null}">
-添加学生评价指标信息
+添加同行评价指标信息
 </s:if>
 <s:else>
-修改学生评价指标信息
+修改同行评价指标信息
 </s:else>
 </div>
 <!-- 信息开始 -->
@@ -45,7 +45,7 @@
           	<tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">学生评价指标信息</span>
+                        <span class="tt">同行评价指标信息</span>
                     </td>
                     <td class="tr"></td>
             </tr>
@@ -55,13 +55,13 @@
                     </td>
                     <td class="mm">
                     <div>
-<s:form action="stuAccount_%{id == null ? 'add' : 'edit'}">
+<s:form action="peerAccount_%{id == null ? 'add' : 'edit'}">
     	<s:hidden name="id"></s:hidden>
 <table cellspacing="0" cellpadding="6"  align="center" border="0">
 		<!-- 表头-->
 		<tbody> 
 					<tr>
-						<td class="addFont">所属部门</td>
+						<td class="addFont">所属学期</td>
                         <td>
                         	<s:select name="termID" cssClass="ddl" id="select_term"
                         		list="#termList" listKey="id" listValue="name"
@@ -78,7 +78,7 @@
                         </td>
                     </tr>
                     <tr><td  class="addFont">评价占分</td>
-                        <td><s:textfield name="point" cssClass="inpu" id="txt_point" />
+                        <td><s:textfield name="points" cssClass="inpu" id="txt_points" />
                         <span class="span_note">*</span>
 						</td>
                     </tr>
