@@ -42,6 +42,7 @@
 	function Check() {
         if (!MM_Empty('select_chapter', '章节')) return false;
         if (!MM_Empty('select_class', '班级')) return false;
+        if (!MM_Empty('txt_endTime', '结束提交时间')) return false;
 		//点击之后禁止再次点击
 		//loading层
 		layer.load(0,{
@@ -81,18 +82,24 @@
                 <tr>
                     <td class="mm" colspan="3">
 <table align="left" cellspacing="1" cellpadding="1">
-     <tbody><tr>
+     <tbody>
+     <tr>
+     	<td colspan="3">
+     		<span style="color:red;"><s:fielderror name="errorInfo"></s:fielderror></span>
+     	</td>
+     </tr>
+     <tr>
                <td align="right">
                     	 判断题：
 				</td>
                <td>
-               		<s:select name="judgementCount" list="#{10:'10道',15:'15道'}" cssClass="ddl" />
+               		<s:select name="judgementCount" list="#{10:'10道',15:'15道',20:'20道'}" cssClass="ddl" />
                </td>
                <td  align="right">
                   		 单选题：
    			   </td>
                <td>
-                   <s:select name="singleChoiceCount" list="#{10:'10道',15:'15道'}" cssClass="ddl" />
+                   <s:select name="singleChoiceCount" list="#{10:'10道',15:'15道',20:'20道'}" cssClass="ddl" />
                </td>
                
                <td  align="right">
@@ -108,19 +115,20 @@
                   		班级：
    			   </td>
    			   <td>
-                   <s:select id="select_class" name="classId" list="classList"  cssClass="ddl"  headerKey="" headerValue="==请选择章节=="
+                   <s:select id="select_class" name="classId" list="classList"  cssClass="ddl"  headerKey="" headerValue="==请选择班级=="
                     listKey="id" listValue="className"/>
                </td>
                <td  align="right">
                   		学生提交结束时间：
    			   </td>
    			   <td>
-                   <s:textfield name="endTime" cssClass="inpu" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                   <s:textfield id="txt_endTime" name="endTime" cssClass="inpu" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                </td>
                <td>
                </td> 
                <td colspan="4" align="center">
                	<s:submit value="生成测试" cssClass="ttn" onclick="return Check();" ></s:submit>
+               	
 			   </td>
 			   
         </tr>
@@ -180,7 +188,7 @@
 					<td  align="center">${class_.className}&nbsp;</td>
 					<td  align="center">${chapter.chapterName}&nbsp;</td>
 					<td  align="center">
-					<s:a action="teacher_deleteTestPaper?testPaperId=%{id}&courseId=%{courseId}" onclick="return window.confirm('您确定要删除吗？')">
+					<s:a action="teacher_deleteTestPaper?testPaperId=%{id}&courseId=%{courseId}&doInfo=%{doInfo}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
 					|

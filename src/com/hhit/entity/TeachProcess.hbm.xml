@@ -36,7 +36,7 @@
 			</column>
 		</property>
 		<!--teachType属性，本类与DataDict的多对一，单项 -->
-		<many-to-one name="teachType" class="DataDict" column="TeachType_Id"></many-to-one>
+		<many-to-one name="teachType" class="DataDict" column="TeachType_Id" lazy="false"></many-to-one>
 		<!--course属性，本类与Course的多对一 -->
 		<many-to-one name="course" class="Course" column="Course_Id"></many-to-one>
 		<!--teacher属性，本类与Teacher多对一  -->

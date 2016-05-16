@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Synchronization;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
@@ -24,6 +22,7 @@ import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Judgement;
 import com.hhit.entity.LogFile;
+import com.hhit.entity.PageBean;
 import com.hhit.entity.Role;
 import com.hhit.entity.SingleChoice;
 import com.hhit.entity.Teacher;
@@ -375,8 +374,29 @@ public class TeacherAction extends BaseAction<Teacher>{
 		return "myCourseUI";
 	}
 	
+	/**题库不足的准备信息*/
+	public void publicCode(){
+		Teacher teaFind=getCurrentUser().getTeacher();
+	    //准备数据--老师对应课程
+		List<Course> couseList=new ArrayList<>(teaFind.getCourses());
+		ActionContext.getContext().put("couseList", couseList);
+		//准备章节空集合
+		List<Chapter> chapterList=Collections.EMPTY_LIST;
+		ActionContext.getContext().put("chapterList", chapterList);
+		//准备班级空集合
+		List<Class_> classList=Collections.EMPTY_LIST;
+		ActionContext.getContext().put("classList", classList);
+		//准备数据--所有测试
+		new QueryHelper(TestPaper.class, "t")//
+		.addCondition("t.teaNum=?", getCurrentUser().getTeacher().getTeaNum())//
+		.preparePageBean(testPaperService, pageNum, pageSize);
+		addFieldError("errorInfo", "题库此章节题目不足！");
+	}
+	
 	/** 自动生成测试提库 */
 	public String autoMakeQuestion() throws Exception{
+		
+		
 		Teacher teaFind=getCurrentUser().getTeacher();
 		//测试题目总数
 		Integer questionCount=judgementCount+singleChoiceCount;
@@ -395,118 +415,94 @@ public class TeacherAction extends BaseAction<Teacher>{
 		default:
 			break;
 		}
+		Course courseFind=courseService.findById(courseId);
+		Chapter chapterFind=chapterService.findById(chapterId);
+		//设置页大小为4
+		pageSize=4;
+		/***
+		 * 判断题目数量是否足够
+		 */
+		//得到记录总数
+		int recordCount=judgementService.findByCourseAndChapter(courseFind,chapterFind).intValue();
+		if(recordCount<judgementCount-pageSize){//因为我忽略掉了最后一页
+			publicCode();
+			return "myCourseUI";
+		}
+		//得到记录总数
+		int recordSingleCount=singleChoiceService.findByCourseAndChapter(courseFind,chapterFind).intValue();
+		if(recordSingleCount<singleChoiceCount-pageSize){//因为我忽略掉了最后一页
+			publicCode();
+			return "myCourseUI";
+		}
 		//保存测试卷
 		TestPaper testPaperModel=new TestPaper(testType, questionCount, 0, endTime, teaFind.getTeaNum(), classService.findById(classId),
-				courseService.findById(courseId), chapterService.findById(chapterId));
+				courseFind, chapterFind);
 		testPaperService.save(testPaperModel);
+
 		
 		/*
 		 * 生成判断题
 		 */
-		//最后一条记录Id
-		int maxId=judgementService.findMaxRecord().getId();
-		//第一条记录Id
-		int minId=judgementService.findMinRecord().getId();
-		int random,i=0;
+		
+		
+		//计算总页码-1-------->最后一页不要了
+		int pageCount = (recordCount + pageSize - 1) / pageSize-1;
+		int i=0,random,k=0;
 		List<Integer> intList=new ArrayList<>();
-		//生成minId--maxId之间的judgementCount个随机数
-		while(i<judgementCount){
-			random=minId+(int)(Math.random()*(maxId-minId));
+		//产生随机页号
+		while(i<(int)Math.ceil((double)judgementCount/(double)4)){
+			random=(int)(Math.random()*pageCount);
 			if(!intList.contains(random)){
 				intList.add(random);
 				i++;
 			}
 		}
-		//保存判断题
-		for(i=0;i<judgementCount;i++){
-			int recordId=intList.get(i);
-			Judgement judgementFind=judgementService.findById(recordId);
-			//没有找到记录
-			if(judgementFind==null){
-				//距离小的Id近
-				if((maxId-recordId)>(recordId-minId)){
-					while(judgementFind==null){
-						recordId++;
-						if(!intList.contains(recordId)){
-							judgementFind=judgementService.findById(recordId);
-							TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
-							testQuestionService.save(questionModel);
-						}
-					}
+		for(i=0;i<intList.size();i++){
+			PageBean pageBean=new QueryHelper(Judgement.class, "j")//
+				.addCondition("j.course=?", courseFind)//
+				.addCondition("j.chapter=?", chapterFind)//
+				.prepareAppPageBean(judgementService, intList.get(i), pageSize);
+			for(int j=0;j<4;j++){
+				if(k<judgementCount){
+					TestQuestion questionModel=new TestQuestion((Judgement)pageBean.getRecordList().get(j), null, testPaperModel);
+					testQuestionService.save(questionModel);
 				}
-				//距离大的Id近
 				else{
-					while(judgementFind==null){
-						recordId--;
-						//集合中没有这个记录
-						if(!intList.contains(recordId)){
-							judgementFind=judgementService.findById(recordId);
-							TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
-							testQuestionService.save(questionModel);
-						}
-					}
+					break;
 				}
-			}
-			else{
-				//保存
-				TestQuestion questionModel=new TestQuestion(judgementFind, null, testPaperModel);
-				testQuestionService.save(questionModel);
+				k++;
 			}
 		}
 		/**
 		 * 生成单选题
 		 */
-		/*
-		 * 生成判断题
-		 */
-		//最后一条记录Id
-		int maxSingleId=singleChoiceService.findMaxRecord().getId();
-		//第一条记录Id
-		int minSingleId=singleChoiceService.findMinRecord().getId();
-		int j=0;
-		List<Integer> singleList=new ArrayList<>();
-		//生成minId--maxId之间的judgementCount个随机数
-		while(j<judgementCount){
-			random=maxSingleId+(int)(Math.random()*(minSingleId-maxSingleId));
-			if(!singleList.contains(random)){
-				singleList.add(random);
+
+		//计算总页码-1-------->最后一页不要了
+		int pageSingleCount = (recordSingleCount + pageSize - 1) / pageSize-1;
+		int j=0,randomSingle,m=0;
+		List<Integer> intSingleList=new ArrayList<>();
+		//产生随机页号
+		while(j<(int)Math.ceil((double)singleChoiceCount/(double)4)){
+			randomSingle=(int)(Math.random()*pageSingleCount);
+			if(!intSingleList.contains(randomSingle)){
+				intSingleList.add(randomSingle);
 				j++;
 			}
 		}
-		//保存判断题
-		for(j=0;j<singleChoiceCount;j++){
-			int recordId=intList.get(j);
-			SingleChoice singleFind=singleChoiceService.findById(recordId);
-			//没有找到记录
-			if(singleFind==null){
-				//距离小的Id近
-				if((maxSingleId-recordId)>(recordId-minSingleId)){
-					while(singleFind==null){
-						recordId++;
-						if(!intList.contains(recordId)){
-							singleFind=singleChoiceService.findById(recordId);
-							TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
-							testQuestionService.save(questionModel);
-						}
-					}
+		for(j=0;j<intList.size();j++){
+			PageBean pageBean=new QueryHelper(SingleChoice.class, "s")//
+				.addCondition("s.course=?", courseFind)//
+				.addCondition("s.chapter=?", chapterFind)//
+				.prepareAppPageBean(singleChoiceService, intList.get(j), pageSize);
+			for(int n=0;n<4;n++){
+				if(m<judgementCount){
+					TestQuestion questionModel=new TestQuestion(null,(SingleChoice)pageBean.getRecordList().get(j), testPaperModel);
+					testQuestionService.save(questionModel);
 				}
-				//距离大的Id近
 				else{
-					while(singleFind==null){
-						recordId--;
-						//集合中没有这个记录
-						if(!intList.contains(recordId)){
-							singleFind=singleChoiceService.findById(recordId);
-							TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
-							testQuestionService.save(questionModel);
-						}
-					}
+					break;
 				}
-			}
-			else{
-				//保存
-				TestQuestion questionModel=new TestQuestion(null, singleFind, testPaperModel);
-				testQuestionService.save(questionModel);
+				m++;
 			}
 		}
 		//准备数据--courseId
@@ -520,6 +516,8 @@ public class TeacherAction extends BaseAction<Teacher>{
 		testPaperService.delete(testPaperId);
 		//携带courseId
 		ActionContext.getContext().put("courseId", courseId);
+		//携带doInfo
+		ActionContext.getContext().put("doInfo", doInfo);
 		return "toMyCourseUI";
 	}
 	/** 查看习题 */
@@ -599,6 +597,59 @@ public class TeacherAction extends BaseAction<Teacher>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//老师个人信息--根据你工号
+	public String appTeaInfo() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Teacher teaFind=teacherService.findByTeacherNum(model.getTeaNum());
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			ClassPropertyFilter.TeacherFilter(map, teaFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//修改个人信息
+	public String appTeaModifyInfo() throws Exception{
+		Map<String, String> map=new HashMap<>();
+		//取出源对象
+		Teacher teaFind=teacherService.findByTeacherNum(model.getTeaNum());
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			teaFind.setQqNum(model.getQqNum());
+			teaFind.setSex(model.getSex());
+			teaFind.setTelphone(model.getTelphone());
+			//更新
+			teacherService.update(teaFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//老师授课班级
+	public String appTeachClass() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		List<ClassSelectCourse> classCourseList=classSelectCourseService.findByTeacherNum(model.getTeaNum());
+		if(classCourseList.size()<1){
+			map.put("name", "noClass");
+		}
+		else{
+			List<Class_> classList=new ArrayList<>();
+			for(int i=0;i<classCourseList.size();i++){
+				classList.add(classCourseList.get(i).getClass_());
+			}
+			ClassPropertyFilter.ListClassFilter(map, classList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	
 //==============================	
 	public Integer getDepartmentId() {
 		return departmentId;

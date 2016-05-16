@@ -40,12 +40,13 @@ public class Judgement {
 	/**
 	 * 构造函数
 	 */
-	public Judgement(String teacherNum, Course course, String knowledgeName,
+	public Judgement(String teacherNum, Course course,Chapter chapter, String knowledgeName,
 			String question, String answer, Integer difExponent,
 			Timestamp addTime, Integer usedCount) {
 		super();
 		this.teacherNum = teacherNum;
 		this.course = course;
+		this.chapter=chapter;
 		this.knowledgeName = knowledgeName;
 		this.question = question;
 		this.answer = answer;

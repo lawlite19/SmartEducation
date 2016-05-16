@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -421,7 +423,47 @@ public class StudentAction extends BaseAction<Student> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-	
+	//根据学号返回学生信息
+	public String appStuInfo() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			ClassPropertyFilter.StudentFilter(map, stuFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	//修改个人信息
+	public String appStuModifyInfo() throws Exception{
+		Map<String, String> map=new HashMap<>();
+		//取出源对象
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			stuFind.setQqNum(model.getQqNum());
+			stuFind.setSex(model.getSex());
+			stuFind.setTelphone(model.getTelphone());
+			//更新
+			studentService.update(stuFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//学生班级
+	public String appStuClass() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+//		Student
+		
+		return null;
+	}
 	
 //=============================	
 	public Integer getDepartmentId() {

@@ -1,5 +1,6 @@
 package com.hhit.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import com.hhit.base.BaseAction;
 import com.hhit.entity.DataDict;
 import com.hhit.entity.DataType;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -114,7 +116,26 @@ public class DataDictAction extends BaseAction<DataDict> {
 		}
 		return null;
 	}
+
 	
+//app
+//===========================
+	//学期----数据字典对应编号002
+	public String appListTerm() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		DataType dataTypeFind=dataTypeService.findByNum("002");
+		if(dataTypeFind.getDataDicts().size()<1){
+			map.put("name", "noTerm");
+		}
+		else{
+			List<DataDict> dataDictList=new ArrayList<>(dataTypeFind.getDataDicts());
+			ClassPropertyFilter.ListDataDictFilter(map, dataDictList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 
 	public Integer getDataTypeId() {
 		return dataTypeId;

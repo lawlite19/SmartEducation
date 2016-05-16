@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hhit.base.DaoSupportImpl;
+import com.hhit.entity.Chapter;
+import com.hhit.entity.Course;
 import com.hhit.entity.SingleChoice;
 import com.hhit.service.ISingleChoiceService;
 
@@ -24,6 +26,14 @@ public class SingleChoiceServiceImpl extends DaoSupportImpl<SingleChoice> implem
 		return (SingleChoice) getSession().createQuery("FROM SingleChoice")//
 				.setFirstResult(0)//
 				.setMaxResults(1)//
+				.uniqueResult();
+	}
+
+	@Override
+	public Long findByCourseAndChapter(Course courseFind, Chapter chapterFind) {
+		return (Long) getSession().createQuery("SELECT COUNT(*) FROM SingleChoice WHERE course=? AND chapter=?")//
+				.setParameter(0, courseFind)//
+				.setParameter(1, chapterFind)//
 				.uniqueResult();
 	}
 

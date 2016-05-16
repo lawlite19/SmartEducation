@@ -9,6 +9,7 @@ import com.hhit.base.IDaoSupport;
 public interface IChapterService extends IDaoSupport<Chapter>{
 
 	//根据课程查找章节
-	List<Chapter> findByCourse(Course courseFind);
-
+	List<Chapter> findByCourse(Course courseFind);	
+	//根据章节模糊查找
+	Chapter findByCourseAndLikeChapterName(Course courseFind,String string);
 }

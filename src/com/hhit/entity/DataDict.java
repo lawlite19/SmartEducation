@@ -20,6 +20,7 @@ public class DataDict implements java.io.Serializable{
 	private String dictNum;
 	private String dictName;
 	private String description;
+	
 	private DataType dataType;
 	
 	/**

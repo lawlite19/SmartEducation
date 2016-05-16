@@ -6,6 +6,9 @@ import java.util.Map;
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.CourseDiscuss;
+import com.hhit.entity.CourseScore;
+import com.hhit.entity.DataDict;
 import com.hhit.entity.Department;
 import com.hhit.entity.Role;
 import com.hhit.entity.SpiderChapter;
@@ -13,7 +16,9 @@ import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
+import com.hhit.entity.StuCourseScore;
 import com.hhit.entity.Student;
+import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
 
 public class ClassPropertyFilter {
@@ -43,6 +48,11 @@ public class ClassPropertyFilter {
 	public static void SpiderCourseInfoFilter(Map<String,Object> map,SpiderCourseInfo spiderCourseInfo){
 		String[] spiderCourseInfoProperty={"spiderCourse"};
 		map.put("spiderCourseInfo", JsonUtil.jsonFilter(spiderCourseInfo, spiderCourseInfoProperty));
+	}
+	//爬取课程评分过滤
+	public static void SpiderCourseScoreFilter(Map<String,Object> map,CourseScore spiderCourseScore){
+		String[] spiderCourseScoreProperty={"spiderCourse"};
+		map.put("courseScore", JsonUtil.jsonFilter(spiderCourseScore, spiderCourseScoreProperty));
 	}
 	
 	
@@ -88,4 +98,25 @@ public class ClassPropertyFilter {
 		String[] spiderDocumentProperty={"spiderCourse"};
 		map.put("spiderDocuments", JsonUtil.jsonListFilter(spiderDocumentList, spiderDocumentProperty));
 	}
+	//教学进程list过滤
+	public static void ListTeachPorcessFilter(Map<String,Object> map,List<TeachProcess> teachProcessList){
+		String[] teachProcessProperty={"course","teacher","children","dataType"};
+		map.put("teachProcesses", JsonUtil.jsonListFilter(teachProcessList, teachProcessProperty));
+	}
+	//爬取课程讨论list过滤
+	public static void ListSpiderCourseDiscussFilter(Map<String,Object> map,List<CourseDiscuss> courseDiscussList){
+		String[] courseDiscussProperty={"spiderCourse"};
+		map.put("courseDiscusses", JsonUtil.jsonListFilter(courseDiscussList, courseDiscussProperty));
+	}
+	//数据字典list过滤
+	public static void ListDataDictFilter(Map<String,Object> map,List<DataDict> dataDictList){
+		String[] dataDictProperty={"dataType"};
+		map.put("dataDicts", JsonUtil.jsonListFilter(dataDictList, dataDictProperty));
+	}
+	//学生成绩单list过滤
+	public static void ListStuCourseScoreFilter(Map<String,Object> map,List<StuCourseScore> stuCourseScoreList){
+		String[] stuCourseScoreProperty={"dataDict","departments","teachers"};
+		map.put("stuCourseScores", JsonUtil.jsonListFilter(stuCourseScoreList, stuCourseScoreProperty));
+	}
+	
 }

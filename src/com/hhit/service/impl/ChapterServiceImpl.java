@@ -22,4 +22,12 @@ public class ChapterServiceImpl extends DaoSupportImpl<Chapter> implements IChap
 		.list();
 	}
 
+	@Override
+	public Chapter findByCourseAndLikeChapterName(Course courseFind,String string) {
+		return (Chapter) getSession().createQuery("FROM Chapter WHERE course=? AND chapterName LIKE ?")//
+				.setParameter(0, courseFind)//
+				.setParameter(1, '%'+string+'%')//
+				.uniqueResult();
+	}
+
 }

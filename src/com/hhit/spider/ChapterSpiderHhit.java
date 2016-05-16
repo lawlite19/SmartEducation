@@ -95,7 +95,7 @@ public class ChapterSpiderHhit implements PageProcessor{
 					if(chapterNumList.get(j).startsWith(""+(i+1)+".")){
 						//保存二级标题
 						Chapter model = new Chapter(chapterNumList.get(j)
-								.toString(), chapterNameList.get(j).toString(),chapterUrlList.get(i).toString(),
+								.toString(), chapterNameList.get(j).toString(),chapterUrlList.get(j).toString(),
 								 courseName,null,modelOne);
 						chapterService.save(model);
 					}

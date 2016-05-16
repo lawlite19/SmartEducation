@@ -116,5 +116,13 @@ public class QueryHelper {
 		PageBean pageBean = service.getPageBean(pageNum, pageSize, this);
 		ActionContext.getContext().getValueStack().push(pageBean);
 	}
+	/**
+	 * 用于app端的分页查询
+	 * @param service   需要的service
+	 */
+	public PageBean prepareAppPageBean(IDaoSupport<?> service, int pageNum,int pageSize) {
+		PageBean pageBean = service.getPageBean(pageNum, pageSize, this);
+		return pageBean;
+	}
 
 }

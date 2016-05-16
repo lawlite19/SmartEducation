@@ -31,5 +31,4 @@ public class CountOnlineListener implements HttpSessionListener {
 		context.setAttribute("count", count);
 		System.out.println("当前用户人数：" + count);
 	}
-
 }

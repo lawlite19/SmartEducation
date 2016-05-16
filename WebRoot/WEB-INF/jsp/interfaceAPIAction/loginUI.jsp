@@ -97,8 +97,12 @@
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
 							student：&nbsp;<span class="span_apiNormal">学生信息</span>
+							&nbsp;&nbsp;<span class="span_apiProperty">photo</span>
+							<span class="span_apiNormal">-->只是照片的名字，真正的路径为：</span>
+							<span class="span_apiSuccess">域名/studentImgs/照片名称</span>
 						</span>
 						</span>
+						<br/>
 						</span>
 					</div>
 					<!-- 测试 -->

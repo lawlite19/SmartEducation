@@ -65,7 +65,7 @@
 			<result name="toListCourseClass" type="redirectAction">teacher_listCourseClass?courseId=${courseId}</result>
 			<result name="myCourseUI">/WEB-INF/jsp/teacherAction/myCourseUI.jsp</result>
 			<result name="autoMakeQuestion" type="redirectAction">teacher_myCourseUI?courseId=${courseId}&amp;doInfo=${doInfo}</result>
-			<result name="toMyCourseUI" type="redirectAction">teacher_myCourseUI?courseId=${courseId}</result>
+			<result name="toMyCourseUI" type="redirectAction">teacher_myCourseUI?courseId=${courseId}&amp;doInfo=${doInfo}</result>
 			<result name="seeTestPaperUI">/WEB-INF/jsp/teacherAction/seeTestPaperUI.jsp</result>
 			<result name="toSeeTestPaperUI" type="redirectAction">teacher_seeTestPaperUI?testPaperId=${testPaperId}</result>
 		
@@ -229,7 +229,24 @@
 			<result name="teaModifyPasswordUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyPasswordUI.jsp</result>
 			<result name="spiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseScoreUI.jsp</result>
 			<result name="spiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseDiscussUI.jsp</result>
-		
+			<result name="teachProcessUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teachProcessUI.jsp</result>
+			<result name="courseChapterUI">/WEB-INF/jsp/interfaceAPIAction/courseChapterUI.jsp</result>
+			<result name="stuQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuQuestionUI.jsp</result>
+			<result name="teaAnswerUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaAnswerUI.jsp</result>
+			<result name="listStuQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/listStuQuestionUI.jsp</result>
+			<result name="listTeaQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/listTeaQuestionUI.jsp</result>
+			<result name="stuQuestionDetailsUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuQuestionDetailsUI.jsp</result>
+			<result name="stuInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuInfoUI.jsp</result>
+			<result name="teaInfoUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoUI.jsp</result>
+			<result name="stuModifyInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuModifyInfoUI.jsp</result>
+			<result name="teaModifyInfoUI">/WEB-INF/jsp/interfaceAPIAction/teaModifyInfoUI.jsp</result>
+			<result name="stuTermCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuTermCourseScoreUI.jsp</result>
+			<result name="termUI">/WEB-INF/jsp/interfaceAPIAction/assessment/termUI.jsp</result>
+			<result name="stuYearCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuYearCourseScoreUI.jsp</result>
+			<result name="teaTeachClassUI">/WEB-INF/jsp/interfaceAPIAction/teaTeachClassUI.jsp</result>
+			<result name="autoMakeQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/autoMakeQuestionUI.jsp</result>
+			<result name="stuClassInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuClassInfoUI.jsp</result>
+			
 		</action>
 	</package>
 
@@ -255,6 +272,27 @@
 		</action>
 		<!-- 课程讨论 -->
 		<action name="courseDiscuss_*" class="courseDiscussAction" method="{1}">
+		</action>
+		<!-- 教学进程 -->
+		<action name="teachProcess_*" class="teachProcessAction" method="{1}">
+		</action>
+		<!-- 章节 -->
+		<action name="chapter_*" class="chapterAction" method="{1}">
+		</action>
+		<!-- 学生提问 -->
+		<action name="stuQuestion_*" class="stuQuestionAction" method="{1}">
+		</action>
+		<!-- 老师回答 -->
+		<action name="teaAnswer_*" class="teaAnswerAction" method="{1}">
+		</action>
+		<!-- 学生课程成绩 -->
+		<action name="stuCourseScore_*" class="stuCourseScoreAction" method="{1}">
+		</action>
+		<!-- 数据字典==学期 -->
+		<action name="dataDict_*" class="dataDictAction" method="{1}">
+		</action>
+		<!-- 测试卷 -->
+		<action name="testPaper_*" class="testPaperAction" method="{1}">
 		</action>
 	</package>
 </struts>    

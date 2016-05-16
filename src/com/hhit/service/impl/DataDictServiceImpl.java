@@ -1,5 +1,7 @@
 package com.hhit.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,14 @@ public class DataDictServiceImpl extends DaoSupportImpl<DataDict> implements IDa
 		return (DataDict) getSession().createQuery("FROM DataDict WHERE dictNum=?")//
 				.setParameter(0, dictNum)//
 				.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DataDict> findByYear(String year) {
+		return getSession().createQuery("FROM DataDict WHERE dictName LIKE ?")//
+				.setParameter(0, '%'+year+'%')//
+				.list();
 	}
 
 }

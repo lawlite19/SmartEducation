@@ -193,7 +193,7 @@ public class JudgementAction extends BaseAction<Judgement>{
 			}
 			//数据导入操作
 			//需要解析的Excel文件
-			String str[]=new String[5];
+			String str[]=new String[6];
 			Integer difficult = null;
 			File file = new File(tarDir+questionBankFileName);
 			try {
@@ -210,16 +210,17 @@ public class JudgementAction extends BaseAction<Judgement>{
 					XSSFRow row = sheet.getRow(i);
 					//获取当前行最后单元格列号
 					//int lastCellNum = row.getLastCellNum();
-					for (int j = 0; j < 6; j++) {
+					for (int j = 0; j < 7; j++) {
 						XSSFCell cell = row.getCell(j);
-						if(j==5)
+						if(j==6)
 							difficult=(int) cell.getNumericCellValue();
 						else
 							str[j] = cell.getStringCellValue();
 					}
 					Course courseFind=courseService.findByCourseName(str[1]);
+					Chapter chapter=chapterService.findByCourseAndLikeChapterName(courseFind, str[2]);
 					//构造函数
-					Judgement judgeModel=new Judgement(str[0], courseFind, str[2], str[3], str[4], difficult, new Timestamp(new Date().getTime()), 0);
+					Judgement judgeModel=new Judgement(str[0], courseFind,chapter, str[3], str[4],str[5], difficult, new Timestamp(new Date().getTime()), 0);
 					//保存数据库
 					judgementService.save(judgeModel);
 				}

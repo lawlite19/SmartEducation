@@ -77,7 +77,7 @@
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />
 					</s:a>
 					|
-					<s:a action="judgement_deleteJudgement?judgementId=%{id}&testPaperId=%{testPaperId}" onclick="return window.confirm('您确定要删除吗？')">
+					<s:a action="teacher_deleteJudgement?judgementId=%{id}&testPaperId=%{testPaperId}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
 					</td>

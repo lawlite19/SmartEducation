@@ -41,12 +41,13 @@ public class SingleChoice {
 	/**
 	 * 构造函数
 	 */
-	public SingleChoice(String teacherNum, Course course, String knowledgeName,
+	public SingleChoice(String teacherNum, Course course,Chapter chapter, String knowledgeName,
 			String question, String answer, String answerA, String answerB,
 			String answerC, String answerD, Integer difExponent,Timestamp addTime,Integer usedCount) {
 		super();
 		this.teacherNum = teacherNum;
 		this.course = course;
+		this.chapter=chapter;
 		this.knowledgeName = knowledgeName;
 		this.question = question;
 		this.answer = answer;
