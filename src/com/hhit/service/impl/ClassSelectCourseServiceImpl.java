@@ -40,4 +40,12 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 				.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ClassSelectCourse> findByTeacherNum(String teaNum) {
+		return getSession().createQuery("FROM ClassSelectCourse WHERE teacherNum=?")//
+				.setParameter(0, teaNum)//
+				.list();
+	}
+
 }

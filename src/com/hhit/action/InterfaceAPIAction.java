@@ -37,7 +37,7 @@ public class InterfaceAPIAction {
 	public String stuInfoUI() throws Exception{
 		return "stuInfoUI";
 	}
-	/** 老师信息--根据工号号 */
+	/** 老师信息--根据工号 */
 	public String teaInfoUI() throws Exception{
 		return "teaInfoUI";
 	}
@@ -48,6 +48,10 @@ public class InterfaceAPIAction {
 	/** 老师修改个人信息 */
 	public String teaModifyInfoUI() throws Exception{
 		return "teaModifyInfoUI";
+	}
+	/** 老师授课的班级 */
+	public String teaTeachClassUI() throws Exception{
+		return "teaTeachClassUI";
 	}
 	
 
@@ -80,6 +84,10 @@ public class InterfaceAPIAction {
 	/** 学生问题详情 */
 	public String stuQuestionDetailsUI() throws Exception{
 		return "stuQuestionDetailsUI";
+	}
+	/** 学生问题详情 */
+	public String autoMakeQuestionUI() throws Exception{
+		return "autoMakeQuestionUI";
 	}
 //电子书包接口
 //=======================================
@@ -115,4 +123,20 @@ public class InterfaceAPIAction {
 	public String spiderCourseDiscussUI() throws Exception{
 		return "spiderCourseDiscussUI";
 	}
+
+//教学质量接口	
+//==================================	
+	/** 学生课程分数 */
+	public String termUI() throws Exception{
+		return "termUI";
+	}
+	/** 学生课程分数--学期 */
+	public String stuTermCourseScoreUI() throws Exception{
+		return "stuTermCourseScoreUI";
+	}
+	/** 学生课程分数--学年 */
+	public String stuYearCourseScoreUI() throws Exception{
+		return "stuYearCourseScoreUI";
+	}
+	
 }

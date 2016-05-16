@@ -374,8 +374,29 @@ public class TeacherAction extends BaseAction<Teacher>{
 		return "myCourseUI";
 	}
 	
+	/**题库不足的准备信息*/
+	public void publicCode(){
+		Teacher teaFind=getCurrentUser().getTeacher();
+	    //准备数据--老师对应课程
+		List<Course> couseList=new ArrayList<>(teaFind.getCourses());
+		ActionContext.getContext().put("couseList", couseList);
+		//准备章节空集合
+		List<Chapter> chapterList=Collections.EMPTY_LIST;
+		ActionContext.getContext().put("chapterList", chapterList);
+		//准备班级空集合
+		List<Class_> classList=Collections.EMPTY_LIST;
+		ActionContext.getContext().put("classList", classList);
+		//准备数据--所有测试
+		new QueryHelper(TestPaper.class, "t")//
+		.addCondition("t.teaNum=?", getCurrentUser().getTeacher().getTeaNum())//
+		.preparePageBean(testPaperService, pageNum, pageSize);
+		addFieldError("errorInfo", "题库此章节题目不足！");
+	}
+	
 	/** 自动生成测试提库 */
 	public String autoMakeQuestion() throws Exception{
+		
+		
 		Teacher teaFind=getCurrentUser().getTeacher();
 		//测试题目总数
 		Integer questionCount=judgementCount+singleChoiceCount;
@@ -396,27 +417,34 @@ public class TeacherAction extends BaseAction<Teacher>{
 		}
 		Course courseFind=courseService.findById(courseId);
 		Chapter chapterFind=chapterService.findById(chapterId);
+		//设置页大小为4
+		pageSize=4;
+		/***
+		 * 判断题目数量是否足够
+		 */
+		//得到记录总数
+		int recordCount=judgementService.findByCourseAndChapter(courseFind,chapterFind).intValue();
+		if(recordCount<judgementCount-pageSize){//因为我忽略掉了最后一页
+			publicCode();
+			return "myCourseUI";
+		}
+		//得到记录总数
+		int recordSingleCount=singleChoiceService.findByCourseAndChapter(courseFind,chapterFind).intValue();
+		if(recordSingleCount<singleChoiceCount-pageSize){//因为我忽略掉了最后一页
+			publicCode();
+			return "myCourseUI";
+		}
 		//保存测试卷
 		TestPaper testPaperModel=new TestPaper(testType, questionCount, 0, endTime, teaFind.getTeaNum(), classService.findById(classId),
 				courseFind, chapterFind);
 		testPaperService.save(testPaperModel);
+
 		
 		/*
 		 * 生成判断题
 		 */
 		
-		//得到记录总数
-		int recordCount=judgementService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-		if(recordCount<judgementCount){
-			//准备数据--courseId
-			ActionContext.getContext().put("courseId", courseId);
-			//准备数据--doInfo
-			ActionContext.getContext().put("doInfo", doInfo);
-			addFieldError("errorInfo", "题库题目不足！");
-			return "autoMakeQuestion";
-		}
-		//设置页大小为4
-		pageSize=4;
+		
 		//计算总页码-1-------->最后一页不要了
 		int pageCount = (recordCount + pageSize - 1) / pageSize-1;
 		int i=0,random,k=0;
@@ -448,16 +476,7 @@ public class TeacherAction extends BaseAction<Teacher>{
 		/**
 		 * 生成单选题
 		 */
-		//得到记录总数
-		int recordSingleCount=singleChoiceService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-		if(recordSingleCount<singleChoiceCount){
-			//准备数据--courseId
-			ActionContext.getContext().put("courseId", courseId);
-			//准备数据--doInfo
-			ActionContext.getContext().put("doInfo", doInfo);
-			addFieldError("errorInfo", "题库题目不足！");
-			return "autoMakeQuestion";
-		}
+
 		//计算总页码-1-------->最后一页不要了
 		int pageSingleCount = (recordSingleCount + pageSize - 1) / pageSize-1;
 		int j=0,randomSingle,m=0;
@@ -497,6 +516,8 @@ public class TeacherAction extends BaseAction<Teacher>{
 		testPaperService.delete(testPaperId);
 		//携带courseId
 		ActionContext.getContext().put("courseId", courseId);
+		//携带doInfo
+		ActionContext.getContext().put("doInfo", doInfo);
 		return "toMyCourseUI";
 	}
 	/** 查看习题 */
@@ -609,6 +630,26 @@ public class TeacherAction extends BaseAction<Teacher>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//老师授课班级
+	public String appTeachClass() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		List<ClassSelectCourse> classCourseList=classSelectCourseService.findByTeacherNum(model.getTeaNum());
+		if(classCourseList.size()<1){
+			map.put("name", "noClass");
+		}
+		else{
+			List<Class_> classList=new ArrayList<>();
+			for(int i=0;i<classCourseList.size();i++){
+				classList.add(classCourseList.get(i).getClass_());
+			}
+			ClassPropertyFilter.ListClassFilter(map, classList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	
 //==============================	
 	public Integer getDepartmentId() {
 		return departmentId;

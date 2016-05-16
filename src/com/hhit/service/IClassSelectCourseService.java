@@ -17,5 +17,7 @@ public interface IClassSelectCourseService extends IDaoSupport<ClassSelectCourse
 	List<ClassSelectCourse> findByClass(Class_ classFind);
 	//根据班级和课程
 	ClassSelectCourse findByClassAndCourse(Class_ classFind, Course courseFind);
+	//查找老师授课的班级
+	List<ClassSelectCourse> findByTeacherNum(String teaNum);
 
 }

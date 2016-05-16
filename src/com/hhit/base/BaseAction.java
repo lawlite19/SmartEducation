@@ -27,6 +27,7 @@ import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
+import com.hhit.service.IStuCourseScoreService;
 import com.hhit.service.IStuQuestionService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
@@ -126,6 +127,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IStuQuestionService stuQuestionService;//学生问题
 	@Resource
 	protected ITeaAnswerService teaAnswerService;//老师回答
+	@Resource
+	protected IStuCourseScoreService stuCourseScoreService;//学生课程成绩
 	
 	//--------------
 	@Resource

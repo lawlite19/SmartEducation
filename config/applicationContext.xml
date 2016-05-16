@@ -114,6 +114,10 @@
 			<value>com/hhit/entity/CourseScore.hbm.xml</value>
 			<!-- 题目记录 -->
 			<value>com/hhit/entity/QuestionErrorRecord.hbm.xml</value>
+			<!-- 分数记录 -->
+			<value>com/hhit/entity/StuCourseScore.hbm.xml</value>
+			<value>com/hhit/entity/StuScoreRecord.hbm.xml</value>
+			
 			</list>
 		</property>
 	</bean>

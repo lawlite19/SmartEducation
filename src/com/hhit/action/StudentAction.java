@@ -457,7 +457,13 @@ public class StudentAction extends BaseAction<Student> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-	
+	//学生班级
+	public String appStuClass() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+//		Student
+		
+		return null;
+	}
 	
 //=============================	
 	public Integer getDepartmentId() {

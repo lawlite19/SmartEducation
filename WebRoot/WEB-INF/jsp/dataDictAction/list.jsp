@@ -39,25 +39,24 @@
 	});
 
 </script>
-<!-- 查询输入框检查 -->
-<script type="text/javascript">
-    function MM_Empty(ctrl1Id, ctrl2Id) {
-        var ctrl1 = document.getElementById(ctrl1Id);
-        var ctrl2 = document.getElementById(ctrl2Id);
-        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
+	<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
         	//正上方
-        	layer.msg('请输入查询条件！', {
+        	layer.msg('请选择'+msg, {
         	  offset: 0,
         	  shift: 6
         	});
-            ctrl1.focus();
+            ctrl.focus();
             return false;
         }
-        layer.load();
         return true;
     }
 	function Check() {
-		return MM_Empty('select_dept', 'txt_inputTerm');
+        if (!MM_Empty('dataTypeId', '数据字典类型')) return false;
+        layer.load();
     }
 	</script>
 </head>
@@ -100,7 +99,7 @@
 <table align="center" cellspacing="3" cellpadding="5">
 	<tr>
 		<td class="bbtn btn-primary" align="center">
-			<s:a action="dataDict_addUI" style="color:white;text-decoration: none;">添加学生</s:a>
+			<s:a action="dataDict_addUI" style="color:white;text-decoration: none;">添加数据字典</s:a>
 		</td>
 	</tr>
 </table>
@@ -109,7 +108,7 @@
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">用户账号管理</span>
+                        <span class="tt">数据字典管理</span>
                     </td>
                     <td class="tr"></td>
                 </tr>

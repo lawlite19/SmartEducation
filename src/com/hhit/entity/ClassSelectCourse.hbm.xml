@@ -21,7 +21,7 @@
 			</column>
 		</property>
 		<!--class_属性，本类与Class_的一对一  -->
-		<many-to-one name="class_" class="Class_" column="Class_Id">
+		<many-to-one name="class_" class="Class_" column="Class_Id" lazy="false">
 		</many-to-one>
 		<!--course属性，本类与Course的一对一  -->
 		<many-to-one name="course" class="Course" column="Course_Id" lazy="false">
