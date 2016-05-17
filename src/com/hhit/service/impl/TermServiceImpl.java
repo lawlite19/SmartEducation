@@ -25,7 +25,7 @@ public class TermServiceImpl extends DaoSupportImpl<ATerm> implements
 
 	@Override
 	public int findMaxId() {
-        String hql="select max(Id) from ATerm t";
+        String hql="select max(t.id) from ATerm t";
 		return (int)getSession().createQuery(hql).uniqueResult();
 	}
 

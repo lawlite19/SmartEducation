@@ -1,14 +1,31 @@
 package com.hhit.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.JsonArray;
 import com.hhit.base.BaseAction;
+import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
+import com.hhit.entity.Department;
 import com.hhit.entity.Role;
+import com.hhit.entity.Student;
+import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
+import com.hhit.util.ClassPropertyFilter;
+import com.hhit.util.JsonUtil;
 import com.opensymphony.xwork2.ActionContext;
 
 //注入
@@ -22,6 +39,9 @@ public class UserAction extends BaseAction<User>{
 
 	private String oldPassword;
 	private String newPassword;
+	
+	//json
+	private String result;
 
 	/** 跳转到登录界面 */
 	public String loginUI() throws Exception {
@@ -30,7 +50,6 @@ public class UserAction extends BaseAction<User>{
 
 	/** 登录验证，成功跳转主页，否则重新登录 */
 	//说明:User表中只有两种类型，学生和老师，因为负责人、管理员也是教师
-	@SuppressWarnings("unchecked")
 	public String login() throws Exception {
 		// String s1=user.getUserNum().trim();
 		// String s2=user.getPassword().trim();
@@ -60,7 +79,8 @@ public class UserAction extends BaseAction<User>{
 				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),"老师");
 				if(null!=userFind){
 					//查找对应的角色
-					List<Role> rolesList=(List<Role>) userFind.getTeacher().getRoles();
+					//Set转为List
+					List<Role> rolesList=new ArrayList<>(userFind.getTeacher().getRoles());
 					for (Role role : rolesList) {
 						if(role.getRoleName().equals(model.getUserType())){
 							ActionContext.getContext().getSession().put("user", userFind);
@@ -112,6 +132,69 @@ public class UserAction extends BaseAction<User>{
 		} else
 			addFieldError("information", "旧密码错误");
 		return "modifyPasswordUI";
+	}
+	
+//手机端 json返回
+//===========================
+	
+	/**
+	 * app登录
+	 */
+	public String appLogin() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		if (model.getUserType().equals("学生")) {
+			User userFind = userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
+			if (null != userFind) {
+				//ActionContext.getContext().getSession().put("user", userFind);
+				//学生
+				Student stuFind=userFind.getStudent();
+				ClassPropertyFilter.StudentFilter(map, stuFind);
+				//部门
+				Department deptFind=stuFind.getDepartment();
+				ClassPropertyFilter.DepartmentFilter(map, deptFind);
+				//班级
+				Class_ classFind=stuFind.getClass_();
+				ClassPropertyFilter.ClassFilter(map, classFind);
+				map.put("name", "success");
+				JsonUtil.toJson(ServletActionContext.getResponse(), map);
+			} else {
+				result="账号或密码错误！";
+				map.put("name", result);
+				JsonUtil.toJson(ServletActionContext.getResponse(), map);
+			}
+		}
+		else{
+			//查找用户，userType属性为--》老师
+			User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
+			if(null!=userFind){
+				//查找对应的角色
+				List<Role> rolesList=new ArrayList<Role>(userFind.getTeacher().getRoles());
+				for (Role role : rolesList) {
+					if(role.getRoleName().equals(model.getUserType())){
+						//ActionContext.getContext().getSession().put("user", userFind);
+						//老师
+						Teacher teaFind=userFind.getTeacher();
+						ClassPropertyFilter.TeacherFilter(map, teaFind);
+						//部门
+						Department deptFind=teaFind.getDepartment();
+						ClassPropertyFilter.DepartmentFilter(map, deptFind);
+						//角色
+						ClassPropertyFilter.ListRoleFilter(map, rolesList);
+						map.put("name", "success");
+						JsonUtil.toJson(ServletActionContext.getResponse(), map);
+					}
+				}
+				result="账号或密码错误！";
+				map.put("name", result);
+				JsonUtil.toJson(ServletActionContext.getResponse(), map);
+			}
+			else{
+				result="账号或密码错误！";
+				map.put("name", result);
+				JsonUtil.toJson(ServletActionContext.getResponse(), map);
+			}
+		}
+		return null;
 	}
 
 	public String getRandomCode() {

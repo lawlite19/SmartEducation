@@ -1,10 +1,11 @@
-package com.hhit.base;
+	package com.hhit.base;
 
 import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
 
 import com.hhit.entity.User;
+import com.hhit.service.IClassSelectCourseService;
 import com.hhit.service.IClassService;
 import com.hhit.service.ICourseService;
 import com.hhit.service.IDataDictService;
@@ -12,6 +13,7 @@ import com.hhit.service.IDataTypeService;
 import com.hhit.service.IDepartmentService;
 import com.hhit.service.IFavoriteService;
 import com.hhit.service.ILogFileService;
+import com.hhit.service.IPeerAccessService;
 import com.hhit.service.IPeerAccountService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
@@ -24,6 +26,7 @@ import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
 import com.hhit.service.IStuAccountService;
+import com.hhit.service.IStudentAccessService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
@@ -96,7 +99,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected IVisitCourseRecordService visitCourseRecordService;//学生访问次数
 	
-	
+	@Resource
+	protected IClassSelectCourseService classSelectCourseService;//班级选课
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息
@@ -134,6 +138,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected ITeachAccountService teachAccountService;//教学模式指标信息
 	
+	@Resource
+	protected IPeerAccessService peerAccessService;//同行评价
+	@Resource
+	protected IStudentAccessService stuAccessService;//同行评价
 	/**
 	 * 获取当前登录的用户
 	 */

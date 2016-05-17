@@ -52,22 +52,24 @@ public class User implements java.io.Serializable{
 		if (isAdmin()) {
 			return true;
 		}
-
-		// 学生要判断是否含有这个权限
-		if(student.getRole()!=null){
-			for (Privilege priv : student.getRole().getPrivileges()) {
-				if (priv.getPrivilegeName().equals(name)) {
-					return true;
+		if(student!=null){
+			// 学生要判断是否含有这个权限
+			if(student.getRole()!=null){
+				for (Privilege priv : student.getRole().getPrivileges()) {
+					if (priv.getPrivilegeName().equals(name)) {
+						return true;
+					}
 				}
 			}
 		}
-
-		// 教师要判断是否含有这个权限
-		if(teacher.getRoles()!=null){
-			for (Role role : teacher.getRoles()) {
-				for (Privilege priv : role.getPrivileges()) {
-					if (priv.getPrivilegeName().equals(name)) {
-						return true;
+		if(teacher!=null){
+			// 教师要判断是否含有这个权限
+			if(teacher.getRoles()!=null){
+				for (Role role : teacher.getRoles()) {
+					for (Privilege priv : role.getPrivileges()) {
+						if (priv.getPrivilegeName().equals(name)) {
+							return true;
+						}
 					}
 				}
 			}
@@ -103,20 +105,25 @@ public class User implements java.io.Serializable{
 		if (!allPrivilegeUrls.contains(privUrl)) {
 			return true;
 		} else {
-			// 学生要判断是否含有这个权限
+			if(student!=null){
+				// 学生要判断是否含有这个权限
 				for (Privilege priv : student.getRole().getPrivileges()) {
 					if (privUrl.equals(priv.getUrl())) {
 						return true;
 					}
 				}
-			// 老师要判断是否含有这个权限
-			for (Role role : teacher.getRoles()) {
-				for (Privilege priv : role.getPrivileges()) {
-					if (privUrl.equals(priv.getUrl())) {
-						return true;
+			}
+			if(teacher!=null){
+				// 老师要判断是否含有这个权限
+				for (Role role : teacher.getRoles()) {
+					for (Privilege priv : role.getPrivileges()) {
+						if (privUrl.equals(priv.getUrl())) {
+							return true;
+						}
 					}
 				}
 			}
+			
 			return false;
 		}
 	}

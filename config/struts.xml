@@ -187,6 +187,18 @@
 			<action name="tatics_*" class="taticsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/taticsAction/list.jsp</result>
 		</action>
+		<!-- 同行评价 -->
+			<action name="peer_*" class="peerAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/peerAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/peerAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">peer_list</result>
+		</action>
+		<!-- 学生评价 -->
+			<action name="stuaccess_*" class="studentAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/studentAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/studentAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">stuaccess_list</result>
+		</action>
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>
