@@ -460,7 +460,21 @@ public class StudentAction extends BaseAction<Student> {
 	//学生班级
 	public String appStuClass() throws Exception{
 		Map<String, Object> map=new HashMap<>();
-//		Student
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			Class_ classFind=stuFind.getClass_();
+			if(classFind==null){
+				map.put("name", "noClass");
+			}
+			else{
+				ClassPropertyFilter.ClassFilter(map, classFind);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		
 		return null;
 	}

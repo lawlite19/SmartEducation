@@ -215,6 +215,11 @@
 			<result name="toList" type="redirectAction">classSelectCourse_list</result>
 			
     	</action>
+    	<!-- 测试卷分数记录 -->
+		<action name="stuScoreRecord_*" class="stuScoreRecordAction" method="{1}">
+			<result name="stuCourseScoreInfo">/WEB-INF/jsp/studentAction/testPaperScore.jsp</result>
+			
+		</action>
 		<!-- 接口API说明界面 -->
 		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
 			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
@@ -246,6 +251,16 @@
 			<result name="teaTeachClassUI">/WEB-INF/jsp/interfaceAPIAction/teaTeachClassUI.jsp</result>
 			<result name="autoMakeQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/autoMakeQuestionUI.jsp</result>
 			<result name="stuClassInfoUI">/WEB-INF/jsp/interfaceAPIAction/stuClassInfoUI.jsp</result>
+			<result name="getStuTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/getStuTestPaperUI.jsp</result>
+			<result name="testPaperQuestionUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/testPaperQuestionUI.jsp</result>
+			<result name="teaCourseUI">/WEB-INF/jsp/interfaceAPIAction/teaCourseUI.jsp</result>
+			<result name="teaCourseTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaCourseTestPaperUI.jsp</result>
+			<result name="stuQuestionErrorRecordUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuQuestionErrorRecordUI.jsp</result>
+			<result name="stuTestScoreUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuTestScoreUI.jsp</result>
+			<result name="checkStuAlreadyTestUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/checkStuAlreadyTestUI.jsp</result>
+			<result name="teaSeeTestPaperInfoUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaSeeTestPaperInfoUI.jsp</result>
+			<result name="stuAllCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuAllCourseScoreUI.jsp</result>
+			
 			
 		</action>
 	</package>
@@ -293,6 +308,12 @@
 		</action>
 		<!-- 测试卷 -->
 		<action name="testPaper_*" class="testPaperAction" method="{1}">
+		</action>
+		<!-- 错题记录 -->
+		<action name="questionErrorRecord_*" class="questionErrorRecordAction" method="{1}">
+		</action>
+		<!-- 测试卷分数记录 -->
+		<action name="stuScoreRecord_*" class="stuScoreRecordAction" method="{1}">
 		</action>
 	</package>
 </struts>    

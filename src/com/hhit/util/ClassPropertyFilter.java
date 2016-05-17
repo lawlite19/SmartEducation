@@ -10,16 +10,20 @@ import com.hhit.entity.CourseDiscuss;
 import com.hhit.entity.CourseScore;
 import com.hhit.entity.DataDict;
 import com.hhit.entity.Department;
+import com.hhit.entity.Judgement;
 import com.hhit.entity.Role;
+import com.hhit.entity.SingleChoice;
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.StuCourseScore;
+import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
+import com.hhit.entity.TestPaper;
 
 public class ClassPropertyFilter {
 //实体类过滤
@@ -117,6 +121,26 @@ public class ClassPropertyFilter {
 	public static void ListStuCourseScoreFilter(Map<String,Object> map,List<StuCourseScore> stuCourseScoreList){
 		String[] stuCourseScoreProperty={"dataDict","departments","teachers"};
 		map.put("stuCourseScores", JsonUtil.jsonListFilter(stuCourseScoreList, stuCourseScoreProperty));
+	}
+	//测试卷list过滤
+	public static void ListTestPaperFilter(Map<String,Object> map,List<TestPaper> testPaperList){
+		String[] testPaperProperty={"class_","course","testQuestions","parent","children"};
+		map.put("testPapers", JsonUtil.jsonListFilter(testPaperList, testPaperProperty));
+	}
+	//判断题list过滤
+	public static void ListJudgementFilter(Map<String,Object> map,List<Judgement> judgementList){
+		String[] judgementProperty={"course","chapter"};
+		map.put("judgements", JsonUtil.jsonListFilter(judgementList, judgementProperty));
+	}
+	//单选题list过滤
+	public static void ListSingleChoiceFilter(Map<String,Object> map,List<SingleChoice> singleChoiceList){
+		String[] singleChoiceProperty={"course","chapter"};
+		map.put("singleChoices", JsonUtil.jsonListFilter(singleChoiceList, singleChoiceProperty));
+	}
+	//单选题list过滤
+	public static void ListStuScoreRecordFilter(Map<String,Object> map,List<StuScoreRecord> stuScoreRecordList){
+		String[] stuScoreRecordProperty={"testPaper"};
+		map.put("stuScoreRecords", JsonUtil.jsonListFilter(stuScoreRecordList, stuScoreRecordProperty));
 	}
 	
 }
