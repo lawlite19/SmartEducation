@@ -17,12 +17,36 @@ public class QuestionErrorRecord {
 	private Integer id;
 	private String stuNum;
 	private Timestamp addTime;
+	private String questionType;
 	
-	private TestQuestion testQuestion;
-	
+	private Judgement judgement;
+	private SingleChoice singleChoice;
+	/**
+	 * 默认构造函数
+	 */
+	public QuestionErrorRecord() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * 构造函数
+	 */
+	public QuestionErrorRecord(String stuNum, Timestamp addTime,
+			String questionType, Judgement judgement, SingleChoice singleChoice) {
+		super();
+		this.stuNum = stuNum;
+		this.addTime = addTime;
+		this.questionType = questionType;
+		this.judgement = judgement;
+		this.singleChoice = singleChoice;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -32,17 +56,30 @@ public class QuestionErrorRecord {
 	public void setStuNum(String stuNum) {
 		this.stuNum = stuNum;
 	}
-	public TestQuestion getTestQuestion() {
-		return testQuestion;
-	}
-	public void setTestQuestion(TestQuestion testQuestion) {
-		this.testQuestion = testQuestion;
-	}
+
 	public Timestamp getAddTime() {
 		return addTime;
 	}
 	public void setAddTime(Timestamp addTime) {
 		this.addTime = addTime;
+	}
+	public String getQuestionType() {
+		return questionType;
+	}
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+	public Judgement getJudgement() {
+		return judgement;
+	}
+	public void setJudgement(Judgement judgement) {
+		this.judgement = judgement;
+	}
+	public SingleChoice getSingleChoice() {
+		return singleChoice;
+	}
+	public void setSingleChoice(SingleChoice singleChoice) {
+		this.singleChoice = singleChoice;
 	}
 	
 }

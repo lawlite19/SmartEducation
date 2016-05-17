@@ -58,6 +58,21 @@ public class StuCourseScoreAction extends BaseAction<StuCourseScore>{
 		
 		return null;
 	}
+	//学生全部成绩
+	public String appAllScore() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		List<StuCourseScore> courseScoreList=stuCourseScoreService.findByStuNum(model.getStuNum());
+		if(courseScoreList.size()<1){
+			map.put("name", "noCourseScore");
+		}
+		else{
+			ClassPropertyFilter.ListStuCourseScoreFilter(map, courseScoreList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
 	
 	
 //=================

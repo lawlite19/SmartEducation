@@ -2,37 +2,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>学生课程</title>
+<title>老师课程测试卷</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/api.css" />
-
-<!-- 查询输入框检查 -->
-<script type="text/javascript">
-    function MM_Empty(ctrl1Id, ctrl2Id) {
-        var ctrl1 = document.getElementById(ctrl1Id);
-        var ctrl2 = document.getElementById(ctrl2Id);
-        if ((ctrl1.value.trim() == "")&&(ctrl2.value.trim() == "")) {
-        	//正上方
-        	layer.msg('请输入查询条件！', {
-        	  offset: 0,
-        	  shift: 6
-        	});
-            ctrl1.focus();
-            return false;
-        }
-        layer.load();
-        return true;
-    }
-	function Check() {
-		return MM_Empty('select_dept', 'txt_inputTerm');
-    }
-	</script>
 </head>
 <body>
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 接口文档 &gt; 接口信息</div>
 <!-- 信息开始 -->
-<s:form action="/App/student_appStuClass.action" method="post">
+<s:form action="/App/testPaper_appTeaCourseTestPaper.action" method="post">
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
           <tbody>
@@ -55,13 +33,17 @@
 					<div>
 							<h2>接口地址</h2>
 									<p class="p_apiInfo">
-										${pageContext.request.contextPath}/App/student_appStuClass.action
+										${pageContext.request.contextPath}/App/testPaper_appTeaCourseTestPaper.action
 									</p>
 								<br/>
 								<h2>需要传递的数据</h2>
 								<br/>
 								<span class="span_apiInfo">
-									学号：<span class="span_apiProperty">stuNum</span>
+									老师工号：<span class="span_apiProperty">teaNum</span>
+								</span>
+								<br/>
+								<span class="span_apiInfo">
+									课程id：<span class="span_apiProperty">courseId</span>
 								</span>
 								
 					<!-- 返回json数据说明-->
@@ -71,15 +53,21 @@
 						<span class="span_apiProperty">
 							name：&nbsp;<span class="span_apiSuccess">success</span><span class="span_apiNormal">-->查询成功</span>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="span_apiWarning">noStudent</span><span class="span_apiNormal">-->没有学生</span>
+								<span class="span_apiWarning">noCourse</span><span class="span_apiNormal">-->没有找到课程</span>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="span_apiWarning">noClass</span><span class="span_apiNormal">-->没有班级</span>
-								
+								<span class="span_apiWarning">noTestPaper</span><span class="span_apiNormal">-->没有找到测试卷</span>
 						</span>
 						<br/>
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
-							class_：&nbsp;<span class="span_apiNormal">学生班级</span>
+							testPapers：&nbsp;<span class="span_apiNormal">测试卷信息</span>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="span_apiSuccess">endTime</span><span class="span_apiNormal">-->测试卷结束提交时间，过时不可提交
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="span_apiSuccess">questionCount</span><span class="span_apiNormal">-->问题数量
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="span_apiSuccess">submitCount</span><span class="span_apiNormal">-->提交人数
+						</span>
 						</span>
 						</span>
 					</div>
@@ -87,7 +75,11 @@
 					<div class="addFont">
 						<h2>测试</h2>
 						<span class="span_apiInfo">
-							stuNum: <s:textfield cssClass="inpu" name="stuNum"></s:textfield>
+							teaNum: <s:textfield cssClass="inpu" name="teaNum"></s:textfield>eg:01001
+						</span>
+						<br/><br/>
+						<span class="span_apiInfo">
+							courseId: <s:textfield cssClass="inpu" name="courseId"></s:textfield>eg:9
 						</span>
 						<br/><br/>
                         <span class="span_apiButton">

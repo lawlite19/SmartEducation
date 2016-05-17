@@ -32,4 +32,12 @@ public class StuCourseScoreServiceImpl extends DaoSupportImpl<StuCourseScore> im
 				.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StuCourseScore> findByStuNum(String stuNum) {
+		return getSession().createQuery("FROM StuCourseScore WHERE stuNum=?")//
+				.setParameter(0, stuNum)//
+				.list();
+	}
+
 }

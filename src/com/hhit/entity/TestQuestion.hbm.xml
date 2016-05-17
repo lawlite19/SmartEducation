@@ -11,11 +11,11 @@
             <generator class="native"/>
 		</id>
 		<!-- judgement属性，本类与Judgement的一对一   -->
-		<many-to-one name="judgement" class="Judgement" column="Judgement_Id">
+		<many-to-one name="judgement" class="Judgement" column="Judgement_Id" lazy="false">
 		</many-to-one>
 	
 		<!-- singleChoice属性，本类与SingleChoice的一对一   -->
-		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id">
+		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id" lazy="false">
 		</many-to-one>
 
 		<!-- singleChoice属性，本类与SingleChoice的多对一   -->

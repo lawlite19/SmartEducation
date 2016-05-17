@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Chapter;
+import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.Judgement;
 import com.hhit.entity.PageBean;
 import com.hhit.entity.SingleChoice;
 import com.hhit.entity.TestPaper;
 import com.hhit.entity.TestQuestion;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 
@@ -66,8 +68,10 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 						map.put("name", "singleChoiceNotEnough");
 					}
 					else{
+						Class_ classFind= classService.findById(classId);
 						//保存测试卷
-						TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0, model.getEndTime(), model.getTeaNum(), classService.findById(classId),
+						TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0, 
+								model.getEndTime(), model.getTeaNum(), classFind,
 								courseFind, chapterFind);
 						testPaperService.save(testPaperModel);
 						/*
@@ -143,7 +147,85 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		JsonUtil.toJson(ServletActionContext.getResponse(),map);
 		return null;
 	}
-
+	//学生课程测试卷
+	public String appStuCourseTestPaper() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		Class_ classFind=classService.findById(classId);
+		if(classFind==null){
+			map.put("name", "noClass");
+		}
+		else{
+			Course courseFind=courseService.findById(courseId);
+			if(courseFind==null){
+				map.put("name", "noCourse");
+			}
+			else{
+				List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind,courseFind);
+				if(testPaperList.size()<1){
+					map.put("name", "noTestPaper");
+				}
+				else{
+					ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
+					map.put("name", "success");
+				}
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//测试卷题目
+	public String appTestPaperQuestion() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		TestPaper testPaperFind=testPaperService.findById(model.getId());
+		if(testPaperFind==null){
+			map.put("name", "noTestPaper");
+		}
+		else{
+			List<TestQuestion> testQuestionList=new ArrayList<TestQuestion>(testPaperFind.getTestQuestions());
+			if(testQuestionList.size()<1){
+				map.put("name", "noQuestion");
+			}
+			else{
+				List<Judgement> judgementList=new ArrayList<>();
+				List<SingleChoice> singleChoiceList=new ArrayList<>();
+				for(int i=0;i<testQuestionList.size();i++){
+					if(testQuestionList.get(i).getJudgement()!=null){
+						judgementList.add(testQuestionList.get(i).getJudgement());
+					}
+					if(testQuestionList.get(i).getSingleChoice()!=null){
+						singleChoiceList.add(testQuestionList.get(i).getSingleChoice());
+					}
+				}
+				ClassPropertyFilter.ListJudgementFilter(map, judgementList);
+				ClassPropertyFilter.ListSingleChoiceFilter(map, singleChoiceList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//老师课程的测试卷
+	public String appTeaCourseTestPaper() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Course courseFind=courseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			List<TestPaper> testPaperList=testPaperService.findByTeaNumAndCourse(model.getTeaNum(),courseFind);
+			if(testPaperList.size()<1){
+				map.put("name", "noTestPaper");
+			}
+			else{
+				ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	
 	public Integer getJudgementCount() {
 		return judgementCount;
 	}
@@ -174,6 +256,12 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 
 	public void setChapterId(Integer chapterId) {
 		this.chapterId = chapterId;
+	}
+	public Integer getClassId() {
+		return classId;
+	}
+	public void setClassId(Integer classId) {
+		this.classId = classId;
 	}
 	
 }

@@ -43,7 +43,7 @@
 		<many-to-one name="course" class="Course" column="Course_Id">
 		</many-to-one>
 		<!-- chapter属性，本类与Chapter的一对一  -->
-		<many-to-one name="chapter" class="Chapter" column="Chapter_Id">
+		<many-to-one name="chapter" class="Chapter" column="Chapter_Id" lazy="false">
 		</many-to-one>
 		<!-- testQuestions属性，本类与TestQuestion的一对多  -->
 		<set name="testQuestions" lazy="false">

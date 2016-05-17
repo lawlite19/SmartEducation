@@ -53,9 +53,15 @@ public class InterfaceAPIAction {
 	public String teaTeachClassUI() throws Exception{
 		return "teaTeachClassUI";
 	}
-	
+	/** 学生的班级 */
+	public String stuClassInfoUI() throws Exception{
+		return "stuClassInfoUI";
+	}
+	/** 老师的课程 */
+	public String teaCourseUI() throws Exception{
+		return "teaCourseUI";
+	}
 
-	
 	
 	
 //实时测评接口
@@ -89,6 +95,36 @@ public class InterfaceAPIAction {
 	public String autoMakeQuestionUI() throws Exception{
 		return "autoMakeQuestionUI";
 	}
+	/** 学生课程测试卷 */
+	public String getStuTestPaperUI() throws Exception{
+		return "getStuTestPaperUI";
+	}
+	/** 测试卷题目 */
+	public String testPaperQuestionUI() throws Exception{
+		return "testPaperQuestionUI";
+	}
+	/** 老师课程测试卷 */
+	public String teaCourseTestPaperUI() throws Exception{
+		return "teaCourseTestPaperUI";
+	}
+	/** 答题时错题记录 */
+	public String stuQuestionErrorRecordUI() throws Exception{
+		return "stuQuestionErrorRecordUI";
+	}
+	/** 测试卷分数记录 */
+	public String stuTestScoreUI() throws Exception{
+		return "stuTestScoreUI";
+	}
+	/** 检测是否做过测试卷了 */
+	public String checkStuAlreadyTestUI() throws Exception{
+		return "checkStuAlreadyTestUI";
+	}
+	/** 老师查看测试卷 */
+	public String teaSeeTestPaperInfoUI() throws Exception{
+		return "teaSeeTestPaperInfoUI";
+	}
+	
+	
 //电子书包接口
 //=======================================
 	/** 专业类型 */
@@ -137,6 +173,10 @@ public class InterfaceAPIAction {
 	/** 学生课程分数--学年 */
 	public String stuYearCourseScoreUI() throws Exception{
 		return "stuYearCourseScoreUI";
+	}
+	/** 学生课程分数--全部 */
+	public String stuAllCourseScoreUI() throws Exception{
+		return "stuAllCourseScoreUI";
 	}
 	
 }

@@ -19,6 +19,7 @@ import com.hhit.service.IJudgementService;
 import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
+import com.hhit.service.IQuestionErrorRecordService;
 import com.hhit.service.IRoleService;
 import com.hhit.service.ISingleChoiceService;
 import com.hhit.service.ISpiderChapterService;
@@ -29,6 +30,7 @@ import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
 import com.hhit.service.IStuCourseScoreService;
 import com.hhit.service.IStuQuestionService;
+import com.hhit.service.IStuScoreRecordService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
@@ -129,7 +131,10 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ITeaAnswerService teaAnswerService;//老师回答
 	@Resource
 	protected IStuCourseScoreService stuCourseScoreService;//学生课程成绩
-	
+	@Resource
+	protected IStuScoreRecordService stuScoreRecordService;//学生测试卷成绩
+	@Resource
+	protected IQuestionErrorRecordService questionErrorRecordService;//错题记录
 	//--------------
 	@Resource
 	protected IUserDetailsService userDetailsService;// 用户详细信息

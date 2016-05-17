@@ -20,8 +20,17 @@
 				<comment>添加时间</comment>
 			</column>
 		</property>
-		<!-- testQuestion属性，本类与TestQuestion的一对一   -->
-		<many-to-one name="testQuestion" class="TestQuestion" column="TestQuestion_Id">
+		<property name="questionType" type="string">
+			<column name="QuestionType" length="20">
+				<comment>添加时间</comment>
+			</column>
+		</property>
+		<!-- judgement属性，本类与Judgement的一对一   -->
+		<many-to-one name="judgement" class="Judgement" column="Judgement_Id">
 		</many-to-one>
+		<!-- singleChoice属性，本类与SingleChoice的一对一   -->
+		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id">
+		</many-to-one>
+		
 	</class>
 </hibernate-mapping>
