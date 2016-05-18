@@ -21,6 +21,7 @@ import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.StuCourseScore;
 import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
+import com.hhit.entity.TeaAnswer;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.TestPaper;
@@ -57,6 +58,11 @@ public class ClassPropertyFilter {
 	public static void SpiderCourseScoreFilter(Map<String,Object> map,CourseScore spiderCourseScore){
 		String[] spiderCourseScoreProperty={"spiderCourse"};
 		map.put("courseScore", JsonUtil.jsonFilter(spiderCourseScore, spiderCourseScoreProperty));
+	}
+	//老师回答过滤
+	public static void TeaAnswerFilter(Map<String,Object> map,TeaAnswer TeaAnswer){
+		String[] teaAnswerProperty={"stuQuestion"};
+		map.put("teaAnswer", JsonUtil.jsonFilter(TeaAnswer, teaAnswerProperty));
 	}
 	
 	
@@ -142,5 +148,11 @@ public class ClassPropertyFilter {
 		String[] stuScoreRecordProperty={"testPaper"};
 		map.put("stuScoreRecords", JsonUtil.jsonListFilter(stuScoreRecordList, stuScoreRecordProperty));
 	}
+	//老师回答list过滤
+	public static void ListTeaAnswerFilter(Map<String,Object> map,List<TeaAnswer> teaAnswerList){
+		String[] teaAnswerListProperty={"stuQuestion"};
+		map.put("teaAnswers", JsonUtil.jsonListFilter(teaAnswerList, teaAnswerListProperty));
+	}
+	
 	
 }

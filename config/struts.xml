@@ -226,7 +226,7 @@
 			<result name="toMyJudgementError" type="redirectAction">student_myJudgementErrorPush</result>
 			<result name="toMySingleError" type="redirectAction">student_mySingleErrorPush</result>
 		</action>
-		
+
 		<!-- 接口API说明界面 -->
 		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
 			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
@@ -269,6 +269,8 @@
 			<result name="stuAllCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuAllCourseScoreUI.jsp</result>
 			<result name="teaTeachProcessUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaTeachProcessUI.jsp</result>
 			<result name="teaClassOfPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaClassOfPaperUI.jsp</result>
+			<result name="stuCourseTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuCourseTestPaperUI.jsp</result>
+			<result name="teaTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaTestPaperUI.jsp</result>
 			
 			
 		</action>

@@ -147,7 +147,7 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		JsonUtil.toJson(ServletActionContext.getResponse(),map);
 		return null;
 	}
-	//学生课程测试卷---根据班级查找
+	//学生测试卷---根据班级查找
 	public String appStuTestPaper() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		Class_ classFind=classService.findById(classId);
@@ -155,7 +155,7 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 			map.put("name", "noClass");
 		}
 		else{
-			List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind);
+			List<TestPaper> testPaperList=testPaperService.findByClass(classFind);
 			if(testPaperList.size()<1){
 				map.put("name", "noTestPaper");
 			}
@@ -246,7 +246,46 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		
 		return null;
 	}
-
+	//学生课程测试卷
+	public String appStuCourseTestPaper() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		Class_ classFind=classService.findById(classId);
+		if(classFind==null){
+			map.put("name", "noClass");
+		}
+		else{
+			Course courseFind=courseService.findById(courseId);
+			if(courseFind==null){
+				map.put("name", "noCourse");
+			}
+			else{
+				List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind, courseFind);
+				if(testPaperList.size()<1){
+					map.put("name", "noTestPaper");
+				}
+				else{
+					ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
+					map.put("name", "success");
+				}
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//老师测试卷--按id倒序
+	public String appTeaTestPaper() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		List<TestPaper> testPaperList = testPaperService.findByTeaNum(model.getTeaNum());
+		if (testPaperList.size() < 1) {
+			map.put("name", "noTestPaper");
+		} else {
+			ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
 	public Integer getJudgementCount() {
 		return judgementCount;
 	}

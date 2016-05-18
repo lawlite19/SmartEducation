@@ -3,6 +3,7 @@ package com.hhit.action;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -16,6 +17,8 @@ import com.hhit.entity.Course;
 import com.hhit.entity.PageBean;
 import com.hhit.entity.StuQuestion;
 import com.hhit.entity.Student;
+import com.hhit.entity.TeaAnswer;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 @SuppressWarnings("serial")
@@ -112,6 +115,13 @@ public class StuQuestionAction extends BaseAction<StuQuestion>{
 		}
 		else{
 			map.put("stuQuestion", stuQuestionFind);
+			List<TeaAnswer> teaAnswerList=teaAnswerService.findByQuestion(stuQuestionFind);
+			if(teaAnswerList.size()<1){
+				map.put("name", "noAnswer");
+			}
+			else{
+				ClassPropertyFilter.ListTeaAnswerFilter(map, teaAnswerList);
+			}
 			map.put("name", "success");
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);

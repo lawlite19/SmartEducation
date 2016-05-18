@@ -43,7 +43,7 @@
 								</span>
 								<br/>
 								<span class="span_apiInfo">
-									学期id：<span class="span_apiProperty">termId</span>
+									学期名：<span class="span_apiProperty">termName</span>
 								</span>
 					</div>
 					<!-- 返回json数据说明-->
@@ -69,7 +69,7 @@
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-							termId:<s:textfield cssClass="inpu" name="termId"></s:textfield>eg:9
+							termName:<s:textfield cssClass="inpu" name="termName"></s:textfield>eg:2016-2017-1
 						</span>
 						<br/><br/>
                         <span class="span_apiButton">

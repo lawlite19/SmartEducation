@@ -3,8 +3,14 @@
 <html>
   <head>  
     <title>right</title>
+    <%@include file="/WEB-INF/jsp/public/list.jspf"%>
   </head>
 <body>
-right
+<s:iterator value="#session.user">
+<s:property value="userNum"/>
+<br/>
+
+</s:iterator>
+
 </body>
 </html>
