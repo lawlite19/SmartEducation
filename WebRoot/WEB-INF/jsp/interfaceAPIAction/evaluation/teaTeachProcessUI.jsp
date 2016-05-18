@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>学生查看教学进程</title>
+<title>老师查看教学进程</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/api.css" />
 </head>
@@ -10,7 +10,7 @@
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 接口文档 &gt; 接口信息</div>
 <!-- 信息开始 -->
-<s:form action="/App/teachProcess_appCourseTeachProcess.action" method="post">
+<s:form action="/App/teachProcess_appTeaCourseTeachProcess.action" method="post">
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
           <tbody>
@@ -33,17 +33,17 @@
 					<div>
 							<h2>接口地址</h2>
 									<p class="p_apiInfo">
-										${pageContext.request.contextPath}/App/teachProcess_appCourseTeachProcess.action
+										${pageContext.request.contextPath}/App/teachProcess_appTeaCourseTeachProcess.action
 									</p>
 								<br/>
 								<h2>需要传递的数据</h2>
 								<br/>
 								<span class="span_apiInfo">
-									courseId：<span class="span_apiProperty">courseId</span>
+									课程id：<span class="span_apiProperty">courseId</span>
 								</span>
 								<br/>
 								<span class="span_apiInfo">
-									stuNum：<span class="span_apiProperty">stuNum</span>
+									老师工号：<span class="span_apiProperty">teaNum</span>
 								</span>
 					</div>
 					<!-- 返回json数据说明-->
@@ -55,19 +55,7 @@
 							&nbsp;&nbsp;
 							<span class="span_apiWarning">noCourse</span><span class="span_apiNormal">-->没有此课程</span>
 							&nbsp;&nbsp;
-							<span class="span_apiWarning">noStudent</span><span class="span_apiNormal">-->没有此学生</span>
-						</span>
-						<br/>
-						<span class="span_apiInfo">
-						<span class="span_apiProperty">
-							teacher：&nbsp;<span class="span_apiNormal">老师信息</span>
-						</span>
-						</span>
-						<br/>
-						<span class="span_apiInfo">
-						<span class="span_apiProperty">
-							student：&nbsp;<span class="span_apiNormal">学生信息</span>
-						</span>
+							<span class="span_apiWarning">noTeacher</span><span class="span_apiNormal">-->没有此老师</span>
 						</span>
 						</span>
 					</div>
@@ -80,8 +68,8 @@
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-						stuNum:<s:textfield cssClass="inpu" name="stuNum"></s:textfield>
-						eg:2012122710
+						teaNum:<s:textfield cssClass="inpu" name="teaNum"></s:textfield>
+						eg:01001
 						</span>
                         <br/><br/>
                         <span class="span_apiButton">

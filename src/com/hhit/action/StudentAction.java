@@ -29,6 +29,7 @@ import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
+import com.hhit.entity.QuestionErrorRecord;
 import com.hhit.entity.Role;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.Student;
@@ -66,7 +67,10 @@ public class StudentAction extends BaseAction<Student> {
 	private Integer courseId;
 	private String teacherNum;
 	
-	//我的收藏需要
+	//查询添加
+	private String txtCourseName="";
+	private String txtKnowledgeName="";
+	private String txtQuestion="";
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -340,6 +344,28 @@ public class StudentAction extends BaseAction<Student> {
 		}
 		return "myReceivePush";
 	}
+	/** 学生判断题错题记录 */
+	public String myJudgementErrorPush() throws Exception{
+		Student stuFind=getCurrentUser().getStudent();
+		new QueryHelper(QuestionErrorRecord.class, "q")//
+			.addCondition("q.stuNum=? AND q.singleChoice IS NULL",stuFind.getStuNum())//
+			.addCondition(txtCourseName.trim()!="", "q.judgement.course.courseName LIKE ?", "%"+txtCourseName+"%")
+			.addCondition(txtKnowledgeName.trim()!="", "q.judgement.knowledgeName LIKE ?", "%"+txtKnowledgeName+"%")
+			.addCondition(txtQuestion.trim()!="", "q.judgement.question LIKE ?", "%"+txtQuestion+"%")
+			.preparePageBean(questionErrorRecordService, pageNum, pageSize);
+		return "myJudgementErrorPush";
+	}
+	/** 学生单选题错题记录 */
+	public String mySingleErrorPush() throws Exception{
+		Student stuFind=getCurrentUser().getStudent();
+		new QueryHelper(QuestionErrorRecord.class, "q")//
+			.addCondition("q.stuNum=? AND q.judgement IS NULL",stuFind.getStuNum())//
+			.addCondition(txtCourseName.trim()!="", "q.singlceChoice.course.courseName LIKE ?", "%"+txtCourseName+"%")
+			.addCondition(txtKnowledgeName.trim()!="", "q.singlceChoice.knowledgeName LIKE ?", "%"+txtKnowledgeName+"%")
+			.addCondition(txtQuestion.trim()!="", "q.singlceChoice.question LIKE ?", "%"+txtQuestion+"%")
+			.preparePageBean(questionErrorRecordService, pageNum, pageSize);
+		return "mySingleErrorPush";
+	}
 	
 //app接口	
 //====================================
@@ -540,5 +566,22 @@ public class StudentAction extends BaseAction<Student> {
 	public void setTeacherNum(String teacherNum) {
 		this.teacherNum = teacherNum;
 	}
-	
+	public String getTxtCourseName() {
+		return txtCourseName;
+	}
+	public void setTxtCourseName(String txtCourseName) {
+		this.txtCourseName = txtCourseName;
+	}
+	public String getTxtKnowledgeName() {
+		return txtKnowledgeName;
+	}
+	public void setTxtKnowledgeName(String txtKnowledgeName) {
+		this.txtKnowledgeName = txtKnowledgeName;
+	}
+	public String getTxtQuestion() {
+		return txtQuestion;
+	}
+	public void setTxtQuestion(String txtQuestion) {
+		this.txtQuestion = txtQuestion;
+	}
 }

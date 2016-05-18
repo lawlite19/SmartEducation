@@ -147,27 +147,21 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		JsonUtil.toJson(ServletActionContext.getResponse(),map);
 		return null;
 	}
-	//学生课程测试卷
-	public String appStuCourseTestPaper() throws Exception{
+	//学生课程测试卷---根据班级查找
+	public String appStuTestPaper() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		Class_ classFind=classService.findById(classId);
 		if(classFind==null){
 			map.put("name", "noClass");
 		}
 		else{
-			Course courseFind=courseService.findById(courseId);
-			if(courseFind==null){
-				map.put("name", "noCourse");
+			List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind);
+			if(testPaperList.size()<1){
+				map.put("name", "noTestPaper");
 			}
 			else{
-				List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind,courseFind);
-				if(testPaperList.size()<1){
-					map.put("name", "noTestPaper");
-				}
-				else{
-					ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
-					map.put("name", "success");
-				}
+				ClassPropertyFilter.ListTestPaperFilter(map, testPaperList);
+				map.put("name", "success");
 			}
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
@@ -225,7 +219,34 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		
 		return null;
 	}
-	
+	//老师的课程已经发布试卷的班级
+	public String appTeaClassOfPaper() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Course courseFind=courseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			List<TestPaper> testPaperList=testPaperService.findByTeaNumAndCourse(model.getTeaNum(), courseFind);
+			if(testPaperList.size()<1){
+				map.put("name", "noClass");
+			}
+			else{
+				List<Class_> classList=new ArrayList<>();
+				for(int i=0;i<testPaperList.size();i++){
+					if(!classList.contains(testPaperList.get(i).getClass_())){
+						classList.add(testPaperList.get(i).getClass_());
+					}
+				}
+				ClassPropertyFilter.ListClassFilter(map, classList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+
 	public Integer getJudgementCount() {
 		return judgementCount;
 	}
