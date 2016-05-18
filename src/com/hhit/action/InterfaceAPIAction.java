@@ -123,6 +123,14 @@ public class InterfaceAPIAction {
 	public String teaSeeTestPaperInfoUI() throws Exception{
 		return "teaSeeTestPaperInfoUI";
 	}
+	/** 老师查看教学进程 */
+	public String teaTeachProcessUI() throws Exception{
+		return "teaTeachProcessUI";
+	}
+	/** 老师对应课程已发布作业的班级 */
+	public String teaClassOfPaperUI() throws Exception{
+		return "teaClassOfPaperUI";
+	}
 	
 	
 //电子书包接口

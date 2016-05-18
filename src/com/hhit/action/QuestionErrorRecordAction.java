@@ -22,6 +22,17 @@ public class QuestionErrorRecordAction extends BaseAction<QuestionErrorRecord> {
 
 	private Integer questionId;
 
+	/**删除判断*/
+	public String deleteJudgement() throws Exception{
+		questionErrorRecordService.delete(model.getId());
+		return "toMyJudgementError";
+	}
+	/**删除单选*/
+	public String deleteSingle() throws Exception{
+		questionErrorRecordService.delete(model.getId());
+		return "toMySingleError";
+	}
+	
 	// app
 	// ================
 	public String appQueErrorRecord() throws Exception {

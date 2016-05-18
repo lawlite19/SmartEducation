@@ -34,6 +34,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	
 	//app
 	private String stuNum;
+	private String teaNum;
 	
 	/** 列表 */
 	public String list() throws Exception{
@@ -160,6 +161,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	
 //app	
 //=============================================	
+	//学生查看教学进程
 	public String appCourseTeachProcess() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		//找到课程
@@ -191,6 +193,29 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//老师查看教学进程
+	public String appTeaCourseTeachProcess() throws Exception{
+		Map<String, Object> map=new HashMap<String, Object>();
+		//找到课程
+		Course courseFind=courseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			//找到老师
+			Teacher teaFind=teacherService.findByTeacherNum(teaNum);
+			if(teaFind==null){
+				map.put("name", "noTeacher");
+			}
+			else{
+				//根据老师和课程找到教学进程
+				List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind, courseFind);
+				ClassPropertyFilter.ListTeachPorcessFilter(map, teachProcessList);
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	
 	//=========
 	public Integer getCourseId() {
@@ -217,4 +242,15 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	public void setStuNum(String stuNum) {
 		this.stuNum = stuNum;
 	}
+
+
+	public String getTeaNum() {
+		return teaNum;
+	}
+
+
+	public void setTeaNum(String teaNum) {
+		this.teaNum = teaNum;
+	}
+	
 }

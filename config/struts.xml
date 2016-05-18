@@ -50,7 +50,8 @@
 			<result name="myFavorite">/WEB-INF/jsp/studentAction/myFavorite.jsp</result>
 		    <result name="visitRecord">/WEB-INF/jsp/studentAction/visitRecord.jsp</result>
 			<result name="myReceivePush">/WEB-INF/jsp/studentAction/myReceivePush.jsp</result>
-		
+			<result name="myJudgementErrorPush">/WEB-INF/jsp/studentAction/myJudgementErrorPush.jsp</result>
+			
 		</action>
 		<!-- 老师管理 -->
 		<action name="teacher_*" class="teacherAction" method="{1}">
@@ -220,6 +221,12 @@
 			<result name="stuCourseScoreInfo">/WEB-INF/jsp/studentAction/testPaperScore.jsp</result>
 			
 		</action>
+		<!-- 错题记录 -->
+		<action name="questionErrorRecord_*" class="questionErrorRecordAction" method="{1}">
+			<result name="toMyJudgementError" type="redirectAction">student_myJudgementErrorPush</result>
+			<result name="toMySingleError" type="redirectAction">student_mySingleErrorPush</result>
+		</action>
+		
 		<!-- 接口API说明界面 -->
 		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
 			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
@@ -260,6 +267,8 @@
 			<result name="checkStuAlreadyTestUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/checkStuAlreadyTestUI.jsp</result>
 			<result name="teaSeeTestPaperInfoUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaSeeTestPaperInfoUI.jsp</result>
 			<result name="stuAllCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuAllCourseScoreUI.jsp</result>
+			<result name="teaTeachProcessUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaTeachProcessUI.jsp</result>
+			<result name="teaClassOfPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaClassOfPaperUI.jsp</result>
 			
 			
 		</action>
