@@ -21,18 +21,18 @@ public class StuCourseScoreAction extends BaseAction<StuCourseScore>{
 
 	private Integer termId;
 	private String year;
+	private String termName;
 //app
 //========================
 	//学生学期成绩
 	public String appTermScore() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
-		
-		DataDict termFind=dataDictService.findById(termId);
-		if(termFind==null){
-			map.put("name", "noTerm");
+//		DataDict termFind=dataDictService.findById(termId);
+		if(termName==null){
+			map.put("name", "noTermName");
 		}
 		else{
-			List<StuCourseScore> stuCourseScoreList=stuCourseScoreService.findByStuNumAndTerm(model.getStuNum(),termFind);
+			List<StuCourseScore> stuCourseScoreList=stuCourseScoreService.findByStuNumAndTerm(model.getStuNum(),termName);
 			ClassPropertyFilter.ListStuCourseScoreFilter(map, stuCourseScoreList);
 			map.put("name", "success");
 		}
@@ -88,4 +88,11 @@ public class StuCourseScoreAction extends BaseAction<StuCourseScore>{
 	public void setYear(String year) {
 		this.year = year;
 	}
+	public String getTermName() {
+		return termName;
+	}
+	public void setTermName(String termName) {
+		this.termName = termName;
+	}
+	
 }

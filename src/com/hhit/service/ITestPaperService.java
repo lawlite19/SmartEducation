@@ -14,6 +14,7 @@ public interface ITestPaperService extends IDaoSupport<TestPaper>{
 	//根据老师工号和课程查找
 	List<TestPaper> findByTeaNumAndCourse(String teaNum, Course courseFind);
 	//根据班级查找
-	List<TestPaper> findByClassAndCourse(Class_ classFind);
-
+	List<TestPaper> findByClass(Class_ classFind);
+	//根据老师工号查找--id倒序
+	List<TestPaper> findByTeaNum(String teaNum);
 }

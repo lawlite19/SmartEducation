@@ -18,7 +18,7 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TestPaper> findByClassAndCourse(Class_ classFind,Course courseFind) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=?")//
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=? ORDER BY id DESC")//
 				.setParameter(0, classFind)//
 				.setParameter(1, courseFind)//
 				.list();
@@ -27,7 +27,7 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TestPaper> findByTeaNumAndCourse(String teaNum, Course courseFind) {
-		return getSession().createQuery("FROM TestPaper WHERE teaNum=? AND course=?")//
+		return getSession().createQuery("FROM TestPaper WHERE teaNum=? AND course=? ORDER BY id DESC")//
 				.setParameter(0, teaNum)//
 				.setParameter(1, courseFind)//
 				.list();
@@ -35,10 +35,19 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TestPaper> findByClassAndCourse(Class_ classFind) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=?")//
+	public List<TestPaper> findByClass(Class_ classFind) {
+		return getSession().createQuery("FROM TestPaper WHERE class_=? ORDER BY id DESC")//
 				.setParameter(0, classFind)//
 				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestPaper> findByTeaNum(String teaNum) {
+		return getSession().createQuery("FROM TestPaper WHERE teaNum=? ORDER BY id DESC")//
+				.setParameter(0, teaNum)//
+				.list();
+				
 	}
 
 }

@@ -131,6 +131,14 @@ public class InterfaceAPIAction {
 	public String teaClassOfPaperUI() throws Exception{
 		return "teaClassOfPaperUI";
 	}
+	/** 学生课程测试卷 */
+	public String stuCourseTestPaperUI() throws Exception{
+		return "stuCourseTestPaperUI";
+	}
+	/** 老师的测试卷 */
+	public String teaTestPaperUI() throws Exception{
+		return "teaTestPaperUI";
+	}
 	
 	
 //电子书包接口

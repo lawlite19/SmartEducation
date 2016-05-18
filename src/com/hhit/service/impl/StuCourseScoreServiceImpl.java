@@ -16,8 +16,8 @@ public class StuCourseScoreServiceImpl extends DaoSupportImpl<StuCourseScore> im
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<StuCourseScore> findByStuNumAndTerm(String stuNum, DataDict termFind) {
-		return getSession().createQuery("FROM StuCourseScore WHERE stuNum=? AND dataDict=?")//
+	public List<StuCourseScore> findByStuNumAndTerm(String stuNum, String termFind) {
+		return getSession().createQuery("FROM StuCourseScore WHERE stuNum=? AND dataDict.dictName=?")//
 				.setParameter(0, stuNum)//
 				.setParameter(1, termFind)//
 				.list();
