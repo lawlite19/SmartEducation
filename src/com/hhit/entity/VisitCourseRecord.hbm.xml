@@ -22,7 +22,7 @@
 		</many-to-one>
 		
 		<!-- spiderCourse属性，本类与 SpiderCourse的多对一-->
-		<many-to-one name="spiderCourse" class="SpiderCourse">
+		<many-to-one name="spiderCourse" class="SpiderCourse" lazy="false">
 			<column name="SpiderCourse_Id"></column>
 		</many-to-one>
 	</class>

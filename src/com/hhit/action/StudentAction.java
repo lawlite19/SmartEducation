@@ -504,7 +504,21 @@ public class StudentAction extends BaseAction<Student> {
 		
 		return null;
 	}
-	
+	//根据id返回学生信息
+	public String appStuInfoById() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Student stuFind=studentService.findById(model.getId());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			ClassPropertyFilter.StudentFilter(map, stuFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
 //=============================	
 	public Integer getDepartmentId() {
 		return departmentId;

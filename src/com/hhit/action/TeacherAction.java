@@ -640,7 +640,8 @@ public class TeacherAction extends BaseAction<Teacher>{
 		else{
 			List<Class_> classList=new ArrayList<>();
 			for(int i=0;i<classCourseList.size();i++){
-				classList.add(classCourseList.get(i).getClass_());
+				if(!classList.contains(classCourseList.get(i).getClass_()))
+					classList.add(classCourseList.get(i).getClass_());
 			}
 			ClassPropertyFilter.ListClassFilter(map, classList);
 			map.put("name", "success");
@@ -670,7 +671,38 @@ public class TeacherAction extends BaseAction<Teacher>{
 		
 		return null;
 	}
-	
+	//老师教的课程的班级
+	public String appTeaCourseClass() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Teacher teaFind=teacherService.findByTeacherNum(model.getTeaNum());
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			Course courseFind=courseService.findById(courseId);
+			if(courseFind==null){
+				map.put("name", "noCourse");
+			}
+			else{
+				List<ClassSelectCourse> selectCourseList=classSelectCourseService.findByTeacherNumAndCourse(model.getTeaNum(), courseFind);
+				if(selectCourseList.size()<1){
+					map.put("name", "noClass");
+				}
+				else{
+					List<Class_> classList=new ArrayList<>();
+					for(int i=0;i<selectCourseList.size();i++){
+						classList.add(selectCourseList.get(i).getClass_());
+					}
+					ClassPropertyFilter.ListClassFilter(map, classList);
+					map.put("name", "success");
+				}
+				
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
 //==============================	
 	public Integer getDepartmentId() {
 		return departmentId;
