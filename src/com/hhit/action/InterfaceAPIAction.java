@@ -61,8 +61,14 @@ public class InterfaceAPIAction {
 	public String teaCourseUI() throws Exception{
 		return "teaCourseUI";
 	}
-
-	
+	/** 老师课程的班级 */
+	public String teaCourseClassUI() throws Exception{
+		return "teaCourseClassUI";
+	}
+	/** 根据id获取学生信息 */
+	public String stuInfoByIdUI() throws Exception{
+		return "stuInfoByIdUI";
+	}
 	
 //实时测评接口
 //=======================================
@@ -179,7 +185,18 @@ public class InterfaceAPIAction {
 	public String spiderCourseDiscussUI() throws Exception{
 		return "spiderCourseDiscussUI";
 	}
-
+	/** 课程讨论列表 */
+	public String listSpiderCourseDiscussUI() throws Exception{
+		return "listSpiderCourseDiscussUI";
+	}
+	/** 学生浏览记录 */
+	public String stuVisitCourseRecordUI() throws Exception{
+		return "stuVisitCourseRecordUI";
+	}
+	/** 课程搜索 */
+	public String stuSearchCourseUI() throws Exception{
+		return "stuSearchCourseUI";
+	}
 //教学质量接口	
 //==================================	
 	/** 学生课程分数 */

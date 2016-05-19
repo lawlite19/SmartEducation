@@ -276,9 +276,48 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
-	
-	
-	
+	//课程讨论信息
+	public String listCourseDiscuss() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		SpiderCourse courseFind=spiderCourseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			//课程讨论
+			List<CourseDiscuss> courseDiscussList=courseDiscussService.findByCourse(courseFind);
+			if(courseDiscussList.size()<1){
+				map.put("discussName", "noDiscuss");
+			}
+			else{
+				ClassPropertyFilter.ListSpiderCourseDiscussFilter(map, courseDiscussList);
+			}
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//学生搜索课程--模糊搜索
+	public String appSearchCourse() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		//分页信息
+		PageBean pageBean=new QueryHelper(SpiderCourse.class, "s")//
+		.addCondition( "s.name LIKE ? OR s.info LIKE ?", "%"+searchInfo+"%","%"+searchInfo+"%")
+		.prepareAppPageBean(spiderCourseService, pageNum, pageSize);
+		if(pageBean==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			List<SpiderCourse> spiderCourseList=pageBean.getRecordList();
+			ClassPropertyFilter.ListSpiderCourseFilter(map, spiderCourseList);
+			map.put("count", pageBean.getRecordCount());
+			map.put("currentPage", pageBean.getCurrentPage());
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 //=======
 	public Integer getProfessionId() {
 		return professionId;
