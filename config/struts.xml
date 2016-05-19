@@ -271,6 +271,7 @@
 			<result name="teaClassOfPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaClassOfPaperUI.jsp</result>
 			<result name="stuCourseTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/stuCourseTestPaperUI.jsp</result>
 			<result name="teaTestPaperUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaTestPaperUI.jsp</result>
+			<result name="teaAccountOfClassUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaAccountOfClassUI.jsp</result>
 			
 			
 		</action>
@@ -325,6 +326,9 @@
 		</action>
 		<!-- 测试卷分数记录 -->
 		<action name="stuScoreRecord_*" class="stuScoreRecordAction" method="{1}">
+		</action>
+		<!-- 统计课程班级分数记录 -->
+		<action name="stuPaperAccount_*" class="stuPaperAccountAction" method="{1}">
 		</action>
 	</package>
 </struts>    
