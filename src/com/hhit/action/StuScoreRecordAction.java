@@ -21,6 +21,7 @@ import com.hhit.base.BaseAction;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.StuPaperAccount;
 import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
 import com.hhit.entity.TestPaper;
@@ -208,7 +209,24 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 					model.setStuName(stuFind.getStuName());
 					model.setTestPaper(testPaperFind);
 					stuScoreRecordService.save(model);
-					//跟新提交人数--同步操作
+					Course courseFind=testPaperFind.getCourse();
+					//更新或保存用户统计信息
+					StuPaperAccount stuPaperAccount=stuPaperAccountService.findByStuNumAndCourse(stuFind.getStuNum(),courseFind);
+					if(stuPaperAccount==null){
+						//保存
+						stuPaperAccount=new StuPaperAccount(stuFind.getStuName(), stuFind.getStuNum(), 1, model.getScore(), stuFind.getClass_(),testPaperFind.getCourse());
+						stuPaperAccountService.save(stuPaperAccount);
+					}
+					else{
+						//更新
+						int subCount=stuPaperAccount.getSubmitCount();
+						float score=stuPaperAccount.getAverageScore();
+						float realScore=(score*subCount+model.getScore())/(subCount+1);
+						stuPaperAccount.setAverageScore(realScore);
+						stuPaperAccount.setSubmitCount(subCount+1);
+						stuPaperAccountService.update(stuPaperAccount);
+					}
+					//更新提交人数--同步操作
 					synchronized (this) {
 						//再读数据库一次
 						testPaperFind=testPaperService.findById(testPaperId);

@@ -19,6 +19,7 @@ import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.StuCourseScore;
+import com.hhit.entity.StuPaperAccount;
 import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
 import com.hhit.entity.TeaAnswer;
@@ -152,6 +153,11 @@ public class ClassPropertyFilter {
 	public static void ListTeaAnswerFilter(Map<String,Object> map,List<TeaAnswer> teaAnswerList){
 		String[] teaAnswerListProperty={"stuQuestion"};
 		map.put("teaAnswers", JsonUtil.jsonListFilter(teaAnswerList, teaAnswerListProperty));
+	}
+	//老师统计课程班级提交作业记录list过滤
+	public static void ListStuPaperAccountFilter(Map<String,Object> map,List<StuPaperAccount> stuPaperAccountList){
+		String[] stuPaperAccountProperty={"class_","course"};
+		map.put("stuPaperAccounts", JsonUtil.jsonListFilter(stuPaperAccountList, stuPaperAccountProperty));
 	}
 	
 	

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="StuPaperAccount" table="T_StuPaperAccount">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="stuName" type="string">	
+			<column name="StuName" length="20">
+				<comment>学生姓名</comment>
+			</column>
+		</property>
+		<property name="stuNum" type="string">
+			<column name="StuNum" length="20">
+				<comment>学生学号</comment>
+			</column>
+		</property>
+		<property name="submitCount" type="integer">
+			<column name="SubmitCount">
+				<comment>提交次数</comment>
+			</column>
+		</property>
+		<property name="averageScore" type="float">
+			<column name="AverageScore">
+				<comment>平均分</comment>
+			</column>
+		</property>		
+		<!-- class_属性，与Class_多对一 -->
+		<many-to-one name="class_" class="Class_" column="Class_Id">
+		</many-to-one>
+		<!-- course属性，与Course多对一 -->
+		<many-to-one name="course" class="Course" column="Course_Id">
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>
