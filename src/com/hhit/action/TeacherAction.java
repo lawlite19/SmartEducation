@@ -611,6 +611,20 @@ public class TeacherAction extends BaseAction<Teacher>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//老师个人信息--根据id
+	public String appTeaInfoById() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Teacher teaFind=teacherService.findById(model.getId());
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			ClassPropertyFilter.TeacherFilter(map, teaFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	//修改个人信息
 	public String appTeaModifyInfo() throws Exception{
 		Map<String, String> map=new HashMap<>();

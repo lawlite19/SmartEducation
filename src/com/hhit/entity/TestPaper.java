@@ -19,6 +19,8 @@ public class TestPaper {
 	private String testType;
 	private Integer questionCount;
 	private Integer submitCount;
+	
+	private Timestamp startTime;
 	private Timestamp endTime;
 	
 	private String teaNum;
@@ -113,6 +115,12 @@ public class TestPaper {
 	}
 	public void setTestQuestions(Set<TestQuestion> testQuestions) {
 		this.testQuestions = testQuestions;
+	}
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
 	}
 	
 	

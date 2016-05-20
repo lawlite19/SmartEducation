@@ -18,8 +18,8 @@
 		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id" lazy="false">
 		</many-to-one>
 
-		<!-- singleChoice属性，本类与SingleChoice的多对一   -->
-		<many-to-one name="testPaper" class="TestPaper" column="TestPaper_Id">
+		<!-- testPaper属性，本类与TestPaper的多对一   -->
+		<many-to-one name="testPaper" class="TestPaper" column="TestPaper_Id" cascade="delete">
 		</many-to-one>	
 	</class>
 </hibernate-mapping>

@@ -12,4 +12,8 @@ public interface IChapterService extends IDaoSupport<Chapter>{
 	List<Chapter> findByCourse(Course courseFind);	
 	//根据章节模糊查找
 	Chapter findByCourseAndLikeChapterName(Course courseFind,String string);
+	//根据章节号模糊查找
+	Chapter findByCourseAndLikeChapterNum(Course courseFind, String string);
+	//根据父章节和章节号查找
+	Chapter findByParentAndLikeChapterNum(Chapter chapter, String string);
 }

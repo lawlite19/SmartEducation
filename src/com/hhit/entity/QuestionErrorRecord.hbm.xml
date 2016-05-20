@@ -26,10 +26,10 @@
 			</column>
 		</property>
 		<!-- judgement属性，本类与Judgement的一对一   -->
-		<many-to-one name="judgement" class="Judgement" column="Judgement_Id">
+		<many-to-one name="judgement" class="Judgement" column="Judgement_Id" cascade="delete">
 		</many-to-one>
 		<!-- singleChoice属性，本类与SingleChoice的一对一   -->
-		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id">
+		<many-to-one name="singleChoice" class="SingleChoice" column="SingleChoice_Id" cascade="delete">
 		</many-to-one>
 		
 	</class>

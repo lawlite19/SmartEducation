@@ -69,6 +69,10 @@ public class InterfaceAPIAction {
 	public String stuInfoByIdUI() throws Exception{
 		return "stuInfoByIdUI";
 	}
+	/** 根据id获取老师信息 */
+	public String teaInfoByIdUI() throws Exception{
+		return "teaInfoByIdUI";
+	}
 	
 //实时测评接口
 //=======================================

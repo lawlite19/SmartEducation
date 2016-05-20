@@ -9,7 +9,7 @@ import com.hhit.entity.TestPaper;
 
 public interface ITestPaperService extends IDaoSupport<TestPaper>{
 
-	//根据班级和课程查找
+	//根据班级和课程查找--降序
 	List<TestPaper> findByClassAndCourse(Class_ classFind, Course courseFind);
 	//根据老师工号和课程查找
 	List<TestPaper> findByTeaNumAndCourse(String teaNum, Course courseFind);
@@ -17,4 +17,6 @@ public interface ITestPaperService extends IDaoSupport<TestPaper>{
 	List<TestPaper> findByClass(Class_ classFind);
 	//根据老师工号查找--id倒序
 	List<TestPaper> findByTeaNum(String teaNum);
+	//根据班级和课程查找---升序
+	List<TestPaper> findByClassAndCourseASC(Class_ classFind, Course courseFind);
 }

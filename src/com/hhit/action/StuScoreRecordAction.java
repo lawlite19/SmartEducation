@@ -1,6 +1,8 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +56,7 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 			//课程
 			Course courseFind=courseService.findById(courseId);
 			//得到对应的测试卷
-			List<TestPaper> paperList=testPaperService.findByClassAndCourse(classFind, courseFind);
+			List<TestPaper> paperList=testPaperService.findByClassAndCourseASC(classFind, courseFind);
 
 			//定义分数list
 			List<StuScoreRecord> scoreRecordList=new ArrayList<>();
@@ -74,7 +76,9 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 			//及格线
 			double[] dataPass=new double[count];
 			for(int i=0;i<count;i++){
-				labels[i]=""+(i+1);
+				String timeString=scoreRecordList.get(i).getSubmitTime().toString();
+				String dateString=timeString.substring(0, 10);
+				labels[i]=""+dateString+scoreRecordList.get(i).getTestPaper().getTestType();
 				dataScore[i]=scoreRecordList.get(i).getScore();
 				dataPass[i]=60;
 			}
@@ -104,10 +108,10 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 			c.yAxis().setTitle("分数", "宋体", 10);
 			c.yAxis().setLabelStyle("宋体", 8);
 			c.yAxis().setColors(Chart.Transparent);
-
+//			c.yAxis().setOffset(0, 36);
 			// Set y-axis tick density to 30 pixels. ChartDirector auto-scaling will use this as the guideline
 			// when putting ticks on the y-axis.
-			c.yAxis().setTickDensity(30);
+			c.yAxis().setTickDensity(15);
 
 			// Add a line layer to the chart
 			LineLayer layer = c.addLineLayer2();
@@ -189,6 +193,7 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 
 //app
 //========================
+	//记录答题分数
 	public String appStuScoreRecord() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		Student stuFind=studentService.findByStuNum(model.getStuNum());
@@ -208,6 +213,7 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 				else{
 					model.setStuName(stuFind.getStuName());
 					model.setTestPaper(testPaperFind);
+					model.setSubmitTime(new Timestamp(new Date().getTime()));
 					stuScoreRecordService.save(model);
 					Course courseFind=testPaperFind.getCourse();
 					//更新或保存用户统计信息
