@@ -70,7 +70,7 @@
 					<div class="addFont">
 						<h2>测试</h2>
 						<span class="span_apiInfo">
-							id: <s:textfield cssClass="inpu" name="id"></s:textfield>eg:18
+							id: <s:textfield cssClass="inpu" name="id"></s:textfield>eg:2
 						</span>
 						<br/><br/>
                         <span class="span_apiButton">

@@ -9,8 +9,45 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/h_index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 <%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
+<script src="${pageContext.request.contextPath}/script/validate.js"></script>
+
 <!-- 时间选择控件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
+<!-- 根据章节动态加载子章节 -->
+<script>
+	function changeChapter() {
+		$("#select_childrenChapter").empty();
+		$.ajax({
+			type : "post",
+			url : "chapter_findByParent.action",
+			data : {
+				"id" : $("#select_chapter").val()
+			},
+			dataType : "json",
+			async : true,
+			success : function(data) {
+				if(data.name=="noChapter"){
+					//正上方
+		        	layer.msg('该章节没有子章节', {
+		        	  offset: 0,
+		        	  shift: 6
+		        	});
+				}
+				else if(data.name=="success")
+				for (var i = 0; i < data.chapters.length; i++)
+					$("#select_childrenChapter").append(
+							"<option value='"+data.chapters[i].id+"'>" +data.chapters[i].chapterNum+"："+data.chapters[i].chapterName+ "</option>");
+				else{
+					//正上方
+		        	layer.msg('服务器错误', {
+		        	  offset: 0,
+		        	  shift: 6
+		        	});
+				}
+			}
+		});
+	};
+</script>
 
 <!--鼠标悬浮变色相关代码开始-->
     <script type="text/javascript">
@@ -39,10 +76,27 @@
         }
         return true;
     }
+    function CheckDate() {
+        var myDate1 = document.getElementById('txt_startTime');
+        var myDate2 = document.getElementById('txt_endTime');
+        if (!checkDateEarlier(myDate1.value.trim(), myDate2.value.trim())) {
+        	//正上方
+        	layer.msg('结束提交时间不能小于开始答题时间！', {
+        	  offset: 0,
+        	  shift: 6
+        	});
+        	myDate1.focus();
+            return false;
+        }
+        return true;
+    }
 	function Check() {
         if (!MM_Empty('select_chapter', '章节')) return false;
+        if (!MM_Empty('select_childrenChapter', '子章节')) return false;
         if (!MM_Empty('select_class', '班级')) return false;
+        if (!MM_Empty('txt_startTime', '开始答题时间')) return false;
         if (!MM_Empty('txt_endTime', '结束提交时间')) return false;
+        if(!CheckDate()) return false;
 		//点击之后禁止再次点击
 		//loading层
 		layer.load(0,{
@@ -106,8 +160,15 @@
                   		章节：
    			   </td>
                <td>
-                   <s:select id="select_chapter" name="chapterId" list="chapterList" cssClass="ddl" headerKey="" headerValue="==请选择章节=="
-                   listKey="id" listValue="chapterName"/>
+                   <s:select id="select_chapter" name="chapterId" list="chapterList" cssClass="ddl"
+                   listKey="id" listValue="chapterName" onchange="changeChapter();" headerKey="" headerValue="==请选择章节=="/>
+               </td>
+                <td  align="right">
+                  		子章节：
+   			   </td>
+               <td>
+                   <s:select multiple="true" size="10" id="select_childrenChapter" name="chapterIds" list="childrenChapterList" cssClass="ddl" headerKey="" headerValue=""
+                   listKey="id" listValue="chapterName" cssStyle="height:60px;"/>
                </td>
               </tr>
               <tr>
@@ -117,6 +178,12 @@
    			   <td>
                    <s:select id="select_class" name="classId" list="classList"  cssClass="ddl"  headerKey="" headerValue="==请选择班级=="
                     listKey="id" listValue="className"/>
+               </td>
+               <td  align="right">
+                  		开始答题时间：
+   			   </td>
+   			   <td>
+                   <s:textfield id="txt_startTime" name="startTime" cssClass="inpu" onclick="WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                </td>
                <td  align="right">
                   		学生提交结束时间：

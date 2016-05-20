@@ -31,6 +31,7 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 	private Integer singleChoiceCount;
 	private Integer courseId;
 	private Integer chapterId;
+	private Integer[] chapterIds;
 	private Integer classId;
 	
 //app
@@ -38,9 +39,8 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 	/** 自动生成测试提库 */
 	public String appAutoMakeQuestion() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
-		
+		//测试题目总数
 		int questionCount=judgementCount+singleChoiceCount;
-		//设置测试题目类型
 		Course courseFind=courseService.findById(courseId);
 		if(courseFind==null){
 			map.put("name", "noCourse");
@@ -51,99 +51,74 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 				map.put("name", "noChapter");
 			}
 			else{
-				//设置页大小为4
-				pageSize=4;
-				/***
-				 * 判断题目数量是否足够
-				 */
-				//得到记录总数
-				int recordCount=judgementService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-				if(recordCount<judgementCount-pageSize){//因为我忽略掉了最后一页
-					map.put("name", "judgementNotEnough");
+				List<Chapter> chapterList=chapterService.findByIds(chapterIds);
+				if(chapterList.size()<1){
+					map.put("name", "noChildrenChapter");
 				}
 				else{
+					/***
+					 * 判断题目数量是否足够
+					 */
 					//得到记录总数
-					int recordSingleCount=singleChoiceService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-					if(recordSingleCount<singleChoiceCount-pageSize){//因为我忽略掉了最后一页
-						map.put("name", "singleChoiceNotEnough");
+					int recordJudgementCount=judgementService.findByCourseAndChapterList(courseFind,chapterList).intValue();
+					if(recordJudgementCount<judgementCount){
+						map.put("name", "judgementNotEnough");
 					}
 					else{
-						Class_ classFind= classService.findById(classId);
-						//保存测试卷
-						TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0, 
-								model.getEndTime(), model.getTeaNum(), classFind,
-								courseFind, chapterFind);
-						testPaperService.save(testPaperModel);
-						/*
-						 * 生成判断题
-						 */
-						
-						//计算总页码-1-------->最后一页不要了
-						int pageCount = (recordCount + pageSize - 1) / pageSize-1;
-						int i=0,random,k=0;
-						List<Integer> intList=new ArrayList<>();
-						//产生随机页号
-						while(i<(int)Math.ceil((double)judgementCount/(double)4)){
-							random=(int)(Math.random()*pageCount);
-							if(!intList.contains(random)){
-								intList.add(random);
-								i++;
-							}
+						//得到记录总数
+						int recordSingleCount=singleChoiceService.findByCourseAndChapterList(courseFind,chapterList).intValue();
+						if(recordSingleCount<singleChoiceCount){//因为我忽略掉了最后一页
+							map.put("name", "singleChoiceNotEnough");
 						}
-						for(i=0;i<intList.size();i++){
-							PageBean pageBean=new QueryHelper(Judgement.class, "j")//
-								.addCondition("j.course=?", courseFind)//
-								.addCondition("j.chapter=?", chapterFind)//
-								.prepareAppPageBean(judgementService, intList.get(i), pageSize);
-							for(int j=0;j<4;j++){
-								if(k<judgementCount){
-									TestQuestion questionModel=new TestQuestion((Judgement)pageBean.getRecordList().get(j), null, testPaperModel);
-									testQuestionService.save(questionModel);
-								}
-								else{
-									break;
-								}
-								k++;
+						else{
+							//保存测试卷
+							TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0,model.getStartTime(),
+									model.getEndTime(), model.getTeaNum(), classService.findById(classId),
+									courseFind, chapterFind);
+							testPaperService.save(testPaperModel);
+							/*
+							 * 生成判断题
+							 */
+							
+							//设置页大小为选择的判断题数量
+							pageSize=judgementCount;
+							
+							//计算总页码--------->最后一页不要了
+							int pageCount = (recordJudgementCount + pageSize - 1) / pageSize-1;
+							int random;
+							//产生随机页号
+							random=(int)(Math.random()*pageCount)+1;
+							//得到这一页的题目---自己在service里写的
+							PageBean pageBean =judgementService.getPageBeanByInList(courseFind,random,pageSize,recordJudgementCount,chapterList);
+							//保存题目
+							for(int i=0;i<judgementCount;i++){
+								TestQuestion questionModel=new TestQuestion((Judgement)pageBean.getRecordList().get(i), null, testPaperModel);
+								testQuestionService.save(questionModel);
 							}
-						}
-						/**
-						 * 生成单选题
-						 */
+							
+							/**
+							 * 生成单选题
+							 */
 
-						//计算总页码-1-------->最后一页不要了
-						int pageSingleCount = (recordSingleCount + pageSize - 1) / pageSize-1;
-						int j=0,randomSingle,m=0;
-						List<Integer> intSingleList=new ArrayList<>();
-						//产生随机页号
-						while(j<(int)Math.ceil((double)singleChoiceCount/(double)4)){
-							randomSingle=(int)(Math.random()*pageSingleCount);
-							if(!intSingleList.contains(randomSingle)){
-								intSingleList.add(randomSingle);
-								j++;
+							pageSize=singleChoiceCount;
+							//计算总页码--------->最后一页不要了
+							int pageSingleCount = (recordSingleCount + pageSize - 1) / pageSize-1;
+							int randomSingle;
+							//产生随机页号
+							randomSingle=(int)(Math.random()*pageSingleCount)+1;
+							//得到这一页的题目---自己在service里写的
+							PageBean pageBeanSingle =singleChoiceService.getPageBeanByInList(courseFind,randomSingle,pageSize,recordSingleCount,chapterList);
+							//保存题目
+							for(int i=0;i<singleChoiceCount;i++){
+								TestQuestion questionModel=new TestQuestion(null,(SingleChoice)pageBeanSingle.getRecordList().get(i), testPaperModel);
+								testQuestionService.save(questionModel);
 							}
+							map.put("name", "success");
 						}
-						for(j=0;j<intList.size();j++){
-							PageBean pageBean=new QueryHelper(SingleChoice.class, "s")//
-								.addCondition("s.course=?", courseFind)//
-								.addCondition("s.chapter=?", chapterFind)//
-								.prepareAppPageBean(singleChoiceService, intList.get(j), pageSize);
-							for(int n=0;n<4;n++){
-								if(m<judgementCount){
-									TestQuestion questionModel=new TestQuestion(null,(SingleChoice)pageBean.getRecordList().get(j), testPaperModel);
-									testQuestionService.save(questionModel);
-								}
-								else{
-									break;
-								}
-								m++;
-							}
-						}
-						map.put("name", "success");
 					}
 				}
 			}
 		}
-		
 		JsonUtil.toJson(ServletActionContext.getResponse(),map);
 		return null;
 	}
@@ -322,6 +297,12 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 	}
 	public void setClassId(Integer classId) {
 		this.classId = classId;
+	}
+	public Integer[] getChapterIds() {
+		return chapterIds;
+	}
+	public void setChapterIds(Integer[] chapterIds) {
+		this.chapterIds = chapterIds;
 	}
 	
 }

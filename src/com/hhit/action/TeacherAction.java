@@ -65,8 +65,10 @@ public class TeacherAction extends BaseAction<Teacher>{
 	private Integer doInfo;
 	private Integer judgementCount;
 	private Integer singleChoiceCount;
+	private Timestamp startTime;
 	private Timestamp endTime;
 	private Integer chapterId;
+	private Integer[] chapterIds;
 	
 	private Integer testPaperId;
 	
@@ -326,6 +328,9 @@ public class TeacherAction extends BaseAction<Teacher>{
 			//准备数据--章节
 			List<Chapter> chapterList=chapterService.findByCourse(courseFind);
 			ActionContext.getContext().put("chapterList", chapterList);
+			//准备子章节空集合
+			List<Chapter> childrenChapterList=Collections.EMPTY_LIST;
+			ActionContext.getContext().put("childrenChapterList", childrenChapterList);
 			//准备数据--老师教的班级
 			List<ClassSelectCourse> classSelectList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(), courseFind);
 			List<Class_> classList=new ArrayList<>();
@@ -362,6 +367,9 @@ public class TeacherAction extends BaseAction<Teacher>{
 			//准备章节空集合
 			List<Chapter> chapterList=Collections.EMPTY_LIST;
 			ActionContext.getContext().put("chapterList", chapterList);
+			//准备子章节空集合
+			List<Chapter> childrenChapterList=Collections.EMPTY_LIST;
+			ActionContext.getContext().put("childrenChapterList", childrenChapterList);
 			//准备班级空集合
 			List<Class_> classList=Collections.EMPTY_LIST;
 			ActionContext.getContext().put("classList", classList);
@@ -417,25 +425,25 @@ public class TeacherAction extends BaseAction<Teacher>{
 		}
 		Course courseFind=courseService.findById(courseId);
 		Chapter chapterFind=chapterService.findById(chapterId);
-		//设置页大小为4
-		pageSize=4;
+		List<Chapter> chapterList=chapterService.findByIds(chapterIds);
+		
 		/***
 		 * 判断题目数量是否足够
 		 */
 		//得到记录总数
-		int recordCount=judgementService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-		if(recordCount<judgementCount-pageSize){//因为我忽略掉了最后一页
+		int recordJudgementCount=judgementService.findByCourseAndChapterList(courseFind,chapterList).intValue();
+		if(recordJudgementCount<judgementCount){
 			publicCode();
 			return "myCourseUI";
 		}
 		//得到记录总数
-		int recordSingleCount=singleChoiceService.findByCourseAndChapter(courseFind,chapterFind).intValue();
-		if(recordSingleCount<singleChoiceCount-pageSize){//因为我忽略掉了最后一页
+		int recordSingleCount=singleChoiceService.findByCourseAndChapterList(courseFind,chapterList).intValue();
+		if(recordSingleCount<singleChoiceCount){//因为我忽略掉了最后一页
 			publicCode();
 			return "myCourseUI";
 		}
 		//保存测试卷
-		TestPaper testPaperModel=new TestPaper(testType, questionCount, 0, endTime, teaFind.getTeaNum(), classService.findById(classId),
+		TestPaper testPaperModel=new TestPaper(testType, questionCount, 0,startTime,endTime, teaFind.getTeaNum(), classService.findById(classId),
 				courseFind, chapterFind);
 		testPaperService.save(testPaperModel);
 
@@ -444,67 +452,40 @@ public class TeacherAction extends BaseAction<Teacher>{
 		 * 生成判断题
 		 */
 		
+		//设置页大小为选择的判断题数量
+		pageSize=judgementCount;
 		
-		//计算总页码-1-------->最后一页不要了
-		int pageCount = (recordCount + pageSize - 1) / pageSize-1;
-		int i=0,random,k=0;
-		List<Integer> intList=new ArrayList<>();
+		//计算总页码--------->最后一页不要了
+		int pageCount = (recordJudgementCount + pageSize - 1) / pageSize-1;
+		int random;
 		//产生随机页号
-		while(i<(int)Math.ceil((double)judgementCount/(double)4)){
-			random=(int)(Math.random()*pageCount);
-			if(!intList.contains(random)){
-				intList.add(random);
-				i++;
-			}
+		random=(int)(Math.random()*pageCount)+1;
+		//得到这一页的题目---自己在service里写的
+		PageBean pageBean =judgementService.getPageBeanByInList(courseFind,random,pageSize,recordJudgementCount,chapterList);
+		//保存题目
+		for(int i=0;i<judgementCount;i++){
+			TestQuestion questionModel=new TestQuestion((Judgement)pageBean.getRecordList().get(i), null, testPaperModel);
+			testQuestionService.save(questionModel);
 		}
-		for(i=0;i<intList.size();i++){
-			PageBean pageBean=new QueryHelper(Judgement.class, "j")//
-				.addCondition("j.course=?", courseFind)//
-				.addCondition("j.chapter=?", chapterFind)//
-				.prepareAppPageBean(judgementService, intList.get(i), pageSize);
-			for(int j=0;j<4;j++){
-				if(k<judgementCount){
-					TestQuestion questionModel=new TestQuestion((Judgement)pageBean.getRecordList().get(j), null, testPaperModel);
-					testQuestionService.save(questionModel);
-				}
-				else{
-					break;
-				}
-				k++;
-			}
-		}
+		
 		/**
 		 * 生成单选题
 		 */
 
-		//计算总页码-1-------->最后一页不要了
+		pageSize=singleChoiceCount;
+		//计算总页码--------->最后一页不要了
 		int pageSingleCount = (recordSingleCount + pageSize - 1) / pageSize-1;
-		int j=0,randomSingle,m=0;
-		List<Integer> intSingleList=new ArrayList<>();
+		int randomSingle;
 		//产生随机页号
-		while(j<(int)Math.ceil((double)singleChoiceCount/(double)4)){
-			randomSingle=(int)(Math.random()*pageSingleCount);
-			if(!intSingleList.contains(randomSingle)){
-				intSingleList.add(randomSingle);
-				j++;
-			}
+		randomSingle=(int)(Math.random()*pageSingleCount)+1;
+		//得到这一页的题目---自己在service里写的
+		PageBean pageBeanSingle =singleChoiceService.getPageBeanByInList(courseFind,randomSingle,pageSize,recordSingleCount,chapterList);
+		//保存题目
+		for(int i=0;i<singleChoiceCount;i++){
+			TestQuestion questionModel=new TestQuestion(null,(SingleChoice)pageBeanSingle.getRecordList().get(i), testPaperModel);
+			testQuestionService.save(questionModel);
 		}
-		for(j=0;j<intList.size();j++){
-			PageBean pageBean=new QueryHelper(SingleChoice.class, "s")//
-				.addCondition("s.course=?", courseFind)//
-				.addCondition("s.chapter=?", chapterFind)//
-				.prepareAppPageBean(singleChoiceService, intList.get(j), pageSize);
-			for(int n=0;n<4;n++){
-				if(m<judgementCount){
-					TestQuestion questionModel=new TestQuestion(null,(SingleChoice)pageBean.getRecordList().get(j), testPaperModel);
-					testQuestionService.save(questionModel);
-				}
-				else{
-					break;
-				}
-				m++;
-			}
-		}
+		
 		//准备数据--courseId
 		ActionContext.getContext().put("courseId", courseId);
 		//准备数据--doInfo
@@ -832,4 +813,17 @@ public class TeacherAction extends BaseAction<Teacher>{
 	public void setOldPwd(String oldPwd) {
 		this.oldPwd = oldPwd;
 	}
+	public Integer[] getChapterIds() {
+		return chapterIds;
+	}
+	public void setChapterIds(Integer[] chapterIds) {
+		this.chapterIds = chapterIds;
+	}
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+	
 }

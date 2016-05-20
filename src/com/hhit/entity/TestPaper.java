@@ -43,11 +43,12 @@ public class TestPaper {
 	 * @return
 	 */
 	public TestPaper(String testType, Integer questionCount,
-			Integer submitCount, Timestamp endTime, String teaNum,
+			Integer submitCount, Timestamp startTime,Timestamp endTime, String teaNum,
 			Class_ class_, Course course, Chapter chapter) {
 		this.testType = testType;
 		this.questionCount = questionCount;
 		this.submitCount = submitCount;
+		this.startTime=startTime;
 		this.endTime = endTime;
 		this.teaNum = teaNum;
 		this.class_ = class_;
