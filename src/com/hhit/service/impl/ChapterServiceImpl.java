@@ -47,4 +47,12 @@ public class ChapterServiceImpl extends DaoSupportImpl<Chapter> implements IChap
 				.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Chapter> findByParent(Chapter parentFind) {
+		return getSession().createQuery("FROM Chapter WHERE parent=?")//
+				.setParameter(0, parentFind)//
+				.list();
+	}
+
 }

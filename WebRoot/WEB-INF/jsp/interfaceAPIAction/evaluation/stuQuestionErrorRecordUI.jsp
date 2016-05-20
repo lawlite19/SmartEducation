@@ -71,7 +71,7 @@
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-							questionId: <s:textfield cssClass="inpu" name="questionId"></s:textfield>eg:210
+							questionId: <s:textfield cssClass="inpu" name="questionId"></s:textfield>eg:12
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">

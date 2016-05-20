@@ -16,4 +16,6 @@ public interface IChapterService extends IDaoSupport<Chapter>{
 	Chapter findByCourseAndLikeChapterNum(Course courseFind, String string);
 	//根据父章节和章节号查找
 	Chapter findByParentAndLikeChapterNum(Chapter chapter, String string);
+	//根据父章节查找子章节
+	List<Chapter> findByParent(Chapter parentFind);
 }

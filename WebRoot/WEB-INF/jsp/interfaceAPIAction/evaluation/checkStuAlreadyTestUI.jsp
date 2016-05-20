@@ -67,7 +67,7 @@
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
-							testPaperId: <s:textfield cssClass="inpu" name="testPaperId"></s:textfield>eg:18
+							testPaperId: <s:textfield cssClass="inpu" name="testPaperId"></s:textfield>eg:2
 						</span>
 						<br/><br/>
                         <span class="span_apiButton">

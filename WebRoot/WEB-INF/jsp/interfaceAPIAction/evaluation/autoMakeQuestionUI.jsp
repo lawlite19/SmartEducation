@@ -51,6 +51,11 @@
 								</span>
 								<br/>
 								<span class="span_apiInfo">
+									课程子章节id数组：<span class="span_apiProperty">chapterIds</span>-->
+									<span class="span_apiPropertyInfo">数组类型</span>
+								</span>
+								<br/>
+								<span class="span_apiInfo">
 									作业类型：<span class="span_apiProperty">testType</span>
 										<span class="span_apiInfo">(课前预习、课堂测试、课后复习)</span>
 								</span>
@@ -65,6 +70,11 @@
 								<br/>
 								<span class="span_apiInfo">
 									判断题道数：<span class="span_apiProperty">judgementCount</span>
+								</span>
+								<br/>
+								<span class="span_apiInfo">
+									答题开始时间：<span class="span_apiProperty">startTime</span>-->
+											<span class="span_apiWarning">Timestamp类型</span>
 								</span>
 								<br/>
 								<span class="span_apiInfo">
@@ -102,7 +112,11 @@
 							chapterId: <s:textfield cssClass="inpu" name="chapterId"></s:textfield>eg:1
 						</span>
 						<br/><br/>
-						
+						<span class="span_apiInfo">
+							chapterIds: <s:textfield cssClass="inpu" name="chapterIds"></s:textfield>eg:2
+							<s:textfield cssClass="inpu" name="chapterIds"></s:textfield>eg:3
+						</span>
+						<br/><br/>
 						<span class="span_apiInfo">
 							testType: <s:textfield cssClass="inpu" name="testType"></s:textfield>eg:课堂测试
 						</span>
@@ -120,6 +134,10 @@
 						</span>
 						<br/><br/>
 						<span class="span_apiInfo">
+							startTime: <s:textfield cssClass="inpu" name="startTime"></s:textfield>eg:2016-05-21 16:17:28
+						</span>
+						<br/><br/>
+						<span class="span_apiInfo">
 							endTime: <s:textfield cssClass="inpu" name="endTime"></s:textfield>eg:2016-06-09 16:17:28
 						</span>
 						<br/><br/>
@@ -127,7 +145,6 @@
                         	<s:submit value="提交"   cssClass="ttn"></s:submit>
                         </span>
 					</div>
-
 				</td>
 			</tr>
 	</tbody>
