@@ -1,5 +1,6 @@
 package com.hhit.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TestPaper> findByClassAndCourse(Class_ classFind,Course courseFind) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=? ORDER BY id DESC")//
+	public List<TestPaper> findByClassAndCourse(Class_ classFind,Course courseFind,Timestamp nowTime) {
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=? startTime<? AND endTime>? ORDER BY id DESC")//
 				.setParameter(0, classFind)//
 				.setParameter(1, courseFind)//
+				.setTimestamp(3, nowTime)//
+				.setTimestamp(4, nowTime)//
 				.list();
 	}
 
@@ -35,9 +38,11 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TestPaper> findByClass(Class_ classFind) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=? ORDER BY id DESC")//
+	public List<TestPaper> findByClass(Class_ classFind,Timestamp nowTime) {
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND startTime<? AND endTime>? ORDER BY id DESC")//
 				.setParameter(0, classFind)//
+				.setTimestamp(1, nowTime)//
+				.setTimestamp(2, nowTime)//
 				.list();
 	}
 

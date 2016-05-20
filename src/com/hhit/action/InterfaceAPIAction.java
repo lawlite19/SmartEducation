@@ -73,6 +73,10 @@ public class InterfaceAPIAction {
 	public String teaInfoByIdUI() throws Exception{
 		return "teaInfoByIdUI";
 	}
+	/** 章节的子章节 */
+	public String childrenChapterUI() throws Exception{
+		return "childrenChapterUI";
+	}
 	
 //实时测评接口
 //=======================================

@@ -111,7 +111,7 @@
 					<td align="center">${judgement.chapter.chapterName}&nbsp;</td>
 					<td align="center">${judgement.knowledgeName}&nbsp;</td>
 					<td align="center">
-				    <s:if test="question.length()>10">
+				    <s:if test="judgement.question.length()>10">
 						<a class="questionDetails" id="${judgement.question}" style="cursor:pointer;">
 							${judgement.question.substring(0,10)} .....
 						</a>
@@ -126,6 +126,11 @@
 					<s:a action="questionErrorRecord_deleteJudgement?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
+					|
+					<a href="${judgement.chapter.url}" target="_blank" title="查看相关知识点">
+						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/searchicon.png"  />
+						学习
+					</a>
 					</td>
 				</tr>
 			</s:iterator>

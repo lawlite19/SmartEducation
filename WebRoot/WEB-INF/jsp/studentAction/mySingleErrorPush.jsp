@@ -96,8 +96,8 @@
 				<td align="center">所属章节</td>
 				<td align="center">知识点</td>
 				<td align="center">问题</td>
-				<td align="center">答案</td>
-				<td align="center">难易指数</td>
+				<td align="center">正确答案</td>
+				<td align="center">问题的答案</td>
 				<td align="center">相关操作</td>
 			</tr>
 		</thead>
@@ -107,25 +107,44 @@
 			<s:iterator value="recordList" status="s">
 				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
 					<td align="center">${(currentPage-1)*10+s.count}</td>
-					<td align="center">${judgement.course.courseName}&nbsp;</td>
-					<td align="center">${judgement.chapter.chapterName}&nbsp;</td>
-					<td align="center">${judgement.knowledgeName}&nbsp;</td>
+					<td align="center">${singleChoice.course.courseName}&nbsp;</td>
+					<td align="center">${singleChoice.chapter.chapterName}&nbsp;</td>
+					<td align="center">${singleChoice.knowledgeName}&nbsp;</td>
 					<td align="center">
-				    <s:if test="question.length()>10">
-						<a class="questionDetails" id="${judgement.question}" style="cursor:pointer;">
-							${judgement.question.substring(0,10)} .....
+					<s:if test="singleChoice.question.length()>10">
+						<a class="questionDetails" id="${singleChoice.question}" style="cursor:pointer;">
+							${singleChoice.question.substring(0,10)} .....
 						</a>
 					</s:if>
 					<s:else>
-							${judgement.question}
+							${singleChoice.question}
 					</s:else>
 					&nbsp;</td>
-					<td align="center">${judgement.answer}&nbsp;</td>
-					<td align="center">${judgement.difExponent}&nbsp;</td>
+					<td align="center">${singleChoice.answer}&nbsp;</td>
+					<td align="center">
+				    <s:if test="singleChoice.answerA.length()>10">
+						<a class="answerDetails" id="A:${singleChoice.answerA}<br/>B:${singleChoice.answerB}<br/>C:${singleChoice.answerC}<br/>D:${singleChoice.answerD}"
+						style="cursor:pointer;">
+							A：${singleChoice.answerA.substring(0,10)} .....
+						</a>
+					</s:if>
+					<s:else>
+						<a class="answerDetails" id="A:${singleChoice.answerA}<br/>B:${singleChoice.answerB}<br/>C:${singleChoice.answerC}<br/>D:${singleChoice.answerD}"
+						style="cursor:pointer;">
+							A：${singleChoice.answerA} .....
+						</a>
+					</s:else>
+					&nbsp;</td>
+					<td align="center">${singleChoice.answer}&nbsp;</td>
 					<td align="center">
 					<s:a action="questionErrorRecord_deleteSingle?id=%{id}" onclick="return window.confirm('您确定要删除吗？')">
 						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/del.gif"  />
 					</s:a>
+					|
+					<a href="${singleChoice.chapter.url}" target="_blank" title="查看相关知识点">
+						<img  style=" border:0px;"  src="${pageContext.request.contextPath}/style/images/searchicon.png"  />
+						学习
+					</a>
 					</td>
 				</tr>
 			</s:iterator>
@@ -142,7 +161,15 @@
 	<!-- tips加载全部信息 -->
 <script type="text/javascript">
 (function(){
-	//问题描述
+	//显示答案描述
+	$('a.answerDetails').on('click', function (event) {
+	    var value = $(this).attr("id");
+	  //tips层-左
+		 index=layer.tips(value, this, {
+		  tips: [1, '#78BA32'],
+		  time:4000 //4s关闭
+		});
+	});
 	$('a.questionDetails').on('click',function(event){
 		var value = $(this).attr("id");
 		  //tips层-左

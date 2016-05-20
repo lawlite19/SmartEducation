@@ -180,7 +180,7 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 
 			// Include tool tip for the chart
 			String imageMap1 = c.getHTMLImageMap("", "",
-			    "title='Revenue of {dataSetName} in {xLabel}: US$ {value}M'");
+			    "title='{dataSetName}  {xLabel}: {value}分'");
 			ActionContext.getContext().put("chart1URL", chart1URL);
 			ActionContext.getContext().put("imageMap1", imageMap1);
 			

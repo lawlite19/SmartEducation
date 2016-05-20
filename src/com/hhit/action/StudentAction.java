@@ -306,7 +306,7 @@ public class StudentAction extends BaseAction<Student> {
 		// Output the chart
 		String chart1URL = c.makeSession(ServletActionContext.getRequest(), "chart1");
 		// Include tool tip for the chart
-		String imageMap1 = c.getHTMLImageMap("", "", "title='{xLabel}: US$ {value}M'");
+		String imageMap1 = c.getHTMLImageMap("", "", "title='{xLabel}: 浏览{value}次'");
 
 		ActionContext.getContext().put("chart1URL", chart1URL);
 		ActionContext.getContext().put("imageMap1", imageMap1);

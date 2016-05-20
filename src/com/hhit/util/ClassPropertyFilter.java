@@ -84,6 +84,11 @@ public class ClassPropertyFilter {
 		String[] chapterProperty={"course"};
 		map.put("chapters", JsonUtil.jsonListFilter(chapters, chapterProperty));
 	}
+	//章节list过滤2
+	public static void ListChapter2Filter(Map<String,Object> map,List<Chapter> chapters){
+		String[] chapterProperty={"course","parent","children"};
+		map.put("chapters", JsonUtil.jsonListFilter(chapters, chapterProperty));
+	}
 	//班级list过滤
 	public static void ListClassFilter(Map<String,Object> map,List<Class_> classList){
 		String[] classProperty={"department","students"};

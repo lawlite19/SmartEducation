@@ -25,6 +25,7 @@ public class Course implements java.io.Serializable{
 	private String description;
 	//add properties
 	private Float credit;
+	private String imgUrl;
 	
 	private Set<Department> departments;
 	
@@ -72,5 +73,10 @@ public class Course implements java.io.Serializable{
 	public void setCredit(Float credit) {
 		this.credit = credit;
 	}
-
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 }
