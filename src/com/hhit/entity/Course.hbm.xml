@@ -30,6 +30,11 @@
 				<comment>学分</comment>
 			</column>
 		</property>		
+		<property name="imgUrl" type="string">
+			<column name="ImgUrl">
+				<comment>学分</comment>
+			</column>
+		</property>	
 		<!-- departments属性，本类与Department的多对多   -->
 		<set name="departments" table="T_Department_Course">
 			<key column="Course_Id"></key>

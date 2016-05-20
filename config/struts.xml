@@ -51,6 +51,7 @@
 		    <result name="visitRecord">/WEB-INF/jsp/studentAction/visitRecord.jsp</result>
 			<result name="myReceivePush">/WEB-INF/jsp/studentAction/myReceivePush.jsp</result>
 			<result name="myJudgementErrorPush">/WEB-INF/jsp/studentAction/myJudgementErrorPush.jsp</result>
+			<result name="mySingleErrorPush">/WEB-INF/jsp/studentAction/mySingleErrorPush.jsp</result>
 			
 		</action>
 		<!-- 老师管理 -->
@@ -278,6 +279,7 @@
 			<result name="stuVisitCourseRecordUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/stuVisitCourseRecordUI.jsp</result>
 			<result name="stuSearchCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/stuSearchCourseUI.jsp</result>
 			<result name="teaInfoByIdUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoByIdUI.jsp</result>
+			<result name="childrenChapterUI">/WEB-INF/jsp/interfaceAPIAction/childrenChapterUI.jsp</result>
 			
 			
 		</action>

@@ -75,6 +75,26 @@ public class ChapterAction extends BaseAction<Chapter>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//获取子章节
+	public String appChildrenChapter() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Chapter parentFind=chapterService.findById(model.getId());
+		if(parentFind==null){
+			map.put("name", "noParent");
+		}
+		else{
+			List<Chapter> chapterList=chapterService.findByParent(parentFind);
+			if(chapterList.size()<1){
+				map.put("name", "noChapter");
+			}
+			else{
+				ClassPropertyFilter.ListChapter2Filter(map, chapterList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 
 	public Integer getCourseId() {
 		return courseId;

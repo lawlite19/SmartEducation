@@ -1,6 +1,8 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,6 @@ import com.hhit.entity.TestPaper;
 import com.hhit.entity.TestQuestion;
 import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.JsonUtil;
-import com.hhit.util.QueryHelper;
 
 @SuppressWarnings("serial")
 @Controller
@@ -122,7 +123,7 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 		JsonUtil.toJson(ServletActionContext.getResponse(),map);
 		return null;
 	}
-	//学生测试卷---根据班级查找
+	//学生测试卷---根据班级查找--在提交的时间段内的
 	public String appStuTestPaper() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		Class_ classFind=classService.findById(classId);
@@ -130,7 +131,8 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 			map.put("name", "noClass");
 		}
 		else{
-			List<TestPaper> testPaperList=testPaperService.findByClass(classFind);
+			Timestamp nowTime=new Timestamp(new Date().getTime());
+			List<TestPaper> testPaperList=testPaperService.findByClass(classFind,nowTime);
 			if(testPaperList.size()<1){
 				map.put("name", "noTestPaper");
 			}
@@ -234,7 +236,8 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 				map.put("name", "noCourse");
 			}
 			else{
-				List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind, courseFind);
+				Timestamp nowTime=new Timestamp(new Date().getTime());
+				List<TestPaper> testPaperList=testPaperService.findByClassAndCourse(classFind, courseFind,nowTime);
 				if(testPaperList.size()<1){
 					map.put("name", "noTestPaper");
 				}
