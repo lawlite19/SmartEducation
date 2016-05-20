@@ -277,6 +277,7 @@
 			<result name="listSpiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/listSpiderCourseDiscussUI.jsp</result>
 			<result name="stuVisitCourseRecordUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/stuVisitCourseRecordUI.jsp</result>
 			<result name="stuSearchCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/stuSearchCourseUI.jsp</result>
+			<result name="teaInfoByIdUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoByIdUI.jsp</result>
 			
 			
 		</action>

@@ -193,7 +193,7 @@ public class JudgementAction extends BaseAction<Judgement>{
 			}
 			//数据导入操作
 			//需要解析的Excel文件
-			String str[]=new String[6];
+			String str[]=new String[7];
 			Integer difficult = null;
 			File file = new File(tarDir+questionBankFileName);
 			try {
@@ -204,23 +204,25 @@ public class JudgementAction extends BaseAction<Judgement>{
 				//读取默认第一个工作表sheet
 				XSSFSheet sheet = workbook.getSheetAt(0);
 				int firstRowNum = 3;
+				
 				//获取sheet中最后一行行号
 				int lastRowNum = sheet.getLastRowNum();
 				for (int i = firstRowNum; i <=lastRowNum; i++) {
 					XSSFRow row = sheet.getRow(i);
 					//获取当前行最后单元格列号
 					//int lastCellNum = row.getLastCellNum();
-					for (int j = 0; j < 7; j++) {
+					for (int j = 0; j < 8; j++) {
 						XSSFCell cell = row.getCell(j);
-						if(j==6)
+						if(j==7)
 							difficult=(int) cell.getNumericCellValue();
 						else
 							str[j] = cell.getStringCellValue();
 					}
 					Course courseFind=courseService.findByCourseName(str[1]);
 					Chapter chapter=chapterService.findByCourseAndLikeChapterName(courseFind, str[2]);
+					Chapter realChapter=chapterService.findByParentAndLikeChapterNum(chapter, str[3]);
 					//构造函数
-					Judgement judgeModel=new Judgement(str[0], courseFind,chapter, str[3], str[4],str[5], difficult, new Timestamp(new Date().getTime()), 0);
+					Judgement judgeModel=new Judgement(str[0], courseFind,realChapter, str[4], str[5],str[6], difficult, new Timestamp(new Date().getTime()), 0);
 					//保存数据库
 					judgementService.save(judgeModel);
 				}

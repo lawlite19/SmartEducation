@@ -159,7 +159,7 @@
 					</td>
 					<td align="center">${(currentPage-1)*10+s.count}</td>
 					<td align="center">${course.courseName}&nbsp;</td>
-					<td align="center">${chapter.chapterName}&nbsp;</td>
+					<td align="center">${chapter.chapterNum}、${chapter.chapterName}&nbsp;</td>
 					<td align="center">${knowledgeName}&nbsp;</td>
 					<td align="center">
 					<s:if test="question.length()>10">

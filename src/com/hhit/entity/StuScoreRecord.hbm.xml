@@ -25,8 +25,13 @@
 				<comment>分数</comment>
 			</column>
 		</property>
+		<property name="submitTime" type="timestamp">
+			<column name="SubmitTime">
+				<comment>提交时间</comment>
+			</column>
+		</property>
 		<!-- testPaper属性，与 TestPaper类一对一-->
-		<many-to-one name="testPaper" class="TestPaper" column="TestPaper_Id">
+		<many-to-one name="testPaper" class="TestPaper" column="TestPaper_Id" lazy="false">
 		</many-to-one>
 		
 	</class>

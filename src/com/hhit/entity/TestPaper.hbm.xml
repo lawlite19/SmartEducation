@@ -12,27 +12,32 @@
 		</id>
 		<property name="testType" type="string">	
 			<column name="TestType" length="50">
-				<comment>课程名</comment>
+				<comment>测试类型</comment>
 			</column>
 		</property>
 		<property name="questionCount" type="integer">
 			<column name="QuestionCount">
-				<comment>添加时间</comment>
+				<comment>问题数量</comment>
 			</column>
 		</property>
 		<property name="submitCount" type="integer">
 			<column name="SubmitCount">
-				<comment>课程介绍</comment>
+				<comment>提交人数</comment>
 			</column>
 		</property>
+		<property name="startTime" type="timestamp">
+			<column name="StartTime">
+				<comment>开始时间</comment>
+			</column>
+		</property>	
 		<property name="endTime" type="timestamp">
 			<column name="EndTime">
-				<comment>学分</comment>
+				<comment>结束时间</comment>
 			</column>
 		</property>	
 		<property name="teaNum" type="string">
 			<column name="TeaNum" length="20">
-				<comment>学分</comment>
+				<comment>老师工号</comment>
 			</column>
 		</property>		
 		<!-- class_属性，本类与Class_的一对一   -->

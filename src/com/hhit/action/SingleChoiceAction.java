@@ -191,7 +191,7 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 			}
 			//数据导入操作
 			//需要解析的Excel文件
-			String str[]=new String[10];
+			String str[]=new String[11];
 			Integer difficult = null;
 			File file = new File(tarDir+questionBankFileName);
 			try {
@@ -208,17 +208,18 @@ public class SingleChoiceAction extends BaseAction<SingleChoice>{
 					XSSFRow row = sheet.getRow(i);
 					//获取当前行最后单元格列号
 					//int lastCellNum = row.getLastCellNum();
-					for (int j = 0; j < 11; j++) {
+					for (int j = 0; j < 12; j++) {
 						XSSFCell cell = row.getCell(j);
-						if(j==10)
+						if(j==11)
 							difficult=(int) cell.getNumericCellValue();
 						else
 							str[j] = cell.getStringCellValue();
 					}
 					Course courseFind=courseService.findByCourseName(str[1]);
 					Chapter chapter=chapterService.findByCourseAndLikeChapterName(courseFind,str[2]);
+					Chapter realChapter=chapterService.findByParentAndLikeChapterNum(chapter,str[3]);
 					//构造函数
-					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind,chapter, str[3], str[4], str[5], str[6], str[7], str[8],str[9], difficult,
+					SingleChoice singleChoiceFind=new SingleChoice(str[0], courseFind,realChapter, str[4], str[5], str[6], str[7], str[8], str[9],str[10], difficult,
 							new Timestamp(new Date().getTime()),0);
 					//保存数据库
 					singleChoiceService.save(singleChoiceFind);

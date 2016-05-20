@@ -50,4 +50,14 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 				
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TestPaper> findByClassAndCourseASC(Class_ classFind,Course courseFind) {
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=?")//
+				.setParameter(0, classFind)//
+				.setParameter(1, courseFind)//
+				.list();
+	}
+
+
 }
