@@ -247,7 +247,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		return null;
 	}
 	//老师查看教学进程
-	public String appTeaCourseTeachProcess() throws Exception{
+	public String appTeaCourseDeptTeachProcess() throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
 		//找到课程
 		Course courseFind=courseService.findById(courseId);
@@ -261,12 +261,52 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 				map.put("name", "noTeacher");
 			}
 			else{
-				//根据老师和课程找到教学进程
-				List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind, courseFind);
-				ClassPropertyFilter.ListTeachPorcessFilter(map, teachProcessList);
+				Department deptFind=departmentService.findById(departmentId);
+				if(deptFind==null){
+					map.put("name", "noDepartment");
+				}
+				else{
+					//根据老师和课程找到教学进程
+					List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind, courseFind, deptFind);
+					ClassPropertyFilter.ListTeachPorcessFilter(map, teachProcessList);
+					map.put("name", "success");
+				}
 			}
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//老师课程的系和系中的班
+	public String appTeaCourseDept() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Teacher teaFind=teacherService.findByTeacherNum(teaNum);
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			Course courseFind=courseService.findById(courseId);
+			if(courseFind==null){
+				map.put("name", "noCourse");
+			}
+			else{
+				List<ClassSelectCourse> classSelectList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(), courseFind);
+				if(classSelectList.size()<1){
+					map.put("name", "noDepartment");
+				}
+				else{
+					List<Department> departmentList=new ArrayList<>();
+					for(int i=0;i<classSelectList.size();i++){
+						if(!departmentList.contains(classSelectList.get(i).getClass_().getDepartment())){
+							departmentList.add(classSelectList.get(i).getClass_().getDepartment());
+						}
+					}
+					ClassPropertyFilter.ListDepartmentFilter(map, departmentList);
+					map.put("name", "success");
+				}
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
 		return null;
 	}
 	

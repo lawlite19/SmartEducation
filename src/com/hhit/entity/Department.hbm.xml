@@ -48,7 +48,7 @@
 			<one-to-many class="Teacher" />
 		</set>	
 		<!--classes属性，本类与Class_的一对多-->
-		<set name="classes">
+		<set name="classes" lazy="false">
 			<key column="Department_Id"></key>
 			<one-to-many class="Class_" />
 		</set>		
