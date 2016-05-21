@@ -29,6 +29,26 @@
             	//$("#form_closeLayer").submit();
         })();
 </script>
+<script type="text/javascript">
+    function MM_Empty(ctrlId, msg) {
+        var ctrl = document.getElementById(ctrlId);
+        if (!ctrl) return true;
+        if (ctrl.value.trim() == "") {
+        	//正上方
+        	layer.msg('请选择'+msg, {
+        	  offset: 0,
+        	  shift: 6
+        	});
+            ctrl.focus();
+            return false;
+        }
+        return true;
+    }
+	function Check() {
+        if (!MM_Empty('select_dept', '系别')) return false;
+        layer.load();
+    }
+	</script>
 </head>
 <body>
 <div class="main">
@@ -42,7 +62,23 @@
 <!-- 添加教学进程 -->
 <!-- 添加按钮 -->
 <table align="center" cellspacing="3" cellpadding="5">
-	<tr>
+	
+	<tr><s:form action="teachProcess_list" method="post">
+		<s:hidden name="courseId"></s:hidden>
+		<td>按系别：</td>
+		<td>
+			<s:select id="select_dept" name="departmentId" list="departmentList" headerKey="" headerValue="==请选择系别=="
+			cssClass="ddl" listKey="id" listValue="deptName">
+			
+			</s:select>
+		</td>
+		
+		<td>
+			<s:submit cssClass="bbtn btn-primary" onclick="return Check();" value="查询"></s:submit>
+		</td>
+		</s:form>
+		<td width="20px">
+		</td>
 		<td class="bbtn btn-primary" align="center">
 			<!--  <a href="#" onclick="AddTeachProcess('${courseId}')"  style="color:white;text-decoration: none;">添加</a>
 			-->
@@ -55,7 +91,7 @@
 <!-- 教学进程信息 -->
 			<ul style="overflow:hidden;">
 			<div class="mframe">
-<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
+<table width="98%" align="center" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
@@ -80,6 +116,7 @@
 				<th align="center">节次</th>
 				<th align="center">教学方式</th>
 				<th align="center">教学章节</th>
+				<th align="center">系别</th>
 				<th align="center">操作</th>
 			</tr>
 		</thead>
@@ -105,6 +142,7 @@
 					<td align="center">${lessonCount}&nbsp;</td>
 					<td align="center">${teachType.dictName}&nbsp;</td>
 					<td align="center">${chapter.chapterName}&nbsp;</td>
+					<td align="center">${department.deptName}&nbsp;</td>
 					<td  align="center">
 					<s:a action="teachProcess_editUI?id=%{id}&courseId=%{courseId}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hhit.base.DaoSupportImpl;
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Course;
+import com.hhit.entity.Department;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
 import com.hhit.service.ITeachProcessService;
@@ -45,6 +46,15 @@ public class TeachProcessServiceImpl extends DaoSupportImpl<TeachProcess> implem
 				.setDate("time", nowTime)//
 				.list();
 		
+	}
+
+	@Override
+	public List<TeachProcess> findByTeacherAndCourse(Teacher teaFind,Course courseFind, Department deptFind) {
+		return getSession().createQuery("FROM TeachProcess WHERE teacher=? AND course=? AND department=?")//
+				.setParameter(0, teaFind)//
+				.setParameter(1, courseFind)//
+				.setParameter(2, deptFind)//
+				.list();
 	}
 
 }

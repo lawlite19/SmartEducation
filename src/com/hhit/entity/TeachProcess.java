@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 //
 
 public class TeachProcess implements java.io.Serializable{
+
 	/**
 	 * 
 	 */
@@ -31,6 +32,8 @@ public class TeachProcess implements java.io.Serializable{
 	private DataDict teachType;
 	private Course course;
 	private Teacher teacher; 
+	//new add
+	private Department department;
 	
 	public Integer getId() {
 		return id;
@@ -95,5 +98,10 @@ public class TeachProcess implements java.io.Serializable{
 	public void setPushTime(Timestamp pushTime) {
 		this.pushTime = pushTime;
 	}
-	
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 }

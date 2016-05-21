@@ -44,5 +44,8 @@
 		<!--chapter属性，本类与Chapter一对一  -->
 		<many-to-one name="chapter" class="Chapter" column="Chapter_Id" lazy="false"></many-to-one>
 		
+		<!--department属性，本类与Department一对一  -->
+		<many-to-one name="department" class="Department" column="Department_Id" lazy="false"></many-to-one>
+		
 	</class>
 </hibernate-mapping>

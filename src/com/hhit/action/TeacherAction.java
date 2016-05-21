@@ -248,7 +248,7 @@ public class TeacherAction extends BaseAction<Teacher>{
 
 		}
 		if(courseId==null){
-			//准备数据--第一门课程的教学进程
+			//准备数据--第一门课程
 			List<Course> couseList=new ArrayList<>(teaFind.getCourses());
 			Course courseFind=couseList.get(0);
 			//准备数据--课程名
