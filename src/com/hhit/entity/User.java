@@ -1,5 +1,6 @@
 package com.hhit.entity;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -21,6 +22,9 @@ public class User implements java.io.Serializable{
 	private String password;
 	private String userType;
 	
+	//new add
+	private Timestamp loginTime;
+	private Integer totalMinute;
 	
 	private Student student;
 	private Teacher teacher;
@@ -176,6 +180,22 @@ public class User implements java.io.Serializable{
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+
+	public Timestamp getLoginTime() {
+		return loginTime;
+	}
+
+	public void setLoginTime(Timestamp loginTime) {
+		this.loginTime = loginTime;
+	}
+
+	public Integer getTotalMinute() {
+		return totalMinute;
+	}
+
+	public void setTotalMinute(Integer totalMinute) {
+		this.totalMinute = totalMinute;
 	}
 
 

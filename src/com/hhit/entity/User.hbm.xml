@@ -26,6 +26,16 @@
 				<comment>用户类型</comment>
 			</column>
 		</property>
+		<property name="loginTime" type="timestamp">
+			<column name="LoginTime">
+				<comment>登录时间</comment>
+			</column>
+		</property>
+		<property name="totalMinute" type="integer">
+			<column name="TotalMinute">
+				<comment>在线总时长</comment>
+			</column>
+		</property>
 		<!--student属性，本类与Student的一对一关系     外键对应主键 -->
 		<many-to-one name="student" class="Student" lazy="false">
 			<column name="Student_Id"></column>

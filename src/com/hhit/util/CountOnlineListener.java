@@ -18,8 +18,7 @@ public class CountOnlineListener implements HttpSessionListener {
 		Integer count = (Integer) context.getAttribute("count");
 		if(userFind!=null){
 			if (count == null) {
-				count = new Integer(1);
-			} else {
+				count = new Integer(1);			} else {
 				int co = count.intValue();
 				count = new Integer(co + 1);
 			}

@@ -205,6 +205,11 @@ public class InterfaceAPIAction {
 	public String stuSearchCourseUI() throws Exception{
 		return "stuSearchCourseUI";
 	}
+	/** 课程搜索 */
+	public String listSpiderCourseScoreUI() throws Exception{
+		return "listSpiderCourseScoreUI";
+	}
+	
 //教学质量接口	
 //==================================	
 	/** 学生课程分数 */

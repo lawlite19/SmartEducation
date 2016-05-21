@@ -227,7 +227,14 @@
 			<result name="toMyJudgementError" type="redirectAction">student_myJudgementErrorPush</result>
 			<result name="toMySingleError" type="redirectAction">student_mySingleErrorPush</result>
 		</action>
-
+		<!-- 平台信息 -->
+		<action name="userListener_*" class="userListener" method="{1}">
+			<result name="list">/WEB-INF/jsp/websiteInfo/onlineMember.jsp</result>
+		</action>
+		<!-- 个人在线时长信息 -->
+		<action name="userOnlineTime_*" class="userOnlineTimeAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/userOnlineTimeAction/list.jsp</result>
+		</action>
 		<!-- 接口API说明界面 -->
 		<action name="interfaceAPI_*" class="interfaceAPIAction" method="{1}">
 			<result name="loginUI">/WEB-INF/jsp/interfaceAPIAction/loginUI.jsp</result>
@@ -280,6 +287,7 @@
 			<result name="stuSearchCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/stuSearchCourseUI.jsp</result>
 			<result name="teaInfoByIdUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoByIdUI.jsp</result>
 			<result name="childrenChapterUI">/WEB-INF/jsp/interfaceAPIAction/childrenChapterUI.jsp</result>
+			<result name="listSpiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/listSpiderCourseScoreUI.jsp</result>
 			
 			
 		</action>
