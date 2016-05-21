@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="UserOnlineTime" table="T_UserOnlineTime">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="date" type="date">	
+			<column name="Date">
+				<comment>日期</comment>
+			</column>
+		</property>
+		<property name="durationMinute" type="integer">
+			<column name="DurationMinute">
+				<comment>在线时长</comment>
+			</column>
+		</property>
+
+		<!-- user属性，本类与 User的多对一-->
+		<many-to-one name="user" class="User">
+			<column name="User_Id"></column>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -164,6 +164,11 @@ public class ClassPropertyFilter {
 		String[] stuPaperAccountProperty={"class_","course"};
 		map.put("stuPaperAccounts", JsonUtil.jsonListFilter(stuPaperAccountList, stuPaperAccountProperty));
 	}
+	//爬取课程评分list过滤
+	public static void ListSpiderCourseScoreFilter(Map<String,Object> map,List<CourseScore> courseScoreList){
+		String[] courseScoreProperty={"spiderCourse"};
+		map.put("courseScores", JsonUtil.jsonListFilter(courseScoreList, courseScoreProperty));
+	}
 	
 	
 }

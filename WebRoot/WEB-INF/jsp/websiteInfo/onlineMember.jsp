@@ -38,17 +38,7 @@
                 </tr>
                 <tr>
                     <td class="mm" colspan="3">
-<table align="left" cellspacing="1" cellpadding="1">
-     <tbody><tr>
-               <td>
-                                     按部门：
-				</td>
-               <td colspan="4" align="center">
-               		<s:submit onclick="return Check();" cssClass="ttn" value="查询" ></s:submit>
-			   </td>
-        </tr>
-    </tbody>
-</table>
+
 </td>
 </tr>
 </tbody>
@@ -75,21 +65,27 @@
 		<!-- 表头-->
 		<thead>
 			<tr>
-				<td align="center">选择</td>
 				<td align="center">序号</td>
-				<td align="center">所属部门</td>
-				<td align="center">所属班级</td>
-				<td align="center">姓名</td>
 				<td align="center">账号</td>
-				<td align="center">年级</td>
-				<td align="center">性别</td>
-				<td align="center">相关操作</td>
+				<td align="center">用户类型</td>
+				<td align="center">登录时间</td>
+				<td align="center">在线总时长</td>
 			</tr>
 		</thead>
 
 		<!--显示数据列表-->
 		<tbody>
-				<h1>${#session.size}</h1>
+				<h2>当前在线人数：${onlineCount}</h2>
+				<s:iterator value="userList" status="s">
+				<tr onmouseover="SetNewColor(this);" onmouseout="SetOldColor(this);">
+					<td align="center">${s.count}</td>
+					<td align="center">${userNum}&nbsp;</td>
+					<td align="center">${userType}&nbsp;</td>
+					<td align="center">${loginTime}&nbsp;</td>
+					<td align="center">${totalMinute}&nbsp;</td>
+					
+				</tr>
+			</s:iterator>
 		</tbody>
 	</table>
 	</div>
@@ -97,8 +93,6 @@
 </tr>
 </tbody>
 </table>
-	<!-- 分页页码 -->
-
 
 	</div>
 </body>

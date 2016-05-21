@@ -41,6 +41,7 @@ import com.hhit.service.ITeacherService;
 import com.hhit.service.ITestPaperService;
 import com.hhit.service.ITestQuestionService;
 import com.hhit.service.IUserDetailsService;
+import com.hhit.service.IUserOnlineTimeService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IVisitCourseRecordService;
 import com.hhit.service.IWeiboInfoService;
@@ -138,7 +139,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IQuestionErrorRecordService questionErrorRecordService;//错题记录
 	@Resource
 	protected IStuPaperAccountService stuPaperAccountService;//学生答卷记录
-	
+	@Resource
+	protected IUserOnlineTimeService userOnlineTimeService;//记录用户在线时长
 	
 	//--------------
 	@Resource

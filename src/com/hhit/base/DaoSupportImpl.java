@@ -35,6 +35,7 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 	 * @return
 	 */
 	protected Session getSession(){
+//		//增加
 //		if(sessionFactory.getCurrentSession()==null)
 //			return sessionFactory.openSession();
 		return sessionFactory.getCurrentSession();

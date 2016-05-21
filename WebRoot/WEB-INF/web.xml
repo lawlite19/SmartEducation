@@ -18,11 +18,11 @@
 	</listener>
 	<!-- 用户在线数和登录数统计 -->
 	<listener>
-		<listener-class>com.hhit.util.CountOnlineListener</listener-class>
+		<listener-class>com.hhit.action.UserListener</listener-class>
 	</listener>
-	<!-- 配置Session过期时间为10分钟 -->
+	<!-- 配置Session过期时间为5分钟 -->
 	<session-config>
-          <session-timeout>10</session-timeout>
+          <session-timeout>5</session-timeout>
     </session-config>   
 	<!-- 配置Spring的用于解决懒加载问题的过滤器 -->
 	<filter>

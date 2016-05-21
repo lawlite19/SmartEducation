@@ -291,8 +291,8 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 			}
 			else{
 				ClassPropertyFilter.ListSpiderCourseDiscussFilter(map, courseDiscussList);
+				map.put("name", "success");
 			}
-			map.put("name", "success");
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
@@ -314,6 +314,27 @@ public class SpiderCourseAction extends BaseAction<SpiderCourse>{
 			map.put("count", pageBean.getRecordCount());
 			map.put("currentPage", pageBean.getCurrentPage());
 			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//课程评分信息
+	public String listCourseScore() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		SpiderCourse courseFind=spiderCourseService.findById(courseId);
+		if(courseFind==null){
+			map.put("name", "noCourse");
+		}
+		else{
+			//课程讨论
+			List<CourseScore> courseScoreList=courseScoreService.findByCourse(courseFind);
+			if(courseScoreList.size()<1){
+				map.put("discussName", "noCourseScore");
+			}
+			else{
+				ClassPropertyFilter.ListSpiderCourseScoreFilter(map, courseScoreList);
+				map.put("name", "success");
+			}
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;

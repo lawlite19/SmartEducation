@@ -279,7 +279,7 @@ public class StudentAction extends BaseAction<Student> {
 		for(i=0;i<recordCount;i++){
 			labels[i]=courseList.get(i).getSpiderCourse().getName();
 		}
-		// 创建600*360的chart
+		// 创建1000*800的chart
 		XYChart c = new XYChart(1000, 800);
 		c.setDefaultFonts("simsun.ttc");
 		// 添加图形的标题 ---- 18pt Times Bold Italic font

@@ -1,6 +1,8 @@
 package com.hhit.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +56,8 @@ public class UserAction extends BaseAction<User>{
 			if(model.getUserType().equals("管理员")){
 				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(), "超级管理员");
 				if(null!=userFind){
+					//设置登录的时间，----用于统计在线时长
+					userFind.setLoginTime(new Timestamp(new Date().getTime()));
 					ActionContext.getContext().getSession().put("user", userFind);
 					return "toIndex";
 				}
@@ -61,6 +65,7 @@ public class UserAction extends BaseAction<User>{
 			if (model.getUserType().equals("学生")) {
 				User userFind = userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),model.getUserType());
 				if (null != userFind) {
+					userFind.setLoginTime(new Timestamp(new Date().getTime()));
 					ActionContext.getContext().getSession().put("user", userFind);
 					return "toIndex";
 				} else {
@@ -76,6 +81,7 @@ public class UserAction extends BaseAction<User>{
 					List<Role> rolesList=new ArrayList<>(userFind.getTeacher().getRoles());
 					for (Role role : rolesList) {
 						if(role.getRoleName().equals(model.getUserType())){
+							userFind.setLoginTime(new Timestamp(new Date().getTime()));
 							ActionContext.getContext().getSession().put("user", userFind);
 							return "toIndex";
 						}
