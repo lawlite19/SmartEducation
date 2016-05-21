@@ -157,6 +157,11 @@ public class InterfaceAPIAction {
 	public String teaAccountOfClassUI() throws Exception{
 		return "teaAccountOfClassUI";
 	}
+	/** 老师的课程的系级对应的班级 */
+	public String teaCourseDeptUI() throws Exception{
+		return "teaCourseDeptUI";
+	}
+	
 	
 	
 //电子书包接口

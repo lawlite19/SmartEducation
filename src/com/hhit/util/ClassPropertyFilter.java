@@ -2,6 +2,7 @@ package com.hhit.util;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Class_;
@@ -116,7 +117,7 @@ public class ClassPropertyFilter {
 	}
 	//教学进程list过滤
 	public static void ListTeachPorcessFilter(Map<String,Object> map,List<TeachProcess> teachProcessList){
-		String[] teachProcessProperty={"course","teacher","children","dataType"};
+		String[] teachProcessProperty={"course","teacher","children","dataType","department"};
 		map.put("teachProcesses", JsonUtil.jsonListFilter(teachProcessList, teachProcessProperty));
 	}
 	//爬取课程讨论list过滤
@@ -168,6 +169,12 @@ public class ClassPropertyFilter {
 	public static void ListSpiderCourseScoreFilter(Map<String,Object> map,List<CourseScore> courseScoreList){
 		String[] courseScoreProperty={"spiderCourse"};
 		map.put("courseScores", JsonUtil.jsonListFilter(courseScoreList, courseScoreProperty));
+	}
+	
+	//部门list过滤
+	public static void ListDepartmentFilter(Map<String,Object> map,List<Department> departmentList){
+		String[] departmentScoreProperty={"parent","children","students","teachers","courses","department"};
+		map.put("departments", JsonUtil.jsonListFilter(departmentList, departmentScoreProperty));
 	}
 	
 	

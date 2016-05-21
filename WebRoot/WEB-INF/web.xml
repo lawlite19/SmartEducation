@@ -22,7 +22,7 @@
 	</listener>
 	<!-- 配置Session过期时间为5分钟 -->
 	<session-config>
-          <session-timeout>5</session-timeout>
+          <session-timeout>1</session-timeout>
     </session-config>   
 	<!-- 配置Spring的用于解决懒加载问题的过滤器 -->
 	<filter>

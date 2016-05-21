@@ -10,7 +10,7 @@
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 接口文档 &gt; 接口信息</div>
 <!-- 信息开始 -->
-<s:form action="/App/teachProcess_appTeaCourseTeachProcess.action" method="post">
+<s:form action="/App/teachProcess_appTeaCourseDeptTeachProcess.action" method="post">
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
           <tbody>
@@ -33,7 +33,7 @@
 					<div>
 							<h2>接口地址</h2>
 									<p class="p_apiInfo">
-										${pageContext.request.contextPath}/App/teachProcess_appTeaCourseTeachProcess.action
+										${pageContext.request.contextPath}/App/teachProcess_appTeaCourseDeptTeachProcess.action
 									</p>
 								<br/>
 								<h2>需要传递的数据</h2>
@@ -44,6 +44,9 @@
 								<br/>
 								<span class="span_apiInfo">
 									老师工号：<span class="span_apiProperty">teaNum</span>
+								</span>
+								<span class="span_apiInfo">
+									系id：<span class="span_apiProperty">departmentId</span>
 								</span>
 					</div>
 					<!-- 返回json数据说明-->
@@ -70,6 +73,11 @@
 						<span class="span_apiInfo">
 						teaNum:<s:textfield cssClass="inpu" name="teaNum"></s:textfield>
 						eg:01001
+						</span>
+                        <br/><br/>
+                        <span class="span_apiInfo">
+						departmentId:<s:textfield cssClass="inpu" name="departmentId"></s:textfield>
+						eg:3
 						</span>
                         <br/><br/>
                         <span class="span_apiButton">
