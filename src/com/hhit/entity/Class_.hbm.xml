@@ -27,7 +27,7 @@
 		</property>
 
 		<!--department属性，本类与Department的多对一  -->
-		<many-to-one name="department" class="Department" column="Department_Id">
+		<many-to-one name="department" class="Department" column="Department_Id" lazy="false">
 		</many-to-one>
 		<!-- students属性，与Student类的一对多 -->
 		<set name="students">

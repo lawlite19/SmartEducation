@@ -88,6 +88,15 @@
 <table cellspacing="0" cellpadding="6"  align="center" border="0">
 		<!-- 表头-->
 		<tbody> 
+				<tr>
+						<td class="addFont">选择班级</td>
+                        <td>
+                        	<s:select name="departmentId" list="departmentList" cssClass="ddl" id="select_department" headerKey=""
+                        	headerValue="==请选择系别==" listKey="id" listValue="deptName">
+                        	</s:select>
+                        	<span class="span_note">*</span>
+                        </td>
+			</tr>	
 			<tr>
 						<td class="addFont">周次</td>
                         <td>

@@ -16,6 +16,7 @@ import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.DataDict;
 import com.hhit.entity.DataType;
+import com.hhit.entity.Department;
 import com.hhit.entity.Student;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
@@ -27,10 +28,11 @@ import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Scope("prototype")
 public class TeachProcessAction extends BaseAction<TeachProcess>{
-	
 	private Integer courseId;
 	private Integer teachTypeId;
 	private Integer chapterId;
+	private Integer[] classIds;
+	private Integer departmentId;
 	
 	//app
 	private String stuNum;
@@ -49,24 +51,45 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 			ActionContext.getContext().put("couseList", couseList);
 		}
 		if(courseId==null){
+			//准备数据--系别
+			List<Department> departmentList=departmentService.findByDeptLevel(3);
+			ActionContext.getContext().put("departmentList", departmentList);
 			//准备数据--第一门课程的教学进程
 			List<Course> couseList=new ArrayList<>(teaFind.getCourses());
 			Course courseFind=couseList.get(0);
 			//准备数据--课程名
 			ActionContext.getContext().getValueStack().push(courseFind);
-
+			
 			List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind,courseFind);
 			ActionContext.getContext().put("teachProcessList", teachProcessList);
 			courseId=courseFind.getId();
 		}
 		else{
+			Course courseFind=courseService.findById(courseId);
+			
+			//准备数据--三级部门--且是教的班级的部门
+			List<ClassSelectCourse> classSelectList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(), courseFind);
+			List<Department> departmentList=new ArrayList<>();
+			for(int i=0;i<classSelectList.size();i++){
+				if(!departmentList.contains(classSelectList.get(i).getClass_().getDepartment())){
+					departmentList.add(classSelectList.get(i).getClass_().getDepartment());
+				}
+			}
+			ActionContext.getContext().put("departmentList", departmentList);
 			//准备数据--课程名
-			ActionContext.getContext().getValueStack().push(courseService.findById(courseId));
+			ActionContext.getContext().getValueStack().push(courseFind);
 			//准备数据--课程id
 			ActionContext.getContext().put("courseId", courseId);
-			//准备数据--对应课程的教学进程
-			List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind,courseService.findById(courseId));
-			ActionContext.getContext().put("teachProcessList", teachProcessList);
+			if(departmentId==null){//准备所有的教学进程
+				List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind,courseService.findById(courseId));
+				ActionContext.getContext().put("teachProcessList", teachProcessList);
+			}
+			else{
+				//准备数据--相应部门的教学进程
+				List<TeachProcess> teachProcessList=teachProcessService.findByTeacherAndCourse(teaFind,courseService.findById(courseId),departmentService.findById(departmentId));
+				ActionContext.getContext().put("teachProcessList", teachProcessList);
+			}
+			
 		}
 		return "list";
 	}
@@ -74,13 +97,26 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	
 	/** 添加对应课程教学进程界面 */
 	public String addUI() throws Exception{
+		
+		Teacher teaFind=getCurrentUser().getTeacher();
+		Course courseFind=courseService.findById(courseId);
+		
+		//准备数据--三级部门--且是教的班级的部门
+		List<ClassSelectCourse> classSelectList=classSelectCourseService.findByTeacherNumAndCourse(teaFind.getTeaNum(), courseFind);
+		List<Department> departmentList=new ArrayList<>();
+		for(int i=0;i<classSelectList.size();i++){
+			if(!departmentList.contains(classSelectList.get(i).getClass_().getDepartment())){
+				departmentList.add(classSelectList.get(i).getClass_().getDepartment());
+			}
+		}
+		ActionContext.getContext().put("departmentList", departmentList);
 		//准备数据--课程id
 		ActionContext.getContext().put("courseId", courseId);
 		//准备数据--教学方式--001
 		DataType dataTypeFind=dataTypeService.findByNum("001");
 		ActionContext.getContext().put("teachTypeList", dataTypeFind.getDataDicts());
 		//准备数据--课程对应章节
-		List<Chapter> chapterList=chapterService.findByCourse(courseService.findById(courseId));
+		List<Chapter> chapterList=chapterService.findByCourse(courseFind);
 		ActionContext.getContext().put("chapterList", chapterList);
 		return "saveUI";
 	}
@@ -97,14 +133,20 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		model.setTeacher(teaFind);
 		model.setTeachType(dataDictFind);
 		model.setChapter(chapterService.findById(chapterId));
+		model.setDepartment(departmentService.findById(departmentId));
 		//保存
 		teachProcessService.save(model);
 		//将courseId携带过去
 		ActionContext.getContext().put("courseId", courseId);
+		//部门Id携带过去
+		ActionContext.getContext().put("departmentId", departmentId);
 		return "toList";
 	}
 	/** 修改对应课程教学进程界面 */
 	public String editUI() throws Exception{
+		//准备数据--三级部门
+		List<Department> departmentList=departmentService.findByDeptLevel(3);
+		ActionContext.getContext().put("departmentList", departmentList);
 		//准备数据--对象
 		TeachProcess teachProcessFind=teachProcessService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(teachProcessFind);
@@ -116,6 +158,7 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		//准备数据--课程对应章节
 		List<Chapter> chapterList=chapterService.findByCourse(courseService.findById(courseId));
 		ActionContext.getContext().put("chapterList", chapterList);
+		
 		//回显数据--教学方式
 		if(teachProcessFind.getTeachType()!=null)
 			teachTypeId=teachProcessFind.getTeachType().getId();
@@ -123,12 +166,19 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		if(teachProcessFind.getChapter()!=null){
 			chapterId=teachProcessFind.getChapter().getId();
 		}
+		//回显数据--部门
+		if(teachProcessFind.getDepartment()!=null){
+			departmentId=teachProcessFind.getDepartment().getId();
+		}
+		
 		return "saveUI";
 	}
 	/** 修改对应课程教学进程*/
 	public String edit() throws Exception{
 		//查找源对象
 		TeachProcess processFind=teachProcessService.findById(model.getId());
+		//查找--部门
+		Department deptFind=departmentService.findById(departmentId);
 		//查找--教师
 		Teacher teaFind=getCurrentUser().getTeacher();
 		//查找--教学方式
@@ -144,10 +194,13 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 		processFind.setTeacher(teaFind);
 		processFind.setTeachType(dataDictFind);
 		processFind.setChapter(chapterFind);
+		processFind.setDepartment(deptFind);
 		//更新
 		teachProcessService.update(processFind);
 		//将courseId携带过去
 		ActionContext.getContext().put("courseId", courseId);
+		//部门Id携带过去
+		ActionContext.getContext().put("departmentId", departmentId);
 		return "toList";
 	}
 	/** 删除 */
@@ -242,15 +295,24 @@ public class TeachProcessAction extends BaseAction<TeachProcess>{
 	public void setStuNum(String stuNum) {
 		this.stuNum = stuNum;
 	}
-
-
 	public String getTeaNum() {
 		return teaNum;
 	}
-
-
 	public void setTeaNum(String teaNum) {
 		this.teaNum = teaNum;
 	}
-	
+	public Integer[] getClassIds() {
+		return classIds;
+	}
+	public void setClassIds(Integer[] classIds) {
+		this.classIds = classIds;
+	}
+	public Integer getDepartmentId() {
+		return departmentId;
+	}
+
+
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
+	}
 }
