@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
- * 单例类，用户记录在线的用户
+ * 单例类，记录在线的用户
  * @author bob
  */
 public class UserList {
