@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import ChartDirector.Chart;
 import ChartDirector.LegendBox;
 import ChartDirector.LineLayer;
-import ChartDirector.Mark;
 import ChartDirector.XYChart;
 
 import com.hhit.base.BaseAction;
@@ -35,6 +34,7 @@ public class UserOnlineTimeAction extends BaseAction<UserOnlineTime>{
 							.addCondition("u.user=?", userFind)//
 							.prepareAppPageBean(userOnlineTimeService, pageNum, pageSize);
 		List<UserOnlineTime> onlineList=pageBean.getRecordList();
+		ActionContext.getContext().getValueStack().push(pageBean);
 		int size=onlineList.size();
 		// The data for the line chart
 		double[] data =new double[size];
@@ -52,7 +52,7 @@ public class UserOnlineTimeAction extends BaseAction<UserOnlineTime>{
 
 		// Set plotarea at (55, 60) with size of 520 x 240 pixels. Use white (ffffff) as background and grey
 		// (cccccc) for grid lines
-		c.setPlotArea(100, 100, 600, 240, 0xffffff, -1, -1, 0xcccccc, 0xcccccc);
+		c.setPlotArea(100, 100, 700, 240, 0xffffff, -1, -1, 0xcccccc, 0xcccccc);
 
 		// Add a legend box at (55, 58) (top of plot area) using 9pt Arial Bold font with horizontal layout
 		// Set border and background colors of the legend box to Transparent
@@ -79,29 +79,28 @@ public class UserOnlineTimeAction extends BaseAction<UserOnlineTime>{
 
 		// Set the default line width to 3 pixels
 		layer.setLineWidth(3);
-
+		// Add the data sets to the line layer
+		layer.addDataSet(data, -1, "浏览趋势");
 
 		// Create the image
 		String chart1URL = c.makeSession(ServletActionContext.getRequest(), "chart1");
 
 		// Create an image map for the chart
-		String chartImageMap = c.getHTMLImageMap("xystub.jsp", "",
-		    "title='{dataSetName} @ {xLabel} = USD {value|0} millions'");
+		String chartImageMap = c.getHTMLImageMap("charts/xystub.jsp", "",
+		    "title='{dataSetName} @ {xLabel}在线 {value|0} 分钟'");
 
 		// Create an image map for the legend box
 		String legendImageMap = legendBox.getHTMLImageMap(
-		    "javascript:popMsg('the legend key [{dataSetName}]');", " ",
-		    "title='This legend key is clickable!'");
+		    "javascript:popMsg('此信息是 [{dataSetName}]');", " ",
+		    "title='这是可以点击的'");
 
 		// Obtain the image map coordinates for the title, mark, and copyright message. These will be used
 		// to define the image map inline. (See HTML code below.)
-		String titleCoor = title.getImageCoor();
 		
 		ActionContext.getContext().put("chart1URL", chart1URL);
 		ActionContext.getContext().put("chartImageMap", chartImageMap);
 		ActionContext.getContext().put("legendImageMap", legendImageMap);
-		ActionContext.getContext().put("titleCoor", titleCoor);
 		
-		 return "list";
+		return "list";
 	}
 }
