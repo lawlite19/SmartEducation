@@ -33,8 +33,7 @@ import com.hhit.util.SizeOfObjectUtils;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
- * 用户登录时ActionContext.getContext().getSession().put()时经过监听器
- * 访问时也经过这里，但是没有登录操作就不计算为在线
+ * 访问登录时也经过这里，但是没有登录操作就不计算为在线
  * @author bob
  *
  */
@@ -42,17 +41,10 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class UserListener implements HttpSessionAttributeListener,ServletContextListener{
 
-	private int pageNum;
-	private int pageSize;
-
 	private IUserService userService;
 	private IUserOnlineTimeService userOnlineTimeService;
 	
 	private UserList userList = UserList.getInstance();
-	
-
-//	private static Vector<User> userVector=new Vector<>();
-	
 	
 	/**
 	 * ActionContext.getContext().getSession().put()时调用
