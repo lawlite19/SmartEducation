@@ -289,6 +289,8 @@
 			<result name="childrenChapterUI">/WEB-INF/jsp/interfaceAPIAction/childrenChapterUI.jsp</result>
 			<result name="listSpiderCourseScoreUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/listSpiderCourseScoreUI.jsp</result>
 			<result name="teaCourseDeptUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaCourseDeptUI.jsp</result>
+			<result name="stuInfoAndClassUI">/WEB-INF/jsp/interfaceAPIAction/stuInfoAndClassUI.jsp</result>
+			<result name="teaInfoAndDeptAndRoleUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoAndDeptAndRoleUI.jsp</result>
 			
 			
 		</action>

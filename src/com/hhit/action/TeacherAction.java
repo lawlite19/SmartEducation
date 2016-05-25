@@ -698,6 +698,36 @@ public class TeacherAction extends BaseAction<Teacher>{
 		
 		return null;
 	}
+	//老师信息和部门和角色
+	public String appTeaInfoAndDeptAndRole() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		Teacher teaFind=teacherService.findByTeacherNum(model.getTeaNum());
+		if(teaFind==null){
+			map.put("name", "noTeacher");
+		}
+		else{
+			ClassPropertyFilter.TeacherFilter(map, teaFind);
+			Department deptFind=teaFind.getDepartment();
+			if(deptFind==null){
+				map.put("name", "noDepartment");
+			}
+			else{
+				ClassPropertyFilter.DepartmentFilter(map, deptFind);
+				List<Role> roleList=new ArrayList<>(teaFind.getRoles());
+				if(roleList.size()<1){
+					map.put("name", "noRole");
+				}
+				else{
+					ClassPropertyFilter.ListRoleFilter(map, roleList);
+					map.put("name", "success");
+				}
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	
 //==============================	
 	public Integer getDepartmentId() {
 		return departmentId;

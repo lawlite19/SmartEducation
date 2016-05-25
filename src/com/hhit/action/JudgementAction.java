@@ -233,7 +233,6 @@ public class JudgementAction extends BaseAction<Judgement>{
 				addFieldError("questionBankInfo", "文件导入出错！");
 				return "tobulkImportUI";
 			}
-			
 		}
 		else
 		{

@@ -19,11 +19,11 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TestPaper> findByClassAndCourse(Class_ classFind,Course courseFind,Timestamp nowTime) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=? startTime<? AND endTime>? ORDER BY id DESC")//
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND course=? AND startTime<:startTime AND endTime>:endTime ORDER BY id DESC")//
 				.setParameter(0, classFind)//
 				.setParameter(1, courseFind)//
-				.setTimestamp(3, nowTime)//
-				.setTimestamp(4, nowTime)//
+				.setTimestamp("startTime", nowTime)//
+				.setTimestamp("endTime", nowTime)//
 				.list();
 	}
 
@@ -39,10 +39,10 @@ public class TestPaperServiceImpl extends DaoSupportImpl<TestPaper> implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TestPaper> findByClass(Class_ classFind,Timestamp nowTime) {
-		return getSession().createQuery("FROM TestPaper WHERE class_=? AND startTime<? AND endTime>? ORDER BY id DESC")//
+		return getSession().createQuery("FROM TestPaper WHERE class_=? AND startTime<:startTime AND endTime>:endTime ORDER BY id DESC")//
 				.setParameter(0, classFind)//
-				.setTimestamp(1, nowTime)//
-				.setTimestamp(2, nowTime)//
+				.setTimestamp("startTime", nowTime)//
+				.setTimestamp("endTime", nowTime)//
 				.list();
 	}
 

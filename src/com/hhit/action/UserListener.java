@@ -2,22 +2,12 @@ package com.hhit.action;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
-
-
-
-
-
-
-
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +19,6 @@ import com.hhit.entity.UserList;
 import com.hhit.entity.UserOnlineTime;
 import com.hhit.service.IUserOnlineTimeService;
 import com.hhit.service.IUserService;
-import com.hhit.util.SizeOfObjectUtils;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -76,28 +65,20 @@ public class UserListener implements HttpSessionAttributeListener,ServletContext
 	public void attributeRemoved(HttpSessionBindingEvent event) {
 		if((event!=null)&&event.getName().equals("user")){
 			User userFind= (User) event.getValue();
-			
 			try {
-				//如果Vector中有用户==》移除==》记录==>这样如果切换到别的浏览器同一账号登录且之前账号没有退出就无法计时了
-				//如果Vector中没用户==》不记录
 				if(userList.IsExist(userFind.getId())){
-					//userList中移除User
 					try {
 						userList.RemoveUser(userFind);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					System.out.println("用户数量"+userList.getUserCount());
-					//得到当前时间
 					Timestamp nowTime=new Timestamp(new Date().getTime());
-					//计算时间差--在线时长
 					int durationMinute=(int)(nowTime.getTime()-userFind.getLoginTime().getTime())/(1000*60);
-					//得到最后一条记录
 					UserOnlineTime onlineTimeFind=userOnlineTimeService.findByUser(userFind);
 					if(onlineTimeFind==null){
 						onlineTimeFind=new UserOnlineTime(nowTime, durationMinute, userFind);
 						userOnlineTimeService.save(onlineTimeFind);
-						//更新总时长
 						userFind.setTotalMinute(durationMinute+userFind.getTotalMinute());
 						userService.update(userFind);
 					}
