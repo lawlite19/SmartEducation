@@ -89,7 +89,7 @@
 		<!-- 表头-->
 		<tbody> 
 				<tr>
-						<td class="addFont">选择班级</td>
+						<td class="addFont">选择系别</td>
                         <td>
                         	<s:select name="departmentId" list="departmentList" cssClass="ddl" id="select_department" headerKey=""
                         	headerValue="==请选择系别==" listKey="id" listValue="deptName">

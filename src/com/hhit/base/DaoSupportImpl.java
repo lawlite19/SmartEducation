@@ -116,13 +116,10 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 	}
 	@SuppressWarnings("rawtypes")
 	@Override
-	public PageBean getPageBean(int pageNum, int pageSize,
-			QueryHelper queryHelper) {
+	public PageBean getPageBean(int pageNum, int pageSize,QueryHelper queryHelper) {
 		System.out.println("-------> DaoSupportImpl.getPageBean( int pageNum, int pageSize, QueryHelper queryHelper )");
-
 		// 参数列表
 		List<Object> parameters = queryHelper.getParameters();
-
 		// 查询本页的数据列表
 		Query listQuery = getSession().createQuery(queryHelper.getListQueryHql()); // 创建查询对象
 		if (parameters != null) { // 设置参数
@@ -133,7 +130,6 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 		listQuery.setFirstResult((pageNum - 1) * pageSize);
 		listQuery.setMaxResults(pageSize);
 		List list = listQuery.list(); // 执行查询
-
 		// 查询总记录数量
 		Query countQuery = getSession().createQuery(queryHelper.getCountQueryHql());
 		if (parameters != null) { // 设置参数
@@ -142,7 +138,6 @@ public class DaoSupportImpl<T> implements IDaoSupport<T> {
 			}
 		}
 		Long count = (Long) countQuery.uniqueResult(); // 执行查询
-
 		return new PageBean(pageNum, pageSize, count.intValue(), list);
 	}
 

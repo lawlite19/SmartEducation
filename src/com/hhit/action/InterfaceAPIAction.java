@@ -77,6 +77,15 @@ public class InterfaceAPIAction {
 	public String childrenChapterUI() throws Exception{
 		return "childrenChapterUI";
 	}
+	/** 获取学生的信息和班级 */
+	public String stuInfoAndClassUI() throws Exception{
+		return "stuInfoAndClassUI";
+	}
+	/** 获取老师信息和部门和角色 */
+	public String teaInfoAndDeptAndRoleUI() throws Exception{
+		return "teaInfoAndDeptAndRoleUI";
+	}
+	
 	
 //实时测评接口
 //=======================================

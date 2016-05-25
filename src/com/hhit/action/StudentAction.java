@@ -279,33 +279,19 @@ public class StudentAction extends BaseAction<Student> {
 		for(i=0;i<recordCount;i++){
 			labels[i]=courseList.get(i).getSpiderCourse().getName();
 		}
-		// 创建1000*800的chart
 		XYChart c = new XYChart(1000, 800);
 		c.setDefaultFonts("simsun.ttc");
-		// 添加图形的标题 ---- 18pt Times Bold Italic font
 		c.addTitle("访问课程记录", "宋体", 18);
-		// Set the plotarea at (60, 40) and of size 500 x 280 pixels. Use a vertical gradient color from
-		// light blue (eeeeff) to deep blue (0000cc) as background. Set border and grid lines to white
-		// (ffffff).
 		c.setPlotArea(100, 40, 800, 300, c.linearGradientColor(100, 40, 60, 280, 0xeeeeff, 0x0000cc), -1,
 		    0xffffff, 0xffffff);
-		// Add a multi-color bar chart layer using the supplied data. Use soft lighting effect with light
-		// direction from left.
 		c.addBarLayer3(count).setBorderColor(Chart.Transparent, Chart.softLighting(Chart.Left));
-		// 设置文字旋转90度
 		c.xAxis().setLabels(labels);
-		//设置文字以及方向
 		c.xAxis().setLabelStyle("宋体", 10).setFontAngle(65);
-		// Draw the ticks between label positions (instead of at label positions)
 		c.xAxis().setTickOffset(0.5);
-		// Add a title to the y axis with 10pt Arial Bold font
 		c.yAxis().setTitle("访问次数","宋体",12);
-		// Set axis line width to 2 pixels
 		c.xAxis().setWidth(2);
 		c.yAxis().setWidth(2);
-		// Output the chart
 		String chart1URL = c.makeSession(ServletActionContext.getRequest(), "chart1");
-		// Include tool tip for the chart
 		String imageMap1 = c.getHTMLImageMap("", "", "title='{xLabel}: 浏览{value}次'");
 
 		ActionContext.getContext().put("chart1URL", chart1URL);
@@ -519,6 +505,29 @@ public class StudentAction extends BaseAction<Student> {
 		
 		return null;
 	}
+	//获取学生的信息和班级
+	public String appStuInfoAndClass() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			ClassPropertyFilter.StudentFilter(map, stuFind);
+			Class_ classFind=stuFind.getClass_();
+			if(classFind==null){
+				map.put("name", "noClass");
+			}
+			else{
+				ClassPropertyFilter.ClassFilter(map, classFind);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		
+		return null;
+	}
+	
 //=============================	
 	public Integer getDepartmentId() {
 		return departmentId;
