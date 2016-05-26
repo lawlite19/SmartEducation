@@ -62,7 +62,7 @@
 			<result name="personalMaintainUI">/WEB-INF/jsp/teacherAction/personalMaintainUI.jsp</result>
 			<result name="personalMaintain"  type="redirectAction">teacher_personalMaintainUI</result>
 			<result name="listCourseClass">/WEB-INF/jsp/teacherAction/listCourseClass.jsp</result>
-			<result name="noCourseError" type="redirectAction">teachProcess_noCourseError</result>
+			<result name="noCourseError">/WEB-INF/jsp/teachProcessAction/noCourseError.jsp</result>
 			<result name="saveCourseClassUI">/WEB-INF/jsp/teacherAction/saveCourseClassUI.jsp</result>
 			<result name="toListCourseClass" type="redirectAction">teacher_listCourseClass?courseId=${courseId}</result>
 			<result name="myCourseUI">/WEB-INF/jsp/teacherAction/myCourseUI.jsp</result>
