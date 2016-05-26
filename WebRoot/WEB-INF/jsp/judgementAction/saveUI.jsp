@@ -42,13 +42,13 @@
 			async : true,
 			success : function(data) {
 				if(data.name=='success'){
-					for (var i = 0; i < data.length; i++)
+					for (var i = 0; i < data.chapters.length; i++)
 						$("#select_chapter").append(
-								"<option value='"+data.chapters[i].id+"'>" + data.chapters[i].className+ "</option>");
+								"<option value='"+data.chapters[i].id+"'>" + data.chapters[i].chapterName+ "</option>");
 				}
 				else if(data.name=='noChapter'){
 					//正上方
-		        	layer.msg('该课程没有章节信息（章节非必填）', {
+		        	layer.msg('该课程没有章节信息', {
 		        	  offset: 0,
 		        	  shift: 6
 		        	});

@@ -38,14 +38,13 @@ public class JsonUtil {
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setIgnoreDefaultExcludes(false);    
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);    //防止自包含
-         
+        
         if(filterNames != null){
             //这里是核心，过滤掉不想使用的属性
             jsonConfig .setExcludes(filterNames) ;
         }
         JSONObject jsonObj = JSONObject.fromObject(obj, jsonConfig);
         return jsonObj;
-         
     }
     //过滤掉对象List关联的外键
     public static JSONArray jsonListFilter(List objList, String[] filterNames){
