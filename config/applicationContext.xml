@@ -118,6 +118,9 @@
 			<!-- 评价操作-->
 			<value>com/hhit/entity/APeerAccess.hbm.xml</value>
 			<value>com/hhit/entity/AStudentAccess.hbm.xml</value>
+			<value>com/hhit/entity/ATeachingAccess.hbm.xml</value>
+			<!-- 个人评价信息查询-->
+			<value>com/hhit/entity/ATeacherGrade.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

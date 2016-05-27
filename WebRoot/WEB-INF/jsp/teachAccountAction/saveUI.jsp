@@ -71,6 +71,18 @@
                         	<span class="span_note">*</span>
                         </td>
                     </tr>
+                    
+                    <tr>
+						<td class="addFont">评价维度</td>
+                        <td>
+                        	<s:select name="datadictID" cssClass="ddl" id="select_datadict"
+                        		list="#dataList" listKey="id" listValue="dictName"
+                        		headerKey="" headerValue="==请选择维度=="
+                        	/>
+                        	<span class="span_note">*</span>
+                        </td>
+                    </tr>
+                    
                     <tr>
                     	<td class="addFont">评价描述</td>
                         <td>

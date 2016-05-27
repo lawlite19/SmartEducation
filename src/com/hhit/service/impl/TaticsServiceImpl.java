@@ -16,9 +16,10 @@ public class TaticsServiceImpl extends DaoSupportImpl<ATatics> implements
 
 
 	@Override
-	public List<ATatics> findByTerm(ATerm termFind) {
-		// TODO Auto-generated method stub
-		return null;
+	public ATatics findByTerm(ATerm termFind) {
+		return (ATatics) getSession().
+				createQuery("select t from ATatics t where t.ATerm=?").
+				setParameter(0, termFind).uniqueResult();
 	}
 	public int findMaxId() {
         String hql="select max(t.id) from ATatics t";

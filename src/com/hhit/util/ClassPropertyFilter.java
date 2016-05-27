@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
+import com.hhit.entity.ATeacherGrade;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
 import com.hhit.entity.DataDict;
@@ -46,7 +49,11 @@ public class ClassPropertyFilter {
 		String[] spiderCourseInfoProperty={"spiderCourse"};
 		map.put("spiderCourseInfo", JsonUtil.jsonFilter(spiderCourseInfo, spiderCourseInfoProperty));
 	}
-
+	//学生过滤
+	public static void ATeacherGradeFilter(Map<String,Object> map,ATeacherGrade stu){
+		String[] stuProperty={"Teacher","ATerm","teacher","aTerm","id"};
+		map.put("teachergrade", JsonUtil.jsonFilter(stu, stuProperty));
+	}
 	
 //list过滤
 //==============================================

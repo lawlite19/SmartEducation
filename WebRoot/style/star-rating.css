@@ -113,7 +113,7 @@
 }
 
 .rating-lg {
-    font-size: 3.91em;
+    font-size: 28px;
 }
 
 .rating-md {
@@ -158,7 +158,7 @@
     color: #999;
     display: inline-block;
     vertical-align: middle;
-    font-size: 55%;
+    font-size: 20%;
 }
 
 .star-rating .caption {

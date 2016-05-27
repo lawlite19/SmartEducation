@@ -7,6 +7,6 @@ import com.hhit.entity.ATatics;
 import com.hhit.entity.ATerm;
 
 public interface ITaticsService extends IDaoSupport<ATatics> {
-	List<ATatics> findByTerm(ATerm termFind);
+	ATatics findByTerm(ATerm termFind);
 	int findMaxId();
 }

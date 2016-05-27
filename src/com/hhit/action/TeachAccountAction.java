@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
-
 import com.hhit.entity.ATeachingAccount;
 import com.hhit.entity.ATerm;
+import com.hhit.entity.DataDict;
+import com.hhit.entity.DataType;
 import com.hhit.entity.LogFile;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
@@ -20,7 +21,15 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class TeachAccountAction extends BaseAction<ATeachingAccount> {
 	
-	private Integer termID;
+	private Integer termID;//设置学期
+	private Integer datadictID;//设置评价维度
+	
+	public Integer getDatadictID() {
+		return datadictID;
+	}
+	public void setDatadictID(Integer datadictID) {
+		this.datadictID = datadictID;
+	}
 	public Integer getTermID() {
 		return termID;
 	}
@@ -52,7 +61,9 @@ public class TeachAccountAction extends BaseAction<ATeachingAccount> {
 		List<ATerm> termList = null;
 		termList =termService.findAll();
 		ActionContext.getContext().put("termList", termList);
-		
+		DataType datatype=dataTypeService.findById(4);
+		List<DataDict> dataList=dataDictService.findByType(datatype);
+		ActionContext.getContext().put("dataList", dataList);
 		return "saveUI";
 	}
 	public String add() throws Exception {
@@ -68,6 +79,10 @@ public class TeachAccountAction extends BaseAction<ATeachingAccount> {
 		List<ATerm> termList = null;
 		termList =termService.findAll();
 		ActionContext.getContext().put("termList", termList);
+		
+		DataType datatype=dataTypeService.findById(4);
+		List<DataDict> dataList=dataDictService.findByType(datatype);
+		ActionContext.getContext().put("dataList", dataList);
 		
 		ATeachingAccount teachAccout = teachAccountService.findById(model.getId());
 		ActionContext.getContext().getValueStack().push(teachAccout);
@@ -88,7 +103,8 @@ public class TeachAccountAction extends BaseAction<ATeachingAccount> {
 		teachAccout.setBPoint(model.getBPoint());
 		teachAccout.setCPoint(model.getCPoint());
 		teachAccout.setDPoint(model.getDPoint());
-
+		model.setDataDict(dataDictService.findById(datadictID));
+		teachAccout.setDataDict(model.getDataDict());
 		model.setATerm(termService.findById(termID));
 		teachAccout.setATerm(model.getATerm());
 

@@ -87,6 +87,7 @@
 				<td align="center">评价选项D</td>
 				<td align="center">选项D占分</td>
 				<td align="center">学期</td>
+				<td align="center">评价维度</td>
 				<td align="center">相关操作</td>
 			</tr>
 		</thead>
@@ -110,6 +111,7 @@
 					<td align="center">${descriptionD}&nbsp;</td>
 					<td align="center" >${DPoint}&nbsp;</td>
 					<td align="center" >${ATerm.name}&nbsp;</td>
+					<td align="center" >${DataDict.dictName}&nbsp;</td>
 					<td align="center">
 					<s:a action="teachAccount_editUI?id=%{id}">
 						<img style="border: 0px;" src="${pageContext.request.contextPath}/style/images/edit.gif" />

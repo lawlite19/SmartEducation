@@ -32,7 +32,9 @@ import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
 import com.hhit.service.ITaticsService;
 import com.hhit.service.ITeachAccountService;
+import com.hhit.service.ITeacherGradeService;
 import com.hhit.service.ITeacherService;
+import com.hhit.service.ITeachingAccessService;
 import com.hhit.service.ITermService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
@@ -141,7 +143,14 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected IPeerAccessService peerAccessService;//同行评价
 	@Resource
-	protected IStudentAccessService stuAccessService;//同行评价
+	protected IStudentAccessService stuAccessService;//学生评价
+	@Resource
+	protected ITeachingAccessService teaAccessService;//学教学要素评价
+	
+	@Resource
+	protected ITeacherGradeService teaGradeService;//学教学要素评价
+	
+	
 	/**
 	 * 获取当前登录的用户
 	 */

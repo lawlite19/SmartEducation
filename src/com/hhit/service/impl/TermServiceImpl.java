@@ -29,5 +29,14 @@ public class TermServiceImpl extends DaoSupportImpl<ATerm> implements
 		return (int)getSession().createQuery(hql).uniqueResult();
 	}
 
+	@Override
+	public List<String> findTermName() {
+		@SuppressWarnings("unchecked")
+		List<String> termlist=getSession().//
+				createQuery("select t.name from ATerm t  order by id asc").
+				list();
+		return termlist;
+	}
+	
 	
 }

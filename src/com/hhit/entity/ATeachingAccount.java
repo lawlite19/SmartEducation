@@ -8,9 +8,9 @@ public class ATeachingAccount implements java.io.Serializable {
 
 	// Fields
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	private ATerm ATerm;
+	private DataDict DataDict;
 	private String description;
 	private Double allPoint;
 	private String descriptionA;
@@ -29,11 +29,13 @@ public class ATeachingAccount implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ATeachingAccount(ATerm ATerm, String description, Double allPoint,
-			String descriptionA, Double APoint, String descriptionB,
-			Double BPoint, String descriptionC, Double CPoint,
-			String descriptionD, Double DPoint) {
+	public ATeachingAccount(ATerm ATerm, DataDict DataDict,
+			String description, Double allPoint, String descriptionA,
+			Double APoint, String descriptionB, Double BPoint,
+			String descriptionC, Double CPoint, String descriptionD,
+			Double DPoint) {
 		this.ATerm = ATerm;
+		this.DataDict = DataDict;
 		this.description = description;
 		this.allPoint = allPoint;
 		this.descriptionA = descriptionA;
@@ -62,6 +64,14 @@ public class ATeachingAccount implements java.io.Serializable {
 
 	public void setATerm(ATerm ATerm) {
 		this.ATerm = ATerm;
+	}
+
+	public DataDict getDataDict() {
+		return this.DataDict;
+	}
+
+	public void setDataDict(DataDict DataDict) {
+		this.DataDict = DataDict;
 	}
 
 	public String getDescription() {

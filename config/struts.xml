@@ -199,6 +199,29 @@
 			<result name="access">/WEB-INF/jsp/studentAccessAction/access.jsp</result>
 			<result name="toList" type="redirectAction">stuaccess_list</result>
 		</action>
+		<!-- 自我评价 -->
+			<action name="selfaccess_*" class="selfAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/selfAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/selfAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">selfaccess_list</result>
+		</action>
+		<!-- 教学要素评价 -->
+			<action name="teachaccess_*" class="teachAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/teachAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">teachaccess_list</result>
+		</action>
+		
+		<!-- 个人评价信息 -->
+			<action name="teachergrade_*" class="teacherGradeAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teacherGradeAction/list.jsp</result>
+			<result name="highchar">/WEB-INF/jsp/teacherGradeAction/highchar.jsp</result>
+			<result name="query">/WEB-INF/jsp/teacherGradeAction/query.jsp</result>
+			<result name="querychart">/WEB-INF/jsp/teacherGradeAction/querychart.jsp</result>
+			<result name="adminquery">/WEB-INF/jsp/teacherGradeAction/adminquery.jsp</result>
+			<result name="toList" type="redirectAction">teachaccess_list</result>
+		</action>
+		
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>

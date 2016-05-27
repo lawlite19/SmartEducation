@@ -9,4 +9,5 @@ public interface ITermService extends IDaoSupport<ATerm> {
 
 	List<ATerm> findList();
 	int findMaxId();
+	List<String> findTermName();
 }

@@ -30,10 +30,21 @@ public class StudentAccessAction extends BaseAction<AStudentAccess> {
 		this.accessgrade = accessgrade;
 	}
 	public String list(){
+		int status[] = new int[40];
 		User user=getCurrentUser();
 		Student student=user.getStudent();
-		List<ClassSelectCourse> classSelectList=classSelectCourseService.findByClass(student.getClass_());
+		ATerm term=termService.findById(termService.findMaxId());
+		List<ClassSelectCourse> classSelectList=classSelectCourseService.findByClassAndTerm(student.getClass_(),term);
+		for(int i=0;i<classSelectList.size();i++)
+		{
+			Teacher teacher=teacherService.findByTeaNum(classSelectList.get(i).getTeacherNum());
+			if(null == stuAccessService.findByTeaAndStuAndTerm(teacher,student,term))
+				status[i]=0;
+			else status[i]=1;
+				
+		}
 		ActionContext.getContext().put("classSelectList", classSelectList);
+		ActionContext.getContext().put("status", status);
 		new QueryHelper(ClassSelectCourse.class, "c").preparePageBean(classSelectCourseService, pageNum, pageSize);
 		return "list";
 	}
