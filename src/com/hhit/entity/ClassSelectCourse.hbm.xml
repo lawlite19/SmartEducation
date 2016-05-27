@@ -26,5 +26,8 @@
 		<!--course属性，本类与Course的一对一  -->
 		<many-to-one name="course" class="Course" column="Course_Id" lazy="false">
 		</many-to-one>	
+		<!--dataDictTerm属性，本类与DataDict的一对一  -->
+		<many-to-one name="dataDictTerm" class="DataDict" column="DataDictTerm_Id">
+		</many-to-one>	
 	</class>
 </hibernate-mapping>

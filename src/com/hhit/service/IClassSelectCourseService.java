@@ -6,6 +6,7 @@ import com.hhit.base.IDaoSupport;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.DataDict;
 
 public interface IClassSelectCourseService extends IDaoSupport<ClassSelectCourse>{
 
@@ -19,5 +20,8 @@ public interface IClassSelectCourseService extends IDaoSupport<ClassSelectCourse
 	ClassSelectCourse findByClassAndCourse(Class_ classFind, Course courseFind);
 	//查找老师授课的班级
 	List<ClassSelectCourse> findByTeacherNum(String teaNum);
+	//根据班级和学期
+	List<ClassSelectCourse> findByClassAndDictTerm(Class_ classFind,
+			DataDict termFind);
 
 }

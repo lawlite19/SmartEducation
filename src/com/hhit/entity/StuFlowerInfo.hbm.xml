@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="StuFlowerInfo" table="T_StuFlowerInfo">
+		<id name="id" type="int">
+			<column name="Id"></column>
+            <generator class="native"/>
+		</id>
+		<property name="stuNum" type="string">	
+			<column name="StuNum" length="20">
+				<comment>学号</comment>
+			</column>
+		</property>
+		<property name="addTime" type="timestamp">
+			<column name="AddTime">
+				<comment>添加时间</comment>
+			</column>
+		</property>
+		<property name="courseName" type="string">
+			<column name="CourseName" length="50">
+				<comment>课程名</comment>
+			</column>
+		</property>
+		<property name="teaNum" type="string">
+			<column name="TeaNum" length="20">
+				<comment>老师工号</comment>
+			</column>
+		</property>
+		<!-- stuScoreRecord属性，与StuScoreRecord一对一 -->
+		<many-to-one name="stuScoreRecord" class="StuScoreRecord" column="StuScoreRecord_Id"></many-to-one>
+	</class>
+</hibernate-mapping>

@@ -85,6 +85,10 @@ public class InterfaceAPIAction {
 	public String teaInfoAndDeptAndRoleUI() throws Exception{
 		return "teaInfoAndDeptAndRoleUI";
 	}
+	/** 当前学期 */
+	public String currentTermUI() throws Exception{
+		return "currentTermUI";
+	}
 	
 	
 //实时测评接口
@@ -223,6 +227,10 @@ public class InterfaceAPIAction {
 	public String listSpiderCourseScoreUI() throws Exception{
 		return "listSpiderCourseScoreUI";
 	}
+	/** 学生学期课程 */
+	public String myTermCourseUI() throws Exception{
+		return "myTermCourseUI";
+	}
 	
 //教学质量接口	
 //==================================	
@@ -241,6 +249,18 @@ public class InterfaceAPIAction {
 	/** 学生课程分数--全部 */
 	public String stuAllCourseScoreUI() throws Exception{
 		return "stuAllCourseScoreUI";
+	}
+	/** 老师给学生送花*/
+	public String teaSendFlowerUI() throws Exception{
+		return "teaSendFlowerUI";
+	}
+	/** 老师取消送花*/
+	public String teaCancelFlowerUI() throws Exception{
+		return "teaCancelFlowerUI";
+	}
+	/** 学生得到花的记录*/
+	public String stuFlowerRecordUI() throws Exception{
+		return "stuFlowerRecordUI";
 	}
 	
 }

@@ -136,6 +136,22 @@ public class DataDictAction extends BaseAction<DataDict> {
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//当前学期--id最大的学期
+	public String appGetCurrentTerm() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		
+		DataType dataTypeFind=dataTypeService.findByNum("002");
+		if(dataTypeFind==null){
+			map.put("name", "error");
+		}
+		else{
+			DataDict termFind=dataDictService.findCurrentTerm(dataTypeFind);
+			ClassPropertyFilter.DataDictFilter(map, termFind);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 
 	public Integer getDataTypeId() {
 		return dataTypeId;

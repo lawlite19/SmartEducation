@@ -29,6 +29,7 @@ import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
 import com.hhit.service.IStuCourseScoreService;
+import com.hhit.service.IStuFlowerInfoService;
 import com.hhit.service.IStuPaperAccountService;
 import com.hhit.service.IStuQuestionService;
 import com.hhit.service.IStuScoreRecordService;
@@ -141,6 +142,8 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected IStuPaperAccountService stuPaperAccountService;//学生答卷记录
 	@Resource
 	protected IUserOnlineTimeService userOnlineTimeService;//记录用户在线时长
+	@Resource
+	protected IStuFlowerInfoService stuFlowerInfoService;//学生得到花的记录
 	
 	//--------------
 	@Resource

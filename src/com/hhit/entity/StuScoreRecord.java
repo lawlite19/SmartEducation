@@ -21,6 +21,9 @@ public class StuScoreRecord {
 	private Float score;
 	private Timestamp submitTime;
 	
+	//new add
+	private Integer isGetFlower;
+	
 	private TestPaper testPaper;
 	
 	public Integer getId() {
@@ -59,5 +62,10 @@ public class StuScoreRecord {
 	public void setSubmitTime(Timestamp submitTime) {
 		this.submitTime = submitTime;
 	}
-	
+	public Integer getIsGetFlower() {
+		return isGetFlower;
+	}
+	public void setIsGetFlower(Integer isGetFlower) {
+		this.isGetFlower = isGetFlower;
+	}
 }

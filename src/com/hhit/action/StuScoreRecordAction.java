@@ -23,6 +23,7 @@ import com.hhit.base.BaseAction;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.StuFlowerInfo;
 import com.hhit.entity.StuPaperAccount;
 import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
@@ -288,7 +289,68 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 		
 		return null;
 	}
-	
+	//老师送花
+	public String appTeaSendFlower() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		StuScoreRecord recordFind=stuScoreRecordService.findById(model.getId());
+		if(recordFind==null){
+			map.put("name", "noScoreRecord");
+		}
+		else{
+			//更新是否送花
+			recordFind.setIsGetFlower(1);
+			stuScoreRecordService.update(recordFind);
+			//保存送花信息
+			TestPaper paperFind=recordFind.getTestPaper();
+			StuFlowerInfo model=new StuFlowerInfo(recordFind.getStuNum(),
+					new Timestamp(new Date().getTime()), paperFind.getCourse().getCourseName(), paperFind.getTeaNum(),recordFind);
+			stuFlowerInfoService.save(model);
+			//更新总花数--同步操作
+			synchronized (this) {
+				Student stuFind=studentService.findByStuNum(recordFind.getStuNum());
+				if(stuFind.getFlowerCount()!=null){
+					int flowerCount=stuFind.getFlowerCount();
+					stuFind.setFlowerCount(flowerCount+1);
+					studentService.update(stuFind);
+				}
+				else{
+					stuFind.setFlowerCount(1);
+					studentService.update(stuFind);
+				}
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//老师取消送花
+	public String appTeaCancelFlower() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		StuScoreRecord recordFind=stuScoreRecordService.findById(model.getId());
+		if(recordFind==null){
+			map.put("name", "noScoreRecord");
+		}
+		else{
+			//更新是否送花
+			recordFind.setIsGetFlower(0);
+			stuScoreRecordService.update(recordFind);
+			//删除送花信息
+			StuFlowerInfo stuFlowerFind=stuFlowerInfoService.findByStuScoreRecord(recordFind);
+			stuFlowerInfoService.delete(stuFlowerFind.getId());
+			//更新总花数--同步操作
+			synchronized (this) {
+				Student stuFind=studentService.findByStuNum(recordFind.getStuNum());
+				if(stuFind.getFlowerCount()!=null){
+					int flowerCount=stuFind.getFlowerCount();
+					stuFind.setFlowerCount(flowerCount-1);
+					studentService.update(stuFind);
+				}
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	public Integer getTestPaperId() {
 		return testPaperId;
 	}

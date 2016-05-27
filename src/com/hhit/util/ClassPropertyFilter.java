@@ -2,7 +2,6 @@ package com.hhit.util;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Class_;
@@ -20,6 +19,7 @@ import com.hhit.entity.SpiderCourseInfo;
 import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.StuCourseScore;
+import com.hhit.entity.StuFlowerInfo;
 import com.hhit.entity.StuPaperAccount;
 import com.hhit.entity.StuScoreRecord;
 import com.hhit.entity.Student;
@@ -65,6 +65,11 @@ public class ClassPropertyFilter {
 	public static void TeaAnswerFilter(Map<String,Object> map,TeaAnswer TeaAnswer){
 		String[] teaAnswerProperty={"stuQuestion"};
 		map.put("teaAnswer", JsonUtil.jsonFilter(TeaAnswer, teaAnswerProperty));
+	}
+	//数据字典过滤
+	public static void DataDictFilter(Map<String,Object> map,DataDict dataDict){
+		String[] dataDictProperty={"dataType"};
+		map.put("dataDict", JsonUtil.jsonFilter(dataDict, dataDictProperty));
 	}
 	
 	
@@ -176,6 +181,10 @@ public class ClassPropertyFilter {
 		String[] departmentScoreProperty={"parent","children","students","teachers","courses","department"};
 		map.put("departments", JsonUtil.jsonListFilter(departmentList, departmentScoreProperty));
 	}
-	
+	//学生得到花list过滤
+	public static void ListStuFlowerInfoFilter(Map<String,Object> map,List<StuFlowerInfo> stuFlowerList){
+		String[] stuFlowerProperty={"stuScoreRecord"};
+		map.put("stuFlowers", JsonUtil.jsonListFilter(stuFlowerList, stuFlowerProperty));
+	}
 	
 }
