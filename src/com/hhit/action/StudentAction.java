@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -26,6 +24,7 @@ import com.hhit.entity.Chapter;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.DataDict;
 import com.hhit.entity.Department;
 import com.hhit.entity.Favorite;
 import com.hhit.entity.PageBean;
@@ -71,6 +70,8 @@ public class StudentAction extends BaseAction<Student> {
 	private String txtCourseName="";
 	private String txtKnowledgeName="";
 	private String txtQuestion="";
+	
+	private Integer dictTermId;
 	
 	/** 列表 */
 	public String list() throws Exception {
@@ -527,6 +528,41 @@ public class StudentAction extends BaseAction<Student> {
 		
 		return null;
 	}
+	//学生学期课程
+	public String appStuTermCourse() throws Exception{
+		Map<String, Object> map=new HashMap<String,Object>();
+		//根据学号找到学生
+		Student stuFind=studentService.findByStuNum(model.getStuNum());
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		//根据学期id找到学期
+		else{
+			DataDict termFind=dataDictService.findById(dictTermId);
+			if(termFind==null){
+				map.put("name", "noTerm");
+			}
+			else{
+				Class_ classFind=stuFind.getClass_();
+				//根据班级查找选课
+				List<ClassSelectCourse> classSelectCourseList = classSelectCourseService.findByClassAndDictTerm(classFind,termFind);
+				if(classSelectCourseList.size()<1){
+					map.put("name", "noCourse");
+				}
+				else{
+					//课程
+					List<Course> courseList=new ArrayList<>();
+					for(int i=0;i<classSelectCourseList.size();i++){
+						courseList.add(classSelectCourseList.get(i).getCourse());
+					}
+					ClassPropertyFilter.ListCourseFilter(map, courseList);
+					map.put("name", "success");
+				}
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	
 //=============================	
 	public Integer getDepartmentId() {
@@ -607,4 +643,11 @@ public class StudentAction extends BaseAction<Student> {
 	public void setTxtQuestion(String txtQuestion) {
 		this.txtQuestion = txtQuestion;
 	}
+	public Integer getDictTermId() {
+		return dictTermId;
+	}
+	public void setDictTermId(Integer dictTermId) {
+		this.dictTermId = dictTermId;
+	}
+	
 }

@@ -29,6 +29,7 @@ public class Student implements java.io.Serializable{
 	//new add
 	private String telphone;
 	private String qqNum;
+	private Integer flowerCount;
 	
 	
 	private Department department;
@@ -125,4 +126,11 @@ public class Student implements java.io.Serializable{
 	public void setQqNum(String qqNum) {
 		this.qqNum = qqNum;
 	}
+	public Integer getFlowerCount() {
+		return flowerCount;
+	}
+	public void setFlowerCount(Integer flowerCount) {
+		this.flowerCount = flowerCount;
+	}
+	
 }

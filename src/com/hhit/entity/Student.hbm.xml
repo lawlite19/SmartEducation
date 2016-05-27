@@ -50,6 +50,11 @@
 				<comment>qq号码</comment>
 			</column>
 		</property>
+		<property name="flowerCount" type="integer">
+			<column name="FlowerCount">
+				<comment>得到花的数量</comment>
+			</column>
+		</property>
 		<!--department属性，本类与Department的多对一 -->
 		<many-to-one name="department" class="Department" column="Department_Id" lazy="false">
 		</many-to-one>

@@ -10,12 +10,22 @@ package com.hhit.entity;
 
 
 public class ClassSelectCourse {
+	public DataDict getDataDictTerm() {
+		return dataDictTerm;
+	}
+
+	public void setDataDictTerm(DataDict dataDictTerm) {
+		this.dataDictTerm = dataDictTerm;
+	}
 	private Integer id;
 	private String selectNum;
 	private String teacherNum;
 	
 	private Class_ class_;
 	private Course course;
+	
+	//new add
+	private DataDict dataDictTerm;
 	
 	/**
 	 * 默认构造函数
@@ -67,5 +77,4 @@ public class ClassSelectCourse {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	
 }

@@ -291,6 +291,11 @@
 			<result name="teaCourseDeptUI">/WEB-INF/jsp/interfaceAPIAction/evaluation/teaCourseDeptUI.jsp</result>
 			<result name="stuInfoAndClassUI">/WEB-INF/jsp/interfaceAPIAction/stuInfoAndClassUI.jsp</result>
 			<result name="teaInfoAndDeptAndRoleUI">/WEB-INF/jsp/interfaceAPIAction/teaInfoAndDeptAndRoleUI.jsp</result>
+			<result name="myTermCourseUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/myTermCourseUI.jsp</result>
+			<result name="teaSendFlowerUI">/WEB-INF/jsp/interfaceAPIAction/assessment/teaSendFlowerUI.jsp</result>
+			<result name="teaCancelFlowerUI">/WEB-INF/jsp/interfaceAPIAction/assessment/teaCancelFlowerUI.jsp</result>
+			<result name="currentTermUI">/WEB-INF/jsp/interfaceAPIAction/currentTermUI.jsp</result>
+			<result name="stuFlowerRecordUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuFlowerRecordUI.jsp</result>
 			
 			
 		</action>
@@ -351,6 +356,9 @@
 		</action>
 		<!-- 学生访问爬取课程记录 -->
 		<action name="visitCourseRecord_*" class="visitCourseRecordAction" method="{1}">
+		</action>
+		<!-- 学生得到花记录 -->
+		<action name="stuFlower_*" class="stuFlowerInfoAction" method="{1}">
 		</action>
 	</package>
 </struts>    

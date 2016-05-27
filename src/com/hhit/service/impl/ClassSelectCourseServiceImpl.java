@@ -9,6 +9,7 @@ import com.hhit.base.DaoSupportImpl;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
+import com.hhit.entity.DataDict;
 import com.hhit.service.IClassSelectCourseService;
 
 @Service
@@ -45,6 +46,15 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 	public List<ClassSelectCourse> findByTeacherNum(String teaNum) {
 		return getSession().createQuery("FROM ClassSelectCourse WHERE teacherNum=?")//
 				.setParameter(0, teaNum)//
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ClassSelectCourse> findByClassAndDictTerm(Class_ classFind,DataDict termFind) {
+		return getSession().createQuery("FROM ClassSelectCourse WHERE class_=? AND dataDictTerm=?")//
+				.setParameter(0, classFind)//
+				.setParameter(1, termFind)//
 				.list();
 	}
 

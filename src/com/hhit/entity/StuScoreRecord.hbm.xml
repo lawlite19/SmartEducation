@@ -30,6 +30,11 @@
 				<comment>提交时间</comment>
 			</column>
 		</property>
+		<property name="isGetFlower" type="integer">
+			<column name="IsGetFlower">
+				<comment>是否得到花了</comment>
+			</column>
+		</property>
 		<!-- testPaper属性，与 TestPaper类一对一-->
 		<many-to-one name="testPaper" class="TestPaper" column="TestPaper_Id" lazy="false">
 		</many-to-one>

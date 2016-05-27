@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>老师查看测试卷学生分数</title>
+<title>老师给学生送花</title>
 <%@include file="/WEB-INF/jsp/public/list.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/api.css" />
 </head>
@@ -10,7 +10,7 @@
 <!-- 顶层 -->
 <div class="crumd"><a href="" id="A1">首页</a> &gt; 接口文档 &gt; 接口信息</div>
 <!-- 信息开始 -->
-<s:form action="/App/stuScoreRecord_appTeaLookStuScore.action" method="post">
+<s:form action="/App/stuScoreRecord_appTeaSendFlower.action" method="post">
 <div class="mframe">
 	<table width="91.8%" align="center" cellspacing="0" cellpadding="0">
           <tbody>
@@ -33,49 +33,39 @@
 					<div>
 							<h2>接口地址</h2>
 									<p class="p_apiInfo">
-										${pageContext.request.contextPath}/App/stuScoreRecord_appTeaLookStuScore.action
+										${pageContext.request.contextPath}/App/stuScoreRecord_appTeaSendFlower.action
 									</p>
 								<br/>
 								<h2>需要传递的数据</h2>
 								<br/>
 								<span class="span_apiInfo">
-									测试卷id：<span class="span_apiProperty">testPaperId</span>
+									学生测试分数id：<span class="span_apiProperty">id</span>
 								</span>
+					</div>
 					<!-- 返回json数据说明-->
 					<div  class="addFont">
 						<h2>返回json数据说明</h2>
 						<span class="span_apiInfo">
 						<span class="span_apiProperty">
 							name：&nbsp;<span class="span_apiSuccess">success</span><span class="span_apiNormal">-->查询成功</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="span_apiWarning">noTestPaper</span><span class="span_apiNormal">-->没有找到测试卷</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="span_apiWarning">noRecord</span><span class="span_apiNormal">-->没有找到记录</span>
+							&nbsp;&nbsp;
+							<span class="span_apiWarning">noScoreRecord</span><span class="span_apiNormal">-->没有找到分数记录</span>
+							
 						</span>
-						<br/>
-						<span class="span_apiInfo">
-						<span class="span_apiProperty">
-							stuScoreRecords：&nbsp;<span class="span_apiNormal">学生成绩记录</span>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="span_apiWarning">isGetFlower</span><span class="span_apiNormal">-->1表示得到花了，其他为没有得到</span>
-								
-						</span>
-						</span>
-						
 						</span>
 					</div>
 					<!-- 测试 -->
 					<div class="addFont">
 						<h2>测试</h2>
-						<span class="span_apiInfo">
-							testPaperId: <s:textfield cssClass="inpu" name="testPaperId"></s:textfield>eg:2
-						</span>
 						<br/><br/>
+						<span class="span_apiInfo">
+							id:<s:textfield cssClass="inpu" name="id"></s:textfield>eg:1
+						</span>
+                        <br/><br/>
                         <span class="span_apiButton">
-                        	<s:submit value="提交"   cssClass="ttn"></s:submit>
+                        	<s:submit value="提交" cssClass="ttn"></s:submit>
                         </span>
 					</div>
-
 				</td>
 			</tr>
 	</tbody>
