@@ -6,14 +6,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.google.gson.JsonArray;
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
 import com.hhit.entity.Department;
 import com.hhit.entity.Role;
 import com.hhit.entity.Student;

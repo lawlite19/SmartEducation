@@ -17,6 +17,12 @@ public class ClassSelectCourse {
 	private Class_ class_;
 	private Course course;
 	
+	//new add
+	private Double selfAccess;
+	private Double teachAccess;
+	private String teacherName;
+	private ATerm aTerm;
+	
 	/**
 	 * 默认构造函数
 	 */
@@ -66,6 +72,38 @@ public class ClassSelectCourse {
 	}
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public Double getSelfAccess() {
+		return selfAccess;
+	}
+
+	public void setSelfAccess(Double selfAccess) {
+		this.selfAccess = selfAccess;
+	}
+
+	public Double getTeachAccess() {
+		return teachAccess;
+	}
+
+	public void setTeachAccess(Double teachAccess) {
+		this.teachAccess = teachAccess;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public ATerm getaTerm() {
+		return aTerm;
+	}
+
+	public void setaTerm(ATerm aTerm) {
+		this.aTerm = aTerm;
 	}
 	
 }

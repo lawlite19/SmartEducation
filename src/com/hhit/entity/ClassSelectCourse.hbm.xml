@@ -4,7 +4,6 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.hhit.entity">
-
 	<class name="ClassSelectCourse" table="T_ClassSelectCourse">
 		<id name="id" type="int">
 			<column name="Id"></column>
@@ -26,5 +25,21 @@
 		<!--course属性，本类与Course的一对一  -->
 		<many-to-one name="course" class="Course" column="Course_Id" lazy="false">
 		</many-to-one>	
+		
+		<!-- new add -->
+		<!--  -->
+		<property name="selfAccess" type="java.lang.Double">
+            <column name="Self_Access" precision="10" />
+        </property>
+        <property name="teachAccess" type="java.lang.Double">
+            <column name="Teach_Access" precision="10" />
+        </property>
+        <property name="teacherName" type="java.lang.String">
+            <column name="TeacherName" precision="50" />
+        </property>
+        <many-to-one name="aTerm" class="com.hhit.entity.ATerm" fetch="select">
+            <column name="Term_Id" />
+        </many-to-one>
 	</class>
 </hibernate-mapping>
+

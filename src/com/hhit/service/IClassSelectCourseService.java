@@ -3,6 +3,7 @@ package com.hhit.service;
 import java.util.List;
 
 import com.hhit.base.IDaoSupport;
+import com.hhit.entity.ATerm;
 import com.hhit.entity.ClassSelectCourse;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
@@ -19,5 +20,13 @@ public interface IClassSelectCourseService extends IDaoSupport<ClassSelectCourse
 	ClassSelectCourse findByClassAndCourse(Class_ classFind, Course courseFind);
 	//查找老师授课的班级
 	List<ClassSelectCourse> findByTeacherNum(String teaNum);
+
+	List<ClassSelectCourse> findByClassAndTerm(Class_ class_, ATerm term);
+
+	List<ClassSelectCourse> findByTeacherNumAndTerm(String teaNum, ATerm term);
+
+	double findgradeByTeacherNumAndTerm(String teaNum, ATerm term);
+
+	double findteagradeByTeacherNumAndTerm(String teaNum, ATerm term);
 
 }

@@ -1,4 +1,4 @@
-package com.hhit.base;
+	package com.hhit.base;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -17,10 +17,13 @@ import com.hhit.service.IDepartmentService;
 import com.hhit.service.IFavoriteService;
 import com.hhit.service.IJudgementService;
 import com.hhit.service.ILogFileService;
+import com.hhit.service.IPeerAccessService;
+import com.hhit.service.IPeerAccountService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IQuestionErrorRecordService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ISelfAccountService;
 import com.hhit.service.ISingleChoiceService;
 import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseInfoService;
@@ -28,16 +31,23 @@ import com.hhit.service.ISpiderCourseService;
 import com.hhit.service.ISpiderDocumentService;
 import com.hhit.service.ISpiderProfessionService;
 import com.hhit.service.ISpiderProfessionTypeService;
+import com.hhit.service.IStuAccountService;
 import com.hhit.service.IStuCourseScoreService;
 import com.hhit.service.IStuPaperAccountService;
 import com.hhit.service.IStuQuestionService;
 import com.hhit.service.IStuScoreRecordService;
+import com.hhit.service.IStudentAccessService;
 import com.hhit.service.IStudentService;
 import com.hhit.service.ISubmitTaskService;
 import com.hhit.service.ITaskService;
+import com.hhit.service.ITaticsService;
 import com.hhit.service.ITeaAnswerService;
+import com.hhit.service.ITeachAccountService;
 import com.hhit.service.ITeachProcessService;
+import com.hhit.service.ITeacherGradeService;
 import com.hhit.service.ITeacherService;
+import com.hhit.service.ITeachingAccessService;
+import com.hhit.service.ITermService;
 import com.hhit.service.ITestPaperService;
 import com.hhit.service.ITestQuestionService;
 import com.hhit.service.IUserDetailsService;
@@ -158,6 +168,31 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	@Resource
 	protected ISpiderDocumentService spiderDocumentService;//爬虫课程文档
 
+	
+	@Resource
+	protected ITermService termService;//评价基础信息
+	@Resource
+	protected IStuAccountService stuAccountService;//学生评价指标信息
+	@Resource
+	protected ISelfAccountService selfAccountService;//学生评价指标信息
+	@Resource
+	protected ITaticsService taticsService;//评价策略信息
+	@Resource
+	protected IPeerAccountService peerAccountService;//同行评价指标信息
+	@Resource
+	protected ITeachAccountService teachAccountService;//教学模式指标信息
+	
+	@Resource
+	protected IPeerAccessService peerAccessService;//同行评价
+	@Resource
+	protected IStudentAccessService stuAccessService;//学生评价
+	@Resource
+	protected ITeachingAccessService teaAccessService;//学教学要素评价
+	
+	@Resource
+	protected ITeacherGradeService teaGradeService;//学教学要素评价
+	
+	
 	/**
 	 * 获取当前登录的用户
 	 */

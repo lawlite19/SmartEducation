@@ -14,6 +14,13 @@ import com.hhit.entity.Department;
 import com.hhit.entity.Judgement;
 import com.hhit.entity.Role;
 import com.hhit.entity.SingleChoice;
+
+import com.hhit.entity.ATeacherGrade;
+import com.hhit.entity.Class_;
+import com.hhit.entity.Course;
+import com.hhit.entity.DataDict;
+import com.hhit.entity.Department;
+import com.hhit.entity.Role;
 import com.hhit.entity.SpiderChapter;
 import com.hhit.entity.SpiderCourse;
 import com.hhit.entity.SpiderCourseInfo;
@@ -27,6 +34,9 @@ import com.hhit.entity.TeaAnswer;
 import com.hhit.entity.TeachProcess;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.TestPaper;
+import com.hhit.entity.Student;
+import com.hhit.entity.TeachProcess;
+import com.hhit.entity.Teacher;
 
 public class ClassPropertyFilter {
 //实体类过滤
@@ -66,8 +76,11 @@ public class ClassPropertyFilter {
 		String[] teaAnswerProperty={"stuQuestion"};
 		map.put("teaAnswer", JsonUtil.jsonFilter(TeaAnswer, teaAnswerProperty));
 	}
-	
-	
+	//学生过滤
+	public static void ATeacherGradeFilter(Map<String,Object> map,ATeacherGrade stu){
+		String[] stuProperty={"Teacher","ATerm","teacher","aTerm","id"};
+		map.put("teachergrade", JsonUtil.jsonFilter(stu, stuProperty));
+	}
 //list过滤
 //==============================================
 	//角色list过滤
@@ -176,6 +189,4 @@ public class ClassPropertyFilter {
 		String[] departmentScoreProperty={"parent","children","students","teachers","courses","department"};
 		map.put("departments", JsonUtil.jsonListFilter(departmentList, departmentScoreProperty));
 	}
-	
-	
 }
