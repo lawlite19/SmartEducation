@@ -178,6 +178,75 @@
 			<result name="show">/WEB-INF/jsp/spiderCourseAction/show.jsp</result>
 			<result name="showCourseInfo">/WEB-INF/jsp/spiderCourseAction/showCourseInfo.jsp</result>
 		</action>
+		<!-- 评价基础信息管理 -->
+		<action name="term_*" class="termAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/termAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/termAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">term_list</result>
+		</action>
+		<!-- 学生评价指标管理 -->
+			<action name="stuAccount_*" class="stuAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/stuAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/stuAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">stuAccount_list</result>
+		</action>
+		<!-- 自我评价指标管理 -->
+			<action name="selfAccount_*" class="selfAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/selfAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/selfAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">selfAccount_list</result>
+		</action>
+		<!-- 同行评价指标管理 -->
+			<action name="peerAccount_*" class="peerAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/peerAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/peerAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">peerAccount_list</result>
+		</action>
+		<!-- 教学模式指标管理 -->
+			<action name="teachAccount_*" class="teachAccountAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachAccountAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/teachAccountAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">teachAccount_list</result>
+		</action>
+		<!-- 评价策略管理 -->
+			<action name="tatics_*" class="taticsAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/taticsAction/list.jsp</result>
+		</action>
+		<!-- 同行评价 -->
+			<action name="peer_*" class="peerAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/peerAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/peerAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">peer_list</result>
+		</action>
+		<!-- 学生评价 -->
+			<action name="stuaccess_*" class="studentAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/studentAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/studentAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">stuaccess_list</result>
+		</action>
+		<!-- 自我评价 -->
+			<action name="selfaccess_*" class="selfAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/selfAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/selfAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">selfaccess_list</result>
+		</action>
+		<!-- 教学要素评价 -->
+			<action name="teachaccess_*" class="teachAccessAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachAccessAction/list.jsp</result>
+			<result name="access">/WEB-INF/jsp/teachAccessAction/access.jsp</result>
+			<result name="toList" type="redirectAction">teachaccess_list</result>
+		</action>
+		
+		<!-- 个人评价信息 -->
+			<action name="teachergrade_*" class="teacherGradeAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teacherGradeAction/list.jsp</result>
+			<result name="highchar">/WEB-INF/jsp/teacherGradeAction/highchar.jsp</result>
+			<result name="query">/WEB-INF/jsp/teacherGradeAction/query.jsp</result>
+			<result name="querychart">/WEB-INF/jsp/teacherGradeAction/querychart.jsp</result>
+			<result name="adminquery">/WEB-INF/jsp/teacherGradeAction/adminquery.jsp</result>
+			<result name="toList" type="redirectAction">teachaccess_list</result>
+		</action>
+		
 		<!-- 收藏夹 -->
 		<action name="favorite_*" class="favoriteAction" method="{1}">
 		</action>

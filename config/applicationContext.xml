@@ -120,6 +120,19 @@
 			<value>com/hhit/entity/StuPaperAccount.hbm.xml</value>
 			<!-- 用户在线时长记录 -->
 			<value>com/hhit/entity/UserOnlineTime.hbm.xml</value>
+			<!-- 评价指标 -->
+			<value>com/hhit/entity/ATerm.hbm.xml</value>
+			<value>com/hhit/entity/AStudentAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ASelfAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ATatics.hbm.xml</value>
+			<value>com/hhit/entity/APeerAccessAccount.hbm.xml</value>
+			<value>com/hhit/entity/ATeachingAccount.hbm.xml</value>
+			<!-- 评价操作-->
+			<value>com/hhit/entity/APeerAccess.hbm.xml</value>
+			<value>com/hhit/entity/AStudentAccess.hbm.xml</value>
+			<value>com/hhit/entity/ATeachingAccess.hbm.xml</value>
+			<!-- 个人评价信息查询-->
+			<value>com/hhit/entity/ATeacherGrade.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

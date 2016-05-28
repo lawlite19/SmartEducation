@@ -21,6 +21,7 @@ import net.sf.json.util.CycleDetectionStrategy;
 import com.google.gson.Gson;
 
 public class JsonUtil {
+	//使用Gson--->xx转化成json
     public static void toJson(HttpServletResponse response, Object data) 
         throws IOException {
         Gson gson = new Gson();
