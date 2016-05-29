@@ -187,6 +187,13 @@
 			<action name="tatics_*" class="taticsAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/taticsAction/list.jsp</result>
 		</action>
+		<!-- 教学要素管理 -->
+			<action name="teachElement_*" class="teachElementAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/teachElementAction/list.jsp</result>
+			<result name="saveUI">/WEB-INF/jsp/teachElementAction/saveUI.jsp</result>
+			<result name="toList" type="redirectAction">teachElement_list</result>
+		</action>
+		
 		<!-- 同行评价 -->
 			<action name="peer_*" class="peerAccessAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/peerAccessAction/list.jsp</result>

@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>显示数据字典</title>
-<%@include file="/WEB-INF/jsp/public/commons.jspf"%>
+<%@ include file="/WEB-INF/jsp/public/list.jspf" %>
 <script>
 	$(function() {
 		$("#selectAll").click(function() {
