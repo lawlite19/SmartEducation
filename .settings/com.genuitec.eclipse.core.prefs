@@ -1,3 +1,3 @@
 eclipse.preferences.version=1
-validator.Checked=WebRoot/script/star-rating.js,WebRoot/layer/jquery.min.js,WebRoot/script/jquery-2.0.0.min.js,WebRoot/WEB-INF/jsp/userAction/loginUI.jsp,WebRoot/script/jquery.min.js
+validator.Checked=WebRoot/layer/jquery.min.js,WebRoot/script/star-rating.js,WebRoot/script/jquery-2.0.0.min.js,WebRoot/WEB-INF/jsp/userAction/loginUI.jsp,WebRoot/script/jquery.min.js
 validator.Unchecked=

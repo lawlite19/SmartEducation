@@ -29,4 +29,7 @@ public interface IClassSelectCourseService extends IDaoSupport<ClassSelectCourse
 
 	double findteagradeByTeacherNumAndTerm(String teaNum, ATerm term);
 
+	ClassSelectCourse findByTeacherNumAndCourseandTerm(String teaNum,
+			Course courseFind, ATerm term);
+
 }

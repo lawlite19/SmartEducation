@@ -51,7 +51,7 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ClassSelectCourse> findByClassAndTerm(Class_ class_, ATerm term) {
-		return getSession().createQuery("FROM ClassSelectCourse c WHERE c.class_=? and c.ATerm=?")//
+		return getSession().createQuery("FROM ClassSelectCourse c WHERE c.class_=? and c.aTerm=?")//
 				.setParameter(0, class_).setParameter(1, term)//
 				.list();
 	}
@@ -61,7 +61,7 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 	public List<ClassSelectCourse> findByTeacherNumAndTerm(String teaNum,
 			ATerm term) {
 		
-		return getSession().createQuery("FROM ClassSelectCourse c WHERE c.teacherNum=? and c.ATerm=?")//
+		return getSession().createQuery("FROM ClassSelectCourse c WHERE c.teacherNum=? and  c.aTerm=?")//
 				.setParameter(0, teaNum).setParameter(1, term)//
 				.list();
 	}
@@ -70,7 +70,7 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 	public double findgradeByTeacherNumAndTerm(String teaNum, ATerm term) {
 		
 		return (double) getSession().createQuery
-				("select avg(c.selfAccess)FROM ClassSelectCourse c WHERE c.teacherNum=? and c.ATerm=? GROUP BY c.teacherNum,c.ATerm")//
+				("select avg(c.selfAccess)FROM ClassSelectCourse c WHERE c.teacherNum=? and c.aTerm=? GROUP BY c.teacherNum,c.aTerm")//
 				.setParameter(0, teaNum).setParameter(1, term)//
 				.uniqueResult();
 	}
@@ -78,8 +78,17 @@ public class ClassSelectCourseServiceImpl extends DaoSupportImpl<ClassSelectCour
 	@Override
 	public double findteagradeByTeacherNumAndTerm(String teaNum, ATerm term) {
 		return (double) getSession().createQuery
-				("select avg(c.teachAccess)FROM ClassSelectCourse c WHERE c.teacherNum=? and c.ATerm=? GROUP BY c.teacherNum,c.ATerm")//
+				("select avg(c.teachAccess)FROM ClassSelectCourse c WHERE c.teacherNum=? and c.aTerm=? GROUP BY c.teacherNum,c.aTerm")//
 				.setParameter(0, teaNum).setParameter(1, term)//
+				.uniqueResult();
+	}
+
+	@Override
+	public ClassSelectCourse findByTeacherNumAndCourseandTerm(String teaNum,
+			Course courseFind, ATerm term) {
+		
+		return (ClassSelectCourse)getSession().createQuery("FROM ClassSelectCourse c WHERE c.teacherNum=? and c.course=? and c.aTerm=?")//
+				.setParameter(0, teaNum).setParameter(1, courseFind).setParameter(2, term)//
 				.uniqueResult();
 	}
 

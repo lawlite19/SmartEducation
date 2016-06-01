@@ -1,19 +1,27 @@
 package com.hhit.action;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.hhit.base.BaseAction;
+import com.hhit.entity.APeerAccessAccount;
 import com.hhit.entity.ASelfAccessAccount;
 import com.hhit.entity.AStudentAccessAccount;
 import com.hhit.entity.ATerm;
 import com.hhit.entity.ClassSelectCourse;
+import com.hhit.entity.Course;
 import com.hhit.entity.Student;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
+import com.hhit.util.ClassPropertyFilter;
+import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
@@ -23,6 +31,27 @@ public class SelfAccessAction extends BaseAction<ClassSelectCourse> {
 	
 	/**读取评价分数**/
 	Double[] accessgrade; 
+	String teaNum;
+	int courseFind;
+	double selfGrade;
+	public String getTeaNum() {
+		return teaNum;
+	}
+	public void setTeaNum(String teaNum) {
+		this.teaNum = teaNum;
+	}
+	public int getCourseFind() {
+		return courseFind;
+	}
+	public void setCourseFind(int courseFind) {
+		this.courseFind = courseFind;
+	}
+	public double getSelfGrade() {
+		return selfGrade;
+	}
+	public void setSelfGrade(double selfGrade) {
+		this.selfGrade = selfGrade;
+	}
 	public Double[] getAccessgrade() {
 		return accessgrade;
 	}
@@ -78,4 +107,33 @@ public class SelfAccessAction extends BaseAction<ClassSelectCourse> {
 		classSelectCourseService.update(csc);
 		return "toList";
 		}
+	
+	public String appSelfAccess() throws IOException {
+		Map<String, Object> map=new HashMap<>();
+		int termid=termService.findMaxId();
+		ATerm term=termService.findById(termid);
+		List<ASelfAccessAccount> selfaccoutList=selfAccountService.findByTerm(term);
+		ClassPropertyFilter.ListSelfAccountFilter(map,selfaccoutList);
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+
+	}
+	public String appSaveSelfGrade() throws IOException{
+		Map<String, Object> map=new HashMap<>();
+		if(teaNum!=null){
+		ATerm term=termService.findById(termService.findMaxId());
+		Course course=courseService.findById(courseFind);
+		ClassSelectCourse csc=classSelectCourseService.findByTeacherNumAndCourseandTerm(teaNum, course,term);
+		csc.setSelfAccess(selfGrade);
+		classSelectCourseService.update(csc);
+		map.put("result", "success");
+		}
+		else 
+		{
+			map.put("result","noTeaNum");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+		
+	}
 }

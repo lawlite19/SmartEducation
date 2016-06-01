@@ -1,8 +1,12 @@
 package com.hhit.action;	
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -12,6 +16,8 @@ import com.hhit.entity.APeerAccessAccount;
 import com.hhit.entity.ATerm;
 import com.hhit.entity.Teacher;
 import com.hhit.entity.User;
+import com.hhit.util.ClassPropertyFilter;
+import com.hhit.util.JsonUtil;
 import com.hhit.util.QueryHelper;
 import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
@@ -19,7 +25,27 @@ import com.opensymphony.xwork2.ActionContext;
 @Scope("prototype")
 public class PeerAccessAction extends BaseAction<APeerAccess> {
 	String[] accessgrade; 
-	
+	String teaNum;
+	String peerNum;
+	Double peerGrade;
+	public String getPeerNum() {
+		return peerNum;
+	}
+	public void setPeerNum(String peerNum) {
+		this.peerNum = peerNum;
+	}
+	public Double getPeerGrade() {
+		return peerGrade;
+	}
+	public void setPeerGrade(Double peerGrade) {
+		this.peerGrade = peerGrade;
+	}
+	public String getTeaNum() {
+		return teaNum;
+	}
+	public void setTeaNum(String teaNum) {
+		this.teaNum = teaNum;
+	}
 	public String[] getAccessgrade() {
 		return accessgrade;
 	}
@@ -76,5 +102,42 @@ public class PeerAccessAction extends BaseAction<APeerAccess> {
 		peerAccessService.save(model);
 		
 		return "toList";
+	}
+	public String appPeerAccess() throws IOException{
+		Map<String, Object> map=new HashMap<>();
+		int termid=termService.findMaxId();
+		ATerm term=termService.findById(termid);
+		List<APeerAccessAccount> peeraccoutList=peerAccountService.findByTerm(term);
+		ClassPropertyFilter.ListPeerAccoutFilter(map,peeraccoutList);
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	public String appPeerTeacher() throws IOException{
+	//	this.setTeaNum(getCurrentUser().getTeacher().getTeaNum());
+		Teacher teacher=teacherService.findByTeaNum(teaNum);
+		List<Teacher> teacherList=teacherService.findByLead(teaNum, teacher.getDepartment());
+		Map<String, Object> map=new HashMap<>();
+		ClassPropertyFilter.ListTeacherFilter(map, teacherList);
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	public String appSavePeerGrade() throws IOException{
+		Map<String, Object> map=new HashMap<>();
+		ATerm term=termService.findById(termService.findMaxId());
+		model.setATerm(term);
+		if(teaNum!=null&&peerNum!=null){
+		Teacher leader=teacherService.findByTeaNum(teaNum);
+		Teacher teacher=teacherService.findByTeaNum(peerNum);
+		model.setLeader(leader);
+		model.setTeacher(teacher);
+		model.setPeerAccess(peerGrade);
+		map.put("result", "success");
+		
+		}
+		else{
+			map.put("result","noTeaNum");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
 	}
 }

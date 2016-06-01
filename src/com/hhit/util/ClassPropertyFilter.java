@@ -2,8 +2,10 @@ package com.hhit.util;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import com.hhit.entity.APeerAccessAccount;
+import com.hhit.entity.ASelfAccessAccount;
+import com.hhit.entity.AStudentAccessAccount;
 import com.hhit.entity.Chapter;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
@@ -14,7 +16,6 @@ import com.hhit.entity.Department;
 import com.hhit.entity.Judgement;
 import com.hhit.entity.Role;
 import com.hhit.entity.SingleChoice;
-
 import com.hhit.entity.ATeacherGrade;
 import com.hhit.entity.Class_;
 import com.hhit.entity.Course;
@@ -188,5 +189,27 @@ public class ClassPropertyFilter {
 	public static void ListDepartmentFilter(Map<String,Object> map,List<Department> departmentList){
 		String[] departmentScoreProperty={"parent","children","students","teachers","courses","department"};
 		map.put("departments", JsonUtil.jsonListFilter(departmentList, departmentScoreProperty));
+	}
+	//同行评价指标list过滤
+	public static void ListPeerAccoutFilter(Map<String,Object> map,List<APeerAccessAccount> peerAccessAccount){
+		String[] peerAccessAccountProperty={"id","ATerm"};
+		map.put("peerAccessAccounts", JsonUtil.jsonListFilter(peerAccessAccount, peerAccessAccountProperty));
+	}
+	public static void ListStudentAccountFilter(Map<String, Object> map,
+			List<AStudentAccessAccount> stuaccoutList) {
+		String[] stuAccessAccountProperty={"id","ATerm"};
+		map.put("stuAccessAccounts", JsonUtil.jsonListFilter(stuaccoutList, stuAccessAccountProperty));
+	}
+	public static void ListSelfAccountFilter(Map<String, Object> map,
+		List<ASelfAccessAccount> selfaccoutList) {
+		String[] selfAccessAccountProperty={"id","ATerm"};
+		map.put("selfAccessAccounts", JsonUtil.jsonListFilter(selfaccoutList, selfAccessAccountProperty));
+		
+	}
+	public static void ListTeacherFilter(Map<String, Object> map,
+			List<Teacher> teacherList) {
+		String[] teacherProperty={"title","sex","birthday","finalEdu","inTime","telphone","department","roles","qqNum","courses"};
+		map.put("teacherList", JsonUtil.jsonListFilter(teacherList, teacherProperty));
+		
 	}
 }
