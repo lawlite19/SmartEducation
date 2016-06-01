@@ -296,6 +296,9 @@
 			<result name="teaCancelFlowerUI">/WEB-INF/jsp/interfaceAPIAction/assessment/teaCancelFlowerUI.jsp</result>
 			<result name="currentTermUI">/WEB-INF/jsp/interfaceAPIAction/currentTermUI.jsp</result>
 			<result name="stuFlowerRecordUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuFlowerRecordUI.jsp</result>
+			<result name="stuDeptLevel3UI">/WEB-INF/jsp/interfaceAPIAction/stuDeptLevel3UI.jsp</result>
+			<result name="deptLevel3TeaUI">/WEB-INF/jsp/interfaceAPIAction/deptLevel3TeaUI.jsp</result>
+			
 			
 			
 		</action>
@@ -359,6 +362,9 @@
 		</action>
 		<!-- 学生得到花记录 -->
 		<action name="stuFlower_*" class="stuFlowerInfoAction" method="{1}">
+		</action>
+		<!-- 部门管理 -->
+		<action name="department_*" class="departmentAction" method="{1}">
 		</action>
 	</package>
 </struts>    

@@ -10,11 +10,12 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import ChartDirector.GetSessionImage;
-
 import com.hhit.base.BaseAction;
 import com.hhit.entity.Department;
 import com.hhit.entity.LogFile;
+import com.hhit.entity.Student;
+import com.hhit.entity.Teacher;
+import com.hhit.util.ClassPropertyFilter;
 import com.hhit.util.DepartmentUtils;
 import com.hhit.util.JsonUtil;
 import com.opensymphony.xwork2.ActionContext;
@@ -32,6 +33,8 @@ public class DepartmentAction extends BaseAction<Department> {
 	// ajax json返回
 	private String result;
 
+	private String stuNum;
+	
 	/** 列表 */
 	public String list() throws Exception {
 		List<Department> departmentList = null;
@@ -124,13 +127,64 @@ public class DepartmentAction extends BaseAction<Department> {
 
 		return null;
 	}
-
+	
+//app
+//============================================
+	public String appStuDeptLevel3() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Student stuFind=studentService.findByStuNum(stuNum);
+		if(stuFind==null){
+			map.put("name", "noStudent");
+		}
+		else{
+			Department deptFind=stuFind.getDepartment();
+			if(deptFind==null){
+				map.put("name", "noDept");
+			}
+			else{
+				Department deptLevel2=deptFind.getParent();
+				List<Department> deptList=departmentService.findByParent(deptLevel2);
+				ClassPropertyFilter.ListDepartmentFilter(map, deptList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
+	//系里的老师
+	public String appDeptLevel3Tea() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Department deptFind=departmentService.findById(model.getId());
+		if(deptFind==null){
+			map.put("name", "noDept");
+		}
+		else{
+			List<Teacher> teaList=teacherService.findByDept(deptFind);
+			if(teaList.size()<1){
+				map.put("name", "noTeacher");
+			}
+			else{
+				ClassPropertyFilter.ListTeacherFilter(map, teaList);
+				map.put("name", "success");
+			}
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	public Integer getParentId() {
 		return parentId;
 	}
 
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getStuNum() {
+		return stuNum;
+	}
+
+	public void setStuNum(String stuNum) {
+		this.stuNum = stuNum;
 	}
 
 }

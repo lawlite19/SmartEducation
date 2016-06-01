@@ -36,4 +36,12 @@ public class DepartmentServiceImpl extends DaoSupportImpl<Department> implements
 				.setParameter(0, i)//
 				.list();
 	}
+
+	@Override
+	public List<Department> findByParent(Department deptLevel2) {
+		return getSession().createQuery("FROM Department WHERE parent=?")//
+				.setParameter(0, deptLevel2)//
+				.list();
+	}
+
 }

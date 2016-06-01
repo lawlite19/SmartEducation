@@ -127,7 +127,6 @@
                         	<s:submit value="提交"   cssClass="ttn"></s:submit>
                         </span>
 					</div>
-
 				</td>
 			</tr>
 	</tbody>

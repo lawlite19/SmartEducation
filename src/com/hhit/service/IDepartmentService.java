@@ -13,5 +13,6 @@ public interface IDepartmentService extends IDaoSupport<Department>{
 	List<Department> findChildren(Integer parentId);
 	//根据部门级别查找
 	List<Department> findByDeptLevel(int i);
-
+	//查找子级部门
+	List<Department> findByParent(Department deptLevel2);
 }
