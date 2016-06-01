@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
 <head>
-	<title>教学模式指标管理</title>
+	<title>教学要素指标管理</title>
 	<%@ include file="/WEB-INF/jsp/public/commons.jspf" %>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/baseSE.css" />
 	<script type="text/javascript">
@@ -30,12 +30,12 @@
 </head>
 <body>
 <!-- 顶层 -->
-<div class="crumd"><a href="" id="A1">首页</a> &gt; 教学模式指标管理 &gt; 
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 教学模式要素管理 &gt; 
 <s:if test="%{id == null}">
-添加教学模式指标信息
+添加教学要素指标信息
 </s:if>
 <s:else>
-修改教学模式指标信息
+修改教学要素指标信息
 </s:else>
 </div>
 <!-- 信息开始 -->

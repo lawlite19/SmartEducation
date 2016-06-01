@@ -51,7 +51,7 @@
 			<s:a action="stuAccount_addUI?parentId=%{parentId}" style="color:white;text-decoration: none;">增加指标</s:a>
 		</td>
 		<td class="bbtn btn-primary" align="center">
-			<s:a action="stuAccount_list?parentId=%{#parent.parent.id}" style="color:white;text-decoration: none;">返回上级</s:a>
+			<s:a action="stuAccount_list?parentId=%{#parent.parent.id}" style="color:white;text-decoration: none;">一键添加</s:a>
 		</td>
 	</tr>
 </table>

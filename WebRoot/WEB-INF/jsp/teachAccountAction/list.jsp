@@ -40,7 +40,7 @@
 </head>
 <body>
 <!-- 顶层 -->
-<div class="crumd"><a href="" id="A1">首页</a> &gt; 教学质量管理 &gt; 教学模式指标管理</div>
+<div class="crumd"><a href="" id="A1">首页</a> &gt; 教学质量管理 &gt; 教学要素指标管理</div>
 <!-- 引入选择按钮 -->
 <%@include file="/WEB-INF/jsp/public/list_button.jspf" %>
 
@@ -51,7 +51,7 @@
 			<s:a action="teachAccount_addUI?parentId=%{parentId}" style="color:white;text-decoration: none;">增加指标</s:a>
 		</td>
 		<td class="bbtn btn-primary" align="center">
-			<s:a action="teachAccount_list?parentId=%{#parent.parent.id}" style="color:white;text-decoration: none;">返回上级</s:a>
+			<s:a action="teachAccount_list?parentId=%{#parent.parent.id}" style="color:white;text-decoration: none;">一键添加</s:a>
 		</td>
 	</tr>
 </table>
@@ -60,7 +60,7 @@
                 <tbody><tr>
                     <td class="tl"></td>
                     <td class="tm">
-                        <span class="tt">教学模式指标管理</span>
+                        <span class="tt">教学要素指标管理</span>
                     </td>
                     <td class="tr"></td>
                 </tr>
@@ -79,13 +79,13 @@
 				<td align="center">评价描述</td>
 				<td align="center">评价占分</td>
 				<td align="center">评价选项A</td>
-				<td align="center">选项A占分</td>
+			
 				<td align="center">评价选项B</td>
-				<td align="center">选项B占分</td>
+			
 				<td align="center">评价选项C</td>
-				<td align="center">选项C占分</td>
+			
 				<td align="center">评价选项D</td>
-				<td align="center">选项D占分</td>
+				
 				<td align="center">学期</td>
 				<td align="center">评价维度</td>
 				<td align="center">相关操作</td>
@@ -102,14 +102,10 @@
 					<td align="center">${(currentPage-1)*10+s.count}</td>
 					<td align="center">${description}&nbsp;</td>
 					<td align="center" >${allPoint}&nbsp;</td>
-					<td align="center">${descriptionA}&nbsp;</td>
-					<td align="center" >${APoint}&nbsp;</td>
-					<td align="center">${descriptionB}&nbsp;</td>
-					<td align="center" >${BPoint}&nbsp;</td>
-					<td align="center">${descriptionC}&nbsp;</td>
-					<td align="center" >${CPoint}&nbsp;</td>
-					<td align="center">${descriptionD}&nbsp;</td>
-					<td align="center" >${DPoint}&nbsp;</td>
+					<td align="center">${descriptionA}&nbsp;占分：${APoint}&nbsp;</td>
+					<td align="center">${descriptionB}&nbsp;占分：${BPoint}&nbsp;</td>
+					<td align="center">${descriptionC}&nbsp;占分：${CPoint}&nbsp;</td>
+					<td align="center">${descriptionD}&nbsp;占分：${CPoint}&nbsp;</td>
 					<td align="center" >${ATerm.name}&nbsp;</td>
 					<td align="center" >${DataDict.dictName}&nbsp;</td>
 					<td align="center">
