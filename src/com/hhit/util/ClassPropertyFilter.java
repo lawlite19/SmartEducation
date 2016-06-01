@@ -186,5 +186,9 @@ public class ClassPropertyFilter {
 		String[] stuFlowerProperty={"stuScoreRecord"};
 		map.put("stuFlowers", JsonUtil.jsonListFilter(stuFlowerList, stuFlowerProperty));
 	}
-	
+	//学生得到花list过滤
+	public static void ListTeacherFilter(Map<String,Object> map,List<Teacher> teacherList){
+		String[] teacherProperty={"department","roles","courses"};
+		map.put("teachers", JsonUtil.jsonListFilter(teacherList, teacherProperty));
+	}
 }

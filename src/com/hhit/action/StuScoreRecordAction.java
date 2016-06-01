@@ -276,6 +276,7 @@ public class StuScoreRecordAction extends BaseAction<StuScoreRecord>{
 			map.put("name", "noTestPaper");
 		}
 		else{
+			ClassPropertyFilter.ClassFilter(map, paperFind.getClass_());
 			List<StuScoreRecord> recordList=stuScoreRecordService.findByPaper(paperFind);
 			if(recordList.size()<1){
 				map.put("name", "noRecord");

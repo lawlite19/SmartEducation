@@ -89,6 +89,14 @@ public class InterfaceAPIAction {
 	public String currentTermUI() throws Exception{
 		return "currentTermUI";
 	}
+	/** 学生的系 */
+	public String stuDeptLevel3UI() throws Exception{
+		return "stuDeptLevel3UI";
+	}
+	/** 系中的老师 */
+	public String deptLevel3TeaUI() throws Exception{
+		return "deptLevel3TeaUI";
+	}
 	
 	
 //实时测评接口
