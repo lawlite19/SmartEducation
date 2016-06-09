@@ -97,7 +97,10 @@ public class InterfaceAPIAction {
 	public String deptLevel3TeaUI() throws Exception{
 		return "deptLevel3TeaUI";
 	}
-	
+	/** 系中的老师 */
+	public String teaDeptUI() throws Exception{
+		return "teaDeptUI";
+	}
 	
 //实时测评接口
 //=======================================
