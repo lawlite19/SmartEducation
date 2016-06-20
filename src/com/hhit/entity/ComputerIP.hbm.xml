@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="ComputerIP" table="E_ComputerIP">
+		<id name="ID" type="string">
+			<column name="ID"></column>
+            <!-- <generator class="native"/> -->
+		</id>
+		<property name="TestRoomId" type="integer">	
+			<column name="TestRoomId">
+				<comment>考场编号</comment>
+			</column>
+		</property>
+		<property name="ComputerId" type="integer">
+			<column name="ComputerId">
+				<comment>电脑编号</comment>
+			</column>
+		</property>
+		<property name="IP" type="string">
+			<column name="IP">
+				<comment>电脑对应的IP地址</comment>
+			</column>
+		</property>		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TestingControl" table="testingcontrol">
+		<id name="Rnumber" type="int">
+			<column name="Rnumber"></column>
+            <!-- <generator class="native"/> -->
+		</id>
+		<property name="TestName" type="string">	
+			<column name="TestName">
+				<comment>考试名称</comment>
+			</column>
+		</property>
+		<property name="TestPaperID" type="string">	
+			<column name="TestPaperID">
+				<comment>试卷编号</comment>
+			</column>
+		</property>
+		<property name="TestList" type="string">
+			<column name="TestList">
+				<comment>考试场次</comment>
+			</column>
+		</property>
+		<property name="TesterID" type="string">
+			<column name="TesterID">
+				<comment>考生学号</comment>
+			</column>
+		</property>
+		<property name="TesterName" type="string">
+			<column name="TesterName">
+				<comment>考生姓名</comment>
+			</column>
+		</property>		
+		<property name="TestRoomName" type="string">
+			<column name="TestRoomName">
+				<comment>考试机房名称</comment>
+			</column>
+		</property>		
+		<property name="ClassName" type="string">
+			<column name="ClassName">
+				<comment>班级名称</comment>
+			</column>
+		</property>		
+		<property name="LoginFlag" type="string">
+			<column name="LoginFlag">
+				<comment>登陆标志</comment>
+			</column>
+		</property>		
+		<property name="TestRoomID" type="string">
+			<column name="TestRoomID">
+				<comment>考试机房编号</comment>
+			</column>
+		</property>		
+		<property name="teaname" type="string">
+			<column name="teaname">
+				<comment>teaname</comment>
+			</column>
+		</property>		
+		<property name="teaid" type="string">
+			<column name="teaid">
+				<comment>老师姓名</comment>
+			</column>
+		</property>		
+	</class>
+</hibernate-mapping>

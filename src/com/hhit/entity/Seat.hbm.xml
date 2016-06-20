@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="Seat" table="E_Seat">
+		<id name="Id" type="string">
+			<column name="Id"></column>
+		</id>
+		<property name="Ip" type="string">	
+			<column name="Ip">
+				<comment>IP地址</comment>
+			</column>
+		</property>
+		<property name="StuNum" type="string">
+			<column name="StuNum">
+				<comment>学号</comment>
+			</column>
+		</property>
+		<property name="Flag" type="integer">
+			<column name="Flag">
+				<comment>登陆标志</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

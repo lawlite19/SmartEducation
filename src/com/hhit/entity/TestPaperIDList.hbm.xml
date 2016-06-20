@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TestPaperIDList" table="TestPaperIDList">
+		<id name="TestPaperID" type="string">
+			<column name="TestPaperID"></column>
+		</id>
+		<property name="PaperCombineID" type="integer">	
+			<column name="PaperCombineID"></column>
+		</property>
+		<property name="TestList" type="string">
+			<column name="TestList"></column>
+		</property>
+		<property name="TestID" type="string">
+			<column name="TestID"></column>
+		</property>
+		<property name="CourseID" type="integer">
+			<column name="CourseID"></column>
+		</property>		
+		<property name="BeginTime" type="timestamp">
+			<column name="BeginTime"></column>
+		</property>		
+		<property name="EndTime" type="timestamp">
+			<column name="EndTime"></column>
+		</property>		
+		<property name="TestFlag" type="string">
+			<column name="TestFlag"></column>
+		</property>		
+		<property name="TestPaperIDRnumber" type="integer">
+			<column name="TestPaperIDRnumber"></column>
+		</property>		
+		<property name="adminflag" type="boolean">
+			<column name="adminflag"></column>
+		</property>		
+	</class>
+</hibernate-mapping>

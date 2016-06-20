@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.hhit.entity">
+
+	<class name="TestRoom" table="TestRoom">
+		<id name="TestRoomID" type="int">
+			<column name="TestRoomID"></column>
+            <!-- <generator class="native"/> -->
+		</id>
+		<property name="TestRoomName" type="string">	
+			<column name="TestRoomName">
+				<comment>考场名称</comment>
+			</column>
+		</property>
+		<property name="FirstIP" type="string">
+			<column name="FirstIP">
+				<comment>起始IP</comment>
+			</column>
+		</property>
+		<property name="EndtIP" type="string">
+			<column name="EndtIP">
+				<comment>最后IP</comment>
+			</column>
+		</property>
+		<property name="FtpIP" type="string">
+			<column name="FtpIP">
+				<comment>FtpIP</comment>
+			</column>
+		</property>		
+		<property name="FtpName" type="string">
+			<column name="FtpName">
+				<comment>Ftp用户名</comment>
+			</column>
+		</property>		
+		<property name="FtpPwd" type="string">
+			<column name="FtpPwd">
+				<comment>Ftp密码</comment>
+			</column>
+		</property>		
+		<property name="TeacherPwd" type="string">
+			<column name="TeacherPwd">
+				<comment>监考密码</comment>
+			</column>
+		</property>		
+		<property name="SetDir" type="string">
+			<column name="SetDir">
+				<comment>本地位置</comment>
+			</column>
+		</property>		
+	</class>
+</hibernate-mapping>
