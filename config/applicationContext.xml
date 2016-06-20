@@ -51,6 +51,30 @@
 		<property name="checkoutTimeout" value="3000"></property>
 		<property name="autoCommitOnClose" value="false"></property>-->
 	</bean>
+	<bean id="dataSourceB"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- 连接信息 -->
+		<property name="driverClass"
+			value="${driverClass}">
+		</property>
+		<property name="jdbcUrl"
+			value="${jdbcUrl2}">
+		</property>
+		<property name="user" value="${user2}"></property>
+		<property name="password" value="${password2}"></property>
+		</bean>
+	<!-- <bean id="dynamicDataSource" class="com.hhit.util.DynamicDataSource" >  
+    通过key-value的形式来关联数据源  
+    <property name="targetDataSources">  
+        <map key-type="java.lang.String">  
+            <entry value-ref="dataSource" key="dataSource"></entry>  
+            <entry value-ref="dataSourceB" key="dataSourceB"></entry>  
+        </map>  
+    </property>  
+    <property name="defaultTargetDataSource" ref="dataSource" >  
+    </property>  
+	</bean>    -->
 	<!-- 配置sessionFactory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -112,6 +136,35 @@
 			<!-- App爬取课程评分、评论 -->
 			<value>com/hhit/entity/CourseDiscuss.hbm.xml</value>
 			<value>com/hhit/entity/CourseScore.hbm.xml</value>
+			<!-- 考试监控系统-->
+			<value>com/hhit/entity/Seat.hbm.xml</value>
+			<value>com/hhit/entity/ComputerIP.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="sessionFactory2"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSourceB" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					<!-- SQLServerDialect   MySQLDialect  -->
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<!-- 显示sql语句 -->
+				<prop key="show_sql">true</prop>
+				<!-- 自动建表
+				<prop key="hibernate.hbm2ddl.auto">update</prop>  -->
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+			<!-- 考试监控系统-->
+			<value>com/hhit/entity/TestingControl.hbm.xml</value>
+			<value>com/hhit/entity/TestRoom.hbm.xml</value>
+			<value>com/hhit/entity/TestPaperIDList.hbm.xml</value>
 			
 			</list>
 		</property>

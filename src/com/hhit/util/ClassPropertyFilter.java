@@ -15,6 +15,7 @@ import com.hhit.entity.SpiderDocument;
 import com.hhit.entity.SpiderProfessionType;
 import com.hhit.entity.Student;
 import com.hhit.entity.Teacher;
+import com.hhit.entity.TestRoom;
 
 public class ClassPropertyFilter {
 //实体类过滤
@@ -87,5 +88,15 @@ public class ClassPropertyFilter {
 	public static void ListSpiderDocumentrFilter(Map<String,Object> map,List<SpiderDocument> spiderDocumentList){
 		String[] spiderDocumentProperty={"spiderCourse"};
 		map.put("spiderDocuments", JsonUtil.jsonListFilter(spiderDocumentList, spiderDocumentProperty));
+	}
+
+	/**
+	 * 考场类过滤
+	 * map为将要放入Json的对象
+	 * testRooms为需要过滤的变量
+	 * Property为将要除去的属性名
+	 * */
+	public static void ListTestRoomFilter(Map<String, Object> map, List<TestRoom> testRooms,String[] Property) {
+		map.put("data", JsonUtil.jsonListFilter(testRooms, Property));
 	}
 }

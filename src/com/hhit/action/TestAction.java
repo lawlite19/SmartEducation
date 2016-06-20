@@ -39,7 +39,7 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 @Controller
 @Scope("prototype")
-public class ClassAction extends BaseAction<Class_>{
+public class TestAction extends BaseAction<Class_>{
 
 	private Integer departmentId;
 	

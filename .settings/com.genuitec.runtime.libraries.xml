@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project>
+<project adv-config="true">
+  <add-on id="spring.web"/>
   <add-on id="spring.persistence.jdbc"/>
   <add-on id="hibernate.extra"/>
-  <add-on id="spring.persistence"/>
   <add-on id="spring.aop"/>
-  <add-on id="spring.web"/>
+  <add-on id="spring.persistence"/>
+  <container path="com.genuitec.runtime.library/com.genuitec.struts_2.1">
+    <disable name="antlr-2.7.2.jar" type="jar"/>
+  </container>
+  <container path="com.genuitec.runtime.library/com.genuitec.hibernate_3.3">
+    <disable name="cglib-2.2.jar" type="jar"/>
+  </container>
 </project>

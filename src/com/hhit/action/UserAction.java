@@ -47,6 +47,10 @@ public class UserAction extends BaseAction<User>{
 	public String loginUI() throws Exception {
 		return "loginUI";
 	}
+	/** 跳转到考试监控平台登录界面 */
+	public String logintestmonitorUI() throws Exception {
+		return "logintestmonitorUI";
+	}
 
 	/** 登录验证，成功跳转主页，否则重新登录 */
 	//说明:User表中只有两种类型，学生和老师，因为负责人、管理员也是教师
@@ -98,7 +102,37 @@ public class UserAction extends BaseAction<User>{
 			addFieldError("login", "验证码不正确！");
 		return "loginUI";
 	}
-
+	
+	/**只有管理员和老师有权限登陆*/
+	public String logintestmonitor() throws Exception {
+		// String s1=user.getUserNum().trim();
+		// String s2=user.getPassword().trim();
+		// String s3=user.getUserType().trim();
+		// 得到验证码
+		String code = ((String) ActionContext.getContext().getSession().get("randomCode")).toLowerCase();
+		if (code.equals((randomCode.trim().toLowerCase()))) {
+				//查找用户，userType属性为--》老师
+				User userFind=userService.findUserByNumAndPwd(model.getUserNum(),model.getPassword(),"老师");
+				if(null!=userFind){
+					//查找对应的角色
+					//Set转为List
+					List<Role> rolesList=new ArrayList<>(userFind.getTeacher().getRoles());
+					for (Role role : rolesList) {
+						if(role.getRoleName().equals(model.getUserType())){
+							ActionContext.getContext().getSession().put("user", userFind);
+							return "toIndex2";
+						}
+					}
+					addFieldError("login", "账号或密码错误！");
+				}
+				else{
+					addFieldError("login", "账号或密码错误！");
+				}
+			}
+		else
+			addFieldError("login", "验证码不正确！");
+		return "logintestmonitorUI";
+	}
 	/** 跳转主页 */
 	public String list() throws Exception {
 		// setUsers(userService.findAll());
@@ -114,6 +148,13 @@ public class UserAction extends BaseAction<User>{
 		// 移除session
 		ActionContext.getContext().getSession().remove("user");
 		return "loginUI";
+	}
+	
+	/** 注销账号 */
+	public String logouttotestmonitor() throws Exception {
+		// 移除session
+		ActionContext.getContext().getSession().remove("user");
+		return "logintestmonitorUI";
 	}
 
 	/** 跳转修改密码界面 */

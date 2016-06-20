@@ -232,7 +232,7 @@
            	  
         </div>
         <div class="s2"><a href="right.aspx" style="color: #1598E0" target="right">首页</a></div>
-            <div class="s3"><a href="${pageContext.request.contextPath}/user_logout.action" onclick="signOut();" style="color: #1598E0" target="_top">退出系统</a></div>
+            <div class="s3"><a href="${pageContext.request.contextPath}/user_logintestmonitorUI.action" onclick="signOut();" style="color: #1598E0" target="_top">退出系统</a></div>
             <div class="s4"><a href="${pageContext.request.contextPath}/user_modifyPasswordUI.action" style="color: #1598E0" target="right">密码修改</a></div>
             <div class="s6"><a href=""  style="color: #1598E0" target="right">帮助文档</a></div>
         <div class="s5" id="clock"></div>

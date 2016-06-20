@@ -14,18 +14,26 @@
 			<!-- 声明拦截器 -->
 			<interceptor name="checkPrivilege"
 				class="com.hhit.util.CheckPrivilegeInterceptor"></interceptor>
+			<interceptor name="checklogin"
+				class="com.hhit.util.CheckLoginInterceptor"></interceptor>
 			<!-- 重新定义默认的拦截器栈 -->
-			<interceptor-stack name="defaultStack">
+			<interceptor-stack name="testmonitortStack">
+				<interceptor-ref name="checklogin"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="mydefaultStack">
 				<interceptor-ref name="checkPrivilege"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
+		<default-interceptor-ref name="mydefaultStack" />
 		<!-- 配置测试用的Action -->
 		<!-- class写bean的名称 <action name="test" class="testAction"> <result name="success">/test.jsp</result> 
 			</action> -->
 		<!-- 全局的Result配置 -->
 		<global-results>
 			<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+			<result name="logintestmonitorUI">/WEB-INF/jsp/userAction/loginUI_testmonitor.jsp</result>
 			<result name="noPrivilegeError">/noPrivilegeError.jsp</result>
 		</global-results>
 		<!-- 登录用户管理 -->
@@ -39,6 +47,7 @@
 			<result name="modifyPasswordUI">/WEB-INF/jsp/userAction/modifyPasswordUI.jsp
 			</result>
 			<result name="toIndex" type="redirectAction">home_index</result>
+			<result name="toIndex2" type="redirectAction">home_index</result>
 		</action>
 		<!-- 学生管理 -->
 		<action name="student_*" class="studentAction" method="{1}">
@@ -231,8 +240,33 @@
 			<result name="spiderCourseDiscussUI">/WEB-INF/jsp/interfaceAPIAction/eschoolBag/spiderCourseDiscussUI.jsp</result>
 		
 		</action>
+		
+		<!-- 考试管理 -->
+		<action name="testingControl_*" class="testingControlAction" method="{1}">
+		<result name="exceltosql">/WEB-INF/jsp/testingcontrolAction/exceltosql.jsp</result>
+		<result name="arrangeseats">/WEB-INF/jsp/testingcontrolAction/arrangeseats.jsp</result>
+		<result name="checktest">/WEB-INF/jsp/testingcontrolAction/checktest.jsp</result>
+		<result name="changeseat">/WEB-INF/jsp/testingcontrolAction/changeseat.jsp</result>
+		<result name="setRoomPassword" type="redirectAction">testRoom_first</result>
+		<interceptor-ref name="testmonitortStack"></interceptor-ref>
+		</action>
+		
+		<!-- 考场管理 -->
+		<action name="testRoom_*" class="testRoomAction" method="{1}">
+		<result name="setRoomPassword">/WEB-INF/jsp/testRoomAction/setRoomPassword.jsp</result>
+		<result name="setRoomPasswordsuccess"  type="redirectAction">testingControl_arrangeseats</result>
+		<interceptor-ref name="testmonitortStack"></interceptor-ref>
+		</action>
+		
+		<!-- 考场IP管理 -->
+		<action name="computerip_*" class="computerIPAction" method="{1}">
+		<result name="computerip">/WEB-INF/jsp/computerIPAction/computeripmanagement.jsp</result>
+		<result name="showedit">/WEB-INF/jsp/computerIPAction/edit.jsp</result>
+		<result name="changeseat">/WEB-INF/jsp/testingcontrolAction/changeseat.jsp</result>
+		<interceptor-ref name="testmonitortStack"></interceptor-ref>
+		</action>
 	</package>
-
+	
 <!-- App端接口package -->
 	<package name="app" extends="struts-default" namespace="/App">
 		<!-- 用户 -->

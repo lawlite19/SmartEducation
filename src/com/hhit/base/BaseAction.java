@@ -1,13 +1,19 @@
 package com.hhit.base;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.alibaba.fastjson.JSON;
 import com.hhit.entity.User;
 import com.hhit.service.IChapterService;
 import com.hhit.service.IClassSelectCourseService;
 import com.hhit.service.IClassService;
+import com.hhit.service.IComputerIPService;
 import com.hhit.service.ICourseDiscussService;
 import com.hhit.service.ICourseScoreService;
 import com.hhit.service.ICourseService;
@@ -20,6 +26,7 @@ import com.hhit.service.ILogFileService;
 import com.hhit.service.IPrivilegeService;
 import com.hhit.service.IQQLoginInfoService;
 import com.hhit.service.IRoleService;
+import com.hhit.service.ISeatService;
 import com.hhit.service.ISingleChoiceService;
 import com.hhit.service.ISpiderChapterService;
 import com.hhit.service.ISpiderCourseInfoService;
@@ -34,8 +41,11 @@ import com.hhit.service.ITaskService;
 import com.hhit.service.ITeaAnswerService;
 import com.hhit.service.ITeachProcessService;
 import com.hhit.service.ITeacherService;
+import com.hhit.service.ITestPaperIDListService;
 import com.hhit.service.ITestPaperService;
 import com.hhit.service.ITestQuestionService;
+import com.hhit.service.ITestRoomService;
+import com.hhit.service.ITestingControlService;
 import com.hhit.service.IUserDetailsService;
 import com.hhit.service.IUserService;
 import com.hhit.service.IVisitCourseRecordService;
@@ -62,6 +72,24 @@ public abstract class BaseAction<T> extends ActionSupport implements
 			model = clazz.newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * 写入响应数据 jsonString
+	 * @param object
+	 */
+	public void writeJson(Object object) {
+		try {
+			String jsonString = JSON.toJSONStringWithDateFormat(object, "yyyy-MM-dd HH:mm:ss");
+			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+			PrintWriter out = ServletActionContext.getResponse().getWriter();
+			out.write(jsonString);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -142,6 +170,16 @@ public abstract class BaseAction<T> extends ActionSupport implements
 	protected ISpiderChapterService spiderChapterService;//爬虫课程章节
 	@Resource
 	protected ISpiderDocumentService spiderDocumentService;//爬虫课程文档
+	@Resource
+	protected ITestingControlService testingControlService;//考试控制
+	@Resource
+	protected ITestRoomService testRoomService;//考试控制
+	@Resource
+	protected IComputerIPService computerIPService;//考场IP管理
+	@Resource
+	protected ISeatService seatService;//考试座位管理
+	@Resource
+	protected ITestPaperIDListService testPaperIDListService;//试卷管理
 
 	/**
 	 * 获取当前登录的用户
