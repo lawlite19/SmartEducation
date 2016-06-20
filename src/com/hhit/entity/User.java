@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionContext;
 //  @ Author : 
 //
 
-public class User implements java.io.Serializable{
+public class User implements java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -21,30 +21,32 @@ public class User implements java.io.Serializable{
 	private String userNum;
 	private String password;
 	private String userType;
-	
-	//new add
+
+	// new add
 	private Timestamp loginTime;
 	private Integer totalMinute;
-	
+
 	private Student student;
 	private Teacher teacher;
+
 	/**
 	 * 默认构造函数,重载了则不可缺少
 	 */
-	public User(){
-		
+	public User() {
+
 	}
-	
+
 	/**
 	 * 构造函数，用户安装
 	 */
-	public User(String un,String pwd,String ut,Student stu,Teacher tea){
-		userNum=un;
-		password=pwd;
-		userType=ut;
-		student=stu;
-		teacher=tea;
+	public User(String un, String pwd, String ut, Student stu, Teacher tea) {
+		userNum = un;
+		password = pwd;
+		userType = ut;
+		student = stu;
+		teacher = tea;
 	}
+
 	/**
 	 * 判断本用户是否有指定名称的权限
 	 * 
@@ -56,9 +58,9 @@ public class User implements java.io.Serializable{
 		if (isAdmin()) {
 			return true;
 		}
-		if(student!=null){
+		if (student != null) {
 			// 学生要判断是否含有这个权限
-			if(student.getRole()!=null){
+			if (student.getRole() != null) {
 				for (Privilege priv : student.getRole().getPrivileges()) {
 					if (priv.getPrivilegeName().equals(name)) {
 						return true;
@@ -66,9 +68,9 @@ public class User implements java.io.Serializable{
 				}
 			}
 		}
-		if(teacher!=null){
+		if (teacher != null) {
 			// 教师要判断是否含有这个权限
-			if(teacher.getRoles()!=null){
+			if (teacher.getRoles() != null) {
 				for (Role role : teacher.getRoles()) {
 					for (Privilege priv : role.getPrivileges()) {
 						if (priv.getPrivilegeName().equals(name)) {
@@ -80,6 +82,7 @@ public class User implements java.io.Serializable{
 		}
 		return false;
 	}
+
 	/**
 	 * 判断本用户是否有指定URL的权限
 	 * 
@@ -105,11 +108,12 @@ public class User implements java.io.Serializable{
 		// 如果本URL不需要控制，则登录用户就可以使用
 
 		@SuppressWarnings("unchecked")
-		Collection<String> allPrivilegeUrls = (Collection<String>) ActionContext.getContext().getApplication().get("allPrivilegeUrls");
+		Collection<String> allPrivilegeUrls = (Collection<String>) ActionContext
+				.getContext().getApplication().get("allPrivilegeUrls");
 		if (!allPrivilegeUrls.contains(privUrl)) {
 			return true;
 		} else {
-			if(student!=null){
+			if (student != null) {
 				// 学生要判断是否含有这个权限
 				for (Privilege priv : student.getRole().getPrivileges()) {
 					if (privUrl.equals(priv.getUrl())) {
@@ -117,7 +121,7 @@ public class User implements java.io.Serializable{
 					}
 				}
 			}
-			if(teacher!=null){
+			if (teacher != null) {
 				// 老师要判断是否含有这个权限
 				for (Role role : teacher.getRoles()) {
 					for (Privilege priv : role.getPrivileges()) {
@@ -127,10 +131,11 @@ public class User implements java.io.Serializable{
 					}
 				}
 			}
-			
+
 			return false;
 		}
 	}
+
 	/**
 	 * 判断本用户是否是超级管理员
 	 * 
@@ -139,29 +144,35 @@ public class User implements java.io.Serializable{
 	public boolean isAdmin() {
 		return "admin".equals(userNum);
 	}
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getUserNum() {
 		return userNum;
 	}
+
 	public void setUserNum(String userNum) {
 		this.userNum = userNum;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getUserType() {
 		return userType;
 	}
+
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
@@ -197,6 +208,5 @@ public class User implements java.io.Serializable{
 	public void setTotalMinute(Integer totalMinute) {
 		this.totalMinute = totalMinute;
 	}
-
 
 }

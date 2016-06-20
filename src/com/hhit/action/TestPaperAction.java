@@ -34,6 +34,8 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 	private Integer chapterId;
 	private Integer[] chapterIds;
 	private Integer classId;
+	private String startTimeString;
+	private String endTimeString;
 	
 //app
 //=======================
@@ -73,8 +75,8 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 						}
 						else{
 							//保存测试卷
-							TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0,model.getStartTime(),
-									model.getEndTime(), model.getTeaNum(), classService.findById(classId),
+							TestPaper testPaperModel=new TestPaper(model.getTestType(), questionCount, 0,Timestamp.valueOf(startTimeString),//转换时间字符串为Timestamp,
+									Timestamp.valueOf(endTimeString), model.getTeaNum(), classService.findById(classId),
 									courseFind, chapterFind);
 							testPaperService.save(testPaperModel);
 							/*
@@ -306,6 +308,18 @@ public class TestPaperAction extends BaseAction<TestPaper>{
 	}
 	public void setChapterIds(Integer[] chapterIds) {
 		this.chapterIds = chapterIds;
+	}
+	public String getStartTimeString() {
+		return startTimeString;
+	}
+	public void setStartTimeString(String startTimeString) {
+		this.startTimeString = startTimeString;
+	}
+	public String getEndTimeString() {
+		return endTimeString;
+	}
+	public void setEndTimeString(String endTimeString) {
+		this.endTimeString = endTimeString;
 	}
 	
 }

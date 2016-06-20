@@ -1,4 +1,5 @@
 package com.hhit.entity;
+
 import java.sql.Timestamp;
 
 //
@@ -12,7 +13,7 @@ import java.sql.Timestamp;
 //
 //
 
-public class TeachProcess implements java.io.Serializable{
+public class TeachProcess implements java.io.Serializable {
 
 	/**
 	 * 
@@ -24,83 +25,105 @@ public class TeachProcess implements java.io.Serializable{
 	private Integer lessonCount;
 
 	private String lessonContent;
-	
-	//new add
+
+	// new add
 	private Timestamp pushTime;
-	
+
 	private Chapter chapter;
 	private DataDict teachType;
 	private Course course;
-	private Teacher teacher; 
-	//new add
+	private Teacher teacher;
+	// new add
 	private Department department;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Timestamp getStartData() {
 		return startData;
 	}
+
 	public void setStartData(Timestamp startData) {
 		this.startData = startData;
 	}
+
 	public Integer getWeekCount() {
 		return weekCount;
 	}
+
 	public void setWeekCount(Integer weekCount) {
 		this.weekCount = weekCount;
 	}
+
 	public Integer getLessonCount() {
 		return lessonCount;
 	}
+
 	public void setLessonCount(Integer lessonCount) {
 		this.lessonCount = lessonCount;
 	}
+
 	public Chapter getChapter() {
 		return chapter;
 	}
+
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
+
 	public String getLessonContent() {
 		return lessonContent;
 	}
+
 	public void setLessonContent(String lessonContent) {
 		this.lessonContent = lessonContent;
 	}
+
 	public DataDict getTeachType() {
 		return teachType;
 	}
+
 	public void setTeachType(DataDict teachType) {
 		this.teachType = teachType;
 	}
+
 	public Course getCourse() {
 		return course;
 	}
+
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	public Teacher getTeacher() {
 		return teacher;
 	}
+
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
+
 	public Timestamp getPushTime() {
 		return pushTime;
 	}
+
 	public void setPushTime(Timestamp pushTime) {
 		this.pushTime = pushTime;
 	}
+
 	public Department getDepartment() {
 		return department;
 	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}

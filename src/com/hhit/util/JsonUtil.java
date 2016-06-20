@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 
 import com.google.gson.Gson;
@@ -50,8 +52,8 @@ public class JsonUtil {
     public static JSONArray jsonListFilter(List objList, String[] filterNames){
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setIgnoreDefaultExcludes(false);    
-        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);    //防止自包含
-         
+        jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);    //防止自包含 
+        //jsonConfig.registerJsonValueProcessor(java.sql.Timestamp.class, new DateJsonValueProcessor("yyyy-MM-dd HH:mm:ss")); 
         if(filterNames != null){
             //这里是核心，过滤掉不想使用的属性
             jsonConfig .setExcludes(filterNames) ;
@@ -59,5 +61,4 @@ public class JsonUtil {
         JSONArray jsonArray = JSONArray.fromObject(objList, jsonConfig);
         return jsonArray;
     }
-  
 }

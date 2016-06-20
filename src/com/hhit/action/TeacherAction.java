@@ -735,8 +735,9 @@ public class TeacherAction extends BaseAction<Teacher>{
 			map.put("name", "noTea");
 		}
 		else{
-			Department deptFind=teaFind.getDepartment();
-			ClassPropertyFilter.DepartmentFilter(map, deptFind);
+			Department deptFind=teaFind.getDepartment().getParent();
+			List<Department> deptList=departmentService.findByParent(deptFind);
+			ClassPropertyFilter.ListDepartmentFilter(map, deptList);
 			map.put("name", "success");
 		}
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);

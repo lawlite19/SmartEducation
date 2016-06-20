@@ -96,7 +96,7 @@
         if (!MM_Empty('select_class', '班级')) return false;
         if (!MM_Empty('txt_startTime', '开始答题时间')) return false;
         if (!MM_Empty('txt_endTime', '结束提交时间')) return false;
-        if(!CheckDate()) return false;
+        //if(!CheckDate()) return false;
 		//点击之后禁止再次点击
 		//loading层
 		layer.load(0,{

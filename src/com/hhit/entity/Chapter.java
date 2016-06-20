@@ -14,11 +14,11 @@ public class Chapter {
 	private Integer id;
 	private String chapterNum;
 	private String chapterName;
-	
+
 	private String courseName;
-	//new add
+	// new add
 	private String url;
-	
+
 	private Course course;
 	private Chapter parent;
 	private Set<Chapter> children;
@@ -28,15 +28,16 @@ public class Chapter {
 	 */
 	public Chapter() {
 	}
+
 	/**
 	 * 构造函数
 	 */
-	public Chapter(String chapterNum, String chapterName,String url, String courseName,
-			Course course, Chapter parent) {
+	public Chapter(String chapterNum, String chapterName, String url,
+			String courseName, Course course, Chapter parent) {
 		super();
 		this.chapterNum = chapterNum;
 		this.chapterName = chapterName;
-		this.url=url;
+		this.url = url;
 		this.courseName = courseName;
 		this.course = course;
 		this.parent = parent;
@@ -97,11 +98,13 @@ public class Chapter {
 	public void setChildren(Set<Chapter> children) {
 		this.children = children;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 }

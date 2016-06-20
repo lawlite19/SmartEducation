@@ -11,10 +11,7 @@ import java.sql.Timestamp;
 //
 import java.util.Set;
 
-
-
-
-public class Course implements java.io.Serializable{
+public class Course implements java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -23,59 +20,74 @@ public class Course implements java.io.Serializable{
 	private String courseName;
 	private Timestamp addTime;
 	private String description;
-	//add properties
+	// add properties
 	private Float credit;
 	private String imgUrl;
-	
+
 	private Set<Department> departments;
-	
+
 	private Set<Teacher> teachers;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getCourseName() {
 		return courseName;
 	}
+
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
 	}
+
 	public Timestamp getAddTime() {
 		return addTime;
 	}
+
 	public void setAddTime(Timestamp addTime) {
 		this.addTime = addTime;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Set<Department> getDepartments() {
 		return departments;
 	}
+
 	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
+
 	public Set<Teacher> getTeachers() {
 		return teachers;
 	}
+
 	public void setTeachers(Set<Teacher> teachers) {
 		this.teachers = teachers;
 	}
+
 	public Float getCredit() {
 		return credit;
 	}
+
 	public void setCredit(Float credit) {
 		this.credit = credit;
 	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}

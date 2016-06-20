@@ -11,60 +11,70 @@ import java.sql.Timestamp;
 //
 //
 
-
-
-
 public class StuScoreRecord {
 	private Integer id;
 	private String stuNum;
 	private String stuName;
 	private Float score;
 	private Timestamp submitTime;
-	
-	//new add
+
+	// new add
 	private Integer isGetFlower;
-	
+
 	private TestPaper testPaper;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getStuNum() {
 		return stuNum;
 	}
+
 	public void setStuNum(String stuNum) {
 		this.stuNum = stuNum;
 	}
+
 	public String getStuName() {
 		return stuName;
 	}
+
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
 	}
+
 	public Float getScore() {
 		return score;
 	}
+
 	public void setScore(Float score) {
 		this.score = score;
 	}
+
 	public TestPaper getTestPaper() {
 		return testPaper;
 	}
+
 	public void setTestPaper(TestPaper testPaper) {
 		this.testPaper = testPaper;
 	}
+
 	public Timestamp getSubmitTime() {
 		return submitTime;
 	}
+
 	public void setSubmitTime(Timestamp submitTime) {
 		this.submitTime = submitTime;
 	}
+
 	public Integer getIsGetFlower() {
 		return isGetFlower;
 	}
+
 	public void setIsGetFlower(Integer isGetFlower) {
 		this.isGetFlower = isGetFlower;
 	}
