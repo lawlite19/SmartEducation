@@ -112,8 +112,7 @@
 		<action name="role_*" class="roleAction" method="{1}">
 			<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
 			<result name="saveUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
-			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp
-			</result>
+			<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp</result>
 			<result name="toList" type="redirectAction">role_list</result>
 		</action>
 		<!-- 首页 -->
@@ -298,6 +297,7 @@
 			<result name="stuFlowerRecordUI">/WEB-INF/jsp/interfaceAPIAction/assessment/stuFlowerRecordUI.jsp</result>
 			<result name="stuDeptLevel3UI">/WEB-INF/jsp/interfaceAPIAction/stuDeptLevel3UI.jsp</result>
 			<result name="deptLevel3TeaUI">/WEB-INF/jsp/interfaceAPIAction/deptLevel3TeaUI.jsp</result>
+			<result name="teaDeptUI">/WEB-INF/jsp/interfaceAPIAction/teaDeptUI.jsp</result>
 			
 			
 			

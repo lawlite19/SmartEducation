@@ -10,10 +10,7 @@ import java.util.Set;
 //
 //
 
-
-
-
-public class Class_ implements java.io.Serializable{
+public class Class_ implements java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -22,47 +19,56 @@ public class Class_ implements java.io.Serializable{
 	private String classNum;
 	private String className;
 	private String grade;
-	
-	
+
 	private Department department;
 	private Set<Student> students;
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getClassNum() {
 		return classNum;
 	}
+
 	public void setClassNum(String classNum) {
 		this.classNum = classNum;
 	}
+
 	public String getClassName() {
 		return className;
 	}
+
 	public void setClassName(String className) {
 		this.className = className;
 	}
+
 	public String getGrade() {
 		return grade;
 	}
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
 	public Department getDepartment() {
 		return department;
 	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
 	public Set<Student> getStudents() {
 		return students;
 	}
+
 	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
-	
+
 }

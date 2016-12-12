@@ -12,9 +12,7 @@ import com.alibaba.fastjson.annotation.JSONType;
 //
 //
 
-
-
-public class Student implements java.io.Serializable{
+public class Student implements java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -26,111 +24,134 @@ public class Student implements java.io.Serializable{
 	private Timestamp birthday;
 	private String grade;
 	private String photo;
-	//new add
+	// new add
 	private String telphone;
 	private String qqNum;
 	private Integer flowerCount;
-	
-	
+
 	private Department department;
 	private Class_ class_;
 	private Role role;
-	
-	
+
 	/**
 	 * 默认构造函数
 	 */
-	public Student(){
-		
+	public Student() {
+
 	}
+
 	/**
 	 * 构造函数
 	 */
-	public Student(String num,String name,String s,String g){
-		stuNum=num;
-		stuName=name;
-		sex=s;
-		grade=g;
+	public Student(String num, String name, String s, String g) {
+		stuNum = num;
+		stuName = name;
+		sex = s;
+		grade = g;
 	}
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getStuNum() {
 		return stuNum;
 	}
+
 	public void setStuNum(String stuNum) {
 		this.stuNum = stuNum;
 	}
+
 	public String getStuName() {
 		return stuName;
 	}
+
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
 	}
+
 	public String getSex() {
 		return sex;
 	}
+
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+
 	public Timestamp getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(Timestamp birthday) {
 		this.birthday = birthday;
 	}
+
 	public String getGrade() {
 		return grade;
 	}
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
 	public String getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
 	public Department getDepartment() {
 		return department;
 	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
 	public Class_ getClass_() {
 		return class_;
 	}
+
 	public void setClass_(Class_ class_) {
 		this.class_ = class_;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public String getTelphone() {
 		return telphone;
 	}
+
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
+
 	public String getQqNum() {
 		return qqNum;
 	}
+
 	public void setQqNum(String qqNum) {
 		this.qqNum = qqNum;
 	}
+
 	public Integer getFlowerCount() {
 		return flowerCount;
 	}
+
 	public void setFlowerCount(Integer flowerCount) {
 		this.flowerCount = flowerCount;
 	}
-	
+
 }

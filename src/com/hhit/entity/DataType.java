@@ -10,9 +10,6 @@ import java.util.Set;
 //
 //
 
-
-
-
 public class DataType implements java.io.Serializable {
 	/**
 	 * 
@@ -22,48 +19,56 @@ public class DataType implements java.io.Serializable {
 	private String dataTypeNum;
 	private String dataTypeName;
 	private Set<DataDict> dataDicts;
-	
+
 	/**
 	 * 默认构造函数
 	 */
-	public DataType(){
-		
+	public DataType() {
+
 	}
-	
+
 	/**
 	 * 构造函数
 	 */
-	public DataType(String num,String name){
-		dataTypeNum=num;
-		dataTypeName=name;
+	public DataType(String num, String name) {
+		dataTypeNum = num;
+		dataTypeName = name;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getDataTypeNum() {
 		return dataTypeNum;
 	}
+
 	public void setDataTypeNum(String dataTypeNum) {
 		this.dataTypeNum = dataTypeNum;
 	}
+
 	public String getDataTypeName() {
 		return dataTypeName;
 	}
+
 	public void setDataTypeName(String dataTypeName) {
 		this.dataTypeName = dataTypeName;
 	}
+
 	public Set<DataDict> getDataDicts() {
 		return dataDicts;
 	}
+
 	public void setDataDicts(Set<DataDict> dataDicts) {
 		this.dataDicts = dataDicts;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 }

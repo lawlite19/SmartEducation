@@ -25,29 +25,30 @@ public class SingleChoice {
 	private Integer difExponent;
 	private Integer usedCount;
 	private String questionType;
-	
+
 	private String teacherNum;
-	
+
 	private Course course;
 	private Chapter chapter;
-	
-	
+
 	/**
 	 * 默认构造函数
 	 */
 	public SingleChoice() {
-		
+
 	}
+
 	/**
 	 * 构造函数
 	 */
-	public SingleChoice(String teacherNum, Course course,Chapter chapter, String knowledgeName,
-			String question, String answer, String answerA, String answerB,
-			String answerC, String answerD, Integer difExponent,Timestamp addTime,Integer usedCount) {
+	public SingleChoice(String teacherNum, Course course, Chapter chapter,
+			String knowledgeName, String question, String answer,
+			String answerA, String answerB, String answerC, String answerD,
+			Integer difExponent, Timestamp addTime, Integer usedCount) {
 		super();
 		this.teacherNum = teacherNum;
 		this.course = course;
-		this.chapter=chapter;
+		this.chapter = chapter;
 		this.knowledgeName = knowledgeName;
 		this.question = question;
 		this.answer = answer;
@@ -56,19 +57,22 @@ public class SingleChoice {
 		this.answerC = answerC;
 		this.answerD = answerD;
 		this.difExponent = difExponent;
-		this.addTime=addTime;
-		this.usedCount=usedCount;
+		this.addTime = addTime;
+		this.usedCount = usedCount;
 	}
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getQuestionCode() {
 		return questionCode;
 	}
+
 	public void setQuestionCode(Integer questionCode) {
 		this.questionCode = questionCode;
 	}
@@ -76,93 +80,121 @@ public class SingleChoice {
 	public String getKnowledgeName() {
 		return knowledgeName;
 	}
+
 	public void setKnowledgeName(String knowledgeName) {
 		this.knowledgeName = knowledgeName;
 	}
+
 	public Timestamp getModifyTime() {
 		return modifyTime;
 	}
+
 	public void setModifyTime(Timestamp modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+
 	public Timestamp getAddTime() {
 		return addTime;
 	}
+
 	public void setAddTime(Timestamp addTime) {
 		this.addTime = addTime;
 	}
+
 	public String getAnswer() {
 		return answer;
 	}
+
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
 	public String getQuestion() {
 		return question;
 	}
+
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+
 	public String getAnswerA() {
 		return answerA;
 	}
+
 	public void setAnswerA(String answerA) {
 		this.answerA = answerA;
 	}
+
 	public String getAnswerB() {
 		return answerB;
 	}
+
 	public void setAnswerB(String answerB) {
 		this.answerB = answerB;
 	}
+
 	public String getAnswerC() {
 		return answerC;
 	}
+
 	public void setAnswerC(String answerC) {
 		this.answerC = answerC;
 	}
+
 	public String getAnswerD() {
 		return answerD;
 	}
+
 	public void setAnswerD(String answerD) {
 		this.answerD = answerD;
 	}
+
 	public Integer getUsedCount() {
 		return usedCount;
 	}
+
 	public void setUsedCount(Integer usedCount) {
 		this.usedCount = usedCount;
 	}
+
 	public String getQuestionType() {
 		return questionType;
 	}
+
 	public void setQuestionType(String questionType) {
 		this.questionType = questionType;
 	}
+
 	public Course getCourse() {
 		return course;
 	}
+
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
 	public Chapter getChapter() {
 		return chapter;
 	}
+
 	public void setChapter(Chapter chapter) {
 		this.chapter = chapter;
 	}
+
 	public Integer getDifExponent() {
 		return difExponent;
 	}
+
 	public void setDifExponent(Integer difExponent) {
 		this.difExponent = difExponent;
 	}
+
 	public String getTeacherNum() {
 		return teacherNum;
 	}
+
 	public void setTeacherNum(String teacherNum) {
 		this.teacherNum = teacherNum;
 	}
-	
-	
+
 }

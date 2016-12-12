@@ -1,10 +1,5 @@
 package com.hhit.service.impl;
 
-
-
-
-
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +14,17 @@ import com.opensymphony.xwork2.ActionContext;
 
 //注入
 @Service
-//开事务
+// 开事务
 @Transactional
-public class UserServiceImpl extends DaoSupportImpl<User> implements IUserService {
+public class UserServiceImpl extends DaoSupportImpl<User> implements
+		IUserService {
 
-	//@Resource
-	//private IUserDao userDao;
+	// @Resource
+	// private IUserDao userDao;
 	@Override
-	public User findUserByNumAndPwd(String userNum, String password,String userType) {
-		String md5Digest=DigestUtils.md5Hex(password);
+	public User findUserByNumAndPwd(String userNum, String password,
+			String userType) {
+		String md5Digest = DigestUtils.md5Hex(password);
 		return (User) getSession().createQuery(//
 				"FROM User WHERE userNum=? AND password=? AND userType=?")//
 				.setParameter(0, userNum)//
@@ -35,31 +32,35 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements IUserServic
 				.setParameter(2, userType)//
 				.uniqueResult();
 	}
+
 	@Override
 	public User findByDetailsId(UserDetails userDetails) {
 		return (User) getSession().createQuery("FROM User WHERE userDetails=?")//
-		.setParameter(0, userDetails)//
-		.list().get(0);
+				.setParameter(0, userDetails)//
+				.list().get(0);
 	}
+
 	@Override
 	public User findByStudent(Student stuFind) {
 		return (User) getSession().createQuery("FROM User WHERE student=?")//
 				.setParameter(0, stuFind)//
 				.uniqueResult();
 	}
+
 	@Override
 	public User findByTeacher(Teacher teaFind) {
 		return (User) getSession().createQuery("FROM User WHERE teacher=?")//
 				.setParameter(0, teaFind)//
 				.uniqueResult();
 	}
+
 	@Override
 	public User findByUserNum(String stuNum, String userType) {
-		return (User) getSession().createQuery("FROM User WHERE userNum=? AND userType=?")//
+		return (User) getSession()
+				.createQuery("FROM User WHERE userNum=? AND userType=?")//
 				.setParameter(0, stuNum)//
 				.setParameter(1, userType)//
 				.uniqueResult();
 	}
 
-	
 }

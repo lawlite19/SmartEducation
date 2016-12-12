@@ -10,9 +10,6 @@ import java.util.Set;
 //
 //
 
-
-
-
 public class SpiderCourse {
 	private Integer id;
 	private String professionTypeName;
@@ -20,31 +17,35 @@ public class SpiderCourse {
 	private String url;
 	private String info;
 	private String imgUrl;
-	//===新增
-	private Integer visitCount; 
-	
+	// ===新增
+	private Integer visitCount;
+
 	private Set<SpiderChapter> spiderChapters;
 	private Set<SpiderDocument> spiderDocuemnts;
-	
+
 	private SpiderProfessionType professionType;
-	
+
 	/** 默认构造函数 */
-	public SpiderCourse(){
-		
+	public SpiderCourse() {
+
 	}
+
 	/** 构造函数 */
-	public SpiderCourse(String na,String ur,String in,String pr,String iu,SpiderProfessionType spt,Integer count){
-		name=na;
-		url=ur;
-		info=in;
-		professionTypeName=pr;
-		imgUrl=iu;
-		professionType=spt;
-		visitCount=count;
+	public SpiderCourse(String na, String ur, String in, String pr, String iu,
+			SpiderProfessionType spt, Integer count) {
+		name = na;
+		url = ur;
+		info = in;
+		professionTypeName = pr;
+		imgUrl = iu;
+		professionType = spt;
+		visitCount = count;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -52,54 +53,71 @@ public class SpiderCourse {
 	public String getProfessionTypeName() {
 		return professionTypeName;
 	}
+
 	public void setProfessionTypeName(String professionTypeName) {
 		this.professionTypeName = professionTypeName;
 	}
+
 	public SpiderProfessionType getProfessionType() {
 		return professionType;
 	}
+
 	public void setProfessionType(SpiderProfessionType professionType) {
 		this.professionType = professionType;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getInfo() {
 		return info;
 	}
+
 	public void setInfo(String info) {
 		this.info = info;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 	public Set<SpiderChapter> getSpiderChapters() {
 		return spiderChapters;
 	}
+
 	public void setSpiderChapters(Set<SpiderChapter> spiderChapters) {
 		this.spiderChapters = spiderChapters;
 	}
+
 	public Set<SpiderDocument> getSpiderDocuemnts() {
 		return spiderDocuemnts;
 	}
+
 	public void setSpiderDocuemnts(Set<SpiderDocument> spiderDocuemnts) {
 		this.spiderDocuemnts = spiderDocuemnts;
 	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
+
 	public Integer getVisitCount() {
 		return visitCount;
 	}
+
 	public void setVisitCount(Integer visitCount) {
 		this.visitCount = visitCount;
 	}

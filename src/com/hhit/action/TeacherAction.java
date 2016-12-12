@@ -727,6 +727,22 @@ public class TeacherAction extends BaseAction<Teacher>{
 		JsonUtil.toJson(ServletActionContext.getResponse(), map);
 		return null;
 	}
+	//老师的系
+	public String appTeacherDept() throws Exception{
+		Map<String, Object> map=new HashMap<>();
+		Teacher teaFind=teacherService.findByTeacherNum(model.getTeaNum());
+		if(teaFind==null){
+			map.put("name", "noTea");
+		}
+		else{
+			Department deptFind=teaFind.getDepartment().getParent();
+			List<Department> deptList=departmentService.findByParent(deptFind);
+			ClassPropertyFilter.ListDepartmentFilter(map, deptList);
+			map.put("name", "success");
+		}
+		JsonUtil.toJson(ServletActionContext.getResponse(), map);
+		return null;
+	}
 	
 //==============================	
 	public Integer getDepartmentId() {
