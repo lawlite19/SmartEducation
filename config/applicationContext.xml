@@ -20,8 +20,8 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 导入外部配置数据库连接的文件 -->
-	<!-- classpath:jdbc_mysql.properties -->
-	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- classpath:jdbc.properties -->
+	<context:property-placeholder location="classpath:jdbc_mysql.properties"/>
 	
 	<!-- 配置c3p0数据库连接池 -->
 	<bean id="dataSource"
@@ -61,12 +61,12 @@
 			<props>
 				<prop key="hibernate.dialect">
 					<!-- SQLServerDialect   MySQLDialect  -->
-					org.hibernate.dialect.SQLServerDialect
+					org.hibernate.dialect.MySQLDialect
 				</prop>
 				<!-- 显示sql语句 -->
 				<prop key="show_sql">true</prop>
-				<!-- 自动建表
-				<prop key="hibernate.hbm2ddl.auto">update</prop>  -->
+				<!-- 自动建表 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>  
 			</props>
 		</property>
 		<property name="mappingResources">

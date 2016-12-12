@@ -239,49 +239,49 @@ public class Installer {
 		session.save(new Privilege("角色添加", "/role_add", menu6));
 		session.save(new Privilege("角色修改", "/role_edit", menu6));
 		
-		// --------------------作业管理模块
-		menu1 = new Privilege("作业管理", null, null);
-		menu2=new Privilege("作业菜单", null, menu1);
-		session.save(menu1);
-		session.save(menu2);
+//		// --------------------作业管理模块
+//		menu1 = new Privilege("作业管理", null, null);
+//		menu2=new Privilege("作业菜单", null, menu1);
+//		session.save(menu1);
+//		session.save(menu2);
 		
 		
-		// --------------------教学管理模块
-		menu1=new Privilege("教学管理", null, null);
-		menu2=new Privilege("教学管理菜单", null, menu1);
-		menu3=new Privilege("课程管理", "/course_list", menu2);
-		session.save(menu1);
-		session.save(menu2);
-		session.save(menu3);
-
-		session.save(new Privilege("课程列表", "/course_list", menu3));
-		session.save(new Privilege("课程删除", "/course_delete", menu3));
-		session.save(new Privilege("课程添加", "/course_add", menu3));
-		session.save(new Privilege("课程修改", "/course_edit", menu3));
+//		// --------------------教学管理模块
+//		menu1=new Privilege("教学管理", null, null);
+//		menu2=new Privilege("教学管理菜单", null, menu1);
+//		menu3=new Privilege("课程管理", "/course_list", menu2);
+//		session.save(menu1);
+//		session.save(menu2);
+//		session.save(menu3);
+//
+//		session.save(new Privilege("课程列表", "/course_list", menu3));
+//		session.save(new Privilege("课程删除", "/course_delete", menu3));
+//		session.save(new Privilege("课程添加", "/course_add", menu3));
+//		session.save(new Privilege("课程修改", "/course_edit", menu3));
 		
-		
-		// --------------------问卷管理模块
-		menu1 = new Privilege("问卷管理", null, null);
-		session.save(menu1);
-		
-		
-		// --------------------平台信息模块
-		menu1 = new Privilege("平台信息", null, null);
-		session.save(menu1);
-		
-		// --------------------接口管理模块
-		menu1 = new Privilege("接口管理", null, null);
-		session.save(menu1);
+//		
+//		// --------------------问卷管理模块
+//		menu1 = new Privilege("问卷管理", null, null);
+//		session.save(menu1);
+//		
+//		
+//		// --------------------平台信息模块
+//		menu1 = new Privilege("平台信息", null, null);
+//		session.save(menu1);
+//		
+//		// --------------------接口管理模块
+//		menu1 = new Privilege("接口管理", null, null);
+//		session.save(menu1);
 // ==============================================================
-		// 保存数据字典
-		DataType dataType1=new DataType("001","教学方式");
-		session.save(dataType1);
-		session.save(new DataDict("001","讲课",dataType1));
-		session.save(new DataDict("002","实验",dataType1));
-		session.save(new DataDict("003","大作业",dataType1));
-		session.save(new DataDict("004","小测验",dataType1));
-		session.save(new DataDict("005","课程讨论",dataType1));
-		session.save(new DataDict("006","复习",dataType1));
+//		// 保存数据字典
+//		DataType dataType1=new DataType("001","教学方式");
+//		session.save(dataType1);
+//		session.save(new DataDict("001","讲课",dataType1));
+//		session.save(new DataDict("002","实验",dataType1));
+//		session.save(new DataDict("003","大作业",dataType1));
+//		session.save(new DataDict("004","小测验",dataType1));
+//		session.save(new DataDict("005","课程讨论",dataType1));
+//		session.save(new DataDict("006","复习",dataType1));
 	}
 	public static void main(String[] args) {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
