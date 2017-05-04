@@ -15,7 +15,7 @@ cglib-2.2.jar
 ![enter description here][4]
 #### 5、并生成一些测试数据（没有添加全部功能）
 ![enter description here][5]
-#### 6、这是对应的模板项目`https://github.com/lawlite19/JavaEE-SSH-Template`
+#### 6、这是对应的模板项目：https://github.com/lawlite19/JavaEE-SSH-Template
 
   [1]: ./images/01.png "01.png"
   [2]: ./images/02.png "02.png"
